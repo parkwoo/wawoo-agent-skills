@@ -29,7 +29,8 @@
 | rel-0.6.0-F5 | done | `SECURITY.md` 追加（脆弱性報告窓口） | SECURITY.md 存在 | `SECURITY.md`（GitHub Security Advisories） |
 | rel-0.6.0-F6 | done | `safe_read` のパス判定を `Path.is_relative_to` へ | 境界テスト／既存テスト pass | `mcp/server.py:142`；sibling パス拒否テスト OK／pytest 20 passed |
 | rel-0.6.0-F7 | done | `intent_receiver` socket を `chmod 600`・`XDG_RUNTIME_DIR` 優先 | 権限 0o600 を確認 | `mcp/intent_receiver.py`；実測 socket mode 0o600 |
-| rel-0.6.0-F2 | blocked | 承認後 `git push origin master` ＋ `v0.6.0` tag（外部送信＝Gₐ 承認必須） | 远端・tag を検証 | 承認待ち |
+| rel-0.6.0-F2 | doing | 承認後 `git push origin master` ＋ `v0.6.0` tag | 远端・tag を検証 | `origin/master`=`d6d4471`、`refs/tags/v0.6.0` 有り（`v0.1.0` も push 済） |
+| rel-0.6.0-F2b | blocked | 歴史 tag `v0.2.0`・`v0.3.0`・`v0.4.0` の push | `workflow` scope 付き認証で push し远端 tag を確認 | push 拒否: `! [remote rejected] … without workflow scope`（tag の履歴に `.github/workflows/validate.yml` を含むため） |
 
 ## 詳細計画（任意）
 
