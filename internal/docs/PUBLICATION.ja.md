@@ -46,6 +46,8 @@
 >
 > **移行済み（2026-10-29）**: 公開の読書面を `README.md`・`docs/USAGE.md`・`docs/INTENT-ROUTING.md` に絞るため、設計・工程文書を公開ツリーから `internal/` へ移動（EN+JA）。移動対象: `docs/METHODOLOGY.md`・`docs/PROCESS-PHILOSOPHY.md`・`docs/PUBLICATION.md`・`docs/README.md`・`docs/design/INTENT-RECEIVER.md` → `internal/docs/design/`・`internal/docs/`。公開文書の参照は `AGENTS.md` §3／`mcp/README.md` に張り替え、`scripts/e2e_flows.py` は `internal/` 不在時に METHODOLOGY 検査をスキップする。
 
+> **正本の分離（2026-10-29）**: **本リポジトリ（`wawoo-skills-internal`・非公開）が正本**で、キット**と** `internal/` の両方を追跡する。**公開**キットは `parkwoo/wawoo-skills` で、`.github/workflows/publish-public.yml`（タグ時のみ）が `.publish-allowlist` に従って**生成**する。公開は SSH deploy key（secret `PUBLIC_DEPLOY_KEY`）で行う。公開リポは重い CI（無料）、本リポは publish のみ（タグ時・最小分数）。ローカル保護: 本クローンの `origin` の push URL は無効化（`DISABLED_DO_NOT_PUSH`）し、内部物が公開リポへ push されないようにする。
+
 初回セットアップ:
 
 ```bash
