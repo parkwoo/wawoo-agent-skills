@@ -6,9 +6,9 @@ cd "$ROOT"
 echo "== validate_assets =="
 python3 scripts/validate_assets.py
 echo "== mcp test_server =="
-python3 mcp/test_server.py
+python3 internal/tests/test_server.py
 echo "== mcp test_memory_ops =="
-python3 mcp/test_memory_ops.py
+python3 internal/tests/test_memory_ops.py
 echo "== e2e_flows =="
 python3 scripts/e2e_flows.py
 echo "== cli_adapters_mock =="

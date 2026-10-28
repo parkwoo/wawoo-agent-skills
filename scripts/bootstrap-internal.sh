@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# internal.example → internal/（git 管理外）に配置
+# Copy internal.example → internal/ (outside git)
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SRC="${ROOT}/internal.example"
@@ -12,4 +12,4 @@ fi
 
 mkdir -p "$DST"
 rsync -a --delete "${SRC}/" "${DST}/"
-echo "OK: ${DST}/ を更新（git 管理外）"
+echo "OK: updated ${DST}/ (outside git)"

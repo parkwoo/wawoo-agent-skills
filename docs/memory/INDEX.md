@@ -15,11 +15,60 @@
 - `MEM-20261028-002` 実行衛生・収束ゲート（AGENTS §4.1）をキット共通規約とする（セッション分割・失敗収束・後始末・記憶・トークン衛生・ローカル検証）。
 - `MEM-20261028-003` 意図ルーティングは L1 トリガ分類器（ROUTER 発火語と同一正本）＋ phases で決定論的に解決。監査系に `implement` を持たせない。
 - `MEM-20261028-006` 本デプロイ（/root/.config/kilo）の MCP wawoo-skills は memory_save を有効化（WAWOO_MEMORY_READONLY=0）。キット側は install_global.py --memory-writable で切替可能。既定は recall-only。
+- `MEM-20261028-008` Pi Durable 方法論の吸収優先度は A→H→B/C→F/G。D はほぼ parity、E は原理のみ（分析: `internal/docs/design/PI-DURABLE-ABSORPTION.md`・内部）。
+- `MEM-20261028-054` 公開ドキュメント監査の後続：指摘対応（F1–F11 の具体改稿）と「有人気な記事」草稿を `internal/docs/blog/`（非公開・gitignore）に保存。ファイル: `public-docs-audit-fixes.zh.md`（4.3K 字）・`wawoo-skills-popular-article.zh.md`（2.4K 字）。ユーザーは中国語で依頼（当リポジトリの既定は日本
+- `MEM-20261028-055` 公開ドキュメント編集の規約（今回適用）: (1) 説明文書は **EN 主（`NAME.md`）＋ JA 対訳（`NAME.ja.md`）を同時更新**する（言語ポリシー AGENTS §1）。(2) **件数は生成カタログ `.kilo/CAPABILITIES.md` を正本**とし、README/AGENTS/USAGE の重複記載は除去。(3) **`L0–L3` は 2 軸**（儀式レベ
+- `MEM-20261028-056` 公開面の縮小（2026-10-29 適用）: 公開の「読む」文書は **README.md / docs/USAGE.md / docs/INTENT-ROUTING.md** の 3 本のみ。設計・工程文書 **METHODOLOGY / PROCESS-PHILOSOPHY / PUBLICATION / docs/README / design/INTENT-RECEIVER（EN+JA）は
 ## 制約・落とし穴
 - （例）Cursor は slash command／agent／SKILL をネイティブ実行しない。
 - （例）一部スキルは issue tracker 設定が必要（`scripts/readiness.json`）。
 - `MEM-20261028-001` Kilo の `instructions` は絶対パス必須。既定 agent は `wawoo-router`（`code` のままだとルーティング漏れ）。反映には再起動。
-
+- `MEM-20261028-007` キットの MCP／スクリプトは Python 3 stdlib のみ（前提 `PATH` に `python3`）。TS 化しても「VSCode が動けば動く」ではない（Web は外部プロセス不可、デスクトップも node/python を PATH に出さない）。
+- `MEM-20261028-009` `intent_session._active` は in-memory。MCP 再起動／reload で workflow 選択とツールゲートが消える（学習 DB は SQLite で永続、session は非永続）。
+- `MEM-20261028-010` 本リポジトリは OSS。内部開発資料（調査/分析ノート・監査・RETRO/self-improve・E2E ログ）は公開せず `internal/` に置く。正本は `docs/PUBLICATION.md`。
+- `MEM-20261028-052` 創作系を比較選定：採用=writing-*・teach・science-writing・viral-hooks・marketing-psychology（skills 63）。science-writer は LICENSE 無しで不採用。
+- `MEM-20261028-051` `/writing`（fragments→beats→shape, MIT）吸収。skills 60・workflows 16。`/content-delivery-lite` と並行可。
+- `MEM-20261028-050` OpenCode 実接続 OK。創作系は MIT writing-*・Apache article/blog レイアウトが候補、content-research-writer は NOASSERTION で除外。
+- `MEM-20261028-049` agent 改名 wawoo-router→wawoo-auto、session resume 既定 off＋client 別、Cursor 最新化、OpenCode 対応＋stdio テスト。
+- `MEM-20261028-048` 監査修正：session は最小項目のみ保存・resume は `WAWOO_INTENT_RESUME`(既定 off)・境界 regex 厳密化・replay 検査を workflow 限定・WARN 集約・失敗ログ。
+- `MEM-20261028-047` OS-13 完了：evidence ログを wawoo-e2e- に統一、CHANGELOG 言語/版を明記。
+- `MEM-20261028-046` OS-12 完了：delegate に model_tier（fast/reasoning）＋方針を明文化。
+- `MEM-20261028-045` OS-11 完了：PM/Delivery Lead に監督ループ（Goal/Success/Next/Consistency/Amend）を明示化。
+- `MEM-20261028-044` OS-7 完了：MCP `steer_task`（amend・needs_classification）を実装。計画ファイルは書かない。
+- `MEM-20261028-043` OS-1c 完了：command に replay 分類（incident-response=unsafe）・delegate に idempotency_key・AGENTS に規則。
+- `MEM-20261028-042` OS-1b 完了：CAPABILITIES に size 列、validate が 4KB 超を WARN（現状 11 件）。
+- `MEM-20261028-041` OS-1e 完了：先回り圧縮＋ボードの current-view/差分を AGENTS（EN/JA）に明文化。
+- `MEM-20261028-040` OS-1d 完了：委譲の所有権/abort 契約（foreground/background・下→上伝播・実行はホスト）を明文化。
+- `MEM-20261028-039` OS-1a 完了：intent_session 永続化＋再起動 resume（TTL 12h・e2e は per-call 隔離）。
+- `MEM-20261028-038` OS-2a 完了（公開コード EN。memory の JA 生成定数・パーサキーワード・JA fixture は意図的に維持）。
+- `MEM-20261028-037` OS-2a b2b done（gen_router/ROUTER・install_global EN）。残 b2c/b3。
+- `MEM-20261028-036` OS-2a b2a done（小スクリプト EN）。パーサ用キーワード・JA fixture は維持。残 b2b/b2c/b3。
+- `MEM-20261028-035` OS-2a b1b done（catalog EN）。mcp 完了（memory の JA 生成定数のみ残置）。残 b2 scripts・b3 shell。
+- `MEM-20261028-034` OS-2a は b1a(mcp コメント done)/b1b catalog/b2 scripts/b3 shell。memory の JA 生成定数は維持。テスト追随。
+- `MEM-20261028-033` OS-2b 完了（公開 docs を EN 主+JA 従の 2 種に。memory テンプレは EN のみ）。
+- `MEM-20261028-032` OS-2b b6b1 done（mcp/README EN/JA）。残 b6b2 INTENT-RECEIVER（OS-2b 最後）。
+- `MEM-20261028-031` OS-2b b6a done（SECURITY/plans README EN+JA、memory テンプレは EN のみ）。残 b6b mcp/README・INTENT-RECEIVER。
+- `MEM-20261028-030` OS-2b b5b2 done → b5 完了（主要 docs EN+JA）。残 b6。
+- `MEM-20261028-029` OS-2b b5b1 done（METHODOLOGY EN/JA）。残 b5b2 PROCESS-PHILOSOPHY・b6。
+- `MEM-20261028-028` OS-2b b5a done（VERSIONING/PUBLICATION/docs/README EN+JA）。残 b5b METHODOLOGY/PROCESS-PHILOSOPHY・b6。
+- `MEM-20261028-027` OS-2b b4 done（INTENT-ROUTING EN/JA）。残 b5 主要 docs／b6 残。
+- `MEM-20261028-026` OS-2b b3 done（USAGE EN/JA）。残 b4 INTENT-ROUTING／b5 主要 docs／b6 残。
+- `MEM-20261028-025` OS-2b b2 done（AGENTS EN/JA）。英訳時は e2e の日本語アサートを英語へ追随。
+- `MEM-20261028-024` OS-2b 命名 `NAME.md`(EN)+`NAME.ja.md`(JA)。b1 README done。バッチ `PROGRAM` §14。
+- `MEM-20261028-023` OS-6: 公開境界を skill＋`validate_assets` チェック化（内部混入を検知）。
+- `MEM-20261028-022` OS-3b 完了（skill/agents/commands/rules → English、JP 残 0）。AGENTS/docs/コードは OS-2b/2a。
+- `MEM-20261028-021` OS-3b b2 完了（第三者 skill 9→EN・上流 zh は残置）。残 b3 agents／b4 commands。
+- `MEM-20261028-020` OS-3b は 4 バッチ（b1 自作 skill→EN done／b2 第三者 skill／b3 agents／b4 commands）。`PROGRAM` §13。
+- `MEM-20261028-019` 静的 trigger 撤去済み。解決順 slash→learned→upstream。seed は `mcp/intent_seed.py`（catalog id）。旧語彙はローカル DB のみ。
+- `MEM-20261028-018` pytest 単体は非公開 `internal/tests/`。公開 CI=`validate_assets`＋e2e＋cli_adapters_mock。公開 docs に内部パスを実行手順として書かない。
+- `MEM-20261028-017` 言語ポリシー 3 層（正本 `AGENTS.md` §1）。コード=EN／工程ドキュメント・応答=JA／説明=EN 主＋JA 従。
+- `MEM-20261028-016` 未決 D1/D3/D4/D6 を推奨案で採用（顺序执行指示）。BACKLOG を順序どおり実行。
+- `MEM-20261028-015` バックログの順序・依存は `plan_l2_backlog.py` で検証・`--apply` で自動整列（人の記憶に頼らない）。
+- `MEM-20261028-014` 実行順は二重管理しない。正本は `BACKLOG.md`（行順＝優先度）。他文書は参照のみ。
+- `MEM-20261028-013` 静的 `TRIGGER_KEYWORDS`/`WEAK_TRIGGERS` は撤去し学習 DB に seed 移行（D7）。解決順 slash→learned→upstream。
+- `MEM-20261028-012` バックログは追記式（上書きしない）。優先度＝行の順序、再最適化は並べ替え。
+- `MEM-20261028-011` キット本体の `docs/plans/ACTIVE.md`・`docs/memory/*` の実体も公開しない（テンプレ `ACTIVE.example.md`・`INDEX.example.md`・`TEMPLATE.md`・`MEMORY-TOOLS.md` のみ公開）。CI は実ファイル非依存（example／隔離 memory）。
+- `MEM-20261028-053` 公開ドキュメント監査の落とし穴: `ls .kilo/skills | wc -l` は 65 を返すが、これは非ディレクトリの `.kilo/skills/README.md`・`ATTRIBUTION.md` を数えるため。実体は **63 skill ディレクトリ**（`python3 scripts/validate_assets.py` → `OK: skills=63 agents=2
 ## 再発しうる修正
 - （例）Skill 追加時は `name`／`description` を付け、`name=dir` を守る。
 - （例）`validate_assets.py` を通す（`docs/memory/` の秘密パターンも検査）。
@@ -38,6 +87,15 @@
 - 2026-10-26 追記 `MEM-20261026-002`（未決）。
 - 2026-10-26 追記 `MEM-20261026-003`（未決）。
 - 2026-10-28 追記 `MEM-20261028-003`（未決）。
+- 2026-10-28 追記 `MEM-20261028-007`（制約・落とし穴）。
+- 2026-10-28 追記 `MEM-20261028-008`（決定）・`MEM-20261028-009`（制約・落とし穴）。
+- 2026-10-28 追記 `MEM-20261028-010`（制約・落とし穴：OSS 公開境界）。
+- 2026-10-28 公開境界を適用: 監査/RETRO/self-improve/E2E深さ/出版たたき台を `internal/` へ移動（`docs/PUBLICATION.md`）。
+- 2026-10-28 追記 `MEM-20261028-011`（制約・落とし穴：ACTIVE/memory の非公開化）。
 - 2026-10-28 追記 `MEM-20261028-004`（未決）。
 - 2026-10-28 追記 `MEM-20261028-005`（未決）。
 - 2026-10-28 追記 `MEM-20261028-006`（決定）。
+- 2026-10-28 追記 `MEM-20261028-053`（制約・落とし穴）。
+- 2026-10-28 追記 `MEM-20261028-054`（決定）。
+- 2026-10-28 追記 `MEM-20261028-055`（決定）。
+- 2026-10-28 追記 `MEM-20261028-056`（決定）。
