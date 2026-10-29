@@ -19,6 +19,7 @@
 - `MEM-20261028-054` 公開ドキュメント監査の後続：指摘対応（F1–F11 の具体改稿）と「有人気な記事」草稿を `internal/docs/blog/`（非公開・gitignore）に保存。ファイル: `public-docs-audit-fixes.zh.md`（4.3K 字）・`wawoo-skills-popular-article.zh.md`（2.4K 字）。ユーザーは中国語で依頼（当リポジトリの既定は日本
 - `MEM-20261028-055` 公開ドキュメント編集の規約（今回適用）: (1) 説明文書は **EN 主（`NAME.md`）＋ JA 対訳（`NAME.ja.md`）を同時更新**する（言語ポリシー AGENTS §1）。(2) **件数は生成カタログ `.kilo/CAPABILITIES.md` を正本**とし、README/AGENTS/USAGE の重複記載は除去。(3) **`L0–L3` は 2 軸**（儀式レベ
 - `MEM-20261028-056` 公開面の縮小（2026-10-29 適用）: 公開の「読む」文書は **README.md / docs/USAGE.md / docs/INTENT-ROUTING.md** の 3 本のみ。設計・工程文書 **METHODOLOGY / PROCESS-PHILOSOPHY / PUBLICATION / docs/README / design/INTENT-RECEIVER（EN+JA）は
+- `MEM-20261028-057` 公開/非公開の分離を **2 リポジトリ + publish** に移行（2026-10-29）。(1) 正本は **parkwoo/wawoo-skills-internal（非公開）**：キット＋`internal/` を全部追跡（`/internal/` 等の gitignore を解除）。(2) 公開は **parkwoo/wawoo-skills（PUBLIC）**：`.github/w
 ## 制約・落とし穴
 - （例）Cursor は slash command／agent／SKILL をネイティブ実行しない。
 - （例）一部スキルは issue tracker 設定が必要（`scripts/readiness.json`）。
@@ -99,3 +100,4 @@
 - 2026-10-28 追記 `MEM-20261028-054`（決定）。
 - 2026-10-28 追記 `MEM-20261028-055`（決定）。
 - 2026-10-28 追記 `MEM-20261028-056`（決定）。
+- 2026-10-28 追記 `MEM-20261028-057`（決定）。

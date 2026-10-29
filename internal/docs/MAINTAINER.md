@@ -1,6 +1,6 @@
 # メンテナ向け（git 管理外: `internal/`）
 
-公開 README には載せない。配置: `./scripts/bootstrap-internal.sh`
+公開 README には載せない。配置: `internal/`（本非公開リポジトリで追跡）
 
 ## スモーク（API キー不要）
 

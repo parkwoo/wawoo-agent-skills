@@ -20,4 +20,4 @@
 - `LICENSES/` … ライセンス全文
 - `CHANGELOG.md` / `VERSION` … 変更履歴・現在の版
 
-メンテナ向け（git 外）: `./scripts/bootstrap-internal.sh` → `internal/`（詳細は [PUBLICATION.md](./PUBLICATION.md)）
+メンテナ向け（非公開）: `internal/`（本非公開リポジトリで追跡。詳細は [PUBLICATION.md](./PUBLICATION.md)）

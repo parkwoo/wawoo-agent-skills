@@ -48,14 +48,11 @@
 
 > **正本の分離（2026-10-29）**: **本リポジトリ（`wawoo-skills-internal`・非公開）が正本**で、キット**と** `internal/` の両方を追跡する。**公開**キットは `parkwoo/wawoo-skills` で、`.github/workflows/publish-public.yml`（タグ時のみ）が `.publish-allowlist` に従って**生成**する。公開は SSH deploy key（secret `PUBLIC_DEPLOY_KEY`）で行う。公開リポは重い CI（無料）、本リポは publish のみ（タグ時・最小分数）。ローカル保護: 本クローンの `origin` の push URL は無効化（`DISABLED_DO_NOT_PUSH`）し、内部物が公開リポへ push されないようにする。
 
-初回セットアップ:
+内部ツールは `internal/` 直下に置く（本非公開リポジトリで追跡。テンプレ／bootstrap 手順は無し）。
 
 ```bash
-./scripts/bootstrap-internal.sh
 ./internal/scripts/e2e/smoke.sh
 ```
-
-テンプレートは **`internal.example/`**（git 管理）のみ。運用コピーは `internal/`。
 
 ## 秘密
 

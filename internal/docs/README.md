@@ -23,4 +23,4 @@
 - `LICENSES/` … full license texts
 - `CHANGELOG.md` / `VERSION` … change history, current version
 
-Maintainer-only (outside git): `./scripts/bootstrap-internal.sh` → `internal/` (details in [PUBLICATION.md](./PUBLICATION.md))
+Maintainer-only (not published): `internal/` (tracked in this private repo; details in [PUBLICATION.md](./PUBLICATION.md))

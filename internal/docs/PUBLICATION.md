@@ -50,14 +50,11 @@ The following are **maintainer development-process materials** and are not inclu
 
 > **Source-of-truth split (2026-10-29)**: **this repo (`wawoo-skills-internal`, private) is the source of truth** — it tracks the kit *and* `internal/`. The **public** kit is `parkwoo/wawoo-skills`, **generated** by `.github/workflows/publish-public.yml` (tag-triggered) from `.publish-allowlist`. Publishing uses an SSH deploy key (secret `PUBLIC_DEPLOY_KEY`). The public repo runs the heavy CI (free); this repo runs only the publish job (tags only, minimal minutes). Local guard: this clone's `origin` push URL is disabled (`DISABLED_DO_NOT_PUSH`) so internal content cannot be pushed to the public repo.
 
-Initial setup:
+Internal tooling lives directly under `internal/` (tracked in this private repo; no template/bootstrap step).
 
 ```bash
-./scripts/bootstrap-internal.sh
 ./internal/scripts/e2e/smoke.sh
 ```
-
-Templates are **`internal.example/`** only (git-managed). The working copy is `internal/`.
 
 ## Secrets
 
