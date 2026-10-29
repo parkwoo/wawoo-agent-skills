@@ -61,3 +61,11 @@ tags: docs
 - **内容**: ライセンスと日本語校正（2026-10-29）: (1) **`fal-gen` は自作 skill（MIT）**であり「ライセンス不明」ではなかった → `README(.ja)` と `.kilo/skills/ATTRIBUTION.md` の除外理由を訂正（除外は第三者ではなく外部依存 fal.ai のため、同梱せずグローバル運用）。Marketplace business 3 件のみが第三者 NOASSERTION。(2) **日本語校正 skill `ja-proofread` を新規追加**（簡体字中国語のみの文字を検出→日本語へ、記号・MT くせ・用語統一、Gₑ で grep 0 件を確認）。`scripts/validate_assets.py` に **WARN 検査**（`*.ja.md` と `.kilo/skills/**` の簡体字中国語のみ文字）を追加（`ja-proofread` 自身は除外）。(3) 実際の中国語混入を修正: `reference-design-contract/SKILL.md`（zh_name/triggers/example_prompt_i18n の zh-CN→ja）と `web-design-guidelines/SKILL.md`（trigger「设计审查」→「デザインレビュー」）。skills=64。
 - **出典**: .kilo/skills/ATTRIBUTION.md
 
+
+### MEM-20261029-007
+
+- **日付**: 2026-10-29
+- **種別**: 決定
+- **内容**: 日本語文書の英語混在とサイト言語切替（2026-10-29）: (1) **`ja-proofread` を拡張** — 簡体字中国語のみ文字に加え「日本語の文中の英単語（skill→スキル等）」と置換表・MT くせ・記号・用語統一を追加。(2) **JA 文書の英語混在を一括軽減**（README/AGENTS/USAGE/INTENT-ROUTING/index .ja.md）。落とし穴: 単純一括置換は **`AGENTS.md`→エージェント.md・`Skills For Real Engineers`→スキル For…** のように識別子/固有名詞を壊す。対策＝**大小文字を区別（小文字のみ）＋前後が `[A-Za-z0-9_\-/.\`]` を除外**し、バッククォート内は置換しない。適用後「日本語↔カタカナ語」間の半角スペースを除去。(3) **MkDocs に `mkdocs-static-i18n`（suffix）を導入**し言語切替＋言語別 nav に（EN=/、JA=/ja/、hreflang）。トレードオフ: i18n と GitHub 流の `NAME.ja.md` リンクは両立しない（`.ja.md` は i18n ビルドで「not found」）ため、`validation.links.not_found=ignore` で警告のみ抑制（リンクは GitHub 優先で維持）。Zensical 移行警告は `NO_MKDOCS_2_WARNING=1` で抑制可。公開反映 `ba86790`。
+- **出典**: mkdocs.yml
+
