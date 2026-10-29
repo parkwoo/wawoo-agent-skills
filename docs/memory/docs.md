@@ -69,3 +69,11 @@ tags: docs
 - **内容**: 日本語文書の英語混在とサイト言語切替（2026-10-29）: (1) **`ja-proofread` を拡張** — 簡体字中国語のみ文字に加え「日本語の文中の英単語（skill→スキル等）」と置換表・MT くせ・記号・用語統一を追加。(2) **JA 文書の英語混在を一括軽減**（README/AGENTS/USAGE/INTENT-ROUTING/index .ja.md）。落とし穴: 単純一括置換は **`AGENTS.md`→エージェント.md・`Skills For Real Engineers`→スキル For…** のように識別子/固有名詞を壊す。対策＝**大小文字を区別（小文字のみ）＋前後が `[A-Za-z0-9_\-/.\`]` を除外**し、バッククォート内は置換しない。適用後「日本語↔カタカナ語」間の半角スペースを除去。(3) **MkDocs に `mkdocs-static-i18n`（suffix）を導入**し言語切替＋言語別 nav に（EN=/、JA=/ja/、hreflang）。トレードオフ: i18n と GitHub 流の `NAME.ja.md` リンクは両立しない（`.ja.md` は i18n ビルドで「not found」）ため、`validation.links.not_found=ignore` で警告のみ抑制（リンクは GitHub 優先で維持）。Zensical 移行警告は `NO_MKDOCS_2_WARNING=1` で抑制可。公開反映 `ba86790`。
 - **出典**: mkdocs.yml
 
+
+### MEM-20261029-008
+
+- **日付**: 2026-10-29
+- **種別**: 決定
+- **内容**: 方針修正（2026-10-29）: **日本語文中の英単語（skill/workflow/MCP/識別子）は問題なし＝許容**。日本語技術文書では一般的で、カタカナへ強制変換してはいけない。→ 前回の「英単語→カタカナ」一括変換（README/AGENTS/USAGE/INTENT-ROUTING/index .ja.md）は**撤回**（`git checkout 66777e3 --`）。`ja-proofread` は「英単語は変換しない（コード/識別子/パス/コマンドは英語のまま）」に方針修正し、修正対象を **簡体字中国語のみ文字・半角記号・MT くせ・用語ゆれ** に限定。EN/JA の doc リンクは `.ja.md` 維持、i18n サイト用に index.ja.md のナビは base 名（USAGE.md 等）。公開反映 `be70cd9`。
+- **出典**: .kilo/skills/ja-proofread/SKILL.md
+
