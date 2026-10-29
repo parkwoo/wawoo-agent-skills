@@ -42,5 +42,5 @@ jobs:
           cd /tmp/out
           git remote add pub git@github.com:parkwoo/wawoo-skills.git
           export GIT_SSH_COMMAND="ssh -i $HOME/.ssh/id_publish -o IdentitiesOnly=yes"
-          git push --force pub 'refs/heads/*:refs/heads/*'
+          git push --force pub master:master
           git push --force pub --tags

@@ -27,6 +27,6 @@ cd "$TMP/out"
 git filter-repo --force --paths-from-file "$ALLOWLIST" >/dev/null
 git remote remove origin 2>/dev/null || true
 git remote add pub "$PUBLIC_URL"
-git push --force pub 'refs/heads/*:refs/heads/*'
+git push --force pub master:master
 git push --force pub --tags
 echo "published to $PUBLIC_URL ($(git rev-parse --short HEAD))"
