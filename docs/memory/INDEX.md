@@ -20,6 +20,7 @@
 - `MEM-20261028-055` 公開ドキュメント編集の規約（今回適用）: (1) 説明文書は **EN 主（`NAME.md`）＋ JA 対訳（`NAME.ja.md`）を同時更新**する（言語ポリシー AGENTS §1）。(2) **件数は生成カタログ `.kilo/CAPABILITIES.md` を正本**とし、README/AGENTS/USAGE の重複記載は除去。(3) **`L0–L3` は 2 軸**（儀式レベ
 - `MEM-20261028-056` 公開面の縮小（2026-10-29 適用）: 公開の「読む」文書は **README.md / docs/USAGE.md / docs/INTENT-ROUTING.md** の 3 本のみ。設計・工程文書 **METHODOLOGY / PROCESS-PHILOSOPHY / PUBLICATION / docs/README / design/INTENT-RECEIVER（EN+JA）は
 - `MEM-20261028-057` 公開/非公開の分離を **2 リポジトリ + publish** に移行（2026-10-29）。(1) 正本は **parkwoo/wawoo-skills-internal（非公開）**：キット＋`internal/` を全部追跡（`/internal/` 等の gitignore を解除）。(2) 公開は **parkwoo/wawoo-skills（PUBLIC）**：`.github/w
+- `MEM-20261029-001` 旧足場を撤去（2026-10-29）: `internal.example/` と `scripts/bootstrap-internal.sh` を削除。`internal/` に無かった 5 ファイル（`docs/audit/AGENT-ACTIVE-E2E.md`・`scripts/e2e/{active_apply_dryrun.py,agent-active-live.sh,fixtur
 ## 制約・落とし穴
 - （例）Cursor は slash command／agent／SKILL をネイティブ実行しない。
 - （例）一部スキルは issue tracker 設定が必要（`scripts/readiness.json`）。
@@ -101,3 +102,4 @@
 - 2026-10-28 追記 `MEM-20261028-055`（決定）。
 - 2026-10-28 追記 `MEM-20261028-056`（決定）。
 - 2026-10-28 追記 `MEM-20261028-057`（決定）。
+- 2026-10-29 追記 `MEM-20261029-001`（決定）。
