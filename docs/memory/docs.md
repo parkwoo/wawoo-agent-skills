@@ -77,3 +77,11 @@ tags: docs
 - **内容**: 方針修正（2026-10-29）: **日本語文中の英単語（skill/workflow/MCP/識別子）は問題なし＝許容**。日本語技術文書では一般的で、カタカナへ強制変換してはいけない。→ 前回の「英単語→カタカナ」一括変換（README/AGENTS/USAGE/INTENT-ROUTING/index .ja.md）は**撤回**（`git checkout 66777e3 --`）。`ja-proofread` は「英単語は変換しない（コード/識別子/パス/コマンドは英語のまま）」に方針修正し、修正対象を **簡体字中国語のみ文字・半角記号・MT くせ・用語ゆれ** に限定。EN/JA の doc リンクは `.ja.md` 維持、i18n サイト用に index.ja.md のナビは base 名（USAGE.md 等）。公開反映 `be70cd9`。
 - **出典**: .kilo/skills/ja-proofread/SKILL.md
 
+
+### MEM-20261029-009
+
+- **日付**: 2026-10-29
+- **種別**: 再発しうる修正
+- **内容**: MkDocs サイトの壊れリンク修正（2026-10-29）: 原因は (a) **EN ページの「Japanese version: [X.ja.md](X.ja.md)」言語リンク**（i18n ビルドでは `X.ja.md` はページではなく JA 版 `X` になるため 404）と (b) `../mcp/README(.ja).md`（`docs_dir` 外）。対策＝これらを **絶対 GitHub URL**（`https://github.com/parkwoo/wawoo-skills/blob/master/...`）へ変更（GitHub・サイト両方で有効）。同言語の相互リンク（EN→EN=`X.md`、JA→JA=`X.ja.md`）は i18n が解決するので相対のまま可。あわせて `site_url` を設定（言語切替・404 は `/wawoo-skills/...` のベース付き絶対URLになり Pages で解決）。検証は自作リンカ（`href` 走査）で実施（`validation.links.not_found=ignore` のため MkDocs 警告は出ない）。公開反映 `ff3466c`。
+- **出典**: mkdocs.yml
+
