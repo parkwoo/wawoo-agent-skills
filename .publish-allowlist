@@ -13,10 +13,14 @@ SECURITY.md
 SECURITY.ja.md
 VERSION
 kilo.json
+opencode.json
 .kilo/
 .cursor/
 mcp/
 .github/workflows/validate.yml
+.github/workflows/docs.yml
+mkdocs.yml
+requirements-docs.txt
 scripts/cli_adapters_mock.py
 scripts/e2e_flows.py
 scripts/gen_capabilities.py
@@ -39,6 +43,8 @@ docs/INTENT-ROUTING.md
 docs/INTENT-ROUTING.ja.md
 docs/VERSIONING.md
 docs/VERSIONING.ja.md
+docs/index.md
+docs/index.ja.md
 docs/memory/TEMPLATE.md
 docs/memory/MEMORY-TOOLS.md
 docs/memory/INDEX.example.md

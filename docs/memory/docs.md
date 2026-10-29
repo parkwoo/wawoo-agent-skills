@@ -37,3 +37,11 @@ tags: docs
 - **内容**: 公開文書のコード同期（2026-10-29）。公開リポの文書はソースと完全一致（公開遅延なし）。発見・修正したドリフト: (1) `AGENTS.md`/`.ja` §2 レイアウトが削除済み `docs/design` を記載 → `docs/ … USAGE, INTENT-ROUTING, VERSIONING, plans, memory` に修正、`.cursor/cli.json.example` を追記。(2) EN/JA の**更新履歴の行数ドリフト**: `AGENTS.ja.md` §11 に EN の「3 層言語ポリシー」行が欠落、`docs/INTENT-ROUTING.ja.md` §8 に EN の 2026-10-28 行が欠落 → 追加。(3) 2026-10-29 行（公開面縮小・正本分離）を AGENTS EN/JA に追加。教訓: **EN 主＋JA 従は「見出し構造」だけでなく更新履歴の行パリティも検査する**（`grep -c '^| 2026-'` を EN/JA で比較）。
 - **出典**: AGENTS.md
 
+
+### MEM-20261029-004
+
+- **日付**: 2026-10-29
+- **種別**: 再発しうる修正
+- **内容**: 公開文書の改善（2026-10-29）: (1) **日本語文書の内部リンクを JA 版へ**修正（`README.ja.md`・`docs/USAGE.ja.md`・`docs/INTENT-ROUTING.ja.md` が EN `*.md` を指していた → `*.ja.md`。トップの「English version」リンクのみ EN のまま）。(2) **Oct-28 の新機能を追記**: README(EN/JA) に「Capabilities／主な機能」節（意図ルーティング=学習＋上流、フェーズとゲート、動的ステア、委譲＋**モデル階層 fast|reasoning**、Gₐ/Gₑ/Gₒ、段階的開示、記憶）。`model_tier` は実装済みだが未記載だったので INTENT-ROUTING §3.2 P3 に追記。検証: validate OK / e2e 28/0。公開反映 `17475c1`。
+- **出典**: README.ja.md
+
