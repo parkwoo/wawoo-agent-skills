@@ -45,3 +45,11 @@ tags: docs
 - **内容**: 公開文書の改善（2026-10-29）: (1) **日本語文書の内部リンクを JA 版へ**修正（`README.ja.md`・`docs/USAGE.ja.md`・`docs/INTENT-ROUTING.ja.md` が EN `*.md` を指していた → `*.ja.md`。トップの「English version」リンクのみ EN のまま）。(2) **Oct-28 の新機能を追記**: README(EN/JA) に「Capabilities／主な機能」節（意図ルーティング=学習＋上流、フェーズとゲート、動的ステア、委譲＋**モデル階層 fast|reasoning**、Gₐ/Gₑ/Gₒ、段階的開示、記憶）。`model_tier` は実装済みだが未記載だったので INTENT-ROUTING §3.2 P3 に追記。検証: validate OK / e2e 28/0。公開反映 `17475c1`。
 - **出典**: README.ja.md
 
+
+### MEM-20261029-005
+
+- **日付**: 2026-10-29
+- **種別**: 決定
+- **内容**: 公開文書の強化（2026-10-29）: (1) **OpenCode 対応**を追加 — `opencode.json`（`mcp.wawoo-skills` type=local, command=[python3,mcp/server.py]）、README(EN/JA)「対応環境／対応ツール」と `AGENTS(.ja) §6` に追記、allowlist に `opencode.json`。(2) **MkDocs Material** でドキュメントサイト：`mkdocs.yml`（`docs_dir: docs`, theme material, `exclude_docs: memory/ plans/`, nav=EN/日本語 両方）＋`requirements-docs.txt`（mkdocs-material のみ）＋`.github/workflows/docs.yml`（build→`actions/deploy-pages`）。**GitHub Pages 有効化**（`gh api -X POST repos/.../pages -f build_type=workflow`）→ https://parkwoo.github.io/wawoo-skills/ （EN+JA 200）。落とし穴: **`docs_dir` は config の子でなければならない**（リポジトリ直下 `docs_dir: .` は不可）。また **mkdocs-static-i18n の suffix 構造は GitHub 流の `NAME.ja.md` 内部リンクと衝突**する（`suffix` オプション無しで locale から `NAME.<locale>.md` を期待。EN ページ→`.ja.md` リンクが「not found」警告）→ i18n プラグインは使わず、**EN/日本語 を別 nav セクションとして掲載**して全リンクを解決させた。CI は公開リポ（無料）。
+- **出典**: mkdocs.yml
+

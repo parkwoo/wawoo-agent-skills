@@ -21,6 +21,7 @@
 - `MEM-20261028-056` 公開面の縮小（2026-10-29 適用）: 公開の「読む」文書は **README.md / docs/USAGE.md / docs/INTENT-ROUTING.md** の 3 本のみ。設計・工程文書 **METHODOLOGY / PROCESS-PHILOSOPHY / PUBLICATION / docs/README / design/INTENT-RECEIVER（EN+JA）は
 - `MEM-20261028-057` 公開/非公開の分離を **2 リポジトリ + publish** に移行（2026-10-29）。(1) 正本は **parkwoo/wawoo-skills-internal（非公開）**：キット＋`internal/` を全部追跡（`/internal/` 等の gitignore を解除）。(2) 公開は **parkwoo/wawoo-skills（PUBLIC）**：`.github/w
 - `MEM-20261029-001` 旧足場を撤去（2026-10-29）: `internal.example/` と `scripts/bootstrap-internal.sh` を削除。`internal/` に無かった 5 ファイル（`docs/audit/AGENT-ACTIVE-E2E.md`・`scripts/e2e/{active_apply_dryrun.py,agent-active-live.sh,fixtur
+- `MEM-20261029-005` 公開文書の強化（2026-10-29）: (1) **OpenCode 対応**を追加 — `opencode.json`（`mcp.wawoo-skills` type=local, command=[python3,mcp/server.py]）、README(EN/JA)「対応環境／対応ツール」と `AGENTS(.ja) §6` に追記、allowlist に `opencode.json
 ## 制約・落とし穴
 - （例）Cursor は slash command／agent／SKILL をネイティブ実行しない。
 - （例）一部スキルは issue tracker 設定が必要（`scripts/readiness.json`）。
@@ -109,3 +110,4 @@
 - 2026-10-29 追記 `MEM-20261029-002`（制約・落とし穴）。
 - 2026-10-29 追記 `MEM-20261029-003`（再発しうる修正）。
 - 2026-10-29 追記 `MEM-20261029-004`（再発しうる修正）。
+- 2026-10-29 追記 `MEM-20261029-005`（決定）。
