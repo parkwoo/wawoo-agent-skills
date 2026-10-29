@@ -53,3 +53,11 @@ tags: docs
 - **内容**: 公開文書の強化（2026-10-29）: (1) **OpenCode 対応**を追加 — `opencode.json`（`mcp.wawoo-skills` type=local, command=[python3,mcp/server.py]）、README(EN/JA)「対応環境／対応ツール」と `AGENTS(.ja) §6` に追記、allowlist に `opencode.json`。(2) **MkDocs Material** でドキュメントサイト：`mkdocs.yml`（`docs_dir: docs`, theme material, `exclude_docs: memory/ plans/`, nav=EN/日本語 両方）＋`requirements-docs.txt`（mkdocs-material のみ）＋`.github/workflows/docs.yml`（build→`actions/deploy-pages`）。**GitHub Pages 有効化**（`gh api -X POST repos/.../pages -f build_type=workflow`）→ https://parkwoo.github.io/wawoo-skills/ （EN+JA 200）。落とし穴: **`docs_dir` は config の子でなければならない**（リポジトリ直下 `docs_dir: .` は不可）。また **mkdocs-static-i18n の suffix 構造は GitHub 流の `NAME.ja.md` 内部リンクと衝突**する（`suffix` オプション無しで locale から `NAME.<locale>.md` を期待。EN ページ→`.ja.md` リンクが「not found」警告）→ i18n プラグインは使わず、**EN/日本語 を別 nav セクションとして掲載**して全リンクを解決させた。CI は公開リポ（無料）。
 - **出典**: mkdocs.yml
 
+
+### MEM-20261029-006
+
+- **日付**: 2026-10-29
+- **種別**: 再発しうる修正
+- **内容**: ライセンスと日本語校正（2026-10-29）: (1) **`fal-gen` は自作 skill（MIT）**であり「ライセンス不明」ではなかった → `README(.ja)` と `.kilo/skills/ATTRIBUTION.md` の除外理由を訂正（除外は第三者ではなく外部依存 fal.ai のため、同梱せずグローバル運用）。Marketplace business 3 件のみが第三者 NOASSERTION。(2) **日本語校正 skill `ja-proofread` を新規追加**（簡体字中国語のみの文字を検出→日本語へ、記号・MT くせ・用語統一、Gₑ で grep 0 件を確認）。`scripts/validate_assets.py` に **WARN 検査**（`*.ja.md` と `.kilo/skills/**` の簡体字中国語のみ文字）を追加（`ja-proofread` 自身は除外）。(3) 実際の中国語混入を修正: `reference-design-contract/SKILL.md`（zh_name/triggers/example_prompt_i18n の zh-CN→ja）と `web-design-guidelines/SKILL.md`（trigger「设计审查」→「デザインレビュー」）。skills=64。
+- **出典**: .kilo/skills/ATTRIBUTION.md
+

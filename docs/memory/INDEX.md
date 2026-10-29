@@ -78,6 +78,7 @@
 - （例）`validate_assets.py` を通す（`docs/memory/` の秘密パターンも検査）。
 - `MEM-20261029-003` 公開文書のコード同期（2026-10-29）。公開リポの文書はソースと完全一致（公開遅延なし）。発見・修正したドリフト: (1) `AGENTS.md`/`.ja` §2 レイアウトが削除済み `docs/design` を記載 → `docs/ … USAGE, INTENT-ROUTING, VERSIONING, plans, memory` に修正、`.cursor/cli.json.ex
 - `MEM-20261029-004` 公開文書の改善（2026-10-29）: (1) **日本語文書の内部リンクを JA 版へ**修正（`README.ja.md`・`docs/USAGE.ja.md`・`docs/INTENT-ROUTING.ja.md` が EN `*.md` を指していた → `*.ja.md`。トップの「English version」リンクのみ EN のまま）。(2) **Oct-28 の新機能を追記**
+- `MEM-20261029-006` ライセンスと日本語校正（2026-10-29）: (1) **`fal-gen` は自作 skill（MIT）**であり「ライセンス不明」ではなかった → `README(.ja)` と `.kilo/skills/ATTRIBUTION.md` の除外理由を訂正（除外は第三者ではなく外部依存 fal.ai のため、同梱せずグローバル運用）。Marketplace business 3 件のみが第
 ## 未決
 - （記入）
 - `MEM-20261026-001` after clear
@@ -111,3 +112,4 @@
 - 2026-10-29 追記 `MEM-20261029-003`（再発しうる修正）。
 - 2026-10-29 追記 `MEM-20261029-004`（再発しうる修正）。
 - 2026-10-29 追記 `MEM-20261029-005`（決定）。
+- 2026-10-29 追記 `MEM-20261029-006`（再発しうる修正）。
