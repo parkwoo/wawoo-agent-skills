@@ -21,3 +21,11 @@ tags: release
 - **内容**: 旧足場を撤去（2026-10-29）: `internal.example/` と `scripts/bootstrap-internal.sh` を削除。`internal/` に無かった 5 ファイル（`docs/audit/AGENT-ACTIVE-E2E.md`・`scripts/e2e/{active_apply_dryrun.py,agent-active-live.sh,fixtures/*}`）は `internal/` へ退避してから削除。内部ツールは `internal/` 直下に集約（bootstrap 手順は廃止）。`scripts/e2e_flows.py` の `agent_active_sandbox_dry` テストは `internal/scripts/e2e/agent-active-live.sh` を参照し、無ければスキップに変更。deploy key ローテーションは「新規追加→secret 更新→検証→旧削除」の順（`gh repo deploy-key add/delete` + `gh secret set PUBLIC_DEPLOY_KEY`）。
 - **出典**: scripts/e2e_flows.py
 
+
+### MEM-20261029-002
+
+- **日付**: 2026-10-29
+- **種別**: 制約・落とし穴
+- **内容**: 重要（2026-10-29）: **非公開リポジトリ `wawoo-skills-internal` の GitHub Actions は課金でブロック**（"job was not started because recent account payments have failed or your spending limit needs to be increased"）。→ **タグ自動 publish は実行不可**。公開リポの Actions は無料枠で動作する。(対応1) `.github/workflows/validate.yml` に `if: github.repository == 'parkwoo/wawoo-skills'` を付け、重い CI を**公開リポ限定**に（非公開側はスキップ＝無駄な課金/失敗を防止）。(対応2) **ローカル publish** `internal/scripts/publish_public.sh` を追加（git-filter-repo＋`git push --force pub master:master --tags`、Actions 不使用・コスト0）。(対応3) publish は **master のみ** push（`refs/heads/*` だと全ブランチが公開され、実際に 14 ブランチが public へ漏れたため削除）。
+- **出典**: internal/scripts/publish_public.sh
+

@@ -71,6 +71,7 @@
 - `MEM-20261028-012` バックログは追記式（上書きしない）。優先度＝行の順序、再最適化は並べ替え。
 - `MEM-20261028-011` キット本体の `docs/plans/ACTIVE.md`・`docs/memory/*` の実体も公開しない（テンプレ `ACTIVE.example.md`・`INDEX.example.md`・`TEMPLATE.md`・`MEMORY-TOOLS.md` のみ公開）。CI は実ファイル非依存（example／隔離 memory）。
 - `MEM-20261028-053` 公開ドキュメント監査の落とし穴: `ls .kilo/skills | wc -l` は 65 を返すが、これは非ディレクトリの `.kilo/skills/README.md`・`ATTRIBUTION.md` を数えるため。実体は **63 skill ディレクトリ**（`python3 scripts/validate_assets.py` → `OK: skills=63 agents=2
+- `MEM-20261029-002` 重要（2026-10-29）: **非公開リポジトリ `wawoo-skills-internal` の GitHub Actions は課金でブロック**（"job was not started because recent account payments have failed or your spending limit needs to be increased"）。→ **タグ自動 
 ## 再発しうる修正
 - （例）Skill 追加時は `name`／`description` を付け、`name=dir` を守る。
 - （例）`validate_assets.py` を通す（`docs/memory/` の秘密パターンも検査）。
@@ -103,3 +104,4 @@
 - 2026-10-28 追記 `MEM-20261028-056`（決定）。
 - 2026-10-28 追記 `MEM-20261028-057`（決定）。
 - 2026-10-29 追記 `MEM-20261029-001`（決定）。
+- 2026-10-29 追記 `MEM-20261029-002`（制約・落とし穴）。
