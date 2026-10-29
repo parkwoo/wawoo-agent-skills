@@ -24,6 +24,7 @@
 - `MEM-20261029-005` 公開文書の強化（2026-10-29）: (1) **OpenCode 対応**を追加 — `opencode.json`（`mcp.wawoo-skills` type=local, command=[python3,mcp/server.py]）、README(EN/JA)「対応環境／対応ツール」と `AGENTS(.ja) §6` に追記、allowlist に `opencode.json
 - `MEM-20261029-007` 日本語文書の英語混在とサイト言語切替（2026-10-29）: (1) **`ja-proofread` を拡張** — 簡体字中国語のみ文字に加え「日本語の文中の英単語（skill→スキル等）」と置換表・MT くせ・記号・用語統一を追加。(2) **JA 文書の英語混在を一括軽減**（README/AGENTS/USAGE/INTENT-ROUTING/index .ja.md）。落とし穴: 単
 - `MEM-20261029-008` 方針修正（2026-10-29）: **日本語文中の英単語（skill/workflow/MCP/識別子）は問題なし＝許容**。日本語技術文書では一般的で、カタカナへ強制変換してはいけない。→ 前回の「英単語→カタカナ」一括変換（README/AGENTS/USAGE/INTENT-ROUTING/index .ja.md）は**撤回**（`git checkout 66777e3 --`）。`j
+- `MEM-20261029-010` サイトの「はじめに」に README を取り込み（2026-10-29）: `mkdocs-include-markdown-plugin`（MIT）を追加し、`docs/index.md`＝`{% include-markdown "../README.md" %}`、`docs/index.ja.md`＝`../README.ja.md`。README は `docs_dir` 外だがプラグイ
 ## 制約・落とし穴
 - （例）Cursor は slash command／agent／SKILL をネイティブ実行しない。
 - （例）一部スキルは issue tracker 設定が必要（`scripts/readiness.json`）。
@@ -119,3 +120,4 @@
 - 2026-10-29 追記 `MEM-20261029-007`（決定）。
 - 2026-10-29 追記 `MEM-20261029-008`（決定）。
 - 2026-10-29 追記 `MEM-20261029-009`（再発しうる修正）。
+- 2026-10-29 追記 `MEM-20261029-010`（決定）。

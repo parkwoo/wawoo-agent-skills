@@ -85,3 +85,11 @@ tags: docs
 - **内容**: MkDocs サイトの壊れリンク修正（2026-10-29）: 原因は (a) **EN ページの「Japanese version: [X.ja.md](X.ja.md)」言語リンク**（i18n ビルドでは `X.ja.md` はページではなく JA 版 `X` になるため 404）と (b) `../mcp/README(.ja).md`（`docs_dir` 外）。対策＝これらを **絶対 GitHub URL**（`https://github.com/parkwoo/wawoo-skills/blob/master/...`）へ変更（GitHub・サイト両方で有効）。同言語の相互リンク（EN→EN=`X.md`、JA→JA=`X.ja.md`）は i18n が解決するので相対のまま可。あわせて `site_url` を設定（言語切替・404 は `/wawoo-skills/...` のベース付き絶対URLになり Pages で解決）。検証は自作リンカ（`href` 走査）で実施（`validation.links.not_found=ignore` のため MkDocs 警告は出ない）。公開反映 `ff3466c`。
 - **出典**: mkdocs.yml
 
+
+### MEM-20261029-010
+
+- **日付**: 2026-10-29
+- **種別**: 決定
+- **内容**: サイトの「はじめに」に README を取り込み（2026-10-29）: `mkdocs-include-markdown-plugin`（MIT）を追加し、`docs/index.md`＝`{% include-markdown "../README.md" %}`、`docs/index.ja.md`＝`../README.ja.md`。README は `docs_dir` 外だがプラグインの `rewrite_relative_urls`（既定 true）が相対リンクを補正し、`docs/INTENT-ROUTING.md` → サイト内 `INTENT-ROUTING/` に解決。README の言語リンク（`README.ja.md`）は絶対 GitHub URL 化。nav は Home→**Introduction（JA: はじめに）**。`validation.links.not_found=ignore` のため MkDocs 警告は出ないので、壊れリンク検出は自作リンカ（`href` 走査）で実施 → 実壊れ 0（残りは Pages のベースパス絶対URL）。i18n と `NAME.ja.md` リンクの併用、`docs_dir` 外取り込み、いずれも実績あり。公開反映 `916daaa`。
+- **出典**: mkdocs.yml
+
