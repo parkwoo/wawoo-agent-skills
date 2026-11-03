@@ -1,1 +1,1 @@
-{% include-markdown "../README.md" %}
+../../workspace/repo-docs/wawoo-skills/index.md
