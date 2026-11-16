@@ -18,3 +18,7 @@ For an ordinary L1 request, consider `/delivery-lite` and `docs/plans/ACTIVE.md`
 7. Run `change-readiness` and report requested outcome, implementation, evidence, unverified items, risks, rollback, and approval required.
 8. **Memory (exit)**: persist new decisions, constraints, or gotchas via `memory_save` or `docs/memory/` append (PROCESS P4 / D7).
 9. Do not publish, deploy, push, tag, or perform external mutations unless explicitly approved.
+
+## Apply-before skills
+
+discover: `in-your-own-words`, `principle-attack-the-premise`; design: `principle-exhaust-the-design-space`; implement: `how` + `principle-*`; verify: `principle-prove-it-works`, `create-verification-skill`.

@@ -33,3 +33,17 @@ To pick a workflow from keywords or an explicit `/workflow`, use MCP **instead o
 5. For ambiguous or composite tasks, use this skill and [`references/routing-map.md`](routing-map.md)
 
 The resident receiver is optional. CLI-only: `scripts/task-router.py` or `scripts/wawoo-route.sh`.
+
+## pstack 吸收后的选择指引（新增）
+
+- **理解需求/意图**：`why`（为何这样做/设计取舍/回归动机）、`how`（如何运行/改动前走查/归属分层）。
+- **上下文与反思**：`recall`（开工/续接前重建上下文）、`reflect`（会话后提炼并落到 skill 编辑）。
+- **工程原则（apply-before）**：`principle-*`（设计/调试/验证/上下文/并发/范围）。常用：
+  - 设计：`principle-exhaust-the-design-space`、`principle-redesign-from-first-principles`、`principle-attack-the-premise`
+  - 实现：`principle-foundational-thinking`、`principle-model-the-domain`、`principle-subtract-before-you-add`、`principle-type-system-discipline`
+  - 调试：`principle-fix-root-causes`、`principle-build-the-lever`
+  - 验证：`principle-test-behavior-not-implementation`、`principle-prove-it-works`、`benchmark-checklist`
+  - 并发/运维：`principle-separate-before-serializing-shared-state`、`principle-make-operations-idempotent`
+- **验证/审计**：`blast-radius`（改动会破坏什么）、`create-verification-skill` / `maintain-verification-skill`（项目级验证 skill）。
+- **编排**：`figure-it-out`（大型/模糊工作的可审计 playbook）、`swarm`（并行 fan-out）、`show-me-your-work`（决策日志）。
+- **提示**：`sharpen`（把任务做深再重写 prompt）、`in-your-own-words`（复述目标）。

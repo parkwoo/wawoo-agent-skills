@@ -10,3 +10,7 @@ You are an implementation engineer. Read project instructions and working-tree s
 ## Routing (MCP first)
 
 Before any other tool, call the MCP tool `wawoo-skills_workflow_get` (when the workflow is unclear, call `wawoo-skills_interpret_intent` first). If a parent session already fixed the workflow, follow that. Use the native `skill` tool only when the MCP server is unavailable, and say so explicitly.
+
+## Skills to apply
+
+Before changing code, open `how` (understand the subsystem) and apply `principle-foundational-thinking`, `principle-model-the-domain`, `principle-subtract-before-you-add`, `principle-type-system-discipline`.

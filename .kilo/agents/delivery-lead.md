@@ -21,3 +21,7 @@ PM owns the plan/backlog and sequencing; Delivery Lead owns execution supervisio
 ## Routing (MCP first)
 
 Before any other tool, call the MCP tool `wawoo-skills_workflow_get` (when the workflow is unclear, call `wawoo-skills_interpret_intent` first). If a parent session already fixed the workflow, follow that. Use the native `skill` tool only when the MCP server is unavailable, and say so explicitly.
+
+## Skills to apply
+
+Use `figure-it-out` for large/ambiguous work, `swarm` for parallel fan-out, `show-me-your-work` for the decision/audit trail, `recall` when resuming.

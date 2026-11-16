@@ -186,15 +186,15 @@ class Phase:
 
 
 BASE_PHASES: dict[str, Phase] = {
-    "discover": Phase("discover", "Fix the outcome, acceptance criteria, and scope", "product-owner", ("product-discovery",), _MCP_READ, ("outcome and acceptance criteria are stated",)),
-    "design": Phase("design", "Decide design and tradeoffs", "architect", ("architecture-decision",), _MCP_READ, ("decision, alternatives, and rejection reasons are recorded",)),
-    "plan": Phase("plan", "Break down the work and document the plan", "project-manager", ("plan-md",), _MCP_READ, ("the plan is saved in docs and has an id",)),
-    "implement": Phase("implement", "Implement the smallest change", "implementer", ("engineering-quality",), _MCP_FULL, ("change is scoped / tests added / no secrets",)),
-    "verify": Phase("verify", "Check tests and evidence", "qa-engineer", ("test-engineering",), _MCP_FULL, ("0 unconverged FAILED / 0 leftover containers / commands recorded",), "readonly-parallel"),
-    "audit": Phase("audit", "Read-only review", "security-reviewer", ("security-review",), _MCP_READ, ("findings and evidence (with severity)",), "readonly-parallel"),
-    "research": Phase("research", "Research primary sources", "product-owner", ("research",), _MCP_READ, ("fact and inference recorded separately",), "readonly-parallel"),
-    "release": Phase("release", "Decide release readiness", "release-manager", ("release-readiness",), _MCP_AUDIT, ("version/tag/rollback/unverified stated",)),
-    "report": Phase("report", "Report with evidence", "delivery-lead", ("change-readiness",), _MCP_AUDIT, ("evidence, unverified, risk, next actions",)),
+    "discover": Phase("discover", "Fix the outcome, acceptance criteria, and scope", "product-owner", ("product-discovery", "in-your-own-words", "principle-attack-the-premise"), _MCP_READ, ("outcome and acceptance criteria are stated",)),
+    "design": Phase("design", "Decide design and tradeoffs", "architect", ("architecture-decision", "principle-exhaust-the-design-space", "principle-redesign-from-first-principles"), _MCP_READ, ("decision, alternatives, and rejection reasons are recorded",)),
+    "plan": Phase("plan", "Break down the work and document the plan", "project-manager", ("plan-md", "recall", "figure-it-out", "principle-sequence-verifiable-units"), _MCP_READ, ("the plan is saved in docs and has an id",)),
+    "implement": Phase("implement", "Implement the smallest change", "implementer", ("engineering-quality", "how", "principle-foundational-thinking", "principle-model-the-domain", "principle-subtract-before-you-add"), _MCP_FULL, ("change is scoped / tests added / no secrets",)),
+    "verify": Phase("verify", "Check tests and evidence", "qa-engineer", ("test-engineering", "principle-test-behavior-not-implementation", "principle-prove-it-works", "create-verification-skill"), _MCP_FULL, ("0 unconverged FAILED / 0 leftover containers / commands recorded",), "readonly-parallel"),
+    "audit": Phase("audit", "Read-only review", "security-reviewer", ("security-review", "blast-radius", "principle-fix-root-causes"), _MCP_READ, ("findings and evidence (with severity)",), "readonly-parallel"),
+    "research": Phase("research", "Research primary sources", "product-owner", ("research", "why", "how"), _MCP_READ, ("fact and inference recorded separately",), "readonly-parallel"),
+    "release": Phase("release", "Decide release readiness", "release-manager", ("release-readiness", "principle-make-operations-idempotent"), _MCP_AUDIT, ("version/tag/rollback/unverified stated",)),
+    "report": Phase("report", "Report with evidence", "delivery-lead", ("change-readiness", "show-me-your-work"), _MCP_AUDIT, ("evidence, unverified, risk, next actions",)),
 }
 
 # P5: reuse common phases (avoid duplicate definitions)
@@ -226,13 +226,14 @@ PHASE_OVERRIDES: dict[tuple[str, str], dict[str, object]] = {
     ("design-review", "audit"): {"agent": "web-designer", "skills": ("design-review", "web-design-guidelines", "accessibility-audit")},
     ("compliance-review", "audit"): {"agent": "compliance-reviewer", "skills": ("compliance-legal", "privacy-review")},
     ("release-review", "audit"): {"skills": ("compliance-legal", "privacy-review", "security-review")},
-    ("incident-response", "audit"): {"agent": "sre-operator", "skills": ("incident-debugging",)},
-    ("incident-response", "implement"): {"agent": "sre-operator", "skills": ("incident-debugging", "deployment")},
-    ("self-review", "audit"): {"agent": "code-reviewer", "skills": ("code-review", "codebase-design")},
+    ("incident-response", "audit"): {"agent": "sre-operator", "skills": ("incident-debugging", "why", "how", "principle-fix-root-causes")},
+    ("incident-response", "implement"): {"agent": "sre-operator", "skills": ("incident-debugging", "deployment", "why", "how")},
+    ("self-review", "audit"): {"agent": "code-reviewer", "skills": ("code-review", "codebase-design", "blast-radius", "principle-test-behavior-not-implementation")},
     ("content-delivery-lite", "implement"): {"agent": "docs-specialist", "skills": ("documentation-localization",)},
     ("market-plan", "research"): {"agent": "market-researcher", "skills": ("research", "research-decision-room")},
     ("deck", "plan"): {"agent": "market-researcher", "skills": ("slides",)},
-    ("sprint-plan", "plan"): {"agent": "project-manager", "skills": ("wayfinder", "to-tickets")},
+    ("sprint-plan", "plan"): {"agent": "project-manager", "skills": ("wayfinder", "to-tickets", "figure-it-out", "swarm")},
+    ("self-improve", "implement"): {"skills": ("engineering-quality", "reflect", "principle-encode-lessons-in-structure")},
     ("status-report", "report"): {"agent": "project-manager", "skills": ("plan-md",)},
 }
 

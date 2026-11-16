@@ -22,3 +22,7 @@ replay: safe
 
 - Business decisions (pricing, contracts, legal) are **made by humans**. Agents present options and rationale only.
 - If you keep findings in `docs/`, do not include secrets (personal data, keys).
+
+## Apply-before skills
+
+`why` (motivation/rationale) and `how` (runtime behavior) before writing the decision.
