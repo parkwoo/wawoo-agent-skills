@@ -47,9 +47,9 @@ wawoo-skills は、この「**能力はあるのに呼ばれない**」問題に
 
 ## 対応環境
 
-- **Kilo CLI / Kilo Code**：`.kilo/` の探索、slash ワークフロー（`/feature-delivery` 等）、`kilo.json` の MCP。
-- **Cursor**：`AGENTS.md`・`.cursor/rules`・MCP、および `@.kilo/commands`／`@.kilo/skills` の参照（slash／ネイティブ agent 切替は非対応。手順は同等に適用）。
-- **OpenCode**：`AGENTS.md`＋MCP（`opencode.json`）。slash／skill のネイティブ実行は無し（`interpret_intent` → `workflow_get` → `skill_get`）。
+- **Kilo CLI / Kilo Code**：`.kilo/` の探索、slash ワークフロー（`/feature-delivery` 等）、`kilo.json` の MCP。グローバル導入は `scripts/install_global.py`。
+- **Cursor**：`AGENTS.md`・`.cursor/rules`・MCP＋**ネイティブ skills／subagents**、`@.kilo/commands`／`@.kilo/skills` の参照。導入はプロジェクト単位 `scripts/install_cursor_workspace.py`、ユーザ単位 `scripts/install_cursor_global.py`。
+- **OpenCode**：`AGENTS.md`＋`skills.paths` による**ネイティブ skills**＋ MCP（`opencode.json`）。グローバル導入は `scripts/install_opencode.py`（agents/commands をミラーし、MCP＋`instructions`＋`skills.paths`＋`default_agent` を登録）。
 
 ### 前提条件（ランタイム）
 
@@ -109,6 +109,15 @@ wawoo-skills は、この「**能力はあるのに呼ばれない**」問題に
 1. このディレクトリを開く（`AGENTS.md` と `.cursor/rules` を読む）
 2. **Settings → MCP** で `wawoo-skills` を有効化（`.cursor/mcp.json`）
 3. MCP で `interpret_intent`（入口選定）→ `workflow_get`／`skill_get` 等（[INTENT-ROUTING.ja.md](docs/INTENT-ROUTING.ja.md)）
+
+**モノレポ（例: ワークスペースが `/home/git` で wawoo-skills はサブディレクトリ）**  
+ワークスペース直下に MCP を置く:
+
+```bash
+python3 /path/to/wawoo-skills/scripts/install_cursor_workspace.py --workspace /home/git
+```
+
+その後 **Reload Window** → MCP で `wawoo-skills` を Enabled。
 - **slash command／agent は非対応**。手順は `@.kilo/commands/<name>.md` を開いて適用。
 - 詳細：`docs/USAGE.md`
 

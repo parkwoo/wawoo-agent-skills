@@ -26,7 +26,7 @@ def parse_content(path: Path) -> list[ContentUnit]:
     units: list[ContentUnit] = []
     in_section = False
     for line in text.splitlines():
-        if line.strip() in ("## 目次", "## 章・節"):
+        if line.strip() in ("## 目次", "## 章・節", "## Contents", "## Chapters"):
             in_section = True
             continue
         if in_section and line.startswith("## "):

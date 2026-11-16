@@ -75,7 +75,7 @@ def main() -> None:
     commands = collect("commands/*.md", needs)
 
     lines = [
-        "# CAPABILITIES（自動生成）",
+        "# CAPABILITIES (auto-generated)",
         "",
         "> Regenerate with `python3 scripts/gen_capabilities.py`. Do not edit by hand.",
         "> Pick candidates from this catalog first and open only the `SKILL.md` you need (progressive disclosure).",

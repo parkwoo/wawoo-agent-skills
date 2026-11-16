@@ -1,28 +1,32 @@
-# スキル・エージェントの出典とライセンス
+# Skill and agent provenance & licenses
 
-`.kilo/skills`（64）・`.kilo/agents`（22）の由来。**流用・再配布時は各ライセンスを保持**する。
-ライセンス全文：`LICENSES/`。
+Origins of `.kilo/skills` (65) and `.kilo/agents` (22). **Keep each license when reusing or redistributing.**
+Full license texts: `LICENSES/`.
 
 ## Skills
-| 由来 | 件数 | ライセンス | 備考 |
+
+| Origin | Count | License | Notes |
 |---|---|---|---|
-| **Skills For Real Engineers**（Matt Pocock） | 25 | **MIT** | `LICENSES/skills-for-real-engineers-MIT.txt`（`writing-fragments`/`writing-beats`/`writing-shape`/`teach` を含む） |
-| **Kilo 組み込み** | 16 | **MIT**（frontmatter に明記） | `accessibility-audit` 等 |
-| **OpenDesign** | 10 | **Apache-2.0** | `LICENSES/open-design-Apache-2.0.txt`（各 skill ディレクトリに `LICENSE.txt` + `NOTICE.txt`） |
-| **本リポジトリ** | 13 | **MIT**（Copyright (c) 2026 wawoo.jp） | `deployment`・`compliance-legal`・`privacy-review`・`changelog`・`memory`・`slides`・`screenshots-marketing`・`plan-md`・`language-policy`・`publication-boundary`・`science-writing`・`viral-hooks`・`fal-gen` |
+| **Skills For Real Engineers** (Matt Pocock) | 25 | **MIT** | `LICENSES/skills-for-real-engineers-MIT.txt` (includes `writing-fragments` / `writing-beats` / `writing-shape` / `teach`) |
+| **Kilo built-in** | 16 | **MIT** (stated in frontmatter) | e.g. `accessibility-audit` |
+| **OpenDesign** | 10 | **Apache-2.0** | `LICENSES/open-design-Apache-2.0.txt` (each skill directory has `LICENSE.txt` + `NOTICE.txt`) |
+| **This repository** | 14 | **MIT** (Copyright (c) 2026 wawoo.jp) | `deployment`, `compliance-legal`, `privacy-review`, `changelog`, `memory`, `slides`, `screenshots-marketing`, `plan-md`, `language-policy`, `publication-boundary`, `science-writing`, `viral-hooks`, `fal-gen`, `context-compression` |
 
 ## Agents
-| 由来 | 件数 | ライセンス | 備考 |
+
+| Origin | Count | License | Notes |
 |---|---|---|---|
-| **Kilo Marketplace** | 6 | **Apache-2.0**（NOTICE） | `frontend-specialist`・`docs-specialist`・`data`・`code-reviewer`・`code-skeptic`・`code-simplifier` |
-| **wawoo（本ブランド）** | 12 | 本リポジトリ（MIT） | delivery-lead 等 |
-| **本リポジトリ** | 4 | **MIT** | `market-researcher`・`compliance-reviewer`・`project-manager`・`wawoo-auto` |
+| **Kilo Marketplace** | 6 | **Apache-2.0** (NOTICE) | `frontend-specialist`, `docs-specialist`, `data`, `code-reviewer`, `code-skeptic`, `code-simplifier` |
+| **wawoo (this brand)** | 12 | This repository (MIT) | delivery-lead, etc. |
+| **This repository** | 4 | **MIT** | `market-researcher`, `compliance-reviewer`, `project-manager`, `wawoo-auto` |
 
-## 同梱していないもの
-- **Marketplace business 3 件**（`competitive-ads-extractor`・`lead-research-assistant`・`content-research-writer`）… `license: NOASSERTION`（**第三者**）
+## Not bundled
 
-> Marketplace business 3 件は第三者で**ライセンス未確認**のため本リポジトリに含めていない。
+- **Marketplace business (3)** (`competitive-ads-extractor`, `lead-research-assistant`, `content-research-writer`) — `license: NOASSERTION` (third party)
 
-## 注意
-- OpenDesign は **Apache-2.0**（LICENSE 保持）。Marketplace は **Apache-2.0**（NOTICE 帰属）。
-- 本リポジトリの新規スキル／エージェントは **MIT** とする（`LICENSE`、Copyright (c) 2026 **wawoo.jp**）。
+> The 3 Marketplace business skills are third-party with unverified licenses, so they are not bundled.
+
+## Notes
+
+- OpenDesign is **Apache-2.0** (keep LICENSE). Marketplace is **Apache-2.0** (NOTICE attribution).
+- New skills / agents in this repository are **MIT** (`LICENSE`, Copyright (c) 2026 **wawoo.jp**).

@@ -1,6 +1,6 @@
 ---
 name: science-writing
-description: Write accurate popular-science articles and explainers for a general audience — define the audience, translate jargon, ground claims in primary sources, use analogy, and separate evidence from inference. Use for 科普 / blog / newsletter / science explainers.
+description: Write accurate popular-science articles and explainers for a general audience — define the audience, translate jargon, ground claims in primary sources, use analogy, and separate evidence from inference. Use for popular-science / blog / newsletter / science explainers.
 ---
 
 # Science Writing (popular science)

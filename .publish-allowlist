@@ -21,11 +21,15 @@ mcp/
 .github/workflows/docs.yml
 mkdocs.yml
 requirements-docs.txt
+scripts/adapters.py
 scripts/cli_adapters_mock.py
 scripts/e2e_flows.py
 scripts/gen_capabilities.py
 scripts/gen_router.py
+scripts/install_cursor_global.py
+scripts/install_cursor_workspace.py
 scripts/install_global.py
+scripts/install_opencode.py
 scripts/kilo_snapshot_gc.sh
 scripts/plan_active.py
 scripts/plan_content.py

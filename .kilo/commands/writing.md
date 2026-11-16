@@ -18,8 +18,8 @@ replay: safe
 ## Modes
 
 - **general** (default): `writing-fragments` → `writing-beats` → `writing-shape`.
-- **science / 科普**: add `science-writing` (audience, plain language, sources) before drafting; fact-check with `research`; use `teach` for a multi-session lesson.
-- **viral / 人气**: add `viral-hooks` (title/hook/payoff) and `marketing-psychology` (framing); keep the ethics rules (no clickbait).
+- **science / popular science**: add `science-writing` (audience, plain language, sources) before drafting; fact-check with `research`; use `teach` for a multi-session lesson.
+- **viral / social**: add `viral-hooks` (title/hook/payoff) and `marketing-psychology` (framing); keep the ethics rules (no clickbait).
 
 ## Steps
 
