@@ -100,13 +100,14 @@ interpret_intent(text)
 
 ## 3.1 解決の層（決定論 → 学習 → 上流）
 
-`interpret_intent` は **L0 slash → L1 学習（learned）→ L2 上流スコア（LLM）** の順で解決する。
+`interpret_intent` は **L0 slash → L1 学習（learned）→ L1.5 ローカル語彙 → L2 上流スコア（LLM）** の順で解決する。
 
 - **L0 slash**: `/workflow ...` は明示として即時採用（`route_layer: "L0"`）。
 - **L1 学習（learned）**: `data/intent_learned.db`（SQLite）の高信頼ルートに部分一致すれば採用（`source: "learned"`）。多言語を人手で並べる**静的 trigger 表は廃止**（`TRIGGER_KEYWORDS`/`WEAK_TRIGGERS` は撤去）。
 - **seed**: 空の学習 DB は **catalog（workflow id）から自動 seed** してブートストラップ。旧語彙はローカルの学習 DB に移行する（**配布しない**）。
 - **L2 上流スコア**: 一致しなければ `needs_scoring: true` を返し、ホスト LLM が `workflow`+`score` を付けて再呼び出しする（`source: "upstream"`）。
-- **言語非依存**: 語彙メンテをやめ、**learned（利用で育つ）＋ upstream（LLM）** に委ねる（多言語耐性）。
+- **L1.5 ローカル語彙**（モデル不要・トークン0）: 入力と workflow ごとの発話例（`mcp/intent_routes.json`）の tf-idf コサイン。コサインと次点との差が閾値を満たせば採用（`source: "local"`）、満たさなければ**棄権**して L2 へ。`WAWOO_INTENT_LEXICAL=0` で無効、`WAWOO_INTENT_LEXICAL_THRESHOLD` / `_MARGIN` で調整。
+- **言語非依存**: 語彙メンテをやめ、**learned（利用で育つ）＋ローカル語彙（トークン不要の発話例）＋ upstream（LLM）** に委ねる（多言語耐性）。
 
 ## 3.2 フェーズ（workflow の分解）
 

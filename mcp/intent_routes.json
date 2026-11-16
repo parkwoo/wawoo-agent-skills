@@ -1,0 +1,116 @@
+{
+  "_comment": "Utterance examples for the local lexical intent layer (no model). Keep them close to how users phrase requests. English primary; a few Japanese samples.",
+  "compliance-review": [
+    "do a legal and privacy review of this change",
+    "check compliance for handling personal data",
+    "run the security and privacy gate before release",
+    "is this GDPR compliant",
+    "review the terms and privacy policy",
+    "法務とプライバシーの確認をして"
+  ],
+  "content-delivery-lite": [
+    "write a long document about our architecture",
+    "deliver a book chapter into the repo",
+    "produce a long report and track progress",
+    "draft a multi-chapter guide",
+    "長い文章を章ごとに書き進めて"
+  ],
+  "deck": [
+    "make a proposal deck for the client",
+    "prepare a pitch deck",
+    "create slides for the planning meeting",
+    "turn this into a presentation",
+    "提案用のスライドを作って"
+  ],
+  "delivery-lite": [
+    "implement this small feature",
+    "add a single endpoint and wire it up",
+    "make a small fix and track it in ACTIVE",
+    "just ship this one change",
+    "小さな機能を実装して"
+  ],
+  "design-review": [
+    "review the UI design of this page",
+    "audit the design and accessibility",
+    "is this interface good looking and usable",
+    "critique the visual design",
+    "この画面のデザインをレビューして"
+  ],
+  "feature-delivery": [
+    "build a new feature end to end",
+    "deliver this feature with discovery design and tests",
+    "implement a large feature with review gates",
+    "take this feature from spec to release",
+    "大きめの機能を一気通貫で作って"
+  ],
+  "incident-response": [
+    "the service is down in production investigate it",
+    "there is an incident and users are affected",
+    "debug this production outage now",
+    "a regression broke the release",
+    "本番障害を調査して復旧して"
+  ],
+  "market-plan": [
+    "research the market and build a go to market plan",
+    "analyze competitors and propose a strategy",
+    "write a business plan for a new product",
+    "market research and pricing strategy",
+    "市場調査と事業計画を作って"
+  ],
+  "release-review": [
+    "prepare the release and check the version and changelog",
+    "review everything before we publish",
+    "do a pre release checklist and rollback plan",
+    "tag a release with legal and security checks",
+    "リリース前の確認をして"
+  ],
+  "research": [
+    "research this topic and summarize the findings",
+    "investigate the best approach with sources",
+    "do a technical investigation and write it up",
+    "compare options and recommend one",
+    "この技術を調査してまとめて"
+  ],
+  "self-improve": [
+    "run a retrospective and improve our process",
+    "do a pdca cycle on how we work",
+    "look back at this session and propose improvements",
+    "improve the team workflow from what happened",
+    "振り返りをして改善案を出して"
+  ],
+  "self-review": [
+    "review my changes and fix what the review finds",
+    "self review the diff and correct issues",
+    "run code review then fix the problems",
+    "check my code and repair the bugs you find",
+    "自分の変更をレビューして直して"
+  ],
+  "sprint-plan": [
+    "plan the next sprint and estimate the tickets",
+    "break the backlog into tickets with estimates",
+    "do sprint planning with capacity",
+    "prioritize the backlog for the sprint",
+    "次のスプリント計画を立てて"
+  ],
+  "status-report": [
+    "give me a status report on the project",
+    "summarize progress and risks",
+    "write a weekly status update",
+    "report what is done and what is blocked",
+    "進捗とリスクを報告して"
+  ],
+  "ui-delivery": [
+    "build this UI change and audit accessibility",
+    "implement the redesign of this screen",
+    "change the layout and check responsive behavior",
+    "make the interface faster and accessible",
+    "この画面を実装してレスポンシブも確認して"
+  ],
+  "writing": [
+    "write a blog article about this idea",
+    "draft an essay with a strong hook",
+    "write a story or creative piece",
+    "help me write a newsletter article",
+    "ブログ記事を書いて"
+  ]
+}
