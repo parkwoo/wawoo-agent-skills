@@ -13,6 +13,13 @@
 
 ## [Unreleased]
 
+### Fixed — phase overrides additive + utility tools exempt from the gate + module cache
+
+- `phases_for` now **merges** override skills with the base phase (privacy/security/context/engineering no longer dropped by workflow overrides).
+- `compress_context` / `mask_pii` / `redact_infra` / `guard_content` added to the MCP allow-sets (`MCP_TOOL_NAMES`, `_MCP_READ`, `_MCP_AUDIT`) and to `_GATE_EXEMPT`, so egress/guard/context tools stay usable inside an active workflow.
+- `mcp/server.py` caches the loaded compression/PII/guard modules (no per-call re-exec/regex recompile).
+- JA sync: AGENTS.ja §4.1 bullets; INTENT-ROUTING.ja reordered.
+
 ### Changed — intent order + workflow optimization (pstack principles, privacy, context)
 
 - **Routing order**: `interpret_intent` now resolves **L0 slash → L1 local lexical (threshold/abstain) → L1.5 learned (substring) → L2 upstream**; a broad learned substring can no longer override a clear local match. Tests updated (`WAWOO_INTENT_LEXICAL=0` where learned is under test).
