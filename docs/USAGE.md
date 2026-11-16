@@ -117,7 +117,7 @@ python3 scripts/e2e_flows.py   # public smoke (contract/E2E)
 
 **Context**: `compress_context` — deterministic, offline cleaning/compression of conversation turns (heuristic filters + fuzzy dedup + density budget; no LLM, no network). See `.kilo/skills/context-compression/SKILL.md`.
 
-**Intent**: `interpret_intent` resolves slash → learned → **local lexical (threshold/abstain)** → upstream; calibrate with `python3 mcp/intent_calibrate.py`; schedules carry `complexity` / `model_tier`.
+**Intent**: `interpret_intent` resolves slash → **local lexical (threshold/abstain)** → learned → upstream; calibrate with `python3 mcp/intent_calibrate.py`; schedules carry `complexity` / `model_tier`.
 
 **Intent routing** (optional but recommended): `interpret_intent` → `workflow_get` → … → `workflow_clear`. Subtasks: `delegate_subtask`.
 

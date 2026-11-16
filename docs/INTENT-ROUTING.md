@@ -102,12 +102,12 @@ If you only want human-readable text, use **`route_task`** (on `needs_scoring` i
 
 ## 3.1 Resolution layers (deterministic → learned → upstream)
 
-`interpret_intent` resolves in the order **L0 slash → L1 learned → L1.5 local lexical → L2 upstream score (LLM)**.
+`interpret_intent` resolves in the order **L0 slash → L1 local lexical → L1.5 learned → L2 upstream score (LLM)**.
 
 - **L0 slash**: `/workflow ...` is adopted immediately as explicit (`route_layer: "L0"`).
-- **L1 learned**: adopt a high-confidence substring match from `data/intent_learned.db` (SQLite) (`source: "learned"`). The hand-maintained multilingual **static trigger table is removed** (`TRIGGER_KEYWORDS` / `WEAK_TRIGGERS` are gone).
+- **L1 local lexical** (no model, zero tokens): tf-idf cosine against per-workflow utterance examples (`mcp/intent_routes.json`). Adopt the best workflow when the cosine **and** its margin over the runner-up clear a threshold (`source: "local"`); otherwise **abstain**. Disable with `WAWOO_INTENT_LEXICAL=0`; tune with `WAWOO_INTENT_LEXICAL_THRESHOLD` / `_MARGIN`.
+- **L1.5 learned**: adopt a high-confidence **substring** match from `data/intent_learned.db` (SQLite) (`source: "learned"`). Runs **after** the lexical layer, so a broad substring cannot override a clear semantic match; it catches project-specific/multilingual phrasing the utterances miss.
 - **seed**: an empty learned DB is bootstrapped with **catalog (workflow id) seeds**. The legacy vocabulary is migrated into the local learned DB (**not distributed**).
-- **L1.5 local lexical** (no model, zero tokens): tf-idf cosine of the input against per-workflow utterance examples (`mcp/intent_routes.json`). Adopt the best workflow when the cosine **and** its margin over the runner-up clear a threshold (`source: "local"`); otherwise **abstain** and fall through to L2. Disable with `WAWOO_INTENT_LEXICAL=0`; tune with `WAWOO_INTENT_LEXICAL_THRESHOLD` / `_MARGIN`.
 - **L2 upstream score**: if nothing matches, return `needs_scoring: true`; the host LLM adds `workflow`+`score` and re-calls (`source: "upstream"`).
 - **Complexity → model tier** (deterministic): `interpret_intent` also returns `complexity` (`simple|medium|complex`) and a suggested `model_tier` (`fast` for simple/medium, `reasoning` for complex) — pass it to `delegate_subtask`.
 - **Calibration**: `python3 mcp/intent_calibrate.py` grid-searches the lexical threshold/margin on `mcp/intent_eval.json` and prints env values (`WAWOO_INTENT_LEXICAL_THRESHOLD` / `_MARGIN`; `WAWOO_INTENT_MAX_ABSTAIN` caps abstain).

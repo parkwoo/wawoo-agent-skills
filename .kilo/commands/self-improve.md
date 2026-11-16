@@ -19,3 +19,10 @@ replay: safe
 - Base improvements on **evidence** (metrics, failure logs). Do not claim "improved" by inference.
 - Business decisions, contracts, and legal are made by humans.
 - Destructive changes, production, and deletions require approval.
+
+## Privacy / security / context
+
+- Before any external LLM/API call or returning output: `guard_content` (policy gate) → `mask_pii` / `redact_infra` (redact) — see `data-egress-guard`.
+- Never echo internal IPs, hosts, URLs, ports, or credentials in errors or logs.
+- When context is long or repetitive: `context-compression` (MCP `compress_context`) + `principle-guard-the-context-window`.
+- Security/privacy review: `security-review` / `privacy-review` (audit phase).

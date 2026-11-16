@@ -100,7 +100,7 @@ interpret_intent(text)
 
 ## 3.1 解決の層（決定論 → 学習 → 上流）
 
-`interpret_intent` は **L0 slash → L1 学習（learned）→ L1.5 ローカル語彙 → L2 上流スコア（LLM）** の順で解決する。
+`interpret_intent` は **L0 slash → L1 ローカル語彙 → L1.5 学習（learned）→ L2 上流スコア（LLM）** の順で解決する。
 
 - **L0 slash**: `/workflow ...` は明示として即時採用（`route_layer: "L0"`）。
 - **L1 学習（learned）**: `data/intent_learned.db`（SQLite）の高信頼ルートに部分一致すれば採用（`source: "learned"`）。多言語を人手で並べる**静的 trigger 表は廃止**（`TRIGGER_KEYWORDS`/`WEAK_TRIGGERS` は撤去）。

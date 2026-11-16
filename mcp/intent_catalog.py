@@ -167,26 +167,27 @@ class Phase:
 
 BASE_PHASES: dict[str, Phase] = {
     "discover": Phase("discover", "Fix the outcome, acceptance criteria, and scope", "product-owner", ("product-discovery", "in-your-own-words", "principle-attack-the-premise"), _MCP_READ, ("outcome and acceptance criteria are stated",)),
+    "understand": Phase("understand", "Understand intent and runtime before changing", "architect", ("recall", "why", "how"), _MCP_READ, ("goal restated / intent evidence / runtime model stated",)),
     "design": Phase("design", "Decide design and tradeoffs", "architect", ("architecture-decision", "principle-exhaust-the-design-space", "principle-redesign-from-first-principles"), _MCP_READ, ("decision, alternatives, and rejection reasons are recorded",)),
-    "plan": Phase("plan", "Break down the work and document the plan", "project-manager", ("plan-md", "recall", "figure-it-out", "principle-sequence-verifiable-units"), _MCP_READ, ("the plan is saved in docs and has an id",)),
-    "implement": Phase("implement", "Implement the smallest change", "implementer", ("engineering-quality", "how", "principle-foundational-thinking", "principle-model-the-domain", "principle-subtract-before-you-add"), _MCP_FULL, ("change is scoped / tests added / no secrets",)),
-    "verify": Phase("verify", "Check tests and evidence", "qa-engineer", ("test-engineering", "principle-test-behavior-not-implementation", "principle-prove-it-works", "create-verification-skill"), _MCP_FULL, ("0 unconverged FAILED / 0 leftover containers / commands recorded",), "readonly-parallel"),
-    "audit": Phase("audit", "Read-only review", "security-reviewer", ("security-review", "blast-radius", "principle-fix-root-causes"), _MCP_READ, ("findings and evidence (with severity)",), "readonly-parallel"),
+    "plan": Phase("plan", "Break down the work and document the plan", "project-manager", ("plan-md", "recall", "figure-it-out", "principle-sequence-verifiable-units", "context-compression"), _MCP_READ, ("the plan is saved in docs and has an id",)),
+    "implement": Phase("implement", "Implement the smallest change", "implementer", ("engineering-quality", "how", "principle-foundational-thinking", "principle-model-the-domain", "principle-subtract-before-you-add", "principle-guard-the-context-window"), _MCP_FULL, ("change is scoped / tests added / no secrets",)),
+    "verify": Phase("verify", "Check tests and evidence", "qa-engineer", ("test-engineering", "principle-test-behavior-not-implementation", "principle-prove-it-works", "principle-build-the-lever", "create-verification-skill", "data-egress-guard", "content-guardrail"), _MCP_FULL, ("0 unconverged FAILED / 0 leftover containers / commands recorded",), "readonly-parallel"),
+    "audit": Phase("audit", "Read-only review", "security-reviewer", ("security-review", "privacy-review", "blast-radius", "principle-fix-root-causes"), _MCP_READ, ("findings and evidence (with severity)",), "readonly-parallel"),
     "research": Phase("research", "Research primary sources", "product-owner", ("research", "why", "how"), _MCP_READ, ("fact and inference recorded separately",), "readonly-parallel"),
     "release": Phase("release", "Decide release readiness", "release-manager", ("release-readiness", "principle-make-operations-idempotent"), _MCP_AUDIT, ("version/tag/rollback/unverified stated",)),
-    "report": Phase("report", "Report with evidence", "delivery-lead", ("change-readiness", "show-me-your-work"), _MCP_AUDIT, ("evidence, unverified, risk, next actions",)),
+    "report": Phase("report", "Report with evidence", "delivery-lead", ("change-readiness", "show-me-your-work", "data-egress-guard", "content-guardrail"), _MCP_AUDIT, ("evidence, unverified, risk, next actions",)),
 }
 
 # P5: reuse common phases (avoid duplicate definitions)
 WORKFLOW_PHASES: dict[str, tuple[str, ...]] = {
     "delivery-lite": ("plan", "implement", "verify", "report"),
-    "feature-delivery": ("discover", "design", "implement", "verify", "report"),
+    "feature-delivery": ("understand", "discover", "design", "implement", "verify", "report"),
     "ui-delivery": ("design", "implement", "verify", "report"),
     "design-review": ("audit", "report"),
     "research": ("research", "report"),
     "compliance-review": ("audit", "report"),
     "release-review": ("audit", "release", "report"),
-    "incident-response": ("audit", "implement", "verify", "report"),
+    "incident-response": ("understand", "audit", "implement", "verify", "report"),
     "sprint-plan": ("plan", "report"),
     "status-report": ("report",),
     "self-review": ("audit", "verify", "report"),
@@ -204,7 +205,7 @@ PHASE_OVERRIDES: dict[tuple[str, str], dict[str, object]] = {
     ("incident-response", "implement"): {"agent": "sre-operator", "skills": ("incident-debugging", "deployment", "why", "how")},
     ("self-review", "audit"): {"agent": "code-reviewer", "skills": ("code-review", "codebase-design", "blast-radius", "principle-test-behavior-not-implementation")},
     ("sprint-plan", "plan"): {"agent": "project-manager", "skills": ("wayfinder", "to-tickets", "figure-it-out", "swarm")},
-    ("self-improve", "implement"): {"skills": ("engineering-quality", "reflect", "principle-encode-lessons-in-structure")},
+    ("self-improve", "implement"): {"skills": ("engineering-quality", "reflect", "principle-encode-lessons-in-structure", "maintain-verification-skill")},
     ("status-report", "report"): {"agent": "project-manager", "skills": ("plan-md",)},
 }
 

@@ -21,6 +21,8 @@ from intent_interpreter import (  # noqa: E402
     reset_intent_store,
 )
 from intent_learned_store import IntentLearnedStore  # noqa: E402
+
+os.environ['WAWOO_INTENT_LEXICAL'] = '0'
 from intent_upstream import UpstreamScoring  # noqa: E402
 
 
@@ -135,10 +137,10 @@ def test_needs_scoring() -> None:
 
 def test_scoring_apply() -> None:
     p = interpret_intent_payload(
-        "deck 作って",
-        scoring={"workflow": "deck", "score": 0.88, "trigger": "deck作"},
+        "画面を作って",
+        scoring={"workflow": "ui-delivery", "score": 0.88, "trigger": "画面作"},
     )
-    assert p["schedule"]["workflow"] == "deck"
+    assert p["schedule"]["workflow"] == "ui-delivery"
     assert p["schedule"]["source"] == "upstream"
 
 
@@ -157,14 +159,14 @@ def test_receiver_ndjson() -> None:
             {
                 "id": "t1",
                 "text": "投資家向け",
-                "classification": {"workflow": "deck", "score": 0.9, "trigger": "投資家向け"},
+                "classification": {"workflow": "ui-delivery", "score": 0.9, "trigger": "画面"},
             }
         ) + "\n"
         proc.stdin.write(line)
         proc.stdin.flush()
         out = proc.stdout.readline()
         data = json.loads(out)
-        assert data["schedule"]["workflow"] == "deck"
+        assert data["schedule"]["workflow"] == "ui-delivery"
     finally:
         proc.stdin.close()
         proc.wait(timeout=5)
@@ -187,7 +189,7 @@ def test_receiver_socket() -> None:
                 time.sleep(0.05)
             import socket as sock_mod
 
-            payload = json.dumps({"id": "s1", "text": "/deck 提案"}) + "\n"
+            payload = json.dumps({"id": "s1", "text": "/ui-delivery 画面改修"}) + "\n"
             with sock_mod.socket(sock_mod.AF_UNIX, sock_mod.SOCK_STREAM) as client:
                 client.settimeout(2.0)
                 client.connect(str(sock))
@@ -196,7 +198,7 @@ def test_receiver_socket() -> None:
                 while b"\n" not in chunks:
                     chunks += client.recv(4096)
             data = json.loads(chunks.decode("utf-8").split("\n", 1)[0])
-            assert data["schedule"]["workflow"] == "deck"
+            assert data["schedule"]["workflow"] == "ui-delivery"
         finally:
             proc.terminate()
             proc.wait(timeout=5)
@@ -234,7 +236,7 @@ def test_generic_words_need_scoring() -> None:
 def test_phases_in_schedule() -> None:
     p = interpret_intent_payload("/feature-delivery 新しい API を追加する")
     sched = p["schedule"]
-    assert [x["id"] for x in sched["phases"]] == ["discover", "design", "implement", "verify", "report"]
+    assert [x["id"] for x in sched["phases"]] == ["understand", "discover", "design", "implement", "verify", "report"]
     assert sched["implement_allowed"] is True
     impl = next(x for x in sched["phases"] if x["id"] == "implement")
     assert impl["mcp_tools_allow"] and impl["exit_criteria"]
@@ -251,10 +253,10 @@ def test_learned_after_promote() -> None:
     os.environ["WAWOO_INTENT_LEARN_DB"] = str(db)
     reset_intent_store()
     try:
-        IntentLearnedStore(db).promote(trigger="競合分析", workflow="market-plan", confidence=0.9)
-        p = interpret_intent_payload("競合分析をして")
+        IntentLearnedStore(db).promote(trigger="リリース確認", workflow="release-review", confidence=0.9)
+        p = interpret_intent_payload("リリース確認をして")
         assert p["schedule"]["source"] == "learned"
-        assert p["schedule"]["workflow"] == "market-plan"
+        assert p["schedule"]["workflow"] == "release-review"
     finally:
         flush_learn_writes()
         reset_intent_store()
