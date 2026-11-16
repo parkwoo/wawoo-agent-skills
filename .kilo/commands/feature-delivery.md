@@ -10,6 +10,7 @@ For an ordinary L1 request, consider `/delivery-lite` and `docs/plans/ACTIVE.md`
 
 1. Read project instructions and inspect repository status; preserve unrelated changes.
 2. **Memory (entry)**: `memory_recall` or read `docs/memory/INDEX.md` for prior decisions, constraints, and gotchas (`memory` skill).
+2b. **Context hygiene**: if the conversation or context is long or repetitive, clean it first — MCP `compress_context` or the `context-compression` skill (deterministic, offline).
 3. Use `product-discovery` to establish user outcome, acceptance criteria, scope, and open decisions.
 4. Use `architecture-decision` when interfaces, data, dependencies, or significant tradeoffs change.
 5. Delegate implementation and apply `engineering-quality`.
