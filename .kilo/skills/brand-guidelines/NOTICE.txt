@@ -1,3 +1,3 @@
-OpenDesign 由来の skill（Apache-2.0）。
-本ディレクトリの LICENSE.txt は LICENSES/open-design-Apache-2.0.txt と同一。
-リポジトリ全体の帰属: .kilo/skills/ATTRIBUTION.md
+OpenDesign-derived skill (Apache-2.0).
+The LICENSE.txt in this directory is identical to LICENSES/open-design-Apache-2.0.txt.
+Repository-wide attribution: .kilo/skills/ATTRIBUTION.md

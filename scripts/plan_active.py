@@ -26,7 +26,7 @@ def parse_active(path: Path) -> list[ActiveTask]:
     tasks: list[ActiveTask] = []
     in_section = False
     for line in text.splitlines():
-        if line.strip() == "## タスク":
+        if line.strip() in ("## タスク", "## Tasks", "## TASKS"):
             in_section = True
             continue
         if in_section and line.startswith("## "):

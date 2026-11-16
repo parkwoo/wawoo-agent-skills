@@ -5,7 +5,7 @@ from dataclasses import dataclass
 
 from intent_catalog import WORKFLOW_AGENTS, catalog_for_upstream
 
-# workflow + 適合度 score + 学習用 trigger
+# workflow + fitness score + learned trigger
 UPSTREAM_FIELDS = ("workflow", "score", "trigger")
 
 _NO_THINK_RULES = (
@@ -37,7 +37,7 @@ class UpstreamScoring:
         )
 
 
-# 後方互換
+# backward compatibility
 UpstreamClassification = UpstreamScoring
 
 
@@ -60,9 +60,9 @@ def upstream_score_prompt(user_text: str, max_input: int = 2000) -> str:
     catalog = _catalog_prompt_segment()
     return (
         f"{_NO_THINK_RULES} {_SCORE_RULES} "
-        f'JSON:{{"workflow":"<id>","score":0.0-1.0,"trigger":"2-40字"}} '
+        f'JSON:{{"workflow":"<id>","score":0.0-1.0,"trigger":"2-40 chars"}} '
         f"candidates(id:when to use)={catalog} "
-        f"入力全文:{text}"
+        f"input:{text}"
     )
 
 

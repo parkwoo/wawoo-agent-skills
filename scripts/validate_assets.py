@@ -41,7 +41,7 @@ def fm(path: Path) -> dict[str, str]:
 def documents_entry(command_path: Path, name: str) -> bool:
     """Whether the command documents "entry is the command / procedure is the same-named skill" (an intentional name collision)."""
     text = command_path.read_text(encoding="utf-8", errors="ignore")
-    return "**入口**" in text and name in text
+    return "**Entry**" in text and name in text
 
 
 # Internal dev materials that must never be tracked in the public tree.
@@ -126,7 +126,7 @@ def main() -> int:
     issues: list[str] = []
 
     # JSON configs
-    for rel in ("kilo.json", ".cursor/mcp.json", "scripts/readiness.json"):
+    for rel in ("kilo.json", "opencode.json", ".cursor/mcp.json", "scripts/readiness.json"):
         p = ROOT / rel
         if p.exists():
             try:

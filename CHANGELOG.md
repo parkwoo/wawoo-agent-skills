@@ -13,6 +13,22 @@
 
 ## [Unreleased]
 
+### Added — cross-tool adapters (OpenCode native, Cursor native)
+
+- **OpenCode adapter**: new `scripts/install_opencode.py` mirrors `.kilo/{agents,commands}` into `~/.config/opencode/{agent,command}` (stripping `name:` / `id:` so the agent key equals the file name) and idempotently registers `mcp.wawoo-skills` + `instructions` + `skills.paths` + `default_agent` in `opencode.json`. Root `opencode.json` now declares `instructions` and `skills.paths` (native skill discovery).
+- **Cursor adapter**: `scripts/install_cursor_workspace.py` now installs rules/agents/skills alongside `mcp.json` (project scope); new `scripts/install_cursor_global.py` installs user-level `~/.cursor/{rules,agents,skills,mcp.json}`. Shared helpers in `scripts/adapters.py`; new `.cursor/rules/30-agents.mdc`.
+- Docs: `docs/USAGE.md` §2.5 (OpenCode) and §3 (Cursor), `README.md` supported environments, `AGENTS.md` §6 per tool; `.publish-allowlist` updated.
+
+### Added — `context-compression` skill
+
+- New skill `.kilo/skills/context-compression` (pure Python, deterministic, **no LLM/network**): heuristic filters + fuzzy dedup + information-density scoring. Reference `compress.py` (library + CLI + `--selftest`) for offline context cleaning and RAG post-processing. Skills 64 → 65.
+
+### Changed — public kit English-only + self-contained docs
+
+- Localized → English: `.kilo/skills/README.md`, `.kilo/skills/ATTRIBUTION.md`, `reference-design-contract` (`ja_name` / JA triggers / i18n example), `web-design-guidelines`, `science-writing`, `.kilo/commands/writing.md`; `scripts/*.py` and `mcp/*.py` comments, docstrings and messages; OpenDesign `NOTICE.txt` (7). Fixed the `validate_assets` entry marker (`**入口**` → `**Entry**`).
+- `language-policy` now documents the default working language and how to change it (`.kilo/skills/language-policy/SKILL.md`, `docs/USAGE.md` §9).
+- Docs are now **real files** (no vault symlinks), so the public publish renders: `docs/{USAGE,INTENT-ROUTING,VERSIONING,index}*` and `docs/{memory,plans}/*` materialized; private pointer docs removed (`docs/README.md`, `docs/PROJECT_MANAGEMENT.md`, `docs/AGENTS-PROGRESS.md`, `docs/TASKS.md`, `PROGRESS.md`).
+
 ### ドキュメント
 - **公開面の縮小（読む文書を README／USAGE／INTENT-ROUTING に限定）**: 設計・工程文書を公開ツリーから `internal/` へ移動（`docs/METHODOLOGY.md`・`docs/PROCESS-PHILOSOPHY.md`・`docs/PUBLICATION.md`・`docs/README.md`・`docs/design/INTENT-RECEIVER.md`、EN+JA）。公開文書の参照を `AGENTS.md` §3／`mcp/README.md` に張り替え、`scripts/e2e_flows.py` は `internal/` 不在時に該当検査をスキップ、`publication-boundary` skill と `README` のディレクトリ表記を更新。
 - **公開ドキュメントの可読性改善（ベストセラー著者視点の監査 F1–F11 対応）**: README の冒頭を「痛点→約束」に刷新（`Your agent has the skills. It just doesn't use them.`＋`Invocation by design`）、「2 分のビフォー/アフター」「向く人・向かない人」「最初の 10 分」を追加。`L0–L3` の二重定義（儀式レベル vs ルート層）を `METHODOLOGY`／`INTENT-ROUTING`／`AGENTS`／`USAGE`／`PROCESS-PHILOSOPHY` の各初出で注記。件数表記は生成カタログ `.kilo/CAPABILITIES.md` を正本化（README／AGENTS／USAGE の重複を除去）。`docs/PUBLICATION.md` の外部一覧を補完。EN 主＋JA 対訳を同期。

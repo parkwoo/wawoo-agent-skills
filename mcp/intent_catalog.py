@@ -144,7 +144,7 @@ WORKFLOWS: dict[str, WorkflowSpec] = {
     ),
 }
 
-# 後方互換
+# backward compatibility
 WORKFLOW_AGENTS: dict[str, str] = {wid: spec.agent for wid, spec in WORKFLOWS.items()}
 
 

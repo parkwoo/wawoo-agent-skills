@@ -1,10 +1,10 @@
-# CAPABILITIES（自動生成）
+# CAPABILITIES (auto-generated)
 
 > Regenerate with `python3 scripts/gen_capabilities.py`. Do not edit by hand.
 > Pick candidates from this catalog first and open only the `SKILL.md` you need (progressive disclosure).
 > `⚠️` marks items needing external setup (`scripts/readiness.json`). Not used in the standard flow.
 
-## Skills（64）
+## Skills（65）
 
 | name | ready | size | description | path |
 |---|---|---|---|---|
@@ -18,6 +18,7 @@
 | `code-review` | ✅ | 6.5KB | "Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes: Standards (does the code follow this… | `.kilo/skills/code-review/SKILL.md` |
 | `codebase-design` | ✅ | 6.3KB | Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module's interface, find deepening o… | `.kilo/skills/codebase-design/SKILL.md` |
 | `compliance-legal` | ✅ | 1.8KB | Review OSS license obligations (MIT/Apache-2.0 attribution, NOTICE), SBOM, and product/service legal checklists (terms, privacy, … | `.kilo/skills/compliance-legal/SKILL.md` |
+| `context-compression` | ✅ | 3.5KB | Deterministically compress and clean multi-turn conversation context with pure Python (no LLM, no network) — drop stale turns, de… | `.kilo/skills/context-compression/SKILL.md` |
 | `database-change-safety` | ✅ | 1.2KB | Plan, implement, and review schema changes, data migrations, backfills, and cleanup with integrity, availability, observability, … | `.kilo/skills/database-change-safety/SKILL.md` |
 | `dependency-upgrade` | ✅ | 1.2KB | Safely evaluate, apply, and verify software dependency, runtime, container-image, or toolchain upgrades with compatibility, secur… | `.kilo/skills/dependency-upgrade/SKILL.md` |
 | `deployment` | ✅ | 1.2KB | Plan, execute, and verify a deployment or release (Docker Compose, image tagging, environment, migrations, health checks, rollbac… | `.kilo/skills/deployment/SKILL.md` |
@@ -37,7 +38,7 @@
 | `implement` | ✅ | 0.6KB | "Implement a piece of work based on a spec or set of tickets." | `.kilo/skills/implement/SKILL.md` |
 | `implement-spec` | ✅ | 2.7KB | "Implement the result of /to-spec and /to-tickets in code." | `.kilo/skills/implement-spec/SKILL.md` |
 | `incident-debugging` | ✅ | 1.1KB | Diagnose a software incident or high-impact defect through reproduction, evidence collection, fault isolation, mitigation, verifi… | `.kilo/skills/incident-debugging/SKILL.md` |
-| `language-policy` | ✅ | 1.9KB | Decide and enforce the writing language for code, engineering records, and explanatory docs via a three-tier policy (code = Engli… | `.kilo/skills/language-policy/SKILL.md` |
+| `language-policy` | ✅ | 2.4KB | Decide and enforce the writing language for code, engineering records, and explanatory docs via a three-tier policy (code = Engli… | `.kilo/skills/language-policy/SKILL.md` |
 | `marketing-psychology` | ✅ | 1.2KB | Apply psychological principles and behavioral science to copy and design. Useful for tightening hooks, framing, and pricing prese… | `.kilo/skills/marketing-psychology/SKILL.md` |
 | `memory` | ✅ | 1.8KB | Persist and recall durable project knowledge (decisions, constraints, gotchas, recurring fixes) across sessions. Use before start… | `.kilo/skills/memory/SKILL.md` |
 | `pdca-cycle` | ✅ | 1.6KB | Run a lightweight Plan-Do-Check-Act cycle for product, engineering, quality, or process improvements. Use when a request needs me… | `.kilo/skills/pdca-cycle/SKILL.md` |
@@ -48,7 +49,7 @@
 | `product-discovery` | ✅ | 1.1KB | Turn an ambiguous product or feature request into a scoped problem statement, user outcome, acceptance criteria, priorities, risk… | `.kilo/skills/product-discovery/SKILL.md` |
 | `prototype` | ✅ | 2.9KB | Build a throwaway prototype to answer a design question. Use when the user wants to sanity-check whether a state model or logic f… | `.kilo/skills/prototype/SKILL.md` |
 | `publication-boundary` | ✅ | 1.6KB | Keep internal development materials out of the public tree of an open-source repo. Use when adding docs or scripts, or auditing w… | `.kilo/skills/publication-boundary/SKILL.md` |
-| `reference-design-contract` | ✅ | 5.3KB | Turn vague taste, screenshots, URLs, product notes, or "make it feel like this" references into a grounded DESIGN.md plus an impl… | `.kilo/skills/reference-design-contract/SKILL.md` |
+| `reference-design-contract` | ✅ | 5.0KB | Turn vague taste, screenshots, URLs, product notes, or "make it feel like this" references into a grounded DESIGN.md plus an impl… | `.kilo/skills/reference-design-contract/SKILL.md` |
 | `release-readiness` | ✅ | 2.0KB | Prepare and review a software release for versioning, legal files, changelog accuracy, tags, release notes, deployment checks, an… | `.kilo/skills/release-readiness/SKILL.md` |
 | `research` | ✅ | 0.8KB | Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. Use when the u… | `.kilo/skills/research/SKILL.md` |
 | `research-decision-room` | ✅ | 6.1KB | Turn messy user research notes, interviews, support tickets, surveys, and product context into an evidence-backed decision room: … | `.kilo/skills/research-decision-room/SKILL.md` |

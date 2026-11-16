@@ -2,7 +2,11 @@
   "mcpServers": {
     "wawoo-skills": {
       "command": "python3",
-      "args": ["mcp/server.py"]
+      "args": ["mcp/server.py"],
+      "env": {
+        "WAWOO_SKILLS_ROOT": "/home/git/wawoo-skills",
+        "WAWOO_MEMORY_READONLY": "1"
+      }
     }
   }
 }

@@ -103,9 +103,9 @@ docs/                      … 使い方・意図ルーティング・版管理�
 
 ## 6. ツール別
 
-- **Kilo**：`.kilo/` を自動探索（skills/agents/commands）＋ `kilo.json`。**ネイティブ起動可**。
-- **Cursor**：`AGENTS.md`＋`.cursor/rules`＋**MCP**＋`@file`。**slash command／agent／SKILL のネイティブ実行は無い**。
-- **OpenCode**：`AGENTS.md`＋**MCP**（`opencode.json`）。**slash／SKILL のネイティブ実行は無い**（`interpret_intent` → `workflow_get` → `skill_get`）。
+- **Kilo**：`.kilo/`（skills/agents/commands）＋ `kilo.json` を自動探索。**ネイティブ起動可**。グローバル導入: `scripts/install_global.py`。
+- **Cursor**：`AGENTS.md`＋`.cursor/rules`＋**MCP**＋`@file`。**ネイティブ skills／subagents** は `.cursor/{skills,agents}`（導入: プロジェクト `scripts/install_cursor_workspace.py`／ユーザ `scripts/install_cursor_global.py`）。slash command のネイティブ実行は無い。
+- **OpenCode**：`AGENTS.md`＋**MCP**（`opencode.json`）＋**ネイティブ skills**（`skills.paths`）および subagents/commands（グローバル導入: `scripts/install_opencode.py`）。slash のネイティブ実行は無い（`interpret_intent` → `workflow_get` → `skill_get`）。
 - 詳細：`docs/USAGE.md`。
 
 ---

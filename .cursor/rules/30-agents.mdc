@@ -1,0 +1,27 @@
+---
+description: Agent roles (from Kilo agents) and how to obtain them in Cursor (MCP agent_get / project subagents)
+alwaysApply: true
+---
+
+# Agent roles (Cursor)
+
+The kit ships 22 roles under `.kilo/agents/<name>.md`. They are **viewpoints**, not slash commands.
+
+## Preferred: get the role via MCP
+
+Call **`agent_get {name}`** to fetch a role's full definition and follow it. Enumerate names with `capabilities` (or `skill_search`).
+
+- Entry: **`wawoo-auto`** (routes non-trivial work via MCP first).
+- Delivery/design/implementation/quality: delivery-lead, project-manager, product-owner, architect, implementer, qa-engineer, data, code-reviewer, code-skeptic, code-simplifier
+- Security/ops/release: security-reviewer, compliance-reviewer, performance-reviewer, sre-operator, release-manager
+- UI/docs/market: web-designer, frontend-specialist, accessibility-reviewer, docs-specialist, docs-localization-reviewer, market-researcher
+
+## Optional: native subagents
+
+Cursor can run a role in an isolated context as a **project subagent** at `.cursor/agents/<name>.md` (Cursor app, CLI, and cloud agents). Generate them with `python3 scripts/install_cursor_workspace.py` (project) or `python3 scripts/install_cursor_global.py` (user-level).
+
+> User-level `~/.cursor/agents/` is read by the **Cursor desktop app** only; the CLI / ACP reads **project** `.cursor/agents/`. When there is no project subagent, use `agent_get` — the role content is identical.
+
+## Without MCP
+
+Read `@.kilo/agents/<role>.md` and apply that role's viewpoint.

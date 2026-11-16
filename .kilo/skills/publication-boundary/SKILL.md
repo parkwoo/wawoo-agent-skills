@@ -11,7 +11,7 @@ This repository is an open-source kit. Keep **only consumer-facing assets** in t
 
 **Public** (published): `README.md`, `AGENTS.md`, `docs/USAGE.md`, `docs/INTENT-ROUTING.md`, `docs/VERSIONING.md`, templates (`docs/plans/*.example.md`, `docs/memory/{TEMPLATE,MEMORY-TOOLS,INDEX.example}.md`), `.kilo/`, `.cursor/`, `mcp/`, `scripts/` (kit tooling), `LICENSE(S)`, `NOTICE`, `SECURITY.md`, `CHANGELOG.md`, `VERSION`.
 
-**Internal** (not published — keep under `internal/`, git-ignored): research/analysis notes, audits (`*-AUDIT.md`), `RETRO-*`, `self-improve-*`, E2E evidence, publishing drafts, design/process docs (`METHODOLOGY.md`, `PROCESS-PHILOSOPHY.md`, `PUBLICATION.md`, `docs/README.md`, `design/INTENT-RECEIVER.md`), and this repo's own `docs/plans/ACTIVE.md` and `docs/memory/*` content.
+**Internal** (not published — keep under `internal/`, git-ignored): research/analysis notes, audits (`*-AUDIT.md`), `RETRO-*`, `self-improve-*`, E2E evidence, publishing drafts, design/process docs (`METHODOLOGY.md`, `PROCESS-PHILOSOPHY.md`, `PUBLICATION.md`, `design/INTENT-RECEIVER.md`), and this repo's own `docs/plans/ACTIVE.md` and `docs/memory/*` content.
 
 ## Check
 
