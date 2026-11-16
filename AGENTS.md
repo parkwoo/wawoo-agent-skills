@@ -48,7 +48,7 @@ docs/                      … USAGE, INTENT-ROUTING, VERSIONING, plans, memory
 | Purpose | SSOT | When to update |
 |------|------|----------------|
 | **L1 in-progress tasks (code, UI, research, etc.)** | `docs/plans/ACTIVE.md` | Read before starting. The agent updates only `todo`→`doing`→`done` and the evidence column |
-| **L1 long-form / books / reports** | `docs/plans/CONTENT.md` | `/content-delivery-lite`. Validated by `plan_content.py` |
+| **L1 long-form / books / reports** | `docs/plans/CONTENT.md` | `plan_content.py` (content state machine) |
 | **Detailed plan** | `docs/plans/<id>.md` (`plan-md`) | When the breakdown is large. Link from the ACTIVE id |
 | **L2 multiple tasks / sync** | issue tracker (if configured) or `docs/plans/BACKLOG*.md` | `to-tickets` / `plan_l2_backlog.py`. Do not double-manage with ACTIVE |
 | **L3 process improvement** | `docs/plans/RETRO*.md` etc. + `memory` | `/self-improve`. `plan_l3_record.py` |

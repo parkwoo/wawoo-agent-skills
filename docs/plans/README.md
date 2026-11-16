@@ -9,7 +9,7 @@ A directory holding the **task-state source of truth (SSOT)** for agents.
 | **`ACTIVE.example.md`** → copy to **`ACTIVE.md`** | **L1** in-progress tasks (state machine). The real `ACTIVE.md` is **non-public** (created per project) |
 | **`BACKLOG.example.md`** | **L2** backlog table example (a local copy of an issue tracker) |
 | **`RETRO.example.md`** | **L3** retro / PDCA record example |
-| **`CONTENT.example.md`** | **L1 knowledge** chapter/section progress (`/content-delivery-lite`) |
+| **`CONTENT.example.md`** | content state machine (`plan_content.py`) |
 | `<feature>.md` | A detailed plan via `plan-md` only when needed (linked from the ACTIVE id) |
 
 A chat "1,2,3 done" is **not evidence**. Update the `status` and the evidence column in `ACTIVE.md`.

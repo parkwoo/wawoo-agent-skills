@@ -1,3 +1,0 @@
-OpenDesign-derived skill (Apache-2.0).
-The LICENSE.txt in this directory is identical to LICENSES/open-design-Apache-2.0.txt.
-Repository-wide attribution: .kilo/skills/ATTRIBUTION.md

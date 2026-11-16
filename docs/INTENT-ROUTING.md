@@ -2,7 +2,7 @@
 
 > Japanese version: [INTENT-ROUTING.ja.md](https://github.com/parkwoo/wawoo-skills/blob/master/docs/INTENT-ROUTING.ja.md)
 
-Choose which of the **16 workflows** (`.kilo/commands/<id>.md`) to run a request through, and allow only the MCP tools you need. **No separate LLM API is required** — the Cursor / Kilo conversation model returns a short JSON score.
+Choose which of the **12 workflows** (`.kilo/commands/<id>.md`) to run a request through, and allow only the MCP tools you need. **No separate LLM API is required** — the Cursor / Kilo conversation model returns a short JSON score.
 
 This kit is a **standalone generic repository**. It is a separate project from any internal LLM API (e.g. an OpenAI-compatible proxy); the API side references this MCP via `WAWOO_SKILLS_ROOT` only when needed.
 
@@ -92,7 +92,7 @@ If you only want human-readable text, use **`route_task`** (on `needs_scoring` i
 **Upstream JSON contract** (one line, fields only)
 
 ```json
-{"workflow":"deck","score":0.88,"trigger":"investor deck"}
+{"workflow":"ui-delivery","score":0.88,"trigger":"redesign the dashboard"}
 ```
 
 - `learn: true` only on **re-apply** (register a high score to SQLite asynchronously; default `false`).

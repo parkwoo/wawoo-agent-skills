@@ -348,8 +348,8 @@ def test_local_lexical_router(r: Runner) -> None:
 
         got = intent_lexical.local_lexical_route("run a retrospective and improve our process")
         assert got is not None and got.workflow == "self-improve", got
-        got2 = intent_lexical.local_lexical_route("prepare a pitch deck for the client")
-        assert got2 is not None and got2.workflow == "deck", got2
+        got2 = intent_lexical.local_lexical_route("this screen's design needs a review")
+        assert got2 is not None and got2.workflow == "design-review", got2
         # abstain on short / vague input
         assert intent_lexical.local_lexical_route("hi") is None
         assert intent_lexical.local_lexical_route("do something") is None
@@ -619,20 +619,9 @@ def test_l1_simulated_flow(r: Runner) -> None:
     r.run("l1_simulated_flow", _)
 
 
-def test_content_delivery_lite_contract(r: Runner) -> None:
-    def _():
-        p = KILO / "commands" / "content-delivery-lite.md"
-        body = p.read_text(encoding="utf-8")
-        assert "CONTENT.md" in body and "plan_content" in body
-        res = mcp_call("workflow_get", {"name": "content-delivery-lite"})
-        assert "CONTENT" in res["result"]["content"][0]["text"]
-
-    r.run("content_delivery_lite_contract", _)
-
-
 def test_deliverable_workflows_active_hooks(r: Runner) -> None:
     def _():
-        for name in ("ui-delivery", "research", "market-plan"):
+        for name in ("ui-delivery", "research"):
             body = (KILO / "commands" / f"{name}.md").read_text(encoding="utf-8")
             assert "ACTIVE.md" in body, name
 
@@ -665,7 +654,7 @@ def test_agent_active_sandbox_dry(r: Runner) -> None:
         script = ROOT / "internal/scripts/e2e/agent-active-live.sh"
         if not script.is_file():
             return  # internal E2E tooling is non-public; skip when absent
-        for wf in ("delivery-lite", "content-delivery-lite"):
+        for wf in ("delivery-lite",):
             proc = subprocess.run(
                 ["bash", str(script), wf],
                 cwd=str(ROOT),
@@ -755,7 +744,6 @@ def main() -> int:
         test_l2_simulated_flow,
         test_l3_simulated_flow,
         test_ceremony_levels_matrix,
-        test_content_delivery_lite_contract,
         test_deliverable_workflows_active_hooks,
         test_content_simulated_flow,
         test_agent_active_sandbox_dry,

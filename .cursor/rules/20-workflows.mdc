@@ -6,7 +6,7 @@ alwaysApply: true
 # Workflows (from Kilo commands)
 
 **Workflow-driven**: commands own the process and embed Skills For Real Engineers thinking and solutions into each step. Because agents may skip skills, **the workflow calls them explicitly**.
-Apply the **16 workflows** under `.kilo/commands/` as the same steps in Cursor.
+Apply the **12 workflows** under `.kilo/commands/` as the same steps in Cursor.
 
 > **Cursor limitations**: slash commands / agents cannot run natively. **Open `@.kilo/commands/<name>.md` and apply the steps manually**, reading `@.kilo/skills/<skill>/SKILL.md` at each step. Roles are in `@.kilo/agents/<role>.md`.
 >
@@ -17,8 +17,7 @@ Apply the **16 workflows** under `.kilo/commands/` as the same steps in Cursor.
 | **`/feature-delivery`** | Deliver a feature through discovery → design → implement → test → review → approval |
 | **`/ui-delivery`** | Deliver a UI change through design → implement → accessibility/quality check → approval |
 | **`/design-review`** | UI design review (`design-review` → `web-design-guidelines` → `accessibility-audit`) |
-| **`/research`** | Research → decision (`research` → `research-decision-room` → `product-discovery` → `to-spec`/`plan-md`) |
-| **`/market-plan`** | Market research → strategy → plan (`research` → `research-decision-room` → `product-discovery` → `marketing-psychology` → `plan-md`) |
+| **`/research`** | Research → decision (`research` → `product-discovery` → `to-spec`/`plan-md`) |
 | **`/compliance-review`** | Legal / privacy / security gate (`compliance-legal` → `privacy-review` → `security-review` → `release-readiness`) |
 | **`/release-review`** | Pre-release preparation / check (version, CHANGELOG, legal/NOTICE, deploy, rollback) |
 | **`/incident-response`** | Incident: reproduce → isolate → mitigate → permanent fix → retro |
@@ -26,8 +25,6 @@ Apply the **16 workflows** under `.kilo/commands/` as the same steps in Cursor.
 | **`/status-report`** | Progress / status report (`triage`/`to-tickets` → progress/risk → `plan-md`) |
 | **`/self-review`** | Self-correction (`code-review` → `code-skeptic` → `diagnosing-bugs`/`tdd` → `memory`) |
 | **`/self-improve`** | Self-improvement (`retro` → `pdca-cycle` → `plan-md` → `memory`) |
-| **`/deck`** | Proposal / planning deck (`research` → `marketing-psychology` → `slides`; pptx optional) |
-| **`/writing`** | Creative/article writing (explore → beats → shape): blog, essay, fiction, script drafts (`writing-fragments` → `writing-beats` → `writing-shape`) |
 
 # Agent roles (from Kilo agents)
 
@@ -35,7 +32,7 @@ The 22 roles under `.kilo/agents/`. In Cursor, review/implement "from that role'
 - Entry: **wawoo-auto** (default primary agent; ALWAYS route non-trivial work via MCP first)
 - Delivery/design/implementation/quality: delivery-lead, project-manager, product-owner, architect, implementer, qa-engineer, data, code-reviewer, code-skeptic, code-simplifier
 - Security/ops/release: security-reviewer, compliance-reviewer, performance-reviewer, sre-operator, release-manager
-- UI/docs/market: web-designer, frontend-specialist, accessibility-reviewer, docs-specialist, docs-localization-reviewer, market-researcher
+- UI/docs: web-designer, frontend-specialist, accessibility-reviewer, docs-specialist, docs-localization-reviewer
 
 
 ## MCP tools (Kilo / Cursor / OpenCode)

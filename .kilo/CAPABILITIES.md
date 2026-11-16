@@ -4,7 +4,7 @@
 > Pick candidates from this catalog first and open only the `SKILL.md` you need (progressive disclosure).
 > `⚠️` marks items needing external setup (`scripts/readiness.json`). Not used in the standard flow.
 
-## Skills（104）
+## Skills（94）
 
 | name | ready | size | description | path |
 |---|---|---|---|---|
@@ -14,7 +14,6 @@
 | `ask-matt` | ✅ | 3.1KB | Ask which skill or flow fits your situation. A router over the skills in this repo. | `.kilo/skills/ask-matt/SKILL.md` |
 | `benchmark-checklist` | ✅ | 4.9KB | "Vet a perf measurement (limiter, tuning, limits, errors, repeatability, relevance, and whether the work happened) before you rep… | `.kilo/skills/benchmark-checklist/SKILL.md` |
 | `blast-radius` | ✅ | 3.8KB | "Find what a change could break somewhere else before it ships, beyond the diff, and prove the one fact it's safe because of by r… | `.kilo/skills/blast-radius/SKILL.md` |
-| `brand-guidelines` | ✅ | 1.4KB | Apply Anthropic's official brand colors and typography to artifacts for consistent visual identity and professional design standa… | `.kilo/skills/brand-guidelines/SKILL.md` |
 | `change-readiness` | ✅ | 2.4KB | Perform an evidence-based pre-handoff review of a non-trivial software change before requesting human or external audit. Use afte… | `.kilo/skills/change-readiness/SKILL.md` |
 | `changelog` | ✅ | 1.1KB | Generate and maintain user-facing changelog/release notes from git history (Conventional Commits) and keep version/tags consisten… | `.kilo/skills/changelog/SKILL.md` |
 | `code-review` | ✅ | 6.5KB | "Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes: Standards (does the code follow this… | `.kilo/skills/code-review/SKILL.md` |
@@ -48,7 +47,6 @@
 | `incident-debugging` | ✅ | 1.1KB | Diagnose a software incident or high-impact defect through reproduction, evidence collection, fault isolation, mitigation, verifi… | `.kilo/skills/incident-debugging/SKILL.md` |
 | `language-policy` | ✅ | 2.4KB | Decide and enforce the writing language for code, engineering records, and explanatory docs via a three-tier policy (code = Engli… | `.kilo/skills/language-policy/SKILL.md` |
 | `maintain-verification-skill` | ✅ | 4.9KB | "Periodic pass that keeps a project's verification skill and feature map honest: parallel source readers per feature, one live se… | `.kilo/skills/maintain-verification-skill/SKILL.md` |
-| `marketing-psychology` | ✅ | 1.2KB | Apply psychological principles and behavioral science to copy and design. Useful for tightening hooks, framing, and pricing prese… | `.kilo/skills/marketing-psychology/SKILL.md` |
 | `memory` | ✅ | 1.8KB | Persist and recall durable project knowledge (decisions, constraints, gotchas, recurring fixes) across sessions. Use before start… | `.kilo/skills/memory/SKILL.md` |
 | `pdca-cycle` | ✅ | 1.6KB | Run a lightweight Plan-Do-Check-Act cycle for product, engineering, quality, or process improvements. Use when a request needs me… | `.kilo/skills/pdca-cycle/SKILL.md` |
 | `performance-audit` | ✅ | 1.1KB | Measure and improve application or web performance using representative workloads, bottleneck evidence, and regression safeguards… | `.kilo/skills/performance-audit/SKILL.md` |
@@ -87,15 +85,11 @@
 | `reflect` | ✅ | 6.0KB | Spawn three parallel review subagents over the active transcript, surface learnings, and route each to a concrete edit on an exis… | `.kilo/skills/reflect/SKILL.md` |
 | `release-readiness` | ✅ | 2.0KB | Prepare and review a software release for versioning, legal files, changelog accuracy, tags, release notes, deployment checks, an… | `.kilo/skills/release-readiness/SKILL.md` |
 | `research` | ✅ | 0.8KB | Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. Use when the u… | `.kilo/skills/research/SKILL.md` |
-| `research-decision-room` | ✅ | 6.1KB | Turn messy user research notes, interviews, support tickets, surveys, and product context into an evidence-backed decision room: … | `.kilo/skills/research-decision-room/SKILL.md` |
 | `retro` | ✅ | 4.3KB | "Conduct a retrospective on a coding session." | `.kilo/skills/retro/SKILL.md` |
-| `science-writing` | ✅ | 1.6KB | Write accurate popular-science articles and explainers for a general audience — define the audience, translate jargon, ground cla… | `.kilo/skills/science-writing/SKILL.md` |
-| `screenshots-marketing` | ✅ | 1.3KB | Produce marketing screenshots (landing hero, App Store, changelog visuals). Use Playwright when available; otherwise produce a ca… | `.kilo/skills/screenshots-marketing/SKILL.md` |
 | `security-review` | ✅ | 1.7KB | Perform a read-first security review of application code, configuration, dependencies, and delivery changes. Use for requested se… | `.kilo/skills/security-review/SKILL.md` |
 | `setup-matt-pocock-skills` | ✅ | 6.8KB | "Configure this repo for the engineering skills: set up its issue tracker, triage label vocabulary, and domain doc layout. Run on… | `.kilo/skills/setup-matt-pocock-skills/SKILL.md` |
 | `sharpen` | ✅ | 0.6KB | "Make a task deeper, not bigger, then rewrite the prompt. Use for /sharpen." | `.kilo/skills/sharpen/SKILL.md` |
 | `show-me-your-work` | ✅ | 6.7KB | "Keep a reviewable decision trail for long-running or unattended work: a TSV log with one row per decision (what, why, evidence, … | `.kilo/skills/show-me-your-work/SKILL.md` |
-| `slides` | ✅ | 1.4KB | Create slide decks as Markdown/HTML by default (no external dependencies); optionally export .pptx with PptxGenJS if installed. U… | `.kilo/skills/slides/SKILL.md` |
 | `swarm` | ✅ | 3.2KB | "Fan out N parallel workers, drain them, and return one report. Use for /swarm, 'swarm this', or parallel coverage, races, gauntl… | `.kilo/skills/swarm/SKILL.md` |
 | `tdd` | ✅ | 3.5KB | Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or want… | `.kilo/skills/tdd/SKILL.md` |
 | `teach` | ✅ | 9.5KB | Teach the user a new skill or concept, within this workspace. | `.kilo/skills/teach/SKILL.md` |
@@ -103,19 +97,15 @@
 | `to-spec` | ⚠️ issue tracker (setup-matt-pocock-skills) | 3.0KB | "Turn the current conversation into a spec and publish it to the project issue tracker: no interview, just synthesis of what you'… | `.kilo/skills/to-spec/SKILL.md` |
 | `to-tickets` | ⚠️ issue tracker (setup-matt-pocock-skills) | 5.7KB | Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each declaring its blocking edges, published… | `.kilo/skills/to-tickets/SKILL.md` |
 | `triage` | ⚠️ issue tracker (setup-matt-pocock-skills) | 6.4KB | Move issues and external PRs through a state machine of triage roles, categorise, verify, grill if needed, and write agent-ready … | `.kilo/skills/triage/SKILL.md` |
-| `viral-hooks` | ✅ | 1.5KB | Design high-performing hooks, titles, and article structure for popular/viral content without clickbait — audience tension, speci… | `.kilo/skills/viral-hooks/SKILL.md` |
 | `wayfinder` | ✅ | 0.9KB | Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision tickets on your issue tracker, and r… | `.kilo/skills/wayfinder/SKILL.md` |
 | `web-design-guidelines` | ✅ | 2.4KB | Review UI code for Web Interface Guidelines compliance by the Vercel engineering team. Covers layout, typography, color, motion, … | `.kilo/skills/web-design-guidelines/SKILL.md` |
 | `web-experience-design` | ✅ | 3.5KB | Design, implement, audit, and hand off web interfaces with evidence for user tasks, visual hierarchy, responsive behavior, access… | `.kilo/skills/web-experience-design/SKILL.md` |
 | `why` | ✅ | 8.9KB | "Use for 'why does X work this way', 'why we picked Y', design rationale, regressions, postmortems, or data-backed thresholds. Di… | `.kilo/skills/why/SKILL.md` |
-| `writing-beats` | ✅ | 4.8KB | Exploit stage of writing: assemble raw material into a journey of beats, grounding each term before a beat relies on it. Use afte… | `.kilo/skills/writing-beats/SKILL.md` |
 | `writing-for-agents` | ✅ | 0.5KB | Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md or CLAUDE.md. | `.kilo/skills/writing-for-agents/SKILL.md` |
-| `writing-fragments` | ✅ | 3.6KB | "Explore stage of writing: mine raw fragments from the conversation without imposing structure. Use to widen what could be writte… | `.kilo/skills/writing-fragments/SKILL.md` |
-| `writing-shape` | ✅ | 5.9KB | "Exploit stage of writing: shape raw material into an article, paragraph by paragraph. Use to produce the final draft from a fixe… | `.kilo/skills/writing-shape/SKILL.md` |
 
 > `size` = entry `SKILL.md` size (budget 2–4KB; see `AGENTS.md` §5).
 
-## Agents（22）
+## Agents（21）
 
 | name | description | path |
 |---|---|---|
@@ -131,7 +121,6 @@
 | `Documentation Specialist` | Focus on writing documentation, markdown files, and other text-based files | `.kilo/agents/docs-specialist.md` |
 | `Frontend Specialist` | Frontend developer expert in React, TypeScript, and modern CSS | `.kilo/agents/frontend-specialist.md` |
 | `implementer` | Implements scoped software changes with project conventions, focused tests, and evidence-based reporting. | `.kilo/agents/implementer.md` |
-| `market-researcher` | Market, competitor, and customer research for product/service market plans. Produces evidence-backed findings and decision memos;… | `.kilo/agents/market-researcher.md` |
 | `performance-reviewer` | Reviews performance bottlenecks, measurement design, budgets, and regression safeguards. | `.kilo/agents/performance-reviewer.md` |
 | `product-owner` | Clarifies user outcomes, priorities, scope, and acceptance criteria without inventing business decisions. | `.kilo/agents/product-owner.md` |
 | `project-manager` | Agile project and progress management for this project — sprint planning, status reporting, risk tracking, and delivery coordinat… | `.kilo/agents/project-manager.md` |
@@ -142,18 +131,15 @@
 | `wawoo-auto` | Default entry agent. Routes non-trivial requests to a wawoo workflow via MCP before any other tool, then executes that workflow. … | `.kilo/agents/wawoo-auto.md` |
 | `web-designer` | Designs and implements accessible responsive web interfaces, then audits rendered behavior before handoff. | `.kilo/agents/web-designer.md` |
 
-## Workflows（16）
+## Workflows（12）
 
 | name | description | path |
 |---|---|---|
 | `/compliance-review` | Legal / privacy / security gate (compliance-legal → privacy-review → security-review → release-readiness) | `.kilo/commands/compliance-review.md` |
-| `/content-delivery-lite` | L1 knowledge delivery — books, long docs, reports via CONTENT.md state machine (not code implement). | `.kilo/commands/content-delivery-lite.md` |
-| `/deck` | Proposal / planning deck (Markdown/HTML by default; pptx optional). Not part of the standard development flow. | `.kilo/commands/deck.md` |
 | `/delivery-lite` | Lightweight delivery — SSOT plan file state machine, minimal ceremony (L0–L1). Default for single-feature requests without full f… | `.kilo/commands/delivery-lite.md` |
 | `/design-review` | UI design review (design-review → web-design-guidelines → accessibility-audit) | `.kilo/commands/design-review.md` |
 | `/feature-delivery` | Deliver a feature through discovery, design, implementation, testing, review, and approval gates. | `.kilo/commands/feature-delivery.md` |
 | `/incident-response` | Investigate and safely resolve an incident or urgent regression with evidence and follow-up. | `.kilo/commands/incident-response.md` |
-| `/market-plan` | Market research → strategy → plan (research → research-decision-room → product-discovery → marketing-psychology → plan-md). Propo… | `.kilo/commands/market-plan.md` |
 | `/release-review` | Prepare a release-review package with legal/compliance, privacy, version, security, test, artifact, remote, and rollback evidence… | `.kilo/commands/release-review.md` |
 | `/research` | Research → decision (research → product-discovery → to-spec/to-tickets) | `.kilo/commands/research.md` |
 | `/self-improve` | Self-improvement (retro → pdca-cycle → self-review → plan-md) | `.kilo/commands/self-improve.md` |
@@ -161,7 +147,6 @@
 | `/sprint-plan` | Sprint planning L2 (wayfinder → to-tickets → priority/estimate/capacity → plan-md) | `.kilo/commands/sprint-plan.md` |
 | `/status-report` | Progress / status report (ACTIVE or triage/to-tickets → progress/risk → plan-md) | `.kilo/commands/status-report.md` |
 | `/ui-delivery` | Design, implement, and audit a web UI change across responsive and accessibility states. | `.kilo/commands/ui-delivery.md` |
-| `/writing` | Creative/article writing (explore → beats → shape), optionally with magazine/blog layout; runs parallel to content-delivery-lite. | `.kilo/commands/writing.md` |
 
 ## Invocation rules
 1. Choose the Workflow (entry). 2. Open only the skills named in its body, as needed. 3. Follow the output schema and gates.

@@ -12,7 +12,7 @@ replay: safe
 
 1. Read `docs/plans/ACTIVE.md` and add the research task as `todo` (a small check may skip this at L0).
 2. **`research`**: use primary sources and **separate fact from inference**, recording findings in Markdown (do not fabricate certainty).
-3. **`research-decision-room`** (if needed): structure options, rationale, and risks into decision material.
+3. **Decision** (if needed): use `architecture-decision` or `plan-md` to record options, rationale, and risks.
 4. **`product-discovery`**: settle user outcome, acceptance criteria, scope, and open questions.
 5. As needed, use **`to-spec`** / **`to-tickets`** to specify and ticket (and **`plan-md`** to write the plan).
 6. Set ACTIVE to `done` + evidence. Verify with `python3 scripts/plan_active.py`.

@@ -1,6 +1,6 @@
 # 意図ルーティング（Workflow 選定）
 
-ユーザー依頼を **16 種の workflow**（`.kilo/commands/<id>.md`）のどれで進めるか選び、必要な MCP ツールだけ使えるようにする機能です。**別の LLM API は不要** — Cursor / Kilo の会話モデルが短い JSON でスコアを返します。
+ユーザー依頼を **12 種の workflow**（`.kilo/commands/<id>.md`）のどれで進めるか選び、必要な MCP ツールだけ使えるようにする機能です。**別の LLM API は不要** — Cursor / Kilo の会話モデルが短い JSON でスコアを返します。
 
 本キットは **単体の汎用リポジトリ**です。社内 LLM API（OpenAI 互換プロキシ等）とは別プロジェクトで、API 側が必要なときだけ `WAWOO_SKILLS_ROOT` で本 MCP を参照します。
 
@@ -90,11 +90,11 @@ interpret_intent(text)
 **上流 JSON 契約**（1 行・フィールドのみ）
 
 ```json
-{"workflow":"deck","score":0.88,"trigger":"投資家向け"}
+{"workflow":"ui-delivery","score":0.88,"trigger":"ダッシュボード再設計"}
 ```
 
 - `learn: true` は **再適用時のみ**（高スコアを SQLite に非同期登録。既定は `false`）。
-- `workflow` は 16 id のいずれか。台帳外は学習・採用されない。
+- `workflow` は 12 id のいずれか。台帳外は学習・採用されない。
 
 ---
 

@@ -8,20 +8,6 @@
     "review the terms and privacy policy",
     "法務とプライバシーの確認をして"
   ],
-  "content-delivery-lite": [
-    "write a long document about our architecture",
-    "deliver a book chapter into the repo",
-    "produce a long report and track progress",
-    "draft a multi-chapter guide",
-    "長い文章を章ごとに書き進めて"
-  ],
-  "deck": [
-    "make a proposal deck for the client",
-    "prepare a pitch deck",
-    "create slides for the planning meeting",
-    "turn this into a presentation",
-    "提案用のスライドを作って"
-  ],
   "delivery-lite": [
     "implement this small feature",
     "add a single endpoint and wire it up",
@@ -49,13 +35,6 @@
     "debug this production outage now",
     "a regression broke the release",
     "本番障害を調査して復旧して"
-  ],
-  "market-plan": [
-    "research the market and build a go to market plan",
-    "analyze competitors and propose a strategy",
-    "write a business plan for a new product",
-    "market research and pricing strategy",
-    "市場調査と事業計画を作って"
   ],
   "release-review": [
     "prepare the release and check the version and changelog",
@@ -105,12 +84,5 @@
     "change the layout and check responsive behavior",
     "make the interface faster and accessible",
     "この画面を実装してレスポンシブも確認して"
-  ],
-  "writing": [
-    "write a blog article about this idea",
-    "draft an essay with a strong hook",
-    "write a story or creative piece",
-    "help me write a newsletter article",
-    "ブログ記事を書いて"
   ]
 }

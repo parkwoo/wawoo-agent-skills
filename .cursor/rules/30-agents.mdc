@@ -14,7 +14,7 @@ Call **`agent_get {name}`** to fetch a role's full definition and follow it. Enu
 - Entry: **`wawoo-auto`** (routes non-trivial work via MCP first).
 - Delivery/design/implementation/quality: delivery-lead, project-manager, product-owner, architect, implementer, qa-engineer, data, code-reviewer, code-skeptic, code-simplifier
 - Security/ops/release: security-reviewer, compliance-reviewer, performance-reviewer, sre-operator, release-manager
-- UI/docs/market: web-designer, frontend-specialist, accessibility-reviewer, docs-specialist, docs-localization-reviewer, market-researcher
+- UI/docs: web-designer, frontend-specialist, accessibility-reviewer, docs-specialist, docs-localization-reviewer
 
 ## Optional: native subagents
 
