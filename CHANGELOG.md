@@ -44,6 +44,7 @@
 ### Added — pstack `principle-*` methodology (24 skills)
 
 - Absorbed pstack's engineering-principle skills (`principle-*`) from the standalone mirror (MIT, © 2026 Lauren Tan): apply-before rules for design, debugging, verification, context management, concurrency, and scope. `LICENSES/pstack-MIT.txt`; ATTRIBUTION updated. Skills 67 → 91.
+- Batch 2: absorbed `blast-radius`, `create-verification-skill`, `maintain-verification-skill`, `show-me-your-work` (generalized harness references); **skipped `statechart`** (heavy TLA+/Node/Java toolchain) and the `t3-pstack` port.
 - Did **not** absorb the `t3-pstack` port (T3 Code wiring + mixed Cursor/thermos licenses); only its port/sync methodology is noted (see `repo-docs/wawoo-skills/plans/PSTACK-ABSORPTION-PLAN.md`).
 
 ### Changed — public kit English-only + self-contained docs
