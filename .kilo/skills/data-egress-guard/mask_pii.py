@@ -179,6 +179,60 @@ class PiiMasker:
         return text
 
 
+# --- infra redaction (error/log sanitization) --------------------------------
+_PRIVATE_HOST = re.compile(r"\b(?:[a-z0-9-]+\.)+(?:local|internal|lan|corp|intranet|localdomain)\b", re.I)
+_CRED_URL = re.compile(r"\b([a-z][a-z0-9+.-]*://)([^/\s:@]+):([^/\s@]+)@", re.I)
+_HOST_ASSIGN = re.compile(r"\b(?:host|hostname|server|endpoint)\s*[=:]\s*['\"]?[^\s'\",;]+['\"]?", re.I)
+_PORT_ASSIGN = re.compile(r"\bport\s*[=:]\s*\d{1,5}\b", re.I)
+
+
+def _is_private_ipv4(value: str) -> bool:
+    try:
+        a, b, c, d = (int(x) for x in value.split("."))
+    except ValueError:
+        return False
+    if not all(0 <= n <= 255 for n in (a, b, c, d)):
+        return False
+    return a in (0, 10, 127) or (a == 172 and 16 <= b <= 31) or (a == 192 and b == 168) or (a == 169 and b == 254)
+
+
+def redact_infra(text: str, aggressive: bool = False) -> dict:
+    """Strip internal infrastructure from error/log text (no rehydration needed).
+
+    Default: private IPs, internal hostnames (*.local/.internal/...), credentials
+    in URLs, and `host=`/`port=` values. ``aggressive`` also redacts every URL and
+    every IP.
+    """
+    counts: dict[str, int] = {}
+
+    def bump(key: str) -> None:
+        counts[key] = counts.get(key, 0) + 1
+
+    working = text
+    working = _CRED_URL.sub(lambda m: (bump("CRED_URL"), f"{m.group(1)}[REDACTED]@")[1], working)
+
+    def ip_sub(m: re.Match[str]) -> str:
+        s = m.group(0)
+        if aggressive or _is_private_ipv4(s):
+            bump("IPV4")
+            return "[REDACTED_IP]"
+        return s
+
+    working = re.sub(r"\b(?:\d{1,3}\.){3}\d{1,3}\b", ip_sub, working)
+    working = re.sub(
+        r"\b(?:::1|fe80:[0-9a-f:]+|f[cd][0-9a-f]{2}:[0-9a-f:]+)\b",
+        lambda m: (bump("IPV6"), "[REDACTED_IP]")[1],
+        working,
+        flags=re.I,
+    )
+    working = _PRIVATE_HOST.sub(lambda m: (bump("HOST"), "[REDACTED_HOST]")[1], working)
+    working = _HOST_ASSIGN.sub(lambda m: (bump("HOST_ASSIGN"), "host=[REDACTED]")[1], working)
+    working = _PORT_ASSIGN.sub(lambda m: (bump("PORT"), "port=[REDACTED]")[1], working)
+    if aggressive:
+        working = re.sub(r"\bhttps?://[^\s<>\"')]+", lambda m: (bump("URL"), "[REDACTED_URL]")[1], working)
+    return {"text": working, "counts": counts}
+
+
 def selftest() -> int:
     m = PiiMasker(locales=["generic", "jp"])
     src = (
@@ -205,6 +259,12 @@ def selftest() -> int:
     assert "4111111111111111" not in strict.mask("n 4111111111111111").text
     # determinism
     assert m.mask(src).to_dict() == res.to_dict()
+    # infra redaction (error/log sanitization)
+    infra = redact_infra("connect 10.2.3.4:5432 host='db.internal' db://u:p@10.0.0.5/x")
+    assert "10.2.3.4" not in infra["text"] and "db.internal" not in infra["text"], infra
+    assert "u:p@" not in infra["text"], infra
+    assert redact_infra("see https://public.example.com/x")["text"] == "see https://public.example.com/x"
+    assert redact_infra("see https://public.example.com/x", aggressive=True)["text"] == "see [REDACTED_URL]"
     print("selftest OK:", json.dumps({"counts": res.counts}, ensure_ascii=False))
     return 0
 
@@ -215,6 +275,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--locale", default="generic", help="comma list: generic, jp")
     ap.add_argument("--rules", default="", help="comma list of rule names/placeholders to allow")
     ap.add_argument("--strict", action="store_true", help="require checksums (may leave invalid formats unmasked)")
+    ap.add_argument("--profile", default="pii", choices=["pii", "infra"], help="pii=mask+map; infra=sanitize internal infra (no map)")
+    ap.add_argument("--aggressive", action="store_true", help="infra profile: redact all URLs/IPs, not just private")
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--selftest", action="store_true")
     args = ap.parse_args(argv)
@@ -223,6 +285,11 @@ def main(argv: list[str] | None = None) -> int:
         return selftest()
 
     text = open(args.input, encoding="utf-8").read() if args.input else sys.stdin.read()
+    if args.profile == "infra":
+        res_infra = redact_infra(text, aggressive=args.aggressive)
+        print(json.dumps(res_infra, ensure_ascii=False, indent=2 if args.json else None))
+        return 0
+
     masker = PiiMasker(
         locales=[x.strip() for x in args.locale.split(",") if x.strip()],
         rules=[x.strip() for x in args.rules.split(",") if x.strip()] or None,

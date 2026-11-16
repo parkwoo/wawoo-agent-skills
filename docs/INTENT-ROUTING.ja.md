@@ -107,6 +107,8 @@ interpret_intent(text)
 - **seed**: 空の学習 DB は **catalog（workflow id）から自動 seed** してブートストラップ。旧語彙はローカルの学習 DB に移行する（**配布しない**）。
 - **L2 上流スコア**: 一致しなければ `needs_scoring: true` を返し、ホスト LLM が `workflow`+`score` を付けて再呼び出しする（`source: "upstream"`）。
 - **L1.5 ローカル語彙**（モデル不要・トークン0）: 入力と workflow ごとの発話例（`mcp/intent_routes.json`）の tf-idf コサイン。コサインと次点との差が閾値を満たせば採用（`source: "local"`）、満たさなければ**棄権**して L2 へ。`WAWOO_INTENT_LEXICAL=0` で無効、`WAWOO_INTENT_LEXICAL_THRESHOLD` / `_MARGIN` で調整。
+- **複雑度 → モデル階層**（決定的）: `interpret_intent` は `complexity`（`simple|medium|complex`）と推奨 `model_tier`（simple/medium→`fast`、complex→`reasoning`）も返す。`delegate_subtask` に渡す。
+- **キャリブレーション**: `python3 mcp/intent_calibrate.py` が `mcp/intent_eval.json` 上で threshold/margin をグリッド探索し、env 値（`WAWOO_INTENT_LEXICAL_THRESHOLD` / `_MARGIN`、`WAWOO_INTENT_MAX_ABSTAIN`）を出力。
 - **言語非依存**: 語彙メンテをやめ、**learned（利用で育つ）＋ローカル語彙（トークン不要の発話例）＋ upstream（LLM）** に委ねる（多言語耐性）。
 
 ## 3.2 フェーズ（workflow の分解）

@@ -34,6 +34,13 @@
 - `interpret_intent` gains an **L1.5 local lexical** layer between learned and the upstream LLM: tf-idf cosine against per-workflow utterance examples (`mcp/intent_routes.json`), adopted only when the cosine and its margin clear a threshold (`source: "local"`), otherwise it **abstains** to L2. Inspired by Semantic Router (local, threshold, abstain) and Radlab's deterministic-first routing; stdlib only, no embeddings.
 - Env: `WAWOO_INTENT_LEXICAL=0` disables; `WAWOO_INTENT_LEXICAL_THRESHOLD` / `_MARGIN` tune. e2e `local_lexical_router`; `docs/INTENT-ROUTING(.ja)` updated.
 
+### Added — outbound guardrails + intent calibration/complexity
+
+- **A2** `data-egress-guard` now redacts internal infrastructure (private IPs, internal hostnames, credentials in URLs, host=/port=) — new MCP tool **`redact_infra`**; error/log sanitization (`mask_pii --profile infra`).
+- **A3** new skill **`content-guardrail`** (`guard.py` + `policy.example.json`) and MCP tool **`guard_content`**: policy-as-data gate (deny terms, regex, secret/private-infra detectors) with optional **fail-closed**. Skills 66 → 67.
+- **B2** `mcp/intent_calibrate.py` + `intent_eval.json`: grid-search the lexical threshold/margin, report precision/recall/abstain, print env values.
+- **B3** `mcp/intent_complexity.py`: deterministic complexity + `model_tier` on every schedule; local lexical layer is **fail-open** (errors fall through to the upstream LLM).
+
 ### Changed — public kit English-only + self-contained docs
 
 - Localized → English: `.kilo/skills/README.md`, `.kilo/skills/ATTRIBUTION.md`, `reference-design-contract` (`ja_name` / JA triggers / i18n example), `web-design-guidelines`, `science-writing`, `.kilo/commands/writing.md`; `scripts/*.py` and `mcp/*.py` comments, docstrings and messages; OpenDesign `NOTICE.txt` (7). Fixed the `validate_assets` entry marker (`**入口**` → `**Entry**`).

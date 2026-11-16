@@ -109,6 +109,8 @@ If you only want human-readable text, use **`route_task`** (on `needs_scoring` i
 - **seed**: an empty learned DB is bootstrapped with **catalog (workflow id) seeds**. The legacy vocabulary is migrated into the local learned DB (**not distributed**).
 - **L1.5 local lexical** (no model, zero tokens): tf-idf cosine of the input against per-workflow utterance examples (`mcp/intent_routes.json`). Adopt the best workflow when the cosine **and** its margin over the runner-up clear a threshold (`source: "local"`); otherwise **abstain** and fall through to L2. Disable with `WAWOO_INTENT_LEXICAL=0`; tune with `WAWOO_INTENT_LEXICAL_THRESHOLD` / `_MARGIN`.
 - **L2 upstream score**: if nothing matches, return `needs_scoring: true`; the host LLM adds `workflow`+`score` and re-calls (`source: "upstream"`).
+- **Complexity → model tier** (deterministic): `interpret_intent` also returns `complexity` (`simple|medium|complex`) and a suggested `model_tier` (`fast` for simple/medium, `reasoning` for complex) — pass it to `delegate_subtask`.
+- **Calibration**: `python3 mcp/intent_calibrate.py` grid-searches the lexical threshold/margin on `mcp/intent_eval.json` and prints env values (`WAWOO_INTENT_LEXICAL_THRESHOLD` / `_MARGIN`; `WAWOO_INTENT_MAX_ABSTAIN` caps abstain).
 - **Language-independent**: drop vocabulary maintenance and rely on **learned (grows with use) + local lexical (zero-token utterance examples) + upstream (LLM)** (multilingual).
 
 ## 3.2 Phases (workflow decomposition)
