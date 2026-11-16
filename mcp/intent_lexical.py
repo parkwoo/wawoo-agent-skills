@@ -112,8 +112,8 @@ def selftest() -> int:
     cases = {
         "run a retrospective and improve our process": "self-improve",
         "review my changes and fix what the review finds": "self-review",
-        "prepare a pitch deck for the client": "deck",
-        "market research and pricing strategy": "market-plan",
+        "plan the sprint and estimate the tickets": "sprint-plan",
+        "prepare the release checklist": "release-review",
         "this screen's design needs a review": "design-review",
     }
     for text, want in cases.items():
