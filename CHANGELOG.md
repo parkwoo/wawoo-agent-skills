@@ -11,7 +11,7 @@
 > （見出しは後続 commit、主に `c6d07f4` で追記された）ため **タグを付与しない**（誤った出所を作らない）。
 > 以降は `v0.6.0` から連番でタグ付けする。
 
-## [Unreleased]
+## [0.7.0] - 2026-11-16
 
 ### Added — cross-tool adapters (OpenCode native, Cursor native)
 
