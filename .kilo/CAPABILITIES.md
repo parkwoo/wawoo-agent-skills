@@ -4,7 +4,7 @@
 > Pick candidates from this catalog first and open only the `SKILL.md` you need (progressive disclosure).
 > `⚠️` marks items needing external setup (`scripts/readiness.json`). Not used in the standard flow.
 
-## Skills（95）
+## Skills（100）
 
 | name | ready | size | description | path |
 |---|---|---|---|---|
@@ -12,6 +12,7 @@
 | `api-contract-design` | ✅ | 1.1KB | Design or review HTTP, RPC, event, or internal API contracts for clear inputs, outputs, errors, authentication, compatibility, an… | `.kilo/skills/api-contract-design/SKILL.md` |
 | `architecture-decision` | ✅ | 1.1KB | Evaluate software architecture choices, dependencies, interfaces, constraints, and tradeoffs, then produce a concise decision rec… | `.kilo/skills/architecture-decision/SKILL.md` |
 | `ask-matt` | ✅ | 1.7KB | Ask which skill or flow fits your situation. A router over the skills in this repo. | `.kilo/skills/ask-matt/SKILL.md` |
+| `benchmark-checklist` | ✅ | 4.9KB | "Vet a perf measurement (limiter, tuning, limits, errors, repeatability, relevance, and whether the work happened) before you rep… | `.kilo/skills/benchmark-checklist/SKILL.md` |
 | `blast-radius` | ✅ | 3.8KB | "Find what a change could break somewhere else before it ships, beyond the diff, and prove the one fact it's safe because of by r… | `.kilo/skills/blast-radius/SKILL.md` |
 | `brand-guidelines` | ✅ | 1.4KB | Apply Anthropic's official brand colors and typography to artifacts for consistent visual identity and professional design standa… | `.kilo/skills/brand-guidelines/SKILL.md` |
 | `change-readiness` | ✅ | 2.4KB | Perform an evidence-based pre-handoff review of a non-trivial software change before requesting human or external audit. Use afte… | `.kilo/skills/change-readiness/SKILL.md` |
@@ -34,6 +35,7 @@
 | `domain-modeling` | ✅ | 3.3KB | Build and sharpen a project's domain model. Use when discussing codebase terminology, writing or editing a GLOSSARY.md, or record… | `.kilo/skills/domain-modeling/SKILL.md` |
 | `engineering-quality` | ✅ | 1.9KB | Plan and implement software changes with explicit scope, evidence-based verification, safe migrations, and rollback readiness. Us… | `.kilo/skills/engineering-quality/SKILL.md` |
 | `fal-gen` | ✅ | 2.9KB | Batch-generate design images (avatars / illustrations / backgrounds / textures) with fal.ai. Use when a task needs generated or f… | `.kilo/skills/fal-gen/SKILL.md` |
+| `figure-it-out` | ✅ | 4.0KB | "Design an auditable playbook when no narrower one fits: a large migration, an ambitious multi-part change, or work a human revie… | `.kilo/skills/figure-it-out/SKILL.md` |
 | `frontend-design` | ✅ | 5.1KB | Create distinctive, production-grade frontend interfaces with strong visual direction, polished typography, considered layout, an… | `.kilo/skills/frontend-design/SKILL.md` |
 | `grill-with-docs` | ✅ | 0.2KB | A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go. | `.kilo/skills/grill-with-docs/SKILL.md` |
 | `grilling` | ✅ | 2.0KB | Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any '… | `.kilo/skills/grilling/SKILL.md` |
@@ -41,6 +43,7 @@
 | `imagegen-frontend-mobile` | ✅ | 2.2KB | A skill for high-quality image concepts for mobile apps. Provides prompts and visual direction for iOS/Android screens and flows … | `.kilo/skills/imagegen-frontend-mobile/SKILL.md` |
 | `implement` | ✅ | 0.6KB | "Implement a piece of work based on a spec or set of tickets." | `.kilo/skills/implement/SKILL.md` |
 | `implement-spec` | ✅ | 2.7KB | "Implement the result of /to-spec and /to-tickets in code." | `.kilo/skills/implement-spec/SKILL.md` |
+| `in-your-own-words` | ✅ | 0.3KB | "Restate in your own words what you think the user's goals are and what problem they're trying to solve. Use for /in-your-own-wor… | `.kilo/skills/in-your-own-words/SKILL.md` |
 | `incident-debugging` | ✅ | 1.1KB | Diagnose a software incident or high-impact defect through reproduction, evidence collection, fault isolation, mitigation, verifi… | `.kilo/skills/incident-debugging/SKILL.md` |
 | `language-policy` | ✅ | 2.4KB | Decide and enforce the writing language for code, engineering records, and explanatory docs via a three-tier policy (code = Engli… | `.kilo/skills/language-policy/SKILL.md` |
 | `maintain-verification-skill` | ✅ | 4.9KB | "Periodic pass that keeps a project's verification skill and feature map honest: parallel source readers per feature, one live se… | `.kilo/skills/maintain-verification-skill/SKILL.md` |
@@ -87,8 +90,10 @@
 | `screenshots-marketing` | ✅ | 1.3KB | Produce marketing screenshots (landing hero, App Store, changelog visuals). Use Playwright when available; otherwise produce a ca… | `.kilo/skills/screenshots-marketing/SKILL.md` |
 | `security-review` | ✅ | 1.7KB | Perform a read-first security review of application code, configuration, dependencies, and delivery changes. Use for requested se… | `.kilo/skills/security-review/SKILL.md` |
 | `setup-matt-pocock-skills` | ✅ | 6.8KB | "Configure this repo for the engineering skills: set up its issue tracker, triage label vocabulary, and domain doc layout. Run on… | `.kilo/skills/setup-matt-pocock-skills/SKILL.md` |
+| `sharpen` | ✅ | 0.6KB | "Make a task deeper, not bigger, then rewrite the prompt. Use for /sharpen." | `.kilo/skills/sharpen/SKILL.md` |
 | `show-me-your-work` | ✅ | 6.7KB | "Keep a reviewable decision trail for long-running or unattended work: a TSV log with one row per decision (what, why, evidence, … | `.kilo/skills/show-me-your-work/SKILL.md` |
 | `slides` | ✅ | 1.4KB | Create slide decks as Markdown/HTML by default (no external dependencies); optionally export .pptx with PptxGenJS if installed. U… | `.kilo/skills/slides/SKILL.md` |
+| `swarm` | ✅ | 3.2KB | "Fan out N parallel workers, drain them, and return one report. Use for /swarm, 'swarm this', or parallel coverage, races, gauntl… | `.kilo/skills/swarm/SKILL.md` |
 | `tdd` | ✅ | 3.5KB | Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or want… | `.kilo/skills/tdd/SKILL.md` |
 | `teach` | ✅ | 9.5KB | Teach the user a new skill or concept, within this workspace. | `.kilo/skills/teach/SKILL.md` |
 | `test-engineering` | ✅ | 2.5KB | Design, implement, diagnose, and review software tests with evidence-focused coverage across unit, integration, and end-to-end la… | `.kilo/skills/test-engineering/SKILL.md` |
