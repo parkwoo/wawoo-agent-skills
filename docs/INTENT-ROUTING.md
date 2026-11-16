@@ -4,7 +4,7 @@
 
 Choose which of the **16 workflows** (`.kilo/commands/<id>.md`) to run a request through, and allow only the MCP tools you need. **No separate LLM API is required** — the Cursor / Kilo conversation model returns a short JSON score.
 
-This kit is a **standalone generic repository**. It is a separate project from any internal LLM API (e.g. co.taro.bz); the API side references this MCP via `WAWOO_SKILLS_ROOT` only when needed.
+This kit is a **standalone generic repository**. It is a separate project from any internal LLM API (e.g. an OpenAI-compatible proxy); the API side references this MCP via `WAWOO_SKILLS_ROOT` only when needed.
 
 - Implementation details: `mcp/README.md`
 - MCP tool list: [mcp/README.md](https://github.com/parkwoo/wawoo-skills/blob/master/mcp/README.md)

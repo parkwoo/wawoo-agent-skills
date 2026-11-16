@@ -2,7 +2,7 @@
 
 ユーザー依頼を **16 種の workflow**（`.kilo/commands/<id>.md`）のどれで進めるか選び、必要な MCP ツールだけ使えるようにする機能です。**別の LLM API は不要** — Cursor / Kilo の会話モデルが短い JSON でスコアを返します。
 
-本キットは **単体の汎用リポジトリ**です。社内 LLM API（co.taro.bz 等）とは別プロジェクトで、API 側が必要なときだけ `WAWOO_SKILLS_ROOT` で本 MCP を参照します。
+本キットは **単体の汎用リポジトリ**です。社内 LLM API（OpenAI 互換プロキシ等）とは別プロジェクトで、API 側が必要なときだけ `WAWOO_SKILLS_ROOT` で本 MCP を参照します。
 
 - 実装の詳細: `mcp/README.md`
 - MCP ツール一覧: [mcp/README.ja.md](https://github.com/parkwoo/wawoo-skills/blob/master/mcp/README.ja.md)
