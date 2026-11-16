@@ -101,6 +101,8 @@ These apply to **this kit itself** and to any project adopting the kit's convent
 
 ## 5. Context budget (how to hand things to the model)
 
+- **Budget exceptions**: `validate_assets.py`'s `SKILL_BUDGET_EXCEPTIONS` lists upstream/reference-heavy entry skills that exceed 4KB (their detail lives in `references/`). New or own skills must stay ≤4KB.
+
 - Contract ≤500tok / catalog ≤1k / Workflow ≤1.5k / **one skill ≤2–4KB** (exceptions exist) / memory top-5.
 - **Budget guide (§4.1)**: one step's tool output **< 4KB**; one session's payload **< 600KB**. If you would exceed it, split the target / `/compact` / switch to `grep -n`/`head`.
 - **Progressive disclosure**: do not hand everything at once. Read references only when needed.

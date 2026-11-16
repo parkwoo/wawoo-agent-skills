@@ -109,6 +109,7 @@ interpret_intent(text)
 - **L2 上流スコア**: 一致しなければ `needs_scoring: true` を返し、ホスト LLM が `workflow`+`score` を付けて再呼び出しする（`source: "upstream"`）。
 - **複雑度 → モデル階層**（決定的）: `interpret_intent` は `complexity`（`simple|medium|complex`）と推奨 `model_tier`（simple/medium→`fast`、complex→`reasoning`）も返す。`delegate_subtask` に渡す。
 - **キャリブレーション**: `python3 mcp/intent_calibrate.py` が `mcp/intent_eval.json` 上で threshold/margin をグリッド探索し、env 値（`WAWOO_INTENT_LEXICAL_THRESHOLD` / `_MARGIN`、`WAWOO_INTENT_MAX_ABSTAIN`）を出力。
+- **既定値とキャリブレーション**: 出荷既定は `threshold=0.30` / `margin=0.05`（保守的）。`intent_calibrate.py` は小規模 eval で別値（例 `0.35/0.0`）を勧めることがあるが、データ依存として扱い、より大きなラベル集合で再評価してから既定を変える。
 - **言語非依存**: 語彙メンテをやめ、**learned（利用で育つ）＋ローカル語彙（トークン不要の発話例）＋ upstream（LLM）** に委ねる（多言語耐性）。
 
 ## 3.2 フェーズ（workflow の分解）

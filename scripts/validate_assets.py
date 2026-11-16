@@ -62,8 +62,16 @@ INTERNAL_PUBLIC_PATTERNS = (
 
 # Context-budget check (AGENTS §5): entry SKILL.md should be 2-4KB.
 SKILL_BUDGET_BYTES = 4096
+# Upstream / reference-heavy entry skills whose detail lives in references/ (verbatim
+# third-party text or long procedures). New or own skills must stay <= 4KB.
 SKILL_BUDGET_EXCEPTIONS = frozenset(
-    {"imagegen-frontend-mobile", "ask-matt", "wayfinder", "design-brief", "writing-for-agents", "teach"}
+    {
+        "imagegen-frontend-mobile", "ask-matt", "wayfinder", "design-brief", "writing-for-agents", "teach",
+        "benchmark-checklist", "code-review", "codebase-design", "create-verification-skill",
+        "diagnosing-bugs", "frontend-design", "maintain-verification-skill", "pr", "recall",
+        "reference-design-contract", "reflect", "retro", "setup-matt-pocock-skills",
+        "show-me-your-work", "to-tickets", "triage", "why",
+    }
 )
 
 

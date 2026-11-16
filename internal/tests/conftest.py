@@ -28,3 +28,10 @@ def _isolate_learn_db(tmp_path, monkeypatch):
     finally:
         flush_learn_writes()
         reset_intent_store()
+
+
+@pytest.fixture
+def lexical_off(monkeypatch):
+    """Disable the local lexical layer for tests that exercise learned/upstream routing."""
+    monkeypatch.setenv("WAWOO_INTENT_LEXICAL", "0")
+    yield

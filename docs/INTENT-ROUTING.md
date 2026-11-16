@@ -111,6 +111,7 @@ If you only want human-readable text, use **`route_task`** (on `needs_scoring` i
 - **L2 upstream score**: if nothing matches, return `needs_scoring: true`; the host LLM adds `workflow`+`score` and re-calls (`source: "upstream"`).
 - **Complexity → model tier** (deterministic): `interpret_intent` also returns `complexity` (`simple|medium|complex`) and a suggested `model_tier` (`fast` for simple/medium, `reasoning` for complex) — pass it to `delegate_subtask`.
 - **Calibration**: `python3 mcp/intent_calibrate.py` grid-searches the lexical threshold/margin on `mcp/intent_eval.json` and prints env values (`WAWOO_INTENT_LEXICAL_THRESHOLD` / `_MARGIN`; `WAWOO_INTENT_MAX_ABSTAIN` caps abstain).
+- **Defaults vs calibration**: shipped defaults are `threshold=0.30`, `margin=0.05` (conservative). `intent_calibrate.py` may recommend other values on a small eval set (e.g. `0.35/0.0`); treat those as data-dependent and revisit with a larger labelled set before changing defaults.
 - **Language-independent**: drop vocabulary maintenance and rely on **learned (grows with use) + local lexical (zero-token utterance examples) + upstream (LLM)** (multilingual).
 
 ## 3.2 Phases (workflow decomposition)

@@ -21,8 +21,6 @@ from intent_interpreter import (  # noqa: E402
     reset_intent_store,
 )
 from intent_learned_store import IntentLearnedStore  # noqa: E402
-
-os.environ['WAWOO_INTENT_LEXICAL'] = '0'
 from intent_upstream import UpstreamScoring  # noqa: E402
 
 
@@ -44,7 +42,7 @@ def test_catalog_in_upstream_prompt() -> None:
     assert p["workflow_catalog"]
 
 
-def test_route_layer_learned() -> None:
+def test_route_layer_learned(lexical_off) -> None:
     db = _test_db()
     os.environ["WAWOO_INTENT_LEARN_DB"] = str(db)
     reset_intent_store()
@@ -70,7 +68,7 @@ def _test_db() -> Path:
     return db
 
 
-def test_learned_route() -> None:
+def test_learned_route(lexical_off) -> None:
     db = _test_db()
     os.environ["WAWOO_INTENT_LEARN_DB"] = str(db)
     reset_intent_store()
@@ -90,7 +88,7 @@ def test_learned_route() -> None:
             db.unlink()
 
 
-def test_upstream_async_learn() -> None:
+def test_upstream_async_learn(lexical_off) -> None:
     db = _test_db()
     os.environ["WAWOO_INTENT_LEARN_DB"] = str(db)
     reset_intent_store()
@@ -204,7 +202,7 @@ def test_receiver_socket() -> None:
             proc.wait(timeout=5)
 
 
-def test_seed_routes_by_id() -> None:
+def test_seed_routes_by_id(lexical_off) -> None:
     db = _test_db()
     os.environ["WAWOO_INTENT_LEARN_DB"] = str(db)
     reset_intent_store()
@@ -248,7 +246,7 @@ def test_audit_workflow_declares_gate() -> None:
     assert p["schedule"]["gate"]
 
 
-def test_learned_after_promote() -> None:
+def test_learned_after_promote(lexical_off) -> None:
     db = _test_db()
     os.environ["WAWOO_INTENT_LEARN_DB"] = str(db)
     reset_intent_store()
