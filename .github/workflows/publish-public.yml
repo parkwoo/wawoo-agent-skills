@@ -29,6 +29,7 @@ jobs:
           sudo apt-get install -y -qq git-filter-repo
           git clone --no-local . /tmp/out
           cd /tmp/out
+          git checkout -q "$GITHUB_SHA"
           git filter-repo --force --paths-from-file "$GITHUB_WORKSPACE/.publish-allowlist"
 
       - name: Push to the public repo (SSH deploy key)
@@ -42,5 +43,5 @@ jobs:
           cd /tmp/out
           git remote add pub git@github.com:parkwoo/wawoo-skills.git
           export GIT_SSH_COMMAND="ssh -i $HOME/.ssh/id_publish -o IdentitiesOnly=yes"
-          git push --force pub master:master
+          git push --force pub HEAD:master
           git push --force pub --tags
