@@ -4,7 +4,7 @@
 > Pick candidates from this catalog first and open only the `SKILL.md` you need (progressive disclosure).
 > `⚠️` marks items needing external setup (`scripts/readiness.json`). Not used in the standard flow.
 
-## Skills（65）
+## Skills（66）
 
 | name | ready | size | description | path |
 |---|---|---|---|---|
@@ -19,6 +19,7 @@
 | `codebase-design` | ✅ | 6.3KB | Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module's interface, find deepening o… | `.kilo/skills/codebase-design/SKILL.md` |
 | `compliance-legal` | ✅ | 1.8KB | Review OSS license obligations (MIT/Apache-2.0 attribution, NOTICE), SBOM, and product/service legal checklists (terms, privacy, … | `.kilo/skills/compliance-legal/SKILL.md` |
 | `context-compression` | ✅ | 3.9KB | Deterministically compress and clean multi-turn conversation context with pure Python (no LLM, no network) — drop stale turns, de… | `.kilo/skills/context-compression/SKILL.md` |
+| `data-egress-guard` | ✅ | 3.0KB | Deterministically mask PII and secrets before sending text to an external LLM/API (no model, no network) — replaces spans with nu… | `.kilo/skills/data-egress-guard/SKILL.md` |
 | `database-change-safety` | ✅ | 1.2KB | Plan, implement, and review schema changes, data migrations, backfills, and cleanup with integrity, availability, observability, … | `.kilo/skills/database-change-safety/SKILL.md` |
 | `dependency-upgrade` | ✅ | 1.2KB | Safely evaluate, apply, and verify software dependency, runtime, container-image, or toolchain upgrades with compatibility, secur… | `.kilo/skills/dependency-upgrade/SKILL.md` |
 | `deployment` | ✅ | 1.2KB | Plan, execute, and verify a deployment or release (Docker Compose, image tagging, environment, migrations, health checks, rollbac… | `.kilo/skills/deployment/SKILL.md` |

@@ -1,4 +1,4 @@
-# Skills (65)
+# Skills (66)
 
 Agent Skill format (`<name>/SKILL.md`). Shared by Kilo / Cursor. **Origins and licenses: [`ATTRIBUTION.md`](./ATTRIBUTION.md)**.
 
@@ -9,7 +9,7 @@ Agent Skill format (`<name>/SKILL.md`). Shared by Kilo / Cursor. **Origins and l
 | **Skills For Real Engineers** | 25 | MIT | Development process (`to-spec` → `to-tickets` → `implement` / `implement-spec` → `tdd` → `code-review` → `retro`, `ask-matt`) |
 | **Kilo built-in** | 16 | MIT (frontmatter) | Quality, design, safety (`architecture-decision`, `engineering-quality`, `test-engineering`, `security-review`, ...) |
 | **OpenDesign** | 10 | Apache-2.0 | **Web/app design** (`design-brief`, `reference-design-contract`, `design-md`, `frontend-design`, `web-design-guidelines`, `design-review`, ...) |
-| **This repository** | 14 | MIT | `deployment`, `compliance-legal`, `privacy-review`, `changelog`, `memory`, `slides`, `screenshots-marketing`, `plan-md`, `language-policy`, `publication-boundary`, `science-writing`, `viral-hooks`, `fal-gen`, `context-compression` |
+| **This repository** | 15 | MIT | `deployment`, `compliance-legal`, `privacy-review`, `changelog`, `memory`, `slides`, `screenshots-marketing`, `plan-md`, `language-policy`, `publication-boundary`, `science-writing`, `viral-hooks`, `fal-gen`, `context-compression`, `data-egress-guard` |
 
 ## By category
 
@@ -17,7 +17,7 @@ Agent Skill format (`<name>/SKILL.md`). Shared by Kilo / Cursor. **Origins and l
 - **Design / UI**: `web-experience-design`, `accessibility-audit`, `design-brief`, `reference-design-contract`, `design-md`, `frontend-design`, `web-design-guidelines`, `design-review`
 - **Market / business**: `marketing-psychology`, `brand-guidelines`, `slides`
 - **Research**: `research`, `research-decision-room`, `product-discovery`
-- **Security / legal**: `security-review`, `compliance-legal`, `privacy-review`, `release-readiness`
+- **Security / legal**: `security-review`, `compliance-legal`, `privacy-review`, `release-readiness`, `data-egress-guard`
 - **Operations**: `deployment`, `incident-debugging`, `dependency-upgrade`, `database-change-safety`, `pdca-cycle`
 - **Memory / versioning**: `memory`, `changelog`
 - **Context / RAG**: `context-compression` (offline, deterministic context cleaning)

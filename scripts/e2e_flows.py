@@ -304,6 +304,21 @@ def test_mcp_compress_context(r: Runner) -> None:
     r.run("mcp_compress_context", _)
 
 
+def test_mcp_mask_pii(r: Runner) -> None:
+    def _():
+        res = mcp_call("mask_pii", {"text": "mail alice@example.com card 4111 1111 1111 1111", "locale": "generic,jp"})
+        assert not res["result"].get("isError"), res
+        data = json.loads(res["result"]["content"][0]["text"])
+        assert "alice@example.com" not in data["text"]
+        assert "4111 1111 1111 1111" not in data["text"]
+        assert "{{EMAIL_1}}" in data["text"] and "{{CARD_1}}" in data["text"]
+        unmasked = mcp_call("mask_pii", {"unmask": True, "mapping": data["mapping"], "text": data["text"]})
+        back = json.loads(unmasked["result"]["content"][0]["text"])["text"]
+        assert back == "mail alice@example.com card 4111 1111 1111 1111", back
+
+    r.run("mcp_mask_pii", _)
+
+
 def test_plan_active_cli(r: Runner) -> None:
     def _():
         proc = subprocess.run(
@@ -668,6 +683,7 @@ def main() -> int:
         test_mcp_memory_roundtrip_isolated,
         test_mcp_evidence_check,
         test_mcp_compress_context,
+        test_mcp_mask_pii,
         test_plan_active_cli,
         test_active_blocked_and_duplicate,
         test_mcp_memory_recall_repo,
