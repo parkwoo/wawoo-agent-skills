@@ -46,7 +46,7 @@ docs/                      … 使い方・意図ルーティング・版管理�
 | 用途 | 正本 | 更新タイミング |
 |------|------|----------------|
 | **L1 進行中タスク（コード・UI・調査等）** | `docs/plans/ACTIVE.md` | 着手前に読む。`todo`→`doing`→`done` と証拠列のみエージェントが更新 |
-| **L1 長文・書籍・レポート** | `docs/plans/CONTENT.md` | `/content-delivery-lite`。`plan_content.py` で検証 |
+| **L1 長文・書籍・レポート** | `docs/plans/CONTENT.md` | `plan_content.py`（コンテンツ状態機械） |
 | **詳細計画** | `docs/plans/<id>.md`（`plan-md`） | 分解が大きいとき。ACTIVE の id とリンク |
 | **L2 複数タスク・同期** | issue tracker（設定時）または `docs/plans/BACKLOG*.md` | `to-tickets`／`plan_l2_backlog.py`。ACTIVE と二重管理しない |
 | **L3 プロセス改善** | `docs/plans/RETRO*.md` 等 + `memory` | `/self-improve`。`plan_l3_record.py` |

@@ -67,11 +67,6 @@ WORKFLOWS: dict[str, WorkflowSpec] = {
         "Lightweight delivery. Single-feature implementation and progress tracking via ACTIVE.md. Default path for clear, small changes.",
         _MCP_FULL,
     ),
-    "content-delivery-lite": WorkflowSpec(
-        "docs-specialist",
-        "Knowledge / long-form delivery. Manage books, reports, and long documents with CONTENT.md (not for code implementation).",
-        _MCP_FULL,
-    ),
     "feature-delivery": WorkflowSpec(
         "delivery-lead",
         "Cross-cutting feature delivery. Full delivery that bundles design and implementation across multiple components.",
@@ -90,16 +85,6 @@ WORKFLOWS: dict[str, WorkflowSpec] = {
     "research": WorkflowSpec(
         "product-owner",
         "Research and decisions. From research on technology, market, and specs to the spec/ticket decision.",
-        _MCP_READ,
-    ),
-    "market-plan": WorkflowSpec(
-        "market-researcher",
-        "Market, competitive, and positioning planning and synthesis.",
-        _MCP_READ,
-    ),
-    "deck": WorkflowSpec(
-        "market-researcher",
-        "Structure and copy for presentations, decks, and investor materials.",
         _MCP_READ,
     ),
     "compliance-review": WorkflowSpec(
@@ -135,11 +120,6 @@ WORKFLOWS: dict[str, WorkflowSpec] = {
     "self-improve": WorkflowSpec(
         "delivery-lead",
         "Improve the kit and process themselves. Update skills, procedures, and templates.",
-        _MCP_FULL,
-    ),
-    "writing": WorkflowSpec(
-        "docs-specialist",
-        "Creative/article writing (explore → beats → shape): blog, essay, fiction, scripts. Pairs with content-delivery-lite.",
         _MCP_FULL,
     ),
 }
@@ -200,13 +180,10 @@ BASE_PHASES: dict[str, Phase] = {
 # P5: reuse common phases (avoid duplicate definitions)
 WORKFLOW_PHASES: dict[str, tuple[str, ...]] = {
     "delivery-lite": ("plan", "implement", "verify", "report"),
-    "content-delivery-lite": ("plan", "implement", "verify", "report"),
     "feature-delivery": ("discover", "design", "implement", "verify", "report"),
     "ui-delivery": ("design", "implement", "verify", "report"),
     "design-review": ("audit", "report"),
     "research": ("research", "report"),
-    "market-plan": ("research", "plan", "report"),
-    "deck": ("plan", "report"),
     "compliance-review": ("audit", "report"),
     "release-review": ("audit", "release", "report"),
     "incident-response": ("audit", "implement", "verify", "report"),
@@ -214,14 +191,11 @@ WORKFLOW_PHASES: dict[str, tuple[str, ...]] = {
     "status-report": ("report",),
     "self-review": ("audit", "verify", "report"),
     "self-improve": ("plan", "implement", "verify", "report"),
-    "writing": ("plan", "implement", "verify", "report"),
 }
 
 # Override agent/skills only for a specific workflow's phase
 PHASE_OVERRIDES: dict[tuple[str, str], dict[str, object]] = {
     ("ui-delivery", "implement"): {"agent": "web-designer", "skills": ("web-experience-design", "frontend-design")},
-    ("writing", "implement"): {"agent": "docs-specialist", "skills": ("writing-fragments", "writing-beats", "writing-shape")},
-    ("writing", "verify"): {"skills": ("research",)},
     ("ui-delivery", "verify"): {"skills": ("web-design-guidelines", "accessibility-audit")},
     ("design-review", "audit"): {"agent": "web-designer", "skills": ("design-review", "web-design-guidelines", "accessibility-audit")},
     ("compliance-review", "audit"): {"agent": "compliance-reviewer", "skills": ("compliance-legal", "privacy-review")},
@@ -229,9 +203,6 @@ PHASE_OVERRIDES: dict[tuple[str, str], dict[str, object]] = {
     ("incident-response", "audit"): {"agent": "sre-operator", "skills": ("incident-debugging", "why", "how", "principle-fix-root-causes")},
     ("incident-response", "implement"): {"agent": "sre-operator", "skills": ("incident-debugging", "deployment", "why", "how")},
     ("self-review", "audit"): {"agent": "code-reviewer", "skills": ("code-review", "codebase-design", "blast-radius", "principle-test-behavior-not-implementation")},
-    ("content-delivery-lite", "implement"): {"agent": "docs-specialist", "skills": ("documentation-localization",)},
-    ("market-plan", "research"): {"agent": "market-researcher", "skills": ("research", "research-decision-room")},
-    ("deck", "plan"): {"agent": "market-researcher", "skills": ("slides",)},
     ("sprint-plan", "plan"): {"agent": "project-manager", "skills": ("wayfinder", "to-tickets", "figure-it-out", "swarm")},
     ("self-improve", "implement"): {"skills": ("engineering-quality", "reflect", "principle-encode-lessons-in-structure")},
     ("status-report", "report"): {"agent": "project-manager", "skills": ("plan-md",)},

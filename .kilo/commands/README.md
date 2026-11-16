@@ -2,21 +2,17 @@
 
 This project is **workflow-driven**. Commands own the process and **embed Skills For Real Engineers thinking and solutions into each step**. Because agents may skip skills, the workflow calls them **explicitly**.
 
-## List (16)
+## List (12)
 
 **Source of truth**: the "main skill chain" below is a summary. The procedure SSOT is each `commands/<name>.md` body.
 
 | command | purpose | main skill chain |
 |---|---|---|
 | `/delivery-lite` | **L1 code** — lightweight delivery via the ACTIVE.md state machine | `plan-md` (optional) → `implement` → `engineering-quality` → verify |
-| `/content-delivery-lite` | **L1 knowledge** — books, long docs, reports (CONTENT.md) | `plan-md` → `writing-for-agents` → `plan_content.py` |
-| `/writing` | Creative/article writing (explore → beats → shape); blog, essay, fiction, script drafts | `writing-fragments` → `writing-beats` → `writing-shape` |
 | `/ui-delivery` | UI delivery (ACTIVE + DESIGN) | `web-experience-design` → implement → audit |
 | `/feature-delivery` | Beyond L1, gate-heavy — discovery→design→implement→test→review | the body's skill chain (body wins over this table) |
 | `/design-review` | UI design review | `design-review` → `web-design-guidelines` → `accessibility-audit` |
-| `/research` | Research → decision | `research` → `research-decision-room` → `product-discovery` → `to-spec`/`plan-md` |
-| `/market-plan` | Market research → strategy → plan | `research` → `research-decision-room` → `product-discovery` → `marketing-psychology` → `plan-md` (`competitive-ads*` optional) |
-| `/deck` | Proposal / planning deck | `research`/`research-decision-room` → `marketing-psychology` → `slides` (Markdown/HTML; pptx optional) |
+| `/research` | Research → decision | `research` → `product-discovery` → `to-spec`/`plan-md` |
 | `/compliance-review` | Legal / privacy / security gate | `compliance-legal` → `privacy-review` → `security-review` → `release-readiness` |
 | `/release-review` | Pre-release check | `release-readiness` → `compliance-legal`/`privacy-review` → `security-review` → `documentation-localization` |
 | `/incident-response` | Incident response | `incident-debugging` → `engineering-quality` → `retro` |

@@ -3,12 +3,12 @@ description: Available skills (Skills For Real Engineers / OpenDesign / Kilo, Ma
 alwaysApply: true
 ---
 
-# Skills (63)
+# Skills (94)
 
 - **Selection**: if MCP is available, use `capabilities` / `skill_search` → `skill_get`. Otherwise use `@.kilo/CAPABILITIES.md` (generated, one-line each) and open **only the chosen** `@.kilo/skills/<name>/SKILL.md` (do not read everything).
 - **Context budget**: contract ≤500tok / catalog ≤1k / one skill ≤2–4KB / memory top-5.
 - Origins and licenses: `.kilo/skills/ATTRIBUTION.md` / `LICENSES/`
-- Breakdown: Skills For Real Engineers 25 (MIT) / Kilo 16 (MIT) / OpenDesign 10 (Apache-2.0) / this repo 12 (MIT)
+- Breakdown: Skills For Real Engineers 22 (MIT) / Kilo 16 (MIT) / OpenDesign 7 (Apache-2.0) / this repo 12 (MIT) / pstack 37 (MIT)
 
 ## Not set up (keep off the standard flow)
 
@@ -24,7 +24,7 @@ alwaysApply: true
 
 ## Market / business planning
 
-`research` → `research-decision-room` → `product-discovery` → `marketing-psychology` → `plan-md`. Brand: `brand-guidelines`. Decks: `slides` (`/deck`).
+`research` → `product-discovery` → `plan-md`. (Creative writing / marketing / decks live in the internal kit.)
 
 ## Legal / safety
 

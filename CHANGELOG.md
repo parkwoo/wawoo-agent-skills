@@ -11,6 +11,13 @@
 > （見出しは後続 commit、主に `c6d07f4` で追記された）ため **タグを付与しない**（誤った出所を作らない）。
 > 以降は `v0.6.0` から連番でタグ付けする。
 
+## [Unreleased]
+
+### Changed — move creative/marketing to the internal kit
+
+- Removed from the public kit (kept in the internal operational copy): skills `writing-fragments`, `writing-beats`, `writing-shape`, `science-writing`, `viral-hooks`, `marketing-psychology`, `brand-guidelines`, `slides`, `screenshots-marketing`, `research-decision-room`; workflows `writing`, `market-plan`, `deck`, `content-delivery-lite`; agent `market-researcher`. Public: skills 104→94, commands 16→12, agents 22→21.
+- Engineering plans/design docs are unaffected: `plan-md`, `architecture-decision`, `domain-modeling`, `engineering-quality`, `research`, `product-discovery`, `change-readiness`, `documentation-localization` stay. Routers/tests (`intent_catalog`, `intent_routes`, `intent_eval`, e2e) and docs updated accordingly.
+
 ## [0.7.0] - 2026-11-16
 
 ### Added — cross-tool adapters (OpenCode native, Cursor native)

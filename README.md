@@ -84,7 +84,7 @@ The kit's **MCP server and maintenance scripts run on Python 3 (standard library
 |---|---|
 | Skills | `.kilo/skills/<name>/SKILL.md` |
 | Agents | `.kilo/agents/<name>.md` |
-| Workflows | `.kilo/commands/<name>.md` (code L1: `/delivery-lite`, knowledge L1: `/content-delivery-lite`) |
+| Workflows | `.kilo/commands/<name>.md` (code L1: `/delivery-lite`) |
 | MCP server | `mcp/server.py` (stdio, stdlib only) |
 | Cursor rules | `.cursor/rules/*.mdc` |
 

@@ -82,7 +82,7 @@ wawoo-skills は、この「**能力はあるのに呼ばれない**」問題に
 |---|---|
 | Skills | `.kilo/skills/<name>/SKILL.md` |
 | Agents | `.kilo/agents/<name>.md` |
-| Workflows | `.kilo/commands/<name>.md`（コード L1: `/delivery-lite`、知識 L1: `/content-delivery-lite`） |
+| Workflows | `.kilo/commands/<name>.md`（コード L1: `/delivery-lite`） |
 | MCP サーバ | `mcp/server.py`（stdio・stdlib のみ） |
 | Cursor ルール | `.cursor/rules/*.mdc` |
 
