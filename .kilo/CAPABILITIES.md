@@ -4,7 +4,7 @@
 > Pick candidates from this catalog first and open only the `SKILL.md` you need (progressive disclosure).
 > `⚠️` marks items needing external setup (`scripts/readiness.json`). Not used in the standard flow.
 
-## Skills（67）
+## Skills（91）
 
 | name | ready | size | description | path |
 |---|---|---|---|---|
@@ -47,6 +47,30 @@
 | `performance-audit` | ✅ | 1.1KB | Measure and improve application or web performance using representative workloads, bottleneck evidence, and regression safeguards… | `.kilo/skills/performance-audit/SKILL.md` |
 | `plan-md` | ✅ | 1.7KB | Always save planning deliverables (fix plans, implementation plans, design direction, review responses) as a Markdown file. Use f… | `.kilo/skills/plan-md/SKILL.md` |
 | `pr` | ✅ | 4.1KB | "Use when writing a PR body." | `.kilo/skills/pr/SKILL.md` |
+| `principle-attack-the-premise` | ✅ | 1.9KB | "Apply when two or more fixes that share one premise have failed the same gate. Write the premise down and test it directly befor… | `.kilo/skills/principle-attack-the-premise/SKILL.md` |
+| `principle-boundary-discipline` | ✅ | 1.8KB | "Apply when wiring validation, error handling, or framework adapters. Concentrate guards at system boundaries (CLI, config, netwo… | `.kilo/skills/principle-boundary-discipline/SKILL.md` |
+| `principle-build-the-lever` | ✅ | 2.3KB | "Apply to any non-trivial work, not just bulk work: edits, migrations, analyses, checks. Build the tool that does it or proves it… | `.kilo/skills/principle-build-the-lever/SKILL.md` |
+| `principle-encode-lessons-in-structure` | ✅ | 0.5KB | "Apply when you catch yourself writing the same instruction a second time, or notice a recurring correction. Encode the rule as a… | `.kilo/skills/principle-encode-lessons-in-structure/SKILL.md` |
+| `principle-exhaust-the-design-space` | ✅ | 0.4KB | "Apply when facing a novel UI interaction or architectural decision with no precedent in the codebase. Build 2-3 competing protot… | `.kilo/skills/principle-exhaust-the-design-space/SKILL.md` |
+| `principle-experience-first` | ✅ | 1.2KB | "Apply when product, UX, or feature-scope tradeoffs come up. Choose user delight over implementation convenience; ship fewer poli… | `.kilo/skills/principle-experience-first/SKILL.md` |
+| `principle-explain-the-number` | ✅ | 1.9KB | "Apply before you measure, and before you trust, report, or act on a number you measured: a speedup, a regression, a throughput, … | `.kilo/skills/principle-explain-the-number/SKILL.md` |
+| `principle-fix-root-causes` | ✅ | 1.8KB | "Apply when debugging. Trace each symptom back to the first place the system went wrong and fix it there. A guard is a fix only w… | `.kilo/skills/principle-fix-root-causes/SKILL.md` |
+| `principle-foundational-thinking` | ✅ | 1.5KB | "Apply before writing logic: choosing core types and data structures, sequencing scaffold-vs-feature work, asking what concurrent… | `.kilo/skills/principle-foundational-thinking/SKILL.md` |
+| `principle-guard-the-context-window` | ✅ | 0.5KB | "Apply when context is filling up: large outputs, long files, repeated reads, fan-out planning. Route bulk to subagents; keep sum… | `.kilo/skills/principle-guard-the-context-window/SKILL.md` |
+| `principle-laziness-protocol` | ✅ | 0.5KB | "Apply when refactoring, evaluating diff size, or tempted to add abstractions, layers, or signal threading. Bias toward deletion … | `.kilo/skills/principle-laziness-protocol/SKILL.md` |
+| `principle-make-operations-idempotent` | ✅ | 1.8KB | "Apply when designing commands, lifecycle steps, or processing loops that run amid crashes, restarts, and retries. Converge to th… | `.kilo/skills/principle-make-operations-idempotent/SKILL.md` |
+| `principle-migrate-callers-then-delete-legacy-apis` | ✅ | 0.6KB | "Apply when introducing a new internal API while old callers still exist. Migrate callers and delete the old API in the same wave… | `.kilo/skills/principle-migrate-callers-then-delete-legacy-apis/SKILL.md` |
+| `principle-minimize-reader-load` | ✅ | 1.9KB | "Apply when reviewing or shaping code that's hard to trace. Count layers between question and answer, and hidden state in the rea… | `.kilo/skills/principle-minimize-reader-load/SKILL.md` |
+| `principle-model-the-domain` | ✅ | 1.8KB | "Apply when writing stateful logic, or when code branches a lot or repeats a shape assumption across files." | `.kilo/skills/principle-model-the-domain/SKILL.md` |
+| `principle-never-block-on-the-human` | ✅ | 0.9KB | "Apply when tempted to ask 'should I do X?' on reversible work." | `.kilo/skills/principle-never-block-on-the-human/SKILL.md` |
+| `principle-outcome-oriented-execution` | ✅ | 1.1KB | "Apply during planned rewrites and migrations with explicit phase boundaries. Converge on the target architecture; don't preserve… | `.kilo/skills/principle-outcome-oriented-execution/SKILL.md` |
+| `principle-prove-it-works` | ✅ | 1.3KB | "Apply after completing a task, before declaring done. Verify against the real artifact (run the feature, read the actual value, … | `.kilo/skills/principle-prove-it-works/SKILL.md` |
+| `principle-redesign-from-first-principles` | ✅ | 0.7KB | "Apply when integrating a new requirement into an existing design." | `.kilo/skills/principle-redesign-from-first-principles/SKILL.md` |
+| `principle-separate-before-serializing-shared-state` | ✅ | 1.5KB | "Apply when concurrent actors might write to the same file, branch, key, or state object. Eliminate the sharing first; serialize … | `.kilo/skills/principle-separate-before-serializing-shared-state/SKILL.md` |
+| `principle-sequence-verifiable-units` | ✅ | 1.7KB | "Apply to multi-step work (sweeps, migrations, runs of similar edits) and to how you stack commits and PRs. Break work into small… | `.kilo/skills/principle-sequence-verifiable-units/SKILL.md` |
+| `principle-subtract-before-you-add` | ✅ | 0.9KB | "Apply when sequencing an addition, refactor, or rewrite. Remove dead code, redundant validators, and stub references first, then… | `.kilo/skills/principle-subtract-before-you-add/SKILL.md` |
+| `principle-test-behavior-not-implementation` | ✅ | 2.6KB | "Apply when you write, change, or keep a test. Assert what the code's users can observe, so that the test fails when that behavio… | `.kilo/skills/principle-test-behavior-not-implementation/SKILL.md` |
+| `principle-type-system-discipline` | ✅ | 1.5KB | "Apply when designing types, reviewing a function signature, or writing code in any statically-typed language. Make illegal state… | `.kilo/skills/principle-type-system-discipline/SKILL.md` |
 | `privacy-review` | ✅ | 1.6KB | Review personal data (PII) flows, minimization, retention, masking, logging, and cross-border handling for a feature or service. … | `.kilo/skills/privacy-review/SKILL.md` |
 | `product-discovery` | ✅ | 1.1KB | Turn an ambiguous product or feature request into a scoped problem statement, user outcome, acceptance criteria, priorities, risk… | `.kilo/skills/product-discovery/SKILL.md` |
 | `prototype` | ✅ | 2.9KB | Build a throwaway prototype to answer a design question. Use when the user wants to sanity-check whether a state model or logic f… | `.kilo/skills/prototype/SKILL.md` |

@@ -41,6 +41,11 @@
 - **B2** `mcp/intent_calibrate.py` + `intent_eval.json`: grid-search the lexical threshold/margin, report precision/recall/abstain, print env values.
 - **B3** `mcp/intent_complexity.py`: deterministic complexity + `model_tier` on every schedule; local lexical layer is **fail-open** (errors fall through to the upstream LLM).
 
+### Added — pstack `principle-*` methodology (24 skills)
+
+- Absorbed pstack's engineering-principle skills (`principle-*`) from the standalone mirror (MIT, © 2026 Lauren Tan): apply-before rules for design, debugging, verification, context management, concurrency, and scope. `LICENSES/pstack-MIT.txt`; ATTRIBUTION updated. Skills 67 → 91.
+- Did **not** absorb the `t3-pstack` port (T3 Code wiring + mixed Cursor/thermos licenses); only its port/sync methodology is noted (see `repo-docs/wawoo-skills/plans/PSTACK-ABSORPTION-PLAN.md`).
+
 ### Changed — public kit English-only + self-contained docs
 
 - Localized → English: `.kilo/skills/README.md`, `.kilo/skills/ATTRIBUTION.md`, `reference-design-contract` (`ja_name` / JA triggers / i18n example), `web-design-guidelines`, `science-writing`, `.kilo/commands/writing.md`; `scripts/*.py` and `mcp/*.py` comments, docstrings and messages; OpenDesign `NOTICE.txt` (7). Fixed the `validate_assets` entry marker (`**入口**` → `**Entry**`).

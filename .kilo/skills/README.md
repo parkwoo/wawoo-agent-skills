@@ -1,4 +1,4 @@
-# Skills (67)
+# Skills (91)
 
 Agent Skill format (`<name>/SKILL.md`). Shared by Kilo / Cursor. **Origins and licenses: [`ATTRIBUTION.md`](./ATTRIBUTION.md)**.
 
@@ -10,6 +10,7 @@ Agent Skill format (`<name>/SKILL.md`). Shared by Kilo / Cursor. **Origins and l
 | **Kilo built-in** | 16 | MIT (frontmatter) | Quality, design, safety (`architecture-decision`, `engineering-quality`, `test-engineering`, `security-review`, ...) |
 | **OpenDesign** | 10 | Apache-2.0 | **Web/app design** (`design-brief`, `reference-design-contract`, `design-md`, `frontend-design`, `web-design-guidelines`, `design-review`, ...) |
 | **This repository** | 16 | MIT | `deployment`, `compliance-legal`, `privacy-review`, `changelog`, `memory`, `slides`, `screenshots-marketing`, `plan-md`, `language-policy`, `publication-boundary`, `science-writing`, `viral-hooks`, `fal-gen`, `context-compression`, `data-egress-guard`, `content-guardrail` |
+| **pstack** (Lauren Tan / Poteto) | 24 | MIT | `principle-*` engineering-principle skills (design, debugging, verification, context, concurrency) |
 
 ## By category
 
@@ -21,6 +22,7 @@ Agent Skill format (`<name>/SKILL.md`). Shared by Kilo / Cursor. **Origins and l
 - **Operations**: `deployment`, `incident-debugging`, `dependency-upgrade`, `database-change-safety`, `pdca-cycle`
 - **Memory / versioning**: `memory`, `changelog`
 - **Context / RAG**: `context-compression` (offline, deterministic context cleaning)
+- **Engineering principles**: `principle-*` (24) — apply-before rules for design, debugging, verification, context, and concurrency
 - **Planning**: `plan-md`
 
 ## Representative workflows
