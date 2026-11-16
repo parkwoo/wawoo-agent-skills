@@ -27,7 +27,7 @@
 | `dependency-upgrade` | ✅ | 1.2KB | Safely evaluate, apply, and verify software dependency, runtime, container-image, or toolchain upgrades with compatibility, secur… | `.kilo/skills/dependency-upgrade/SKILL.md` |
 | `deployment` | ✅ | 1.2KB | Plan, execute, and verify a deployment or release (Docker Compose, image tagging, environment, migrations, health checks, rollbac… | `.kilo/skills/deployment/SKILL.md` |
 | `design-brief` | ✅ | 1.7KB | Parse a structured design brief written in I-Lang protocol format into a concrete design spec. Eliminates ambiguity from vague re… | `.kilo/skills/design-brief/SKILL.md` |
-| `design-md` | ✅ | 1.1KB | Create and manage DESIGN.md files. Useful for capturing design direction, tokens, and visual rules in a single source of truth. | `.kilo/skills/design-md/SKILL.md` |
+| `design-md` | ✅ | 2.9KB | Create and maintain a DESIGN.md — a plain-text design-system document (Google Stitch format) that design and coding agents read t… | `.kilo/skills/design-md/SKILL.md` |
 | `design-review` | ✅ | 1.2KB | Designer Who Codes: visual audit then fixes with atomic commits and before/after screenshots. Useful for tightening shipped UI be… | `.kilo/skills/design-review/SKILL.md` |
 | `diagnosing-bugs` | ✅ | 8.5KB | Diagnosis loop for hard bugs and performance regressions. Use when the user says "diagnose"/"debug this", or reports something br… | `.kilo/skills/diagnosing-bugs/SKILL.md` |
 | `documentation-localization` | ✅ | 1.7KB | Write, review, and synchronize technical documentation and localized content for factual accuracy, usable instructions, links, me… | `.kilo/skills/documentation-localization/SKILL.md` |

@@ -47,6 +47,11 @@
 - Batch 2: absorbed `blast-radius`, `create-verification-skill`, `maintain-verification-skill`, `show-me-your-work` (generalized harness references); **skipped `statechart`** (heavy TLA+/Node/Java toolchain) and the `t3-pstack` port.
 - Did **not** absorb the `t3-pstack` port (T3 Code wiring + mixed Cursor/thermos licenses); only its port/sync methodology is noted (see `repo-docs/wawoo-skills/plans/PSTACK-ABSORPTION-PLAN.md`).
 
+### Changed — `design-md` made actionable (Google Stitch DESIGN.md format)
+
+- `design-md` was a catalogue stub pointing at upstream; it now carries the **Google Stitch DESIGN.md format** as an actionable skill: 9-section structure, workflow, tips, `references/stitch-format.md`, and `templates/DESIGN.template.md`.
+- Absorbed the **format/spec only** — not `DESIGN.md` files extracted from third-party brand sites (trademark/trade-dress/uncertain-license risk).
+
 ### Changed — public kit English-only + self-contained docs
 
 - Localized → English: `.kilo/skills/README.md`, `.kilo/skills/ATTRIBUTION.md`, `reference-design-contract` (`ja_name` / JA triggers / i18n example), `web-design-guidelines`, `science-writing`, `.kilo/commands/writing.md`; `scripts/*.py` and `mcp/*.py` comments, docstrings and messages; OpenDesign `NOTICE.txt` (7). Fixed the `validate_assets` entry marker (`**入口**` → `**Entry**`).

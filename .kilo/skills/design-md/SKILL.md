@@ -1,42 +1,60 @@
 ---
 name: design-md
 description: |
-  Create and manage DESIGN.md files. Useful for capturing design direction, tokens, and visual rules in a single source of truth.
+  Create and maintain a DESIGN.md — a plain-text design-system document (Google Stitch format) that design and coding agents read to generate consistent UI. Covers theme, color roles, typography, components, layout, depth, do/don't, responsive, and an agent prompt guide.
 triggers:
   - "design.md"
   - "design doc"
   - "design tokens doc"
   - "visual rules doc"
+  - "design system document"
 od:
   mode: design-system
   category: design-systems
   upstream: "https://github.com/google-labs-code/skills"
 ---
 
-# design-md
+# design-md — DESIGN.md (design-system document)
 
-> Curated from Google Labs (Stitch).
+> Format: **Google Stitch DESIGN.md** (<https://stitch.withgoogle.com/docs/design-md/specification>). Curated from Google Labs.
 
-## What it does
+`DESIGN.md` does for **look & feel** what `AGENTS.md` does for **how to build**: one Markdown file in the project root that design/coding agents (Stitch, Claude, Cursor, Kilo, OpenCode) read to keep UI consistent. No JSON, no special tooling.
 
-Create and manage DESIGN.md files. Useful for capturing design direction, tokens, and visual rules in a single source of truth.
+## When to use
 
-## Source
+- Starting a UI/product with a real visual direction.
+- Onboarding an agent to an existing design system.
+- Turning taste/references into a durable spec (pair with `reference-design-contract` for evidence + implementation handoff).
 
-- Upstream: https://github.com/google-labs-code/skills
-- Category: `design-systems`
+## Format (9 sections)
 
-## How to use
+1. **Visual Theme & Atmosphere** — mood, density, design philosophy.
+2. **Color Palette & Roles** — semantic name + hex + functional role.
+3. **Typography** — families + full hierarchy table (size/weight/line-height).
+4. **Components** — buttons, cards, inputs, nav, with states.
+5. **Layout & Spacing** — spacing scale, grid, whitespace rules.
+6. **Depth & Elevation** — surface hierarchy, shadows.
+7. **Do's and Don'ts** — guardrails and anti-patterns.
+8. **Responsive Behavior** — breakpoints, touch targets, collapse strategy.
+9. **Agent Prompt Guide** — quick color/type reference + ready-to-use prompts.
 
-This catalogue entry advertises the skill in OpenDesign so the agent
-discovers it during planning. To run the full upstream workflow with
-its original assets, scripts, and references, install the upstream
-bundle into your active agent's skills directory:
+## Workflow
 
-```bash
-# Inspect the upstream README for exact paths
-open https://github.com/google-labs-code/skills
-```
+1. Gather evidence (existing `DESIGN.md`, brand docs, screenshots, URLs). Do not invent brand facts.
+2. Pick **one** coherent stance; don't mix unrelated moodboards.
+3. Fill `templates/DESIGN.template.md` — all 9 sections, **concrete values > adjectives**.
+4. Place at the project root as `DESIGN.md`; keep it in version control.
+5. Maintain: update on token/component changes; keep colors as hex + role.
 
-Then ask the agent to invoke this skill by name (`design-md`) or with
-one of the trigger phrases listed in this skill's frontmatter.
+## Tips
+
+- Prefer constraints ("one warm accent; no purple/blue glow") over "premium"/"modern".
+- Every color, type, and spacing value must be concrete and reusable.
+- **Do not copy a brand's proprietary assets, logo, or exact layout** — capture controllable qualities only (see `reference-design-contract`).
+- Keep it short enough to fit context; long detail can live in `references/`.
+
+## References
+
+- `references/stitch-format.md` — section-by-section notes + official links.
+- `templates/DESIGN.template.md` — 9-section skeleton.
+- Pair: `reference-design-contract` (evidence → DESIGN.md + handoff), `design-review`, `web-design-guidelines`, `accessibility-audit`.
