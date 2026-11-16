@@ -389,16 +389,21 @@ def do_compress_context(args: dict) -> dict:
     return tool_result(json.dumps(engine.compress(turns), ensure_ascii=False))
 
 
-def _load_pii_module():
-    """Load the data-egress-guard module (stdlib only; registered for dataclasses)."""
-    import importlib.util
+_PII_MOD = None
 
-    path = KILO / "skills" / "data-egress-guard" / "mask_pii.py"
-    spec = importlib.util.spec_from_file_location("wawoo_pii_masker", path)
-    mod = importlib.util.module_from_spec(spec)
-    sys.modules["wawoo_pii_masker"] = mod
-    spec.loader.exec_module(mod)
-    return mod
+
+def _load_pii_module():
+    """Load (and cache) the data-egress-guard module."""
+    global _PII_MOD
+    if _PII_MOD is None:
+        import importlib.util
+        path = KILO / "skills" / "data-egress-guard" / "mask_pii.py"
+        spec = importlib.util.spec_from_file_location("wawoo_pii_masker", path)
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules["wawoo_pii_masker"] = mod
+        spec.loader.exec_module(mod)
+        _PII_MOD = mod
+    return _PII_MOD
 
 
 def _load_pii_masker():
@@ -433,16 +438,21 @@ def do_mask_pii(args: dict) -> dict:
     return tool_result(json.dumps(masker.mask(str(args.get("text", ""))).to_dict(), ensure_ascii=False))
 
 
-def _load_guard_module():
-    """Load the content-guardrail module (stdlib only)."""
-    import importlib.util
+_GUARD_MOD = None
 
-    path = KILO / "skills" / "content-guardrail" / "guard.py"
-    spec = importlib.util.spec_from_file_location("wawoo_content_guard", path)
-    mod = importlib.util.module_from_spec(spec)
-    sys.modules["wawoo_content_guard"] = mod
-    spec.loader.exec_module(mod)
-    return mod
+
+def _load_guard_module():
+    """Load (and cache) the content-guardrail module."""
+    global _GUARD_MOD
+    if _GUARD_MOD is None:
+        import importlib.util
+        path = KILO / "skills" / "content-guardrail" / "guard.py"
+        spec = importlib.util.spec_from_file_location("wawoo_content_guard", path)
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules["wawoo_content_guard"] = mod
+        spec.loader.exec_module(mod)
+        _GUARD_MOD = mod
+    return _GUARD_MOD
 
 
 def do_guard_content(args: dict) -> dict:

@@ -23,6 +23,10 @@ _GATE_EXEMPT: frozenset[str] = frozenset(
         "workflow_clear",
         "delegate_subtask",
         "steer_task",
+        "compress_context",
+        "mask_pii",
+        "redact_infra",
+        "guard_content",
     }
 )
 

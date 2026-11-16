@@ -17,6 +17,10 @@ MCP_TOOL_NAMES: frozenset[str] = frozenset(
         "evidence_check",
         "interpret_intent",
         "route_task",
+        "compress_context",
+        "mask_pii",
+        "redact_infra",
+        "guard_content",
     }
 )
 
@@ -30,6 +34,10 @@ _MCP_READ: frozenset[str] = frozenset(
         "memory_recall",
         "interpret_intent",
         "route_task",
+        "compress_context",
+        "mask_pii",
+        "redact_infra",
+        "guard_content",
     }
 )
 
@@ -46,6 +54,10 @@ _MCP_AUDIT: frozenset[str] = frozenset(
         "evidence_check",
         "interpret_intent",
         "route_task",
+        "compress_context",
+        "mask_pii",
+        "redact_infra",
+        "guard_content",
     }
 )
 
@@ -221,6 +233,11 @@ def phases_for(workflow_id: str) -> tuple[Phase, ...]:
         if ov:
             import dataclasses
 
+            # Overrides are ADDITIVE: keep the base phase skills (privacy/security/
+            # context/engineering) and append the workflow-specific ones.
+            if "skills" in ov:
+                merged = tuple(dict.fromkeys(tuple(phase.skills) + tuple(ov["skills"])))
+                ov = {**ov, "skills": merged}
             phase = dataclasses.replace(phase, **ov)  # type: ignore[arg-type]
         out.append(phase)
     return tuple(out)
