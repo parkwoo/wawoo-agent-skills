@@ -24,6 +24,11 @@
 - New skill `.kilo/skills/context-compression` (pure Python, deterministic, **no LLM/network**): heuristic filters + fuzzy dedup + information-density scoring. Reference `compress.py` (library + CLI + `--selftest`) for offline context cleaning and RAG post-processing. Skills 64 → 65.
 - New MCP tool **`compress_context`** (`mcp/server.py`) so Kilo / Cursor / OpenCode can clean context in one call; e2e `mcp_compress_context`. OpenCode can run it automatically per model call via the `experimental.chat.messages.transform` plugin hook.
 
+### Added — `data-egress-guard` skill + `mask_pii` MCP tool
+
+- New skill `.kilo/skills/data-egress-guard` (pure Python, deterministic, **no model/network**): masks PII/secrets (email, phone, URL, IP, MAC, card, IBAN, JWT, AWS/GitHub/API tokens, PEM keys; optional JP identifiers) with numbered placeholders + a reversible mapping; fail-closed by default, `--strict` uses checksums. Mechanism inspired by Radlab LLM Router's masker pipeline (no bundled ML).
+- New MCP tool **`mask_pii`** (`mcp/server.py`): mask/unmask single text or batches with `locale` / `rules` / `strict`; e2e `mcp_mask_pii`. Skills 65 → 66.
+
 ### Changed — public kit English-only + self-contained docs
 
 - Localized → English: `.kilo/skills/README.md`, `.kilo/skills/ATTRIBUTION.md`, `reference-design-contract` (`ja_name` / JA triggers / i18n example), `web-design-guidelines`, `science-writing`, `.kilo/commands/writing.md`; `scripts/*.py` and `mcp/*.py` comments, docstrings and messages; OpenDesign `NOTICE.txt` (7). Fixed the `validate_assets` entry marker (`**入口**` → `**Entry**`).

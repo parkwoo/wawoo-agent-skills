@@ -8,7 +8,7 @@ Transport: newline-delimited JSON-RPC 2.0 over stdio.
 Tools:
   capabilities, skill_search, skill_get, workflow_get, agent_get,
   memory_recall, memory_save, evidence_check,
-  interpret_intent, route_task, workflow_clear, delegate_subtask, compress_context
+  interpret_intent, route_task, workflow_clear, delegate_subtask, compress_context, mask_pii
 """
 from __future__ import annotations
 
@@ -389,6 +389,40 @@ def do_compress_context(args: dict) -> dict:
     return tool_result(json.dumps(engine.compress(turns), ensure_ascii=False))
 
 
+def _load_pii_masker():
+    """Load the data-egress-guard masker from the skill (stdlib only)."""
+    import importlib.util
+
+    path = KILO / "skills" / "data-egress-guard" / "mask_pii.py"
+    spec = importlib.util.spec_from_file_location("wawoo_pii_masker", path)
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules["wawoo_pii_masker"] = mod
+    spec.loader.exec_module(mod)
+    return mod.PiiMasker
+
+
+def do_mask_pii(args: dict) -> dict:
+    masker_cls = _load_pii_masker()
+    locales = [x.strip() for x in str(args.get("locale", "generic")).split(",") if x.strip()]
+    rules = [x.strip() for x in str(args.get("rules", "")).split(",") if x.strip()] or None
+    masker = masker_cls(locales=locales, rules=rules, strict=bool(args.get("strict", False)))
+
+    if args.get("unmask"):
+        mapping = args.get("mapping") or {}
+        texts = args.get("texts")
+        if isinstance(texts, list):
+            out = [masker.unmask(str(t), mapping) for t in texts]
+            return tool_result(json.dumps({"texts": out}, ensure_ascii=False))
+        return tool_result(json.dumps({"text": masker.unmask(str(args.get("text", "")), mapping)}, ensure_ascii=False))
+
+    texts = args.get("texts")
+    if isinstance(texts, list):
+        return tool_result(
+            json.dumps({"results": [m.to_dict() for m in masker.mask_many([str(t) for t in texts])]}, ensure_ascii=False)
+        )
+    return tool_result(json.dumps(masker.mask(str(args.get("text", ""))).to_dict(), ensure_ascii=False))
+
+
 TOOLS = [
     ("capabilities", "List skills/agents/workflows with one-line descriptions.", {"type": "object", "properties": {"ready_only": {"type": "boolean"}}}),
     ("skill_search", "Search skills/agents/workflows by query.", {"type": "object", "properties": {"query": {"type": "string"}, "limit": {"type": "integer"}}, "required": ["query"]}),
@@ -509,6 +543,22 @@ TOOLS = [
             },
         },
     ),
+    (
+        "mask_pii",
+        "Deterministically mask PII/secrets before sending text to an external LLM/API (no model/network). Replaces spans with numbered placeholders (e.g. {{EMAIL_1}}) and returns a reversible `mapping`; pass `unmask:true` + `mapping` to restore. locale: generic|jp; `strict` requires checksums.",
+        {
+            "type": "object",
+            "properties": {
+                "text": {"type": "string"},
+                "texts": {"type": "array", "items": {"type": "string"}},
+                "locale": {"type": "string"},
+                "rules": {"type": "string"},
+                "strict": {"type": "boolean"},
+                "unmask": {"type": "boolean"},
+                "mapping": {"type": "object"},
+            },
+        },
+    ),
 ]
 
 HANDLERS = {
@@ -526,6 +576,7 @@ HANDLERS = {
     "delegate_subtask": do_delegate_subtask,
     "steer_task": do_steer_task,
     "compress_context": do_compress_context,
+    "mask_pii": do_mask_pii,
 }
 
 
