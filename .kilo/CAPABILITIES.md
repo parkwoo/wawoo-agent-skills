@@ -18,7 +18,7 @@
 | `code-review` | ✅ | 6.5KB | "Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes: Standards (does the code follow this… | `.kilo/skills/code-review/SKILL.md` |
 | `codebase-design` | ✅ | 6.3KB | Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module's interface, find deepening o… | `.kilo/skills/codebase-design/SKILL.md` |
 | `compliance-legal` | ✅ | 1.8KB | Review OSS license obligations (MIT/Apache-2.0 attribution, NOTICE), SBOM, and product/service legal checklists (terms, privacy, … | `.kilo/skills/compliance-legal/SKILL.md` |
-| `context-compression` | ✅ | 3.5KB | Deterministically compress and clean multi-turn conversation context with pure Python (no LLM, no network) — drop stale turns, de… | `.kilo/skills/context-compression/SKILL.md` |
+| `context-compression` | ✅ | 3.9KB | Deterministically compress and clean multi-turn conversation context with pure Python (no LLM, no network) — drop stale turns, de… | `.kilo/skills/context-compression/SKILL.md` |
 | `database-change-safety` | ✅ | 1.2KB | Plan, implement, and review schema changes, data migrations, backfills, and cleanup with integrity, availability, observability, … | `.kilo/skills/database-change-safety/SKILL.md` |
 | `dependency-upgrade` | ✅ | 1.2KB | Safely evaluate, apply, and verify software dependency, runtime, container-image, or toolchain upgrades with compatibility, secur… | `.kilo/skills/dependency-upgrade/SKILL.md` |
 | `deployment` | ✅ | 1.2KB | Plan, execute, and verify a deployment or release (Docker Compose, image tagging, environment, migrations, health checks, rollbac… | `.kilo/skills/deployment/SKILL.md` |

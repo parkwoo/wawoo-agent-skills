@@ -113,6 +113,8 @@ python3 scripts/e2e_flows.py   # public smoke (contract/E2E)
 ```
 **Catalog tools**: `capabilities`, `skill_search`, `skill_get`, `workflow_get`, `agent_get`, `memory_recall`, `memory_save`, `evidence_check`.
 
+**Context**: `compress_context` — deterministic, offline cleaning/compression of conversation turns (heuristic filters + fuzzy dedup + density budget; no LLM, no network). See `.kilo/skills/context-compression/SKILL.md`.
+
 **Intent routing** (optional but recommended): `interpret_intent` → `workflow_get` → … → `workflow_clear`. Subtasks: `delegate_subtask`.
 
 - Public guide: **[docs/INTENT-ROUTING.md](INTENT-ROUTING.md)** (L0–L3, score JSON, tool gate)
