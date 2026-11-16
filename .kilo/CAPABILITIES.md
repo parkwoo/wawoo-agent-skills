@@ -4,7 +4,7 @@
 > Pick candidates from this catalog first and open only the `SKILL.md` you need (progressive disclosure).
 > `⚠️` marks items needing external setup (`scripts/readiness.json`). Not used in the standard flow.
 
-## Skills（100）
+## Skills（104）
 
 | name | ready | size | description | path |
 |---|---|---|---|---|
@@ -40,6 +40,7 @@
 | `grill-with-docs` | ✅ | 0.2KB | A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go. | `.kilo/skills/grill-with-docs/SKILL.md` |
 | `grilling` | ✅ | 2.0KB | Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any '… | `.kilo/skills/grilling/SKILL.md` |
 | `handoff` | ✅ | 0.9KB | Compact the current conversation into a handoff document for another agent to pick up. | `.kilo/skills/handoff/SKILL.md` |
+| `how` | ✅ | 2.5KB | "Use for \"how does X work\", code walkthroughs before changing something, and placement / ownership / layering questions (\"wher… | `.kilo/skills/how/SKILL.md` |
 | `imagegen-frontend-mobile` | ✅ | 2.2KB | A skill for high-quality image concepts for mobile apps. Provides prompts and visual direction for iOS/Android screens and flows … | `.kilo/skills/imagegen-frontend-mobile/SKILL.md` |
 | `implement` | ✅ | 0.6KB | "Implement a piece of work based on a spec or set of tickets." | `.kilo/skills/implement/SKILL.md` |
 | `implement-spec` | ✅ | 2.7KB | "Implement the result of /to-spec and /to-tickets in code." | `.kilo/skills/implement-spec/SKILL.md` |
@@ -81,7 +82,9 @@
 | `product-discovery` | ✅ | 1.1KB | Turn an ambiguous product or feature request into a scoped problem statement, user outcome, acceptance criteria, priorities, risk… | `.kilo/skills/product-discovery/SKILL.md` |
 | `prototype` | ✅ | 2.9KB | Build a throwaway prototype to answer a design question. Use when the user wants to sanity-check whether a state model or logic f… | `.kilo/skills/prototype/SKILL.md` |
 | `publication-boundary` | ✅ | 1.6KB | Keep internal development materials out of the public tree of an open-source repo. Use when adding docs or scripts, or auditing w… | `.kilo/skills/publication-boundary/SKILL.md` |
+| `recall` | ✅ | 6.1KB | "Reconstruct your recent working context from your own chat history, live state, and the shared record (user reports, prior fixes… | `.kilo/skills/recall/SKILL.md` |
 | `reference-design-contract` | ✅ | 5.0KB | Turn vague taste, screenshots, URLs, product notes, or "make it feel like this" references into a grounded DESIGN.md plus an impl… | `.kilo/skills/reference-design-contract/SKILL.md` |
+| `reflect` | ✅ | 6.0KB | Spawn three parallel review subagents over the active transcript, surface learnings, and route each to a concrete edit on an exis… | `.kilo/skills/reflect/SKILL.md` |
 | `release-readiness` | ✅ | 2.0KB | Prepare and review a software release for versioning, legal files, changelog accuracy, tags, release notes, deployment checks, an… | `.kilo/skills/release-readiness/SKILL.md` |
 | `research` | ✅ | 0.8KB | Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. Use when the u… | `.kilo/skills/research/SKILL.md` |
 | `research-decision-room` | ✅ | 6.1KB | Turn messy user research notes, interviews, support tickets, surveys, and product context into an evidence-backed decision room: … | `.kilo/skills/research-decision-room/SKILL.md` |
@@ -104,6 +107,7 @@
 | `wayfinder` | ✅ | 0.9KB | Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision tickets on your issue tracker, and r… | `.kilo/skills/wayfinder/SKILL.md` |
 | `web-design-guidelines` | ✅ | 2.4KB | Review UI code for Web Interface Guidelines compliance by the Vercel engineering team. Covers layout, typography, color, motion, … | `.kilo/skills/web-design-guidelines/SKILL.md` |
 | `web-experience-design` | ✅ | 3.5KB | Design, implement, audit, and hand off web interfaces with evidence for user tasks, visual hierarchy, responsive behavior, access… | `.kilo/skills/web-experience-design/SKILL.md` |
+| `why` | ✅ | 8.9KB | "Use for 'why does X work this way', 'why we picked Y', design rationale, regressions, postmortems, or data-backed thresholds. Di… | `.kilo/skills/why/SKILL.md` |
 | `writing-beats` | ✅ | 4.8KB | Exploit stage of writing: assemble raw material into a journey of beats, grounding each term before a beat relies on it. Use afte… | `.kilo/skills/writing-beats/SKILL.md` |
 | `writing-for-agents` | ✅ | 0.5KB | Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md or CLAUDE.md. | `.kilo/skills/writing-for-agents/SKILL.md` |
 | `writing-fragments` | ✅ | 3.6KB | "Explore stage of writing: mine raw fragments from the conversation without imposing structure. Use to widen what could be writte… | `.kilo/skills/writing-fragments/SKILL.md` |
