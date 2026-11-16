@@ -319,6 +319,24 @@ def test_mcp_mask_pii(r: Runner) -> None:
     r.run("mcp_mask_pii", _)
 
 
+def test_local_lexical_router(r: Runner) -> None:
+    def _():
+        import sys
+
+        sys.path.insert(0, str(ROOT / "mcp"))
+        import intent_lexical
+
+        got = intent_lexical.local_lexical_route("run a retrospective and improve our process")
+        assert got is not None and got.workflow == "self-improve", got
+        got2 = intent_lexical.local_lexical_route("prepare a pitch deck for the client")
+        assert got2 is not None and got2.workflow == "deck", got2
+        # abstain on short / vague input
+        assert intent_lexical.local_lexical_route("hi") is None
+        assert intent_lexical.local_lexical_route("do something") is None
+
+    r.run("local_lexical_router", _)
+
+
 def test_plan_active_cli(r: Runner) -> None:
     def _():
         proc = subprocess.run(
@@ -684,6 +702,7 @@ def main() -> int:
         test_mcp_evidence_check,
         test_mcp_compress_context,
         test_mcp_mask_pii,
+        test_local_lexical_router,
         test_plan_active_cli,
         test_active_blocked_and_duplicate,
         test_mcp_memory_recall_repo,

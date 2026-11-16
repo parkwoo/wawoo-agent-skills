@@ -17,6 +17,7 @@ from intent_catalog import (
 from intent_commands import match_slash_route
 from intent_learn_queue import enqueue_hit, enqueue_promote, flush, reset_learn_queue
 from intent_learned_store import IntentLearnedStore, default_db_path
+from intent_lexical import local_lexical_route
 from intent_seed import seed_learned_store
 from intent_upstream import (
     UpstreamScoring,
@@ -28,7 +29,7 @@ from intent_upstream import (
 UpstreamClassification = UpstreamScoring
 
 Confidence = Literal["high", "medium", "low"]
-Source = Literal["explicit", "learned", "upstream", "pending", "fallback"]
+Source = Literal["explicit", "learned", "upstream", "local", "pending", "fallback"]
 RouteLayer = Literal["L0", "L1", "L2"]
 
 _store: IntentLearnedStore | None = None
@@ -262,6 +263,30 @@ def interpret_intent_payload(
         )
         return {"ok": True, "needs_upstream": False, "needs_scoring": False, "route_layer": "L1", "schedule": sched.to_dict()}
 
+    if os.environ.get("WAWOO_INTENT_LEXICAL", "1").strip().lower() not in {"0", "false", "off", "no"}:
+        lex = local_lexical_route(raw)
+        if lex:
+            confidence: Confidence = "medium" if lex.score >= 0.55 else "low"
+            sched = _schedule_from_workflow(
+                raw,
+                lex.workflow,
+                intent_id=intent_id or "local-lexical",
+                task_type="lexical",
+                confidence=confidence,
+                source="local",
+                route_layer="L2",
+                route_subsource="local_lexical",
+                score=lex.score,
+                trace=[f"L2:local:{lex.workflow}:{lex.score:.2f}:cos={lex.cosine:.2f}:margin={lex.margin:.2f}"],
+            )
+            return {
+                "ok": True,
+                "needs_upstream": False,
+                "needs_scoring": False,
+                "route_layer": "L2",
+                "schedule": sched.to_dict(),
+            }
+
     prompt = upstream_score_prompt(raw)
     return {
         "ok": True,
@@ -314,7 +339,7 @@ def format_needs_scoring_text(payload: dict[str, Any]) -> str:
     lines = [
         "NEEDS SCORING (L2)",
         "=" * 50,
-        "No L1 learned route matched. Have the upstream LLM read the full input and assign a workflow fitness score.",
+        "No L1 learned or local lexical route matched. Have the upstream LLM read the full input and assign a workflow fitness score.",
         "Do not use thinking mode; return one JSON line. Then pass scoring to interpret_intent.",
         "learn=true only on re-applying an upstream decision (optional).",
         "L3 delegation happens after the workflow starts (host agent / Task).",

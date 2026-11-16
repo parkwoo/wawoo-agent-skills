@@ -29,6 +29,11 @@
 - New skill `.kilo/skills/data-egress-guard` (pure Python, deterministic, **no model/network**): masks PII/secrets (email, phone, URL, IP, MAC, card, IBAN, JWT, AWS/GitHub/API tokens, PEM keys; optional JP identifiers) with numbered placeholders + a reversible mapping; fail-closed by default, `--strict` uses checksums. Mechanism inspired by Radlab LLM Router's masker pipeline (no bundled ML).
 - New MCP tool **`mask_pii`** (`mcp/server.py`): mask/unmask single text or batches with `locale` / `rules` / `strict`; e2e `mcp_mask_pii`. Skills 65 → 66.
 
+### Added — local lexical intent layer (zero-token)
+
+- `interpret_intent` gains an **L1.5 local lexical** layer between learned and the upstream LLM: tf-idf cosine against per-workflow utterance examples (`mcp/intent_routes.json`), adopted only when the cosine and its margin clear a threshold (`source: "local"`), otherwise it **abstains** to L2. Inspired by Semantic Router (local, threshold, abstain) and Radlab's deterministic-first routing; stdlib only, no embeddings.
+- Env: `WAWOO_INTENT_LEXICAL=0` disables; `WAWOO_INTENT_LEXICAL_THRESHOLD` / `_MARGIN` tune. e2e `local_lexical_router`; `docs/INTENT-ROUTING(.ja)` updated.
+
 ### Changed — public kit English-only + self-contained docs
 
 - Localized → English: `.kilo/skills/README.md`, `.kilo/skills/ATTRIBUTION.md`, `reference-design-contract` (`ja_name` / JA triggers / i18n example), `web-design-guidelines`, `science-writing`, `.kilo/commands/writing.md`; `scripts/*.py` and `mcp/*.py` comments, docstrings and messages; OpenDesign `NOTICE.txt` (7). Fixed the `validate_assets` entry marker (`**入口**` → `**Entry**`).
