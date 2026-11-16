@@ -4,7 +4,7 @@
 > Pick candidates from this catalog first and open only the `SKILL.md` you need (progressive disclosure).
 > `⚠️` marks items needing external setup (`scripts/readiness.json`). Not used in the standard flow.
 
-## Skills（91）
+## Skills（95）
 
 | name | ready | size | description | path |
 |---|---|---|---|---|
@@ -12,6 +12,7 @@
 | `api-contract-design` | ✅ | 1.1KB | Design or review HTTP, RPC, event, or internal API contracts for clear inputs, outputs, errors, authentication, compatibility, an… | `.kilo/skills/api-contract-design/SKILL.md` |
 | `architecture-decision` | ✅ | 1.1KB | Evaluate software architecture choices, dependencies, interfaces, constraints, and tradeoffs, then produce a concise decision rec… | `.kilo/skills/architecture-decision/SKILL.md` |
 | `ask-matt` | ✅ | 1.7KB | Ask which skill or flow fits your situation. A router over the skills in this repo. | `.kilo/skills/ask-matt/SKILL.md` |
+| `blast-radius` | ✅ | 3.8KB | "Find what a change could break somewhere else before it ships, beyond the diff, and prove the one fact it's safe because of by r… | `.kilo/skills/blast-radius/SKILL.md` |
 | `brand-guidelines` | ✅ | 1.4KB | Apply Anthropic's official brand colors and typography to artifacts for consistent visual identity and professional design standa… | `.kilo/skills/brand-guidelines/SKILL.md` |
 | `change-readiness` | ✅ | 2.4KB | Perform an evidence-based pre-handoff review of a non-trivial software change before requesting human or external audit. Use afte… | `.kilo/skills/change-readiness/SKILL.md` |
 | `changelog` | ✅ | 1.1KB | Generate and maintain user-facing changelog/release notes from git history (Conventional Commits) and keep version/tags consisten… | `.kilo/skills/changelog/SKILL.md` |
@@ -20,6 +21,7 @@
 | `compliance-legal` | ✅ | 1.8KB | Review OSS license obligations (MIT/Apache-2.0 attribution, NOTICE), SBOM, and product/service legal checklists (terms, privacy, … | `.kilo/skills/compliance-legal/SKILL.md` |
 | `content-guardrail` | ✅ | 2.4KB | Deterministic policy-as-data content gate (no model, no network) — checks text against deny terms, named regexes, built-in secret… | `.kilo/skills/content-guardrail/SKILL.md` |
 | `context-compression` | ✅ | 3.9KB | Deterministically compress and clean multi-turn conversation context with pure Python (no LLM, no network) — drop stale turns, de… | `.kilo/skills/context-compression/SKILL.md` |
+| `create-verification-skill` | ✅ | 6.6KB | "Generate a project-local verification skill that drives your app the way a user does — any language, framework, or platform. Use… | `.kilo/skills/create-verification-skill/SKILL.md` |
 | `data-egress-guard` | ✅ | 3.0KB | Deterministically mask PII and secrets before sending text to an external LLM/API (no model, no network) — replaces spans with nu… | `.kilo/skills/data-egress-guard/SKILL.md` |
 | `database-change-safety` | ✅ | 1.2KB | Plan, implement, and review schema changes, data migrations, backfills, and cleanup with integrity, availability, observability, … | `.kilo/skills/database-change-safety/SKILL.md` |
 | `dependency-upgrade` | ✅ | 1.2KB | Safely evaluate, apply, and verify software dependency, runtime, container-image, or toolchain upgrades with compatibility, secur… | `.kilo/skills/dependency-upgrade/SKILL.md` |
@@ -41,6 +43,7 @@
 | `implement-spec` | ✅ | 2.7KB | "Implement the result of /to-spec and /to-tickets in code." | `.kilo/skills/implement-spec/SKILL.md` |
 | `incident-debugging` | ✅ | 1.1KB | Diagnose a software incident or high-impact defect through reproduction, evidence collection, fault isolation, mitigation, verifi… | `.kilo/skills/incident-debugging/SKILL.md` |
 | `language-policy` | ✅ | 2.4KB | Decide and enforce the writing language for code, engineering records, and explanatory docs via a three-tier policy (code = Engli… | `.kilo/skills/language-policy/SKILL.md` |
+| `maintain-verification-skill` | ✅ | 4.9KB | "Periodic pass that keeps a project's verification skill and feature map honest: parallel source readers per feature, one live se… | `.kilo/skills/maintain-verification-skill/SKILL.md` |
 | `marketing-psychology` | ✅ | 1.2KB | Apply psychological principles and behavioral science to copy and design. Useful for tightening hooks, framing, and pricing prese… | `.kilo/skills/marketing-psychology/SKILL.md` |
 | `memory` | ✅ | 1.8KB | Persist and recall durable project knowledge (decisions, constraints, gotchas, recurring fixes) across sessions. Use before start… | `.kilo/skills/memory/SKILL.md` |
 | `pdca-cycle` | ✅ | 1.6KB | Run a lightweight Plan-Do-Check-Act cycle for product, engineering, quality, or process improvements. Use when a request needs me… | `.kilo/skills/pdca-cycle/SKILL.md` |
@@ -84,6 +87,7 @@
 | `screenshots-marketing` | ✅ | 1.3KB | Produce marketing screenshots (landing hero, App Store, changelog visuals). Use Playwright when available; otherwise produce a ca… | `.kilo/skills/screenshots-marketing/SKILL.md` |
 | `security-review` | ✅ | 1.7KB | Perform a read-first security review of application code, configuration, dependencies, and delivery changes. Use for requested se… | `.kilo/skills/security-review/SKILL.md` |
 | `setup-matt-pocock-skills` | ✅ | 6.8KB | "Configure this repo for the engineering skills: set up its issue tracker, triage label vocabulary, and domain doc layout. Run on… | `.kilo/skills/setup-matt-pocock-skills/SKILL.md` |
+| `show-me-your-work` | ✅ | 6.7KB | "Keep a reviewable decision trail for long-running or unattended work: a TSV log with one row per decision (what, why, evidence, … | `.kilo/skills/show-me-your-work/SKILL.md` |
 | `slides` | ✅ | 1.4KB | Create slide decks as Markdown/HTML by default (no external dependencies); optionally export .pptx with PptxGenJS if installed. U… | `.kilo/skills/slides/SKILL.md` |
 | `tdd` | ✅ | 3.5KB | Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or want… | `.kilo/skills/tdd/SKILL.md` |
 | `teach` | ✅ | 9.5KB | Teach the user a new skill or concept, within this workspace. | `.kilo/skills/teach/SKILL.md` |
