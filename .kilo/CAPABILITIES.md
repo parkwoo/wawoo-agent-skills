@@ -47,7 +47,7 @@
 | `performance-audit` | ✅ | 1.1KB | Measure and improve application or web performance using representative workloads, bottleneck evidence, and regression safeguards… | `.kilo/skills/performance-audit/SKILL.md` |
 | `plan-md` | ✅ | 1.7KB | Always save planning deliverables (fix plans, implementation plans, design direction, review responses) as a Markdown file. Use f… | `.kilo/skills/plan-md/SKILL.md` |
 | `pr` | ✅ | 4.1KB | "Use when writing a PR body." | `.kilo/skills/pr/SKILL.md` |
-| `privacy-review` | ✅ | 1.3KB | Review personal data (PII) flows, minimization, retention, masking, logging, and cross-border handling for a feature or service. … | `.kilo/skills/privacy-review/SKILL.md` |
+| `privacy-review` | ✅ | 1.6KB | Review personal data (PII) flows, minimization, retention, masking, logging, and cross-border handling for a feature or service. … | `.kilo/skills/privacy-review/SKILL.md` |
 | `product-discovery` | ✅ | 1.1KB | Turn an ambiguous product or feature request into a scoped problem statement, user outcome, acceptance criteria, priorities, risk… | `.kilo/skills/product-discovery/SKILL.md` |
 | `prototype` | ✅ | 2.9KB | Build a throwaway prototype to answer a design question. Use when the user wants to sanity-check whether a state model or logic f… | `.kilo/skills/prototype/SKILL.md` |
 | `publication-boundary` | ✅ | 1.6KB | Keep internal development materials out of the public tree of an open-source repo. Use when adding docs or scripts, or auditing w… | `.kilo/skills/publication-boundary/SKILL.md` |
@@ -58,7 +58,7 @@
 | `retro` | ✅ | 4.3KB | "Conduct a retrospective on a coding session." | `.kilo/skills/retro/SKILL.md` |
 | `science-writing` | ✅ | 1.6KB | Write accurate popular-science articles and explainers for a general audience — define the audience, translate jargon, ground cla… | `.kilo/skills/science-writing/SKILL.md` |
 | `screenshots-marketing` | ✅ | 1.3KB | Produce marketing screenshots (landing hero, App Store, changelog visuals). Use Playwright when available; otherwise produce a ca… | `.kilo/skills/screenshots-marketing/SKILL.md` |
-| `security-review` | ✅ | 1.2KB | Perform a read-first security review of application code, configuration, dependencies, and delivery changes. Use for requested se… | `.kilo/skills/security-review/SKILL.md` |
+| `security-review` | ✅ | 1.7KB | Perform a read-first security review of application code, configuration, dependencies, and delivery changes. Use for requested se… | `.kilo/skills/security-review/SKILL.md` |
 | `setup-matt-pocock-skills` | ✅ | 6.8KB | "Configure this repo for the engineering skills: set up its issue tracker, triage label vocabulary, and domain doc layout. Run on… | `.kilo/skills/setup-matt-pocock-skills/SKILL.md` |
 | `slides` | ✅ | 1.4KB | Create slide decks as Markdown/HTML by default (no external dependencies); optionally export .pptx with PptxGenJS if installed. U… | `.kilo/skills/slides/SKILL.md` |
 | `tdd` | ✅ | 3.5KB | Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or want… | `.kilo/skills/tdd/SKILL.md` |

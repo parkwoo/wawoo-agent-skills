@@ -15,3 +15,8 @@ Review threats and evidence before recommending remediation.
 5. Re-test remediation proportionately without exposing credentials or exploiting production systems.
 
 This skill is advisory. Do not change production, rotate credentials, contact third parties, or run destructive proof-of-concept actions without approval.
+
+## Outbound egress (secrets / internal infra)
+
+- Before sending logs, errors, or text to an external LLM/API, strip secrets and internal infrastructure — MCP **`mask_pii`** (reversible) and **`redact_infra`** (private IPs, internal hostnames, credentials in URLs, `host=`/`port=`); gate the payload with **`guard_content`** (policy-as-data, optional fail-closed).
+- Never echo internal IPs, hostnames, URLs, ports, or credentials in error responses or logs.
