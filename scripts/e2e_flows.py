@@ -319,6 +319,26 @@ def test_mcp_mask_pii(r: Runner) -> None:
     r.run("mcp_mask_pii", _)
 
 
+def test_mcp_redact_infra(r: Runner) -> None:
+    def _():
+        res = mcp_call("redact_infra", {"text": "boom at 10.2.3.4 host=db.internal"})
+        data = json.loads(res["result"]["content"][0]["text"])
+        assert "10.2.3.4" not in data["text"] and "db.internal" not in data["text"], data
+
+    r.run("mcp_redact_infra", _)
+
+
+def test_mcp_guard_content(r: Runner) -> None:
+    def _():
+        res = mcp_call("guard_content", {"text": "this is CONFIDENTIAL-INTERNAL", "policy": {"deny": ["CONFIDENTIAL-INTERNAL"]}})
+        data = json.loads(res["result"]["content"][0]["text"])
+        assert data["safe"] is False and data["violations"], data
+        ok = mcp_call("guard_content", {"text": "all clear", "policy": {"deny": ["CONFIDENTIAL-INTERNAL"]}})
+        assert json.loads(ok["result"]["content"][0]["text"])["safe"] is True
+
+    r.run("mcp_guard_content", _)
+
+
 def test_local_lexical_router(r: Runner) -> None:
     def _():
         import sys
@@ -335,6 +355,24 @@ def test_local_lexical_router(r: Runner) -> None:
         assert intent_lexical.local_lexical_route("do something") is None
 
     r.run("local_lexical_router", _)
+
+
+def test_intent_calibration_and_complexity(r: Runner) -> None:
+    def _():
+        import sys
+
+        sys.path.insert(0, str(ROOT / "mcp"))
+        import intent_calibrate
+        import intent_complexity
+
+        best = intent_calibrate.calibrate()["best"]
+        assert best["threshold"] > 0 and best["precision"] >= 0.5, best
+        c, _n, tier = intent_complexity.estimate_complexity("refactor the architecture across services with a migration")
+        assert c in ("medium", "complex") and tier == "reasoning", (c, tier)
+        c2, _n2, tier2 = intent_complexity.estimate_complexity("fix the typo")
+        assert c2 == "simple" and tier2 == "fast"
+
+    r.run("intent_calibration_and_complexity", _)
 
 
 def test_plan_active_cli(r: Runner) -> None:
@@ -702,7 +740,10 @@ def main() -> int:
         test_mcp_evidence_check,
         test_mcp_compress_context,
         test_mcp_mask_pii,
+        test_mcp_redact_infra,
+        test_mcp_guard_content,
         test_local_lexical_router,
+        test_intent_calibration_and_complexity,
         test_plan_active_cli,
         test_active_blocked_and_duplicate,
         test_mcp_memory_recall_repo,

@@ -4,7 +4,7 @@
 > Pick candidates from this catalog first and open only the `SKILL.md` you need (progressive disclosure).
 > `⚠️` marks items needing external setup (`scripts/readiness.json`). Not used in the standard flow.
 
-## Skills（66）
+## Skills（67）
 
 | name | ready | size | description | path |
 |---|---|---|---|---|
@@ -18,6 +18,7 @@
 | `code-review` | ✅ | 6.5KB | "Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes: Standards (does the code follow this… | `.kilo/skills/code-review/SKILL.md` |
 | `codebase-design` | ✅ | 6.3KB | Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module's interface, find deepening o… | `.kilo/skills/codebase-design/SKILL.md` |
 | `compliance-legal` | ✅ | 1.8KB | Review OSS license obligations (MIT/Apache-2.0 attribution, NOTICE), SBOM, and product/service legal checklists (terms, privacy, … | `.kilo/skills/compliance-legal/SKILL.md` |
+| `content-guardrail` | ✅ | 2.4KB | Deterministic policy-as-data content gate (no model, no network) — checks text against deny terms, named regexes, built-in secret… | `.kilo/skills/content-guardrail/SKILL.md` |
 | `context-compression` | ✅ | 3.9KB | Deterministically compress and clean multi-turn conversation context with pure Python (no LLM, no network) — drop stale turns, de… | `.kilo/skills/context-compression/SKILL.md` |
 | `data-egress-guard` | ✅ | 3.0KB | Deterministically mask PII and secrets before sending text to an external LLM/API (no model, no network) — replaces spans with nu… | `.kilo/skills/data-egress-guard/SKILL.md` |
 | `database-change-safety` | ✅ | 1.2KB | Plan, implement, and review schema changes, data migrations, backfills, and cleanup with integrity, availability, observability, … | `.kilo/skills/database-change-safety/SKILL.md` |

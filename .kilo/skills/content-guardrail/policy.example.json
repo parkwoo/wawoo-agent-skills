@@ -1,0 +1,15 @@
+{
+  "_comment": "Example policy for content-guardrail. `deny` = case-insensitive substring; `regex` = named patterns; `secrets`/`infra` = built-in detectors; `fail_closed` = a bad regex makes the verdict unsafe.",
+  "deny": [
+    "CONFIDENTIAL-INTERNAL",
+    "Project Bluebird",
+    "do not share externally"
+  ],
+  "regex": [
+    { "name": "ssn", "pattern": "\\b\\d{3}-\\d{2}-\\d{4}\\b" },
+    { "name": "phone_jp", "pattern": "\\b0\\d{1,4}-\\d{1,4}-\\d{3,4}\\b" }
+  ],
+  "secrets": true,
+  "infra": true,
+  "fail_closed": false
+}

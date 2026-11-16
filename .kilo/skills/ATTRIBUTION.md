@@ -1,6 +1,6 @@
 # Skill and agent provenance & licenses
 
-Origins of `.kilo/skills` (66) and `.kilo/agents` (22). **Keep each license when reusing or redistributing.**
+Origins of `.kilo/skills` (67) and `.kilo/agents` (22). **Keep each license when reusing or redistributing.**
 Full license texts: `LICENSES/`.
 
 ## Skills
@@ -10,7 +10,7 @@ Full license texts: `LICENSES/`.
 | **Skills For Real Engineers** (Matt Pocock) | 25 | **MIT** | `LICENSES/skills-for-real-engineers-MIT.txt` (includes `writing-fragments` / `writing-beats` / `writing-shape` / `teach`) |
 | **Kilo built-in** | 16 | **MIT** (stated in frontmatter) | e.g. `accessibility-audit` |
 | **OpenDesign** | 10 | **Apache-2.0** | `LICENSES/open-design-Apache-2.0.txt` (each skill directory has `LICENSE.txt` + `NOTICE.txt`) |
-| **This repository** | 15 | **MIT** (Copyright (c) 2026 wawoo.jp) | `deployment`, `compliance-legal`, `privacy-review`, `changelog`, `memory`, `slides`, `screenshots-marketing`, `plan-md`, `language-policy`, `publication-boundary`, `science-writing`, `viral-hooks`, `fal-gen`, `context-compression`, `data-egress-guard` |
+| **This repository** | 16 | **MIT** (Copyright (c) 2026 wawoo.jp) | `deployment`, `compliance-legal`, `privacy-review`, `changelog`, `memory`, `slides`, `screenshots-marketing`, `plan-md`, `language-policy`, `publication-boundary`, `science-writing`, `viral-hooks`, `fal-gen`, `context-compression`, `data-egress-guard`, `content-guardrail` |
 
 ## Agents
 

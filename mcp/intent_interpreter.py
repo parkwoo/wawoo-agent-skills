@@ -18,6 +18,7 @@ from intent_commands import match_slash_route
 from intent_learn_queue import enqueue_hit, enqueue_promote, flush, reset_learn_queue
 from intent_learned_store import IntentLearnedStore, default_db_path
 from intent_lexical import local_lexical_route
+from intent_complexity import estimate_complexity
 from intent_seed import seed_learned_store
 from intent_upstream import (
     UpstreamScoring,
@@ -93,6 +94,8 @@ class IntentSchedule:
     phases: list[dict[str, Any]] = field(default_factory=list)
     gate: str = ""
     implement_allowed: bool = True
+    complexity: str = ""
+    model_tier: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -110,6 +113,10 @@ def _enrich_workflow_meta(schedule: IntentSchedule) -> IntentSchedule:
     schedule.implement_allowed = implement_allowed(schedule.workflow)
     if schedule.phases and not schedule.implement_allowed:
         schedule.gate = "This workflow is read-only phases only. If implementation is needed, declare the reason and a new workflow (e.g. feature-delivery) and switch."
+    try:
+        schedule.complexity, _, schedule.model_tier = estimate_complexity(schedule.clean_text)
+    except Exception:
+        pass
     return schedule
 
 
@@ -264,7 +271,10 @@ def interpret_intent_payload(
         return {"ok": True, "needs_upstream": False, "needs_scoring": False, "route_layer": "L1", "schedule": sched.to_dict()}
 
     if os.environ.get("WAWOO_INTENT_LEXICAL", "1").strip().lower() not in {"0", "false", "off", "no"}:
-        lex = local_lexical_route(raw)
+        try:
+            lex = local_lexical_route(raw)
+        except Exception:
+            lex = None
         if lex:
             confidence: Confidence = "medium" if lex.score >= 0.55 else "low"
             sched = _schedule_from_workflow(
@@ -361,6 +371,8 @@ def format_route_task_text(schedule: IntentSchedule) -> str:
         f"Source: {schedule.source}",
         f"Confidence: {schedule.confidence.upper()}",
     ]
+    if schedule.complexity:
+        lines.append(f"Complexity: {schedule.complexity} (model_tier: {schedule.model_tier})")
     if schedule.workflow_description:
         lines.append(f"Description: {schedule.workflow_description}")
     if schedule.command_path:

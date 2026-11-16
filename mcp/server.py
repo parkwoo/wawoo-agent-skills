@@ -8,7 +8,7 @@ Transport: newline-delimited JSON-RPC 2.0 over stdio.
 Tools:
   capabilities, skill_search, skill_get, workflow_get, agent_get,
   memory_recall, memory_save, evidence_check,
-  interpret_intent, route_task, workflow_clear, delegate_subtask, compress_context, mask_pii
+  interpret_intent, route_task, workflow_clear, delegate_subtask, compress_context, mask_pii, redact_infra, guard_content
 """
 from __future__ import annotations
 
@@ -389,8 +389,8 @@ def do_compress_context(args: dict) -> dict:
     return tool_result(json.dumps(engine.compress(turns), ensure_ascii=False))
 
 
-def _load_pii_masker():
-    """Load the data-egress-guard masker from the skill (stdlib only)."""
+def _load_pii_module():
+    """Load the data-egress-guard module (stdlib only; registered for dataclasses)."""
     import importlib.util
 
     path = KILO / "skills" / "data-egress-guard" / "mask_pii.py"
@@ -398,7 +398,17 @@ def _load_pii_masker():
     mod = importlib.util.module_from_spec(spec)
     sys.modules["wawoo_pii_masker"] = mod
     spec.loader.exec_module(mod)
-    return mod.PiiMasker
+    return mod
+
+
+def _load_pii_masker():
+    return _load_pii_module().PiiMasker
+
+
+def do_redact_infra(args: dict) -> dict:
+    mod = _load_pii_module()
+    res = mod.redact_infra(str(args.get("text", "")), aggressive=bool(args.get("aggressive", False)))
+    return tool_result(json.dumps(res, ensure_ascii=False))
 
 
 def do_mask_pii(args: dict) -> dict:
@@ -421,6 +431,28 @@ def do_mask_pii(args: dict) -> dict:
             json.dumps({"results": [m.to_dict() for m in masker.mask_many([str(t) for t in texts])]}, ensure_ascii=False)
         )
     return tool_result(json.dumps(masker.mask(str(args.get("text", ""))).to_dict(), ensure_ascii=False))
+
+
+def _load_guard_module():
+    """Load the content-guardrail module (stdlib only)."""
+    import importlib.util
+
+    path = KILO / "skills" / "content-guardrail" / "guard.py"
+    spec = importlib.util.spec_from_file_location("wawoo_content_guard", path)
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules["wawoo_content_guard"] = mod
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def do_guard_content(args: dict) -> dict:
+    mod = _load_guard_module()
+    policy = args.get("policy")
+    if policy is None and args.get("policy_path"):
+        p = Path(str(args["policy_path"]))
+        policy = str(p if p.is_absolute() else (ROOT / p))
+    res = mod.guard(str(args.get("text", "")), policy)
+    return tool_result(json.dumps(res, ensure_ascii=False))
 
 
 TOOLS = [
@@ -559,6 +591,29 @@ TOOLS = [
             },
         },
     ),
+    (
+        "redact_infra",
+        "Sanitize internal infrastructure from error/log/outbound text (no model/network): private IPs, internal hostnames (*.local/.internal), credentials in URLs, and host=/port= values. `aggressive:true` also redacts all URLs/IPs. Returns {text, counts}.",
+        {
+            "type": "object",
+            "properties": {
+                "text": {"type": "string"},
+                "aggressive": {"type": "boolean"},
+            },
+        },
+    ),
+    (
+        "guard_content",
+        "Deterministic policy-as-data content gate (no model/network): check text against deny terms, named regexes, built-in secret/private-infra detectors; optional fail-closed. Returns {safe, violations, policy_errors}. Pass `policy` (object) or `policy_path`.",
+        {
+            "type": "object",
+            "properties": {
+                "text": {"type": "string"},
+                "policy": {"type": "object"},
+                "policy_path": {"type": "string"},
+            },
+        },
+    ),
 ]
 
 HANDLERS = {
@@ -577,6 +632,8 @@ HANDLERS = {
     "steer_task": do_steer_task,
     "compress_context": do_compress_context,
     "mask_pii": do_mask_pii,
+    "redact_infra": do_redact_infra,
+    "guard_content": do_guard_content,
 }
 
 
