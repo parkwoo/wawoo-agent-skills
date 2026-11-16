@@ -252,6 +252,33 @@ def interpret_intent_payload(
         )
         return {"ok": True, "needs_upstream": False, "needs_scoring": False, "route_layer": "L0", "schedule": sched.to_dict()}
 
+    if os.environ.get("WAWOO_INTENT_LEXICAL", "1").strip().lower() not in {"0", "false", "off", "no"}:
+        try:
+            lex = local_lexical_route(raw)
+        except Exception:
+            lex = None
+        if lex:
+            confidence: Confidence = "medium" if lex.score >= 0.55 else "low"
+            sched = _schedule_from_workflow(
+                raw,
+                lex.workflow,
+                intent_id=intent_id or "local-lexical",
+                task_type="lexical",
+                confidence=confidence,
+                source="local",
+                route_layer="L1",
+                route_subsource="local_lexical",
+                score=lex.score,
+                trace=[f"L2:local:{lex.workflow}:{lex.score:.2f}:cos={lex.cosine:.2f}:margin={lex.margin:.2f}"],
+            )
+            return {
+                "ok": True,
+                "needs_upstream": False,
+                "needs_scoring": False,
+                "route_layer": "L1",
+                "schedule": sched.to_dict(),
+            }
+
     store = _get_store()
     learned_route = store.find_match(raw)
     if learned_route:
@@ -269,33 +296,6 @@ def interpret_intent_payload(
             trace=[f"L1:learned:{learned_route.trigger}"],
         )
         return {"ok": True, "needs_upstream": False, "needs_scoring": False, "route_layer": "L1", "schedule": sched.to_dict()}
-
-    if os.environ.get("WAWOO_INTENT_LEXICAL", "1").strip().lower() not in {"0", "false", "off", "no"}:
-        try:
-            lex = local_lexical_route(raw)
-        except Exception:
-            lex = None
-        if lex:
-            confidence: Confidence = "medium" if lex.score >= 0.55 else "low"
-            sched = _schedule_from_workflow(
-                raw,
-                lex.workflow,
-                intent_id=intent_id or "local-lexical",
-                task_type="lexical",
-                confidence=confidence,
-                source="local",
-                route_layer="L2",
-                route_subsource="local_lexical",
-                score=lex.score,
-                trace=[f"L2:local:{lex.workflow}:{lex.score:.2f}:cos={lex.cosine:.2f}:margin={lex.margin:.2f}"],
-            )
-            return {
-                "ok": True,
-                "needs_upstream": False,
-                "needs_scoring": False,
-                "route_layer": "L2",
-                "schedule": sched.to_dict(),
-            }
 
     prompt = upstream_score_prompt(raw)
     return {

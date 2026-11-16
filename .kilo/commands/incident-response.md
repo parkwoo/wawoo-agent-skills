@@ -15,3 +15,10 @@ replay: unsafe
 ## Apply-before skills
 
 `why`/`how` to understand the subsystem, `principle-fix-root-causes`, `blast-radius`.
+
+## Privacy / security / context
+
+- Before any external LLM/API call or returning output: `guard_content` (policy gate) → `mask_pii` / `redact_infra` (redact) — see `data-egress-guard`.
+- Never echo internal IPs, hosts, URLs, ports, or credentials in errors or logs.
+- When context is long or repetitive: `context-compression` (MCP `compress_context`) + `principle-guard-the-context-window`.
+- Security/privacy review: `security-review` / `privacy-review` (audit phase).

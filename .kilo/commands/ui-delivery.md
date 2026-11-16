@@ -15,3 +15,10 @@ replay: safe
 5. Use `test-engineering`, `accessibility-audit`, and `performance-audit` as applicable.
 6. Inspect rendered desktop/mobile states. Report evidence and explicitly list unavailable browsers, devices, states, or data.
 7. Run `change-readiness` before handoff. Update ACTIVE (evidence = screenshots, audit results, PR). Do not replace brand assets, alter tracking, or publish without approval.
+
+## Privacy / security / context
+
+- Before any external LLM/API call or returning output: `guard_content` (policy gate) → `mask_pii` / `redact_infra` (redact) — see `data-egress-guard`.
+- Never echo internal IPs, hosts, URLs, ports, or credentials in errors or logs.
+- When context is long or repetitive: `context-compression` (MCP `compress_context`) + `principle-guard-the-context-window`.
+- Security/privacy review: `security-review` / `privacy-review` (audit phase).

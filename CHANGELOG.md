@@ -13,6 +13,14 @@
 
 ## [Unreleased]
 
+### Changed — intent order + workflow optimization (pstack principles, privacy, context)
+
+- **Routing order**: `interpret_intent` now resolves **L0 slash → L1 local lexical (threshold/abstain) → L1.5 learned (substring) → L2 upstream**; a broad learned substring can no longer override a clear local match. Tests updated (`WAWOO_INTENT_LEXICAL=0` where learned is under test).
+- **Workflow (pstack-aligned)**: new `understand` phase (`recall`/`why`/`how`) for feature-delivery & incident-response; `principle-guard-the-context-window` in implement; `principle-build-the-lever` in verify; `maintain-verification-skill` in self-improve.
+- **Privacy/security in workflows**: `audit` includes `privacy-review`; `verify`/`report` include `data-egress-guard` + `content-guardrail`; commands gained a Privacy/security/context section.
+- **Contract**: AGENTS §4.1 adds “restate the goal first”, “classify before asking / reversible work proceeds”, “name the principle”, “privacy/egress”.
+
+
 ### Changed — move creative/marketing to the internal kit
 
 - Removed from the public kit (kept in the internal operational copy): skills `writing-fragments`, `writing-beats`, `writing-shape`, `science-writing`, `viral-hooks`, `marketing-psychology`, `brand-guidelines`, `slides`, `screenshots-marketing`, `research-decision-room`; workflows `writing`, `market-plan`, `deck`, `content-delivery-lite`; agent `market-researcher`. Public: skills 104→94, commands 16→12, agents 22→21.
