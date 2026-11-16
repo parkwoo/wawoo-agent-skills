@@ -55,6 +55,18 @@ eng = ContextCompressionEngine(budget_tokens=2000, max_age_turns=20, keywords=["
 result = eng.compress([{"role": "user", "text": "..."}, ...])   # -> {"turns": [...], "stats": {...}}
 ```
 
+## MCP tool
+
+The kit exposes it as the MCP tool **`compress_context`** (available in Kilo / Cursor / OpenCode):
+
+```json
+{ "turns": [ {"role": "user", "text": "..."}, ... ], "budget_tokens": 2000, "max_age_turns": 20 }
+```
+
+Returns `{ "turns": [...], "stats": {...} }`. Also accepts `input` = path to a JSON file of turns.
+
+**Automatic mode (OpenCode)**: run it on every model call via a plugin on the `experimental.chat.messages.transform` hook (conservative, fail-open).
+
 ## Tuning
 
 | Flag | Default | Effect |

@@ -8,7 +8,7 @@ Transport: newline-delimited JSON-RPC 2.0 over stdio.
 Tools:
   capabilities, skill_search, skill_get, workflow_get, agent_get,
   memory_recall, memory_save, evidence_check,
-  interpret_intent, route_task, workflow_clear, delegate_subtask
+  interpret_intent, route_task, workflow_clear, delegate_subtask, compress_context
 """
 from __future__ import annotations
 
@@ -353,6 +353,42 @@ def do_route_task(args: dict) -> dict:
     return tool_result(format_route_task_text(schedule))
 
 
+def _load_compressor():
+    """Load the context-compression engine from the skill (stdlib only)."""
+    import importlib.util
+
+    path = KILO / "skills" / "context-compression" / "compress.py"
+    spec = importlib.util.spec_from_file_location("wawoo_context_compress", path)
+    mod = importlib.util.module_from_spec(spec)
+    # dataclasses with `from __future__ import annotations` resolve types via
+    # sys.modules[cls.__module__], so register before executing.
+    sys.modules["wawoo_context_compress"] = mod
+    spec.loader.exec_module(mod)
+    return mod.ContextCompressionEngine
+
+
+def do_compress_context(args: dict) -> dict:
+    turns = args.get("turns")
+    if turns is None and args.get("input"):
+        turns = json.loads(Path(str(args["input"])).read_text(encoding="utf-8"))
+    if not isinstance(turns, list):
+        return tool_result(
+            "compress_context: provide `turns` (array of {role,text,ts?}) or `input` (JSON file path)", True
+        )
+    engine_cls = _load_compressor()
+    age = args.get("max_age_turns")
+    engine = engine_cls(
+        budget_tokens=int(args.get("budget_tokens", 2000)),
+        max_age_turns=None if age in (None, "") else int(age),
+        jaccard=float(args.get("jaccard", 0.85)),
+        seq_ratio=float(args.get("seq_ratio", 0.9)),
+        min_tokens=int(args.get("min_tokens", 2)),
+        keep_system=bool(args.get("keep_system", False)),
+        keywords=[k.strip() for k in str(args.get("keywords", "")).split(",") if k.strip()],
+    )
+    return tool_result(json.dumps(engine.compress(turns), ensure_ascii=False))
+
+
 TOOLS = [
     ("capabilities", "List skills/agents/workflows with one-line descriptions.", {"type": "object", "properties": {"ready_only": {"type": "boolean"}}}),
     ("skill_search", "Search skills/agents/workflows by query.", {"type": "object", "properties": {"query": {"type": "string"}, "limit": {"type": "integer"}}, "required": ["query"]}),
@@ -445,6 +481,34 @@ TOOLS = [
             "required": ["text"],
         },
     ),
+    (
+        "compress_context",
+        "Deterministically compress/clean conversation context with no LLM or network: drop stale/duplicate/acknowledgement turns and keep the highest information density under a token budget. Provide `turns` (array of {role,text,ts?}) or `input` (JSON file path).",
+        {
+            "type": "object",
+            "properties": {
+                "turns": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "role": {"type": "string"},
+                            "text": {"type": "string"},
+                            "ts": {"type": "number"},
+                        },
+                    },
+                },
+                "input": {"type": "string"},
+                "budget_tokens": {"type": "integer"},
+                "max_age_turns": {"type": "integer"},
+                "jaccard": {"type": "number"},
+                "seq_ratio": {"type": "number"},
+                "min_tokens": {"type": "integer"},
+                "keep_system": {"type": "boolean"},
+                "keywords": {"type": "string"},
+            },
+        },
+    ),
 ]
 
 HANDLERS = {
@@ -461,6 +525,7 @@ HANDLERS = {
     "workflow_clear": do_workflow_clear,
     "delegate_subtask": do_delegate_subtask,
     "steer_task": do_steer_task,
+    "compress_context": do_compress_context,
 }
 
 

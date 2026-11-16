@@ -106,6 +106,8 @@ python3 scripts/e2e_flows.py   # 公開スモーク（契約/E2E）
 ```
 **カタログ系**: `capabilities`・`skill_search`・`skill_get`・`workflow_get`・`agent_get`・`memory_recall`・`memory_save`・`evidence_check`。
 
+**コンテキスト**: `compress_context` — 会話ターンをオフライン・決定的に圧縮/クリーニング（ヒューリスティック＋曖昧重複排除＋密度予算。LLM・ネットワーク不要）。詳細は `.kilo/skills/context-compression/SKILL.md`。
+
 **意図ルーティング**（任意だが推奨）: `interpret_intent` → `workflow_get` → … → `workflow_clear`。サブタスクは `delegate_subtask`。
 
 - 対外ガイド：**[docs/INTENT-ROUTING.ja.md](INTENT-ROUTING.ja.md)**（L0–L3・スコア JSON・ツールゲート）

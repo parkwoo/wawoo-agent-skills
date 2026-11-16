@@ -283,6 +283,27 @@ def test_mcp_evidence_check(r: Runner) -> None:
     r.run("mcp_evidence_check", _)
 
 
+def test_mcp_compress_context(r: Runner) -> None:
+    def _():
+        turns = [
+            {"role": "user", "text": "How do I reset the cache?"},
+            {"role": "assistant", "text": "Sure"},
+            {"role": "assistant", "text": "Run cache-cli reset --all."},
+            {"role": "user", "text": "how do i reset the cache?"},
+            {"role": "assistant", "text": "Run cache-cli reset --all."},
+            {"role": "user", "text": "and the schema migration rollback plan?"},
+        ]
+        res = mcp_call("compress_context", {"turns": turns})
+        assert not res["result"].get("isError"), res
+        data = json.loads(res["result"]["content"][0]["text"])
+        assert data["stats"]["input_turns"] == len(turns)
+        assert data["stats"]["kept_turns"] < len(turns)
+        assert any("rollback" in t["text"] for t in data["turns"])
+        assert all("Sure" not in t["text"] for t in data["turns"])
+
+    r.run("mcp_compress_context", _)
+
+
 def test_plan_active_cli(r: Runner) -> None:
     def _():
         proc = subprocess.run(
@@ -646,6 +667,7 @@ def main() -> int:
         test_mcp_workflow_get_delivery_lite,
         test_mcp_memory_roundtrip_isolated,
         test_mcp_evidence_check,
+        test_mcp_compress_context,
         test_plan_active_cli,
         test_active_blocked_and_duplicate,
         test_mcp_memory_recall_repo,

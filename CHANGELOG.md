@@ -22,6 +22,7 @@
 ### Added — `context-compression` skill
 
 - New skill `.kilo/skills/context-compression` (pure Python, deterministic, **no LLM/network**): heuristic filters + fuzzy dedup + information-density scoring. Reference `compress.py` (library + CLI + `--selftest`) for offline context cleaning and RAG post-processing. Skills 64 → 65.
+- New MCP tool **`compress_context`** (`mcp/server.py`) so Kilo / Cursor / OpenCode can clean context in one call; e2e `mcp_compress_context`. OpenCode can run it automatically per model call via the `experimental.chat.messages.transform` plugin hook.
 
 ### Changed — public kit English-only + self-contained docs
 
