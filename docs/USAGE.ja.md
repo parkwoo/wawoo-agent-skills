@@ -106,7 +106,11 @@ python3 scripts/e2e_flows.py   # 公開スモーク（契約/E2E）
 ```
 **カタログ系**: `capabilities`・`skill_search`・`skill_get`・`workflow_get`・`agent_get`・`memory_recall`・`memory_save`・`evidence_check`。
 
+**ガードレール / egress**: `mask_pii`（PII/秘密のマスク＋可逆マップ）、`redact_infra`（エラー/ログから内部 IP・ホスト・資格情報を除去）、`guard_content`（policy-as-data の可否ゲート、任意で fail-closed）。
+
 **コンテキスト**: `compress_context` — 会話ターンをオフライン・決定的に圧縮/クリーニング（ヒューリスティック＋曖昧重複排除＋密度予算。LLM・ネットワーク不要）。詳細は `.kilo/skills/context-compression/SKILL.md`。
+
+**意図**: `interpret_intent` は slash → learned → **ローカル語彙（threshold/棄権）** → upstream の順。`python3 mcp/intent_calibrate.py` で閾値を校正。schedule は `complexity` / `model_tier` を返す。
 
 **意図ルーティング**（任意だが推奨）: `interpret_intent` → `workflow_get` → … → `workflow_clear`。サブタスクは `delegate_subtask`。
 

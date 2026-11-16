@@ -28,3 +28,8 @@ description: Review personal data (PII) flows, minimization, retention, masking,
 ## 4. Related
 
 - Legal: `compliance-legal` / Security: `security-review` / Release: `release-readiness`
+
+## 5. Egress (PII)
+
+- Mask PII before any external LLM/API call with MCP **`mask_pii`** (numbered placeholders + reversible mapping; `locale` for JP identifiers), and gate the payload with **`guard_content`**.
+- Redact internal infrastructure in logs/errors with **`redact_infra`**.
