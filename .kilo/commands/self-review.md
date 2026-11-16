@@ -19,3 +19,7 @@ replay: safe
 - Do not treat "it ran" as done (**state what is unverified**).
 - Destructive changes, production, and deletions require approval.
 - For security boundaries, also use `security-review`.
+
+## Apply-before skills
+
+`blast-radius` (what else breaks), `principle-test-behavior-not-implementation`, `why`/`how` for intent.

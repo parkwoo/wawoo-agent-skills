@@ -11,3 +11,7 @@ replay: unsafe
 3. Separate immediate mitigation from permanent repair. Require explicit approval for production actions, rollback, data repair, feature flags, or external communication.
 4. Implement and verify the approved repair with `test-engineering`; use security or performance review when relevant.
 5. Complete `retro` with cause, evidence, prevention, owner, and next review point.
+
+## Apply-before skills
+
+`why`/`how` to understand the subsystem, `principle-fix-root-causes`, `blast-radius`.

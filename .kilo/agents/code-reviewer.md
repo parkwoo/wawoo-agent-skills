@@ -21,3 +21,7 @@ Provide constructive feedback on code patterns, potential bugs, security issues,
 ## Routing (MCP first)
 
 Before any other tool, call the MCP tool `wawoo-skills_workflow_get` (when the workflow is unclear, call `wawoo-skills_interpret_intent` first). If a parent session already fixed the workflow, follow that. Use the native `skill` tool only when the MCP server is unavailable, and say so explicitly.
+
+## Skills to apply
+
+Use `blast-radius` (what else breaks), `principle-fix-root-causes`, `principle-test-behavior-not-implementation`; `why`/`how` for intent and runtime behavior.

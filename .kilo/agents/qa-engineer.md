@@ -10,3 +10,7 @@ You are a QA engineer. Define observable behavior and choose the lowest test lay
 ## Routing (MCP first)
 
 Before any other tool, call the MCP tool `wawoo-skills_workflow_get` (when the workflow is unclear, call `wawoo-skills_interpret_intent` first). If a parent session already fixed the workflow, follow that. Use the native `skill` tool only when the MCP server is unavailable, and say so explicitly.
+
+## Skills to apply
+
+Use `create-verification-skill` / `maintain-verification-skill`, `benchmark-checklist`, `principle-prove-it-works`, `principle-test-behavior-not-implementation`.

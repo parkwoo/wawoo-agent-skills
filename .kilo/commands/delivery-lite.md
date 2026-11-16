@@ -37,3 +37,7 @@ replay: safe
 - **Gₐ**: stop and get approval for destructive changes, production, external transmission, or contracts.
 - **Gₑ**: never claim `done` without evidence.
 - **Gₒ**: on failure, record the cause in the ACTIVE row or memory before retrying.
+
+## Apply-before skills
+
+`how` (understand before change) + `principle-*`; verify with `principle-prove-it-works` + `create-verification-skill`.

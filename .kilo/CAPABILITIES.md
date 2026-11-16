@@ -11,7 +11,7 @@
 | `accessibility-audit` | ✅ | 1.2KB | Audit and improve web accessibility for semantic structure, keyboard operation, forms, focus, contrast, motion, assistive technol… | `.kilo/skills/accessibility-audit/SKILL.md` |
 | `api-contract-design` | ✅ | 1.1KB | Design or review HTTP, RPC, event, or internal API contracts for clear inputs, outputs, errors, authentication, compatibility, an… | `.kilo/skills/api-contract-design/SKILL.md` |
 | `architecture-decision` | ✅ | 1.1KB | Evaluate software architecture choices, dependencies, interfaces, constraints, and tradeoffs, then produce a concise decision rec… | `.kilo/skills/architecture-decision/SKILL.md` |
-| `ask-matt` | ✅ | 1.7KB | Ask which skill or flow fits your situation. A router over the skills in this repo. | `.kilo/skills/ask-matt/SKILL.md` |
+| `ask-matt` | ✅ | 3.1KB | Ask which skill or flow fits your situation. A router over the skills in this repo. | `.kilo/skills/ask-matt/SKILL.md` |
 | `benchmark-checklist` | ✅ | 4.9KB | "Vet a perf measurement (limiter, tuning, limits, errors, repeatability, relevance, and whether the work happened) before you rep… | `.kilo/skills/benchmark-checklist/SKILL.md` |
 | `blast-radius` | ✅ | 3.8KB | "Find what a change could break somewhere else before it ships, beyond the diff, and prove the one fact it's safe because of by r… | `.kilo/skills/blast-radius/SKILL.md` |
 | `brand-guidelines` | ✅ | 1.4KB | Apply Anthropic's official brand colors and typography to artifacts for consistent visual identity and professional design standa… | `.kilo/skills/brand-guidelines/SKILL.md` |
