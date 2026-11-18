@@ -1,6 +1,6 @@
 # 문서·README·카피 (공개 키트)
 
-[English](COPY-WRITING-GUIDE.md) · [简体中文](COPY-WRITING-GUIDE.zh-CN.md) · [日本語](COPY-WRITING-GUIDE.ja.md) · [한국어](COPY-WRITING-GUIDE.ko.md)
+[English](COPY-WRITING-GUIDE.md) · [日本語](COPY-WRITING-GUIDE.ja.md) · [简体中文](COPY-WRITING-GUIDE.zh-CN.md) · [한국어](COPY-WRITING-GUIDE.ko.md)
 
 ## 요약
 

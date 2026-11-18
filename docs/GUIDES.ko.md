@@ -1,6 +1,6 @@
 # 사용자 가이드
 
-[English](GUIDES.md) · [简体中文](GUIDES.zh-CN.md) · [日本語](GUIDES.ja.md) · [한국어](GUIDES.ko.md)
+[English](GUIDES.md) · [日本語](GUIDES.ja.md) · [简体中文](GUIDES.zh-CN.md) · [한국어](GUIDES.ko.md)
 
 | 가이드 | 용도 |
 |--------|------|

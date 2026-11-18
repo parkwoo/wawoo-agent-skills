@@ -1,6 +1,6 @@
 # 记忆：回忆、保存与客户端配置
 
-[English](MEMORY-CLIENT-GUIDE.md) · [简体中文](MEMORY-CLIENT-GUIDE.zh-CN.md) · [日本語](MEMORY-CLIENT-GUIDE.ja.md) · [한국어](MEMORY-CLIENT-GUIDE.ko.md)
+[English](MEMORY-CLIENT-GUIDE.md) · [日本語](MEMORY-CLIENT-GUIDE.ja.md) · [简体中文](MEMORY-CLIENT-GUIDE.zh-CN.md) · [한국어](MEMORY-CLIENT-GUIDE.ko.md)
 
 ## 本套件里的 memory 是什么
 

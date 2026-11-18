@@ -1,6 +1,6 @@
 # 클라이언트 연동 (Kilo · Cursor · OpenCode · Paseo)
 
-[English](CLIENT-INTEGRATION-GUIDE.md) · [简体中文](CLIENT-INTEGRATION-GUIDE.zh-CN.md) · [日本語](CLIENT-INTEGRATION-GUIDE.ja.md) · [한국어](CLIENT-INTEGRATION-GUIDE.ko.md)
+[English](CLIENT-INTEGRATION-GUIDE.md) · [日本語](CLIENT-INTEGRATION-GUIDE.ja.md) · [简体中文](CLIENT-INTEGRATION-GUIDE.zh-CN.md) · [한국어](CLIENT-INTEGRATION-GUIDE.ko.md)
 
 ## 전제
 

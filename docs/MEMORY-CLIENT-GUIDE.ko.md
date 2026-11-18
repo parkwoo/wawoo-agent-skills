@@ -1,6 +1,6 @@
 # 메모리: 회상·저장·클라이언트 설정
 
-[English](MEMORY-CLIENT-GUIDE.md) · [简体中文](MEMORY-CLIENT-GUIDE.zh-CN.md) · [日本語](MEMORY-CLIENT-GUIDE.ja.md) · [한국어](MEMORY-CLIENT-GUIDE.ko.md)
+[English](MEMORY-CLIENT-GUIDE.md) · [日本語](MEMORY-CLIENT-GUIDE.ja.md) · [简体中文](MEMORY-CLIENT-GUIDE.zh-CN.md) · [한국어](MEMORY-CLIENT-GUIDE.ko.md)
 
 ## 이 키트의 memory
 

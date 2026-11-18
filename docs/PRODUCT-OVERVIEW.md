@@ -1,7 +1,7 @@
 # wawoo-skills: reproducible workflows for AI coding agents
 <!-- SEO: Open-source kit for AI coding agents (Cursor, Kilo, OpenCode) — 97 skills, 21 agents, 12 workflows, Model Context Protocol (MCP) routing. Same request, same steps, with verifiable evidence. -->
 
-[English](PRODUCT-OVERVIEW.md) · [简体中文](PRODUCT-OVERVIEW.zh-CN.md) · [日本語](PRODUCT-OVERVIEW.ja.md) · [한국어](PRODUCT-OVERVIEW.ko.md)
+[English](PRODUCT-OVERVIEW.md) · [日本語](PRODUCT-OVERVIEW.ja.md) · [简体中文](PRODUCT-OVERVIEW.zh-CN.md) · [한국어](PRODUCT-OVERVIEW.ko.md)
 
 ## What this kit is
 

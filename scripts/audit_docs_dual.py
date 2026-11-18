@@ -79,7 +79,7 @@ def doc_bundle() -> str:
 SYSTEM = """You audit wawoo-skills PUBLIC docs (github.com/parkwoo/wawoo-skills).
 
 Facts: 97 skills, 21 agents, 12 workflows. Product-neutral. MCP = Model Context Protocol.
-Paseo-style language bar on every user doc: [English](x.md) · [简体中文](x.zh-CN.md) · [日本語](x.ja.md) · [한국어](x.ko.md)
+Language bar on every user doc: [English](x.md) · [日本語](x.ja.md) · [简体中文](x.zh-CN.md) · [한국어](x.ko.md)
 Public kit has NO /writing, /market-plan, no viral-hooks/marketing-psychology — COPY guide must only list skills that exist.
 
 Checklist gaps to fix in your output:

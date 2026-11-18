@@ -1,6 +1,6 @@
 # Integrations: Paseo, Google, pstack
 
-[English](INTEGRATIONS.md) · [简体中文](INTEGRATIONS.zh-CN.md) · [日本語](INTEGRATIONS.ja.md) · [한국어](INTEGRATIONS.ko.md)
+[English](INTEGRATIONS.md) · [日本語](INTEGRATIONS.ja.md) · [简体中文](INTEGRATIONS.zh-CN.md) · [한국어](INTEGRATIONS.ko.md)
 
 This page explains **third-party stacks the public kit wires up to**—not product-specific private skills.
 

@@ -1,6 +1,6 @@
 # wawoo-skills: AI 코딩 에이전트 오픈소스 키트
 
-[English](PRODUCT-OVERVIEW.md) · [简体中文](PRODUCT-OVERVIEW.zh-CN.md) · [日本語](PRODUCT-OVERVIEW.ja.md) · [한국어](PRODUCT-OVERVIEW.ko.md)
+[English](PRODUCT-OVERVIEW.md) · [日本語](PRODUCT-OVERVIEW.ja.md) · [简体中文](PRODUCT-OVERVIEW.zh-CN.md) · [한국어](PRODUCT-OVERVIEW.ko.md)
 
 **스킬은 있는데 잘 안 씀** — workflow + MCP로 단계 고정. **97 / 21 / 12** (`gen_capabilities.py`).
 

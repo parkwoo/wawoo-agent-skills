@@ -1,6 +1,6 @@
 # 集成：Paseo、Google、pstack
 
-[English](INTEGRATIONS.md) · [简体中文](INTEGRATIONS.zh-CN.md) · [日本語](INTEGRATIONS.ja.md) · [한국어](INTEGRATIONS.ko.md)
+[English](INTEGRATIONS.md) · [日本語](INTEGRATIONS.ja.md) · [简体中文](INTEGRATIONS.zh-CN.md) · [한국어](INTEGRATIONS.ko.md)
 
 公开套件**正式对接**的外部能力（非项目私有 skill）。
 

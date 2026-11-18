@@ -1,6 +1,6 @@
 # wawoo-skills：AI 编程智能体开源套件
 
-[English](PRODUCT-OVERVIEW.md) · [简体中文](PRODUCT-OVERVIEW.zh-CN.md) · [日本語](PRODUCT-OVERVIEW.ja.md) · [한국어](PRODUCT-OVERVIEW.ko.md)
+[English](PRODUCT-OVERVIEW.md) · [日本語](PRODUCT-OVERVIEW.ja.md) · [简体中文](PRODUCT-OVERVIEW.zh-CN.md) · [한국어](PRODUCT-OVERVIEW.ko.md)
 
 <!-- SEO: Cursor Kilo OpenCode MCP，97 skill，21 agent，12 workflow，可复现步骤 -->
 

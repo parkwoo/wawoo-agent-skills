@@ -1,7 +1,7 @@
 # wawoo-skills：AI コーディングエージェント向けオープンソースキット
 <!-- SEO: AI コーディングエージェント (Cursor, Kilo, OpenCode) 向け MCP キット。skill 97・agent 21・workflow 12。同じ依頼を同じ手順で、検証可能な証拠を伴う。製品固有の skill は含みません。 -->
 
-[English](PRODUCT-OVERVIEW.md) · [简体中文](PRODUCT-OVERVIEW.zh-CN.md) · [日本語](PRODUCT-OVERVIEW.ja.md) · [한국어](PRODUCT-OVERVIEW.ko.md)
+[English](PRODUCT-OVERVIEW.md) · [日本語](PRODUCT-OVERVIEW.ja.md) · [简体中文](PRODUCT-OVERVIEW.zh-CN.md) · [한국어](PRODUCT-OVERVIEW.ko.md)
 
 ## このキットとは
 

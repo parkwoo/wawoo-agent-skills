@@ -1,6 +1,6 @@
 # Memory: recall, save, and client setup
 
-[English](MEMORY-CLIENT-GUIDE.md) · [简体中文](MEMORY-CLIENT-GUIDE.zh-CN.md) · [日本語](MEMORY-CLIENT-GUIDE.ja.md) · [한국어](MEMORY-CLIENT-GUIDE.ko.md)
+[English](MEMORY-CLIENT-GUIDE.md) · [日本語](MEMORY-CLIENT-GUIDE.ja.md) · [简体中文](MEMORY-CLIENT-GUIDE.zh-CN.md) · [한국어](MEMORY-CLIENT-GUIDE.ko.md)
 
 <!-- SEO: wawoo-skills memory_recall memory_save WAWOO_MEMORY_READONLY Cursor Kilo OpenCode MCP setup -->
 
