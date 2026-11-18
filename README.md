@@ -9,6 +9,14 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/parkwoo/wawoo-skills/stargazers"><img src="https://img.shields.io/github/stars/parkwoo/wawoo-skills?style=flat-square&color=0b7285&label=stars" alt="GitHub stars"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/parkwoo/wawoo-skills?style=flat-square&color=2f9e44" alt="License: MIT"></a>
+  <a href="https://github.com/parkwoo/wawoo-skills/releases"><img src="https://img.shields.io/github/v/release/parkwoo/wawoo-skills?style=flat-square&color=1c7ed6" alt="Latest release"></a>
+  <a href="docs/USAGE.md"><img src="https://img.shields.io/badge/clients-8%20supported-495057?style=flat-square" alt="8 supported clients"></a>
+  <a href="mcp/server.py"><img src="https://img.shields.io/badge/MCP-capability%20server-6f42c1?style=flat-square" alt="MCP capability server"></a>
+</p>
+
+<p align="center">
   <a href="README.md">English</a> ·
   <a href="README.ja.md">日本語</a> ·
   <a href="README.zh-CN.md">简体中文</a> ·
@@ -29,6 +37,20 @@ The problem isn't a lack of intelligence. It's that **nothing compels it to use 
 wawoo-skills does one thing: **it dictates *which* skill to use, and *when*.** It establishes a fixed path for the agent—what to read first, which workflow to execute, and which gates cannot be bypassed. This ensures that the same request follows the same steps every time, leaving verifiable evidence.
 
 It's product and stack-agnostic—install and go: **98 skills, 21 agent roles, 12 workflows**, plus a local service (MCP). Works with Cursor, Kilo, OpenCode, Codex, Claude Code, Paseo. See [**Usage**](docs/USAGE.md).
+
+<p align="center">
+  <a href="https://parkwoo.github.io/wawoo-skills/"><img src="docs/assets/demo-home.png" width="840" alt="wawoo-skills (live docs)"></a>
+</p>
+
+### Install in 30 seconds
+
+```bash
+git clone https://github.com/parkwoo/wawoo-skills
+cd wawoo-skills
+python3 scripts/install_global.py     # Kilo (global).  OpenCode / Cursor / Codex / Claude Code: see Usage
+```
+
+Then ask your agent to *"fix this bug"* and watch it pick a workflow, fetch only the skills it needs, and refuse to call it done without evidence. Per-client setup → [**Usage**](docs/USAGE.md) · steps → [Quick start](#quick-start-10-minutes).
 
 ## What it is
 
@@ -56,6 +78,25 @@ In one line: **the router selects the workflow, the tool gate restricts availabl
 3.  **The workflow orchestrates phases**: 10 reusable phases compose 12 workflows. Each phase has `exit_criteria`, and `evidence_check` genuinely verifies completion—the model is not evaluating its own work.
 4.  **Skills are fetched on demand**: The catalog is presented first, then only the necessary skills are pulled. This saves tokens and prevents skills from being "invisible and thus unused."
 5.  **Knowledge is persisted**: Decisions and common pitfalls are saved and loaded for future sessions, eliminating the need to re-explain from scratch.
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant U as You
+    participant A as Agent
+    participant M as MCP (wawoo-skills)
+    participant W as Workflow
+    U->>A: "fix this bug"
+    A->>M: interpret_intent
+    M-->>A: workflow = self-correct  (L0 → L1 → L2)
+    A->>M: workflow_get / skill_get
+    M-->>A: phases + only the skills needed
+    A->>W: run phases (gates + exit_criteria)
+    W->>M: evidence_check
+    M-->>W: verified — or FAILED
+    A->>M: memory_save
+    A-->>U: result + evidence
+```
 
 ### Walk through it (fixing a bug)
 
