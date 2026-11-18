@@ -25,7 +25,7 @@
 | `data-egress-guard` | ✅ | 3.0KB | Deterministically mask PII and secrets before sending text to an external LLM/API (no model, no network) — replaces spans with nu… | `.kilo/skills/data-egress-guard/SKILL.md` |
 | `database-change-safety` | ✅ | 1.2KB | Plan, implement, and review schema changes, data migrations, backfills, and cleanup with integrity, availability, observability, … | `.kilo/skills/database-change-safety/SKILL.md` |
 | `dependency-upgrade` | ✅ | 1.2KB | Safely evaluate, apply, and verify software dependency, runtime, container-image, or toolchain upgrades with compatibility, secur… | `.kilo/skills/dependency-upgrade/SKILL.md` |
-| `deployment` | ✅ | 1.3KB | Plan, execute, and verify a deployment or release (Docker Compose, image tagging, environment, migrations, health checks, rollbac… | `.kilo/skills/deployment/SKILL.md` |
+| `deployment` | ✅ | 1.4KB | Plan, execute, and verify a deployment or release (Docker Compose, image tagging, environment, migrations, health checks, rollbac… | `.kilo/skills/deployment/SKILL.md` |
 | `design-brief` | ✅ | 1.7KB | Parse a structured design brief written in I-Lang protocol format into a concrete design spec. Eliminates ambiguity from vague re… | `.kilo/skills/design-brief/SKILL.md` |
 | `design-md` | ✅ | 2.9KB | Create and maintain a DESIGN.md — a plain-text design-system document (Google Stitch format) that design and coding agents read t… | `.kilo/skills/design-md/SKILL.md` |
 | `design-review` | ✅ | 1.2KB | Designer Who Codes: visual audit then fixes with atomic commits and before/after screenshots. Useful for tightening shipped UI be… | `.kilo/skills/design-review/SKILL.md` |

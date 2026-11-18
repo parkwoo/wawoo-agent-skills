@@ -1,8 +1,29 @@
-# wawoo-skills
+<p align="center">
+  <img src="docs/assets/wawoo-skills-logo.svg" width="128" alt="wawoo-skills logo" />
+</p>
 
-**エージェントは能力を持っている。ただ、使っていないだけだ。**
+<h1 align="center">wawoo-skills</h1>
 
-> **Invocation by design（呼び出しを設計する）** — AI コーディングエージェント向けの**再利用可能な skills／agents／workflows／MCP サーバ**の汎用キット。同じ依頼は、毎回同じ手順で。
+<p align="center">
+  <strong>エージェントは能力を持っている。ただ、使っていないだけだ。</strong>
+</p>
+
+<p align="center">
+  <a href="README.md">English</a> ·
+  <a href="README.zh-CN.md">简体中文</a> ·
+  <a href="README.ja.md">日本語</a> ·
+  <a href="README.ko.md">한국어</a>
+</p>
+
+<p align="center">
+  <a href="docs/GUIDES.ja.md">ガイド</a> ·
+  <a href="docs/INTEGRATIONS.ja.md">Paseo · Google · pstack</a>
+</p>
+
+**製品非依存**のオープンソースキット（Cursor・Kilo・OpenCode 向け **AI コーディングエージェント**）：**skill 97**・**agent 役割 21**・**workflow 12** と **MCP**（Model Context Protocol）サーバ。どの workflow に乗り、どの skill を開くかを設計し、同じ依頼を**再現可能で証拠のある手順**にします。
+
+**はじめて:** [製品概要](docs/PRODUCT-OVERVIEW.ja.md) · [**記憶設定**](docs/MEMORY-CLIENT-GUIDE.ja.md) · [導入](docs/CLIENT-INTEGRATION-GUIDE.ja.md) · [文案](docs/COPY-WRITING-GUIDE.ja.md)  
+索引（4 言語）: [GUIDES.ja.md](docs/GUIDES.ja.md)
 
 ## なぜこのキットか
 
@@ -26,7 +47,7 @@ wawoo-skills は、この「**能力はあるのに呼ばれない**」問題に
 - **フェーズとゲート** — 各 workflow は **フェーズ**（`goal`・`agent`・`skills`・`mcp_tools_allow`・`exit_criteria`）に分解。**監査系は読み取り専用**（`implement` を持たない）。
 - **動的ステア** — `steer_task` が実行中プランを修正（add / reorder / reprioritize / scope_change / abort）。ステップ境界で適用。
 - **委譲** — `delegate_subtask` で並列の読み取り専用サブタスクを切り出し、**モデル階層**（`fast`／`reasoning`）を指定できる。
-- **ゲート** — 承認（Gₐ）・証拠（Gₑ）・失敗観察（Gₒ）。推測だけで「完了」にしない。
+- **ゲート** — 承認・証拠・失敗観察。推測だけで「完了」にしない。
 - **段階的開示** — カタログ → 候補 → 必要な skill だけ開く（コンテキスト予算）。
 - **記憶** — `memory_recall` / `memory_save`（秘密は拒否）。**クライアント設定**（`WAWOO_MEMORY_READONLY`・Kilo/Cursor/OpenCode）: [`docs/USAGE.ja.md` §5.1](docs/USAGE.ja.md#51-記憶memory想起保存とクライアント別の設定)。
 
@@ -34,7 +55,7 @@ wawoo-skills は、この「**能力はあるのに呼ばれない**」問題に
 
 **ビフォー（ルーティング無し）**：「このバグ直して」と言う。エージェントは場当たりで進め、ゲートを飛ばし、次の同じ依頼では別の道を行く。
 
-**アフター（ルーティング有り）**：依頼は `/self-review` に入る。エージェントは `test-engineering` を開き、再現を伴って証拠ゲート（Gₑ）に到達し、次の同じ依頼は同じ手順をたどる。
+**アフター（ルーティング有り）**：依頼は `/self-review` に入る。エージェントは `test-engineering` を開き、再現を伴って**証拠ゲート**を通過し、次の同じ依頼は同じ手順をたどる。
 
 ## 向く人・向かない人
 
@@ -50,6 +71,7 @@ wawoo-skills は、この「**能力はあるのに呼ばれない**」問題に
 - **Kilo CLI / Kilo Code**：`.kilo/` の探索、slash ワークフロー（`/feature-delivery` 等）、`kilo.json` の MCP。
 - **Cursor**：`AGENTS.md`・`.cursor/rules`・MCP、および `@.kilo/commands`／`@.kilo/skills` の参照（slash／ネイティブ agent 切替は非対応。手順は同等に適用）。
 - **OpenCode**：`AGENTS.md`＋MCP（`opencode.json`）。slash／skill のネイティブ実行は無し（`interpret_intent` → `workflow_get` → `skill_get`）。
+- **[Paseo](https://github.com/getpaseo/paseo)**：内蔵 OpenCode — 同一 `opencode.json`・`install_opencode.py`・`paseo daemon restart`（[`docs/INTEGRATIONS.ja.md`](docs/INTEGRATIONS.ja.md)）。
 
 ### 前提条件（ランタイム）
 
@@ -73,6 +95,7 @@ wawoo-skills は、この「**能力はあるのに呼ばれない**」問題に
 | Kilo Code | Kilo Code（VS Code 拡張） | https://kilocode.ai |
 | Cursor | Cursor | https://cursor.com |
 | OpenCode | OpenCode | https://opencode.ai |
+| Paseo | Paseo（マルチエージェント IDE） | https://github.com/getpaseo/paseo |
 | MCP | Model Context Protocol | https://modelcontextprotocol.io |
 | AGENTS.md | AGENTS.md | https://agents.md |
 

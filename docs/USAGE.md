@@ -1,5 +1,7 @@
 # Usage (Kilo / Cursor / MCP)
 
+**Overview:** [PRODUCT-OVERVIEW.md](PRODUCT-OVERVIEW.md) · **Guides:** [GUIDES.md](GUIDES.md) (4 languages) · **Memory setup (start here):** [MEMORY-CLIENT-GUIDE.md](MEMORY-CLIENT-GUIDE.md)
+
 > Japanese version: [USAGE.ja.md](https://github.com/parkwoo/wawoo-skills/blob/master/docs/USAGE.ja.md)
 
 ## 0. Prerequisites
@@ -108,7 +110,7 @@ python3 scripts/e2e_flows.py   # public smoke (contract/E2E)
 
 ## 5. Call order
 
-1. Choose the **Workflow** (entry). For ambiguous requests, use MCP **`interpret_intent`** to pick from the 16 workflows ([INTENT-ROUTING.md](INTENT-ROUTING.md)). When you can be explicit, use **`/delivery-lite`** (`docs/plans/ACTIVE.md` is the progress SSOT). Ceremony levels (L0–L3): see `AGENTS.md` §3 (distinct from the route layers `L0–L3` in `INTENT-ROUTING.md`).
+1. Choose the **Workflow** (entry). For ambiguous requests, use MCP **`interpret_intent`** to pick from the **12 workflows** ([INTENT-ROUTING.md](INTENT-ROUTING.md); list: [PRODUCT-OVERVIEW.md](PRODUCT-OVERVIEW.md)). When you can be explicit, use **`/delivery-lite`** (`docs/plans/ACTIVE.md` is the progress SSOT). Ceremony levels (L0–L3): see `AGENTS.md` §3 (distinct from the route layers `L0–L3` in `INTENT-ROUTING.md`).
 2. Select candidates via the **catalog / MCP** (do not read everything).
 3. Open only the **Skills** you need.
 4. Follow the workflow's **output schema** and **gates** (approval, evidence).
