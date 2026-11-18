@@ -1,4 +1,4 @@
-# 使い方（Kilo / Cursor / OpenCode / MCP）
+# 使い方（Kilo / Cursor / MCP）
 
 ## 0. 前提条件
 
@@ -39,59 +39,33 @@ KILO_GLOBAL_DIR=/path/to/config python3 scripts/install_global.py  # 別の配�
 
 ## 2.5 OpenCode（https://opencode.ai）
 
-OpenCode は `AGENTS.md` を読み、`skills.paths` から**ネイティブ skills** を読み込み、MCP サーバへ **stdio** で接続します。キットはリポジトリ直下に `opencode.json` を同梱します:
+OpenCode は `AGENTS.md` を読み、MCP サーバへ **stdio** で接続します。`opencode.json` にローカル MCP として追加します:
 
 ```json
 {
   "$schema": "https://opencode.ai/config.json",
-  "instructions": ["AGENTS.md"],
-  "skills": { "paths": [".kilo/skills"] },
   "mcp": {
     "wawoo-skills": {
       "type": "local",
-      "command": ["python3", "mcp/server.py"],
-      "enabled": true
+      "command": ["python3", "/abs/path/to/wawoo-skills/mcp/server.py"],
+      "enabled": true,
+      "environment": { "WAWOO_SKILLS_ROOT": "/abs/path/to/wawoo-skills" }
     }
   }
 }
 ```
-
-### グローバル導入（全プロジェクトで使う・冪等）
-
-`.kilo/{agents,commands}` を `~/.config/opencode/{agent,command}` へミラーし、MCP・`instructions`・`skills.paths`・`default_agent` を冪等に登録:
-```bash
-python3 scripts/install_opencode.py --dry-run    # 差分のプレビュー
-python3 scripts/install_opencode.py              # 適用（既定 mirror = 余分を削除）
-python3 scripts/install_opencode.py --no-delete  # 余分を保持
-python3 scripts/install_opencode.py --memory-writable
-OPENCODE_GLOBAL_DIR=/path/to/config python3 scripts/install_opencode.py  # 別ターゲット
-```
-- agent は `name:`／`id:` を剥がして**キー＝ファイル名**にする（command の `agent:` 参照と一致させる）。
-- `mcp.wawoo-skills`（絶対 python＋`WAWOO_SKILLS_ROOT`／`WAWOO_MEMORY_READONLY`）、`instructions`＝`<kit>/AGENTS.md`（**絶対パス**。相対は注入されない）、`skills.paths`＝`<kit>/.kilo/skills`（ネイティブ発見）、`default_agent`＝`wawoo-auto`（`--no-default-agent` で除外）。
-- **OpenCode は再起動が必要**（設定は起動時に一度だけ読む）。
-- slash のネイティブ実行は無い。workflow は MCP（`interpret_intent` → `workflow_get` → `skill_get`）＋インストール済み subagents/commands で回す。
+- OpenCode は slash／skill のネイティブ実行を持たない。`AGENTS.md` ＋ MCP（`interpret_intent` → `workflow_get` → `skill_get`）で使う。
 - `opencode_stdio_contract` E2E（MCP handshake＋`tools/list`）で検証。
 
 ## 3. Cursor（https://cursor.com）
 1. このディレクトリを開く（`AGENTS.md` と `.cursor/rules` を読む）。
 2. **Settings → MCP** で `wawoo-skills` を有効化（`.cursor/mcp.json`）。
-3. ツール `capabilities`／`skill_search`／`skill_get`／`agent_get` を利用。
-
-### ネイティブ skills・agents・グローバル rules
-
-Cursor は**ネイティブ skills**（`SKILL.md`）・プロジェクト subagents・ユーザレベル rules を読むため、MCP に加えてネイティブ導入も可能:
-```bash
-python3 scripts/install_cursor_workspace.py --workspace /abs/path/to/project  # プロジェクト: .cursor/{mcp.json,rules,agents,skills}
-python3 scripts/install_cursor_global.py                                      # ユーザ:    ~/.cursor/{rules,agents,skills,mcp.json}
-```
-- `rules/` は相対 `@.kilo/` をキットの絶対パスへ書き換えてコピー（どのプロジェクトからでも有効）。
-- `agents/` は `.kilo/agents` から生成（`name`＋`description`＋本体）。役割の内容は MCP `agent_get` でも取得可。
-- `skills/` は `.kilo/skills/<name>` への symlink（キットが単一の出所）。
-- **プロジェクト** `.cursor/agents` は app・**CLI・cloud** が読む。**ユーザ** `~/.cursor/agents` は**デスクトップのみ**。CLI/ACP ではプロジェクト導入か MCP `agent_get` を使う。
+3. ツール `capabilities`／`skill_search`／`skill_get` を利用。
 
 **Cursor の制約**：
-- slash command（`/feature-delivery` 等）は**ネイティブ実行されない** — 手順を適用するか、MCP `workflow_get` で取得。
-- agent の自動切替は**無い**。プロジェクト subagent を使うか、`agent_get`／`@.kilo/agents/<role>.md` の役割を適用。
+- slash command（`/feature-delivery` 等）は**動かない**。
+- agent の切替は**無い**（役割は `@.kilo/agents/<role>.md` を読んで適用）。
+- `SKILL.md` の**自動発見・自動起動**は**無い**。
 
 **フォールバック（MCP 無し）**：
 ```
@@ -106,19 +80,13 @@ python3 scripts/e2e_flows.py   # 公開スモーク（契約/E2E）
 ```
 **カタログ系**: `capabilities`・`skill_search`・`skill_get`・`workflow_get`・`agent_get`・`memory_recall`・`memory_save`・`evidence_check`。
 
-**ガードレール / egress**: `mask_pii`（PII/秘密のマスク＋可逆マップ）、`redact_infra`（エラー/ログから内部 IP・ホスト・資格情報を除去）、`guard_content`（policy-as-data の可否ゲート、任意で fail-closed）。
-
-**コンテキスト**: `compress_context` — 会話ターンをオフライン・決定的に圧縮/クリーニング（ヒューリスティック＋曖昧重複排除＋密度予算。LLM・ネットワーク不要）。詳細は `.kilo/skills/context-compression/SKILL.md`。
-
-**意図**: `interpret_intent` は slash → **ローカル語彙（threshold/棄権）** → learned → upstream の順。`python3 mcp/intent_calibrate.py` で閾値を校正。schedule は `complexity` / `model_tier` を返す。
-
 **意図ルーティング**（任意だが推奨）: `interpret_intent` → `workflow_get` → … → `workflow_clear`。サブタスクは `delegate_subtask`。
 
 - 対外ガイド：**[docs/INTENT-ROUTING.ja.md](INTENT-ROUTING.ja.md)**（L0–L3・スコア JSON・ツールゲート）
 - 実装・常駐：`mcp/README.md`
 
 ## 5. 呼び出しの順序
-1. **Workflow**（入口）を選ぶ。曖昧な依頼は MCP **`interpret_intent`** で 12 workflow から選ぶ（[INTENT-ROUTING.ja.md](INTENT-ROUTING.ja.md)）。明示できるときは **`/delivery-lite`**（`docs/plans/ACTIVE.md` が進捗 SSOT）。セレモニーレベル（L0–L3）は `AGENTS.md` §3（`INTENT-ROUTING.md` の**ルート層** `L0–L3` とは別の軸）。
+1. **Workflow**（入口）を選ぶ。曖昧な依頼は MCP **`interpret_intent`** で 16 workflow から選ぶ（[INTENT-ROUTING.ja.md](INTENT-ROUTING.ja.md)）。明示できるときは **`/delivery-lite`**（`docs/plans/ACTIVE.md` が進捗 SSOT）。セレモニーレベル（L0–L3）は `AGENTS.md` §3（`INTENT-ROUTING.md` の**ルート層** `L0–L3` とは別の軸）。
 2. **カタログ／MCP** で候補を選ぶ（全部読まない）。
 3. 必要な **Skill** だけ開く。
 4. Workflow の**出力スキーマ**と**ゲート**（承認・証拠）に従う。
@@ -137,6 +105,35 @@ python3 scripts/e2e_flows.py   # 公開スモーク（契約/E2E）
 - 段階的開示：全部を一度に渡さない。
 - 予算例外：入口 `SKILL.md` のみ先読み。詳細は各 skill の `references/`（例：`imagegen-frontend-mobile`・`ask-matt`・`wayfinder`・`design-brief`・`writing-for-agents`）。
 
+### 6.1 Skill 拡充チェックリスト（保守者向け）
+
+skill を増やすときのトークン／コスト対策。ゲートは `AGENTS.ja.md` §8 と `validate_assets.py` と併用する。
+
+| # | やること | 備考 |
+|---|----------|------|
+| 1 | 入口 `SKILL.md` は手順・ゲートのみ。重い本文は `references/` | 新規自作 skill は **4KB 超えたら references 必須**（`skill_budget_warnings`） |
+| 2 | Cursor **ネイティブ skill は curated**（よく使う 15〜30）。残りは **MCP `skill_get` のみ** | `install_cursor_workspace.py` は MCP のみ。全件 symlink は `install_cursor_global.py`（任意）— 一覧例: `scripts/cursor-skills-curated.example.txt` |
+| 3 | frontmatter `description` は **1 行・160 文字目安** | `CAPABILITIES.md` は 130 字で切り詰め自動生成。長い description は Cursor `available_skills` を太らせる |
+| 4 | 社内専用は `internal/skills` または workspace-only | `publication-boundary` skill。汎用キットに載せすぎない |
+| 5 | 長セッションは `compress_context`（MCP）・`/compact`・`memory_save` | 1 セッション = 1 成果物（`AGENTS.ja.md` §4.1） |
+| 6 | 監視 | `validate_assets` の 4KB WARN。実運用は **cache_read** と **1 turn の read < 4KB** を先に疑う |
+
+**Workflow と Skill の分担**: 手順の骨格・ゲート・出力形は **Workflow**（`.kilo/commands/`）。Skill はその中の **1 フェーズ手順**（例: `/writing` → `writing-beats` → `writing-shape`。`/research` → `research-decision-room`）。長い synthesis は skill を workflow に置き換えず、`references/` に逃がす。
+
+### 6.2 Uplift pilot（P0–P3）
+
+| 段 | 内容 |
+|----|------|
+| P0 | **`modern-web-guidance-bridge`** · MCP `mwg_search` / `mwg_retrieve` · `scripts/mwg_bridge.py` |
+| P1 | **`web-design-guidelines/expectations.md`** · `scripts/skill_uplift_check.py` |
+| P1.1 | **`accessibility-audit` / `deployment`** の expectations · checker · `/ui-delivery` **5b** 証拠パス |
+| P1b | **`internal/skill-uplift-ab`** · `scripts/skill_uplift_ab.py`（Playwright A/B） |
+| P1.5 | **`frontend-guides-hub`**（UI 線の索引） |
+| P2 | uplift/prune 規則 — **`docs/SKILL-UPLIFT-PILOT.ja.md`** |
+| P3 | **`legacy-web-scan`** · `scripts/legacy_web_scan.py` + MWG `legacy-scan` |
+
+**Prune ルール（要約）**: 無 skill で ~90% 達成 → 入口を短縮；uplift 低 → **guide/skill を直す**（workflow は維持）；証拠は `docs/evidence/skill-uplift/`。
+
 ## 7. 前提が必要なスキル（3）
 `to-spec`・`to-tickets`・`triage` は issue tracker が必要。初回に `setup-matt-pocock-skills` を実行。
 `scripts/readiness.json` に記載。
@@ -148,22 +145,3 @@ python3 scripts/gen_capabilities.py
 python3 scripts/e2e_flows.py
 ```
 版管理：`docs/VERSIONING.md`。
-
-## 9. 言語ポリシー（既定と変更方法）
-
-キットは **三層** の言語ポリシーを同梱する — 正本は `AGENTS.md` §1、根拠は `.kilo/skills/language-policy/SKILL.md`:
-
-| 対象 | 既定（`wawoo-skills`） |
-|---|---|
-| コード（コメント・識別子・文字列・commit・設定キー） | **英語** |
-| 工程記録（`plans/`・`ACTIVE.md`・`RETRO-*`・`evidence/`・`memory/`）と**エージェントの応答** | **日本語**（本キットの `project working language`） |
-| 説明・対外ドキュメント（`README.md`・`docs/USAGE.md` 等） | **英語（主）＋日本語（副）** の 2 ファイル |
-
-`project working language` は**キットの既定であり固定ではない**。コードは相互運用のため英語のまま、作業言語はプロジェクトの選択。
-
-**作業言語を変える手順**（例：英語や他言語へ）:
-
-1. `AGENTS.md` §1 の「作業言語」行を選択に合わせる。
-2. `.kilo/skills/language-policy/SKILL.md` の「(wawoo-skills: Japanese)」と書かれた 2 行を一致させる。
-3. 規則を再掲する場合は router を再生成: `python3 scripts/gen_router.py`。
-4. 任意：副言語ドキュメント（`*.ja.md`）を外して 1 言語にする。`.publish-allowlist` も更新。
