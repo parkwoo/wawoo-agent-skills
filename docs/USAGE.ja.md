@@ -1,47 +1,149 @@
-# 使い方（Kilo / Cursor / MCP）
+<p align="center">
+  <img src="assets/wawoo-skills-logo.png" width="128" alt="wawoo-skills ロゴ" />
+</p>
 
-**概要:** [PRODUCT-OVERVIEW.ja.md](PRODUCT-OVERVIEW.ja.md) · **ガイド:** [GUIDES.ja.md](GUIDES.ja.md)（4 言語）· **記憶設定:** [MEMORY-CLIENT-GUIDE.ja.md](MEMORY-CLIENT-GUIDE.ja.md)
+<h1 align="center">wawoo-skills 使用ガイド</h1>
 
-## 0. 前提条件
+<p align="center">
+  <strong>導入、設定、活用。</strong>
+</p>
 
-- **Python 3（標準ライブラリのみ）** が必要（MCP サーバ・保守スクリプト）。**追加パッケージ不要**。
-- `PATH` に `python3` が通っていること（Windows は `python`）。確認：`python3 --version`。
-  - macOS: 無ければ `xcode-select --install`。Linux: `apt install python3` 等。Windows: https://www.python.org/downloads/ で「Add python.exe to PATH」を有効化。
-- MCP は `python3` を実行コマンドとして起動（`kilo.json`・`.cursor/mcp.json`）。別名（`python`／`py`）の環境では `command` を実体に合わせる。
-- 詳細：README「前提条件（ランタイム）」。
+<p align="center">
+  <a href="USAGE.md">English</a> ·
+  <a href="USAGE.ja.md">日本語</a> ·
+  <a href="USAGE.zh-CN.md">简体中文</a> ·
+  <a href="USAGE.ko.md">한국어</a>
+</p>
 
-## 1. 収録
-- Skills：`.kilo/skills/<name>/SKILL.md`
-- Agents：`.kilo/agents/<name>.md`
-- Workflows：`.kilo/commands/<name>.md`
-- MCP：`mcp/server.py`
-- カタログ（自動生成）— **件数はここが正本**：`.kilo/CAPABILITIES.md`
+<p align="center">
+  <a href="../README.ja.md">README に戻る</a> ·
+  <a href="https://github.com/parkwoo/wawoo-skills">GitHub</a>
+</p>
 
-## 2. Kilo CLI / Kilo Code（https://kilo.ai ・ https://kilocode.ai）
-1. このディレクトリを開く（`.kilo/` を自動探索、`kilo.json` で MCP 有効）。
-2. ワークフロー：`/feature-delivery` など。
-3. スキル：モデルが `SKILL.md` を選択、または明示的に参照。
+> このドキュメントは**インストール、設定、トラブルシューティング**のみを扱います。「概要と目的」については [`README.ja.md`](../README.ja.md) を参照してください。
 
-### グローバル配置（全プロジェクトで使う・冪等）
-`.kilo/{skills,agents,commands}` を `~/.config/kilo/` へ同期し、MCP と適用範囲メモを冪等登録する（再実行可）。
+**対象**: 初めて導入する開発者。約 10 分で動作するところまで進められます。
+
+**対応**: Kilo、Cursor、OpenCode、Codex、Claude Code、Paseo。本キットは Python 3 標準ライブラリのみで動作します。
+
+## クイックスタート
+
+1. Python 3 を確認 — [§0 前提](#s0)
+2. 使用するクライアントに接続 — [§2 クライアント別の接続](#s2)（**Kilo / Cursor が最も簡単**）
+3. 検証: `python3 scripts/validate_assets.py` を実行し、`OK` が表示されれば完了です。
+
+それ以外（MCP の引数、メモリ設定、トラブルシューティング）は下の目次から必要なところだけ読んでください。
+
+> **設定を変更したい場合** 作業言語、画像生成のキー、メモリ、ルーティング調整、インストール先は [**§9 設定一覧**](#s9) にまとめてあります。
+
+## 目次
+
+- [0. 前提](#s0)
+- [1. 内容](#s1)
+  - [1.1 3 種類のアセット: 参照方法](#s1-1) · [1.2 ワークフローの構造](#s1-2) · [1.3 意図ルーティング](#s1-3) · [1.4 アセットを追加する（skill / agent / workflow）](#s1-4)
+- [2. クライアント別の接続](#s2)
+  - [2.1 Kilo](#s2-1) · [2.2 OpenCode](#s2-2) · [2.3 Cursor](#s2-3) · [2.4 Paseo](#s2-4) · [2.5 Codex](#s2-5) · [2.6 Claude Code](#s2-6)
+- [3. MCP サービス](#s3)
+- [4. メモリ設定](#s4)
+- [5. 呼び出し順](#s5)
+  - [5.1 よくある場面: ひとことで、どのワークフロー](#s5-1)
+- [6. 保守と検証](#s6)
+- [7. 注意事項（依存 / キー / 制限）](#s7)
+- [8. トラブルシューティング（FAQ）](#s8)
+- [9. 設定一覧（環境変数と設定）](#s9)
+
+<a id="s0"></a>
+
+## 0. 前提: Python 3
+
+- **Python 3（標準ライブラリのみ）**: MCP サービスと保守スクリプトは標準ライブラリだけで動作します。追加パッケージは不要です。
+- `PATH` に `python3` が必要（Windows は `python`）。確認: `python3 --version` → `3.x`。
+  - macOS: `xcode-select --install`、Linux: `apt install python3` など、Windows: https://www.python.org/downloads/ からインストールし、**"Add python.exe to PATH"** をチェックしてください。
+- MCP は `python3` で起動します（`kilo.json`、`.cursor/mcp.json`）。名前が異なる場合（`python` / `py`）は、各設定の `command` を実際のコマンドに変更してください。
+- ネットワークも `.env` も不要です（MCP は stdio を使用）。
+
+<a id="s1"></a>
+
+## 1. 内容
+
+要約: **スキルは「何ができるか」、ロールは「誰の視点か」、ワークフローは「どの順で、何をもって完了とするか」です。**
+
+<a id="s1-1"></a>
+
+### 1.1 3 種類のアセット: 参照方法
+
+スキル / ロール / ワークフローの定義は [README の「用語」](../README.ja.md) を参照してください。ここでは**探し方**だけを扱います:
+
+| 種別 | 探し方 |
+|---|---|
+| スキル skills | `skill_search` / `.kilo/CAPABILITIES.md` |
+| ロール agents | `agent_get` |
+| ワークフロー workflows | `workflow_get` |
+| MCP サービス | `python3 mcp/server.py` |
+
+<a id="s1-2"></a>
+
+### 1.2 ワークフローの構造
+
+**12 のワークフロー一覧は [README「12 のワークフロー」](../README.ja.md) にあります。** ここでは構造だけ説明します — 各ワークフローには:
+
+- **フェーズ（phase）**: 目標 / 担当ロール / 使用するスキル / `exit_criteria`。`workflow_get {name, phase}` で段階ごとに確認できます。
+- **ゲート（gate）**: 承認・証拠・失敗の観察。**レビュー系は読み取り専用**（`implement` フェーズがない）。
+- **完了条件（exit_criteria）**: 満たさなければ完了とはなりません。
+
+**`implement` フェーズを持たないワークフロー**（`/design-review`、`/compliance-review`、`/release-review`、`/research`、`/status-report` など）は実装フェーズに入りません。コードを変更する場合は `/delivery-lite`、`/feature-delivery`、`/ui-delivery`、`/incident-response`、`/self-improve` のいずれかに切り替えます。
+
+<a id="s1-3"></a>
+
+### 1.3 意図ルーティング
+
+**選び方の順序**（明示 → ローカル語彙 → 学習済み → モデル採点）は [README](../README.ja.md) を参照してください。ここでは、**選択後の管理**について説明します:
+
+- **ツールゲート**: そのワークフローの**許可ツール一覧**（`mcp_tools_allow`）で MCP ツールを制限します。監査系のワークフローでは、読み取りツールのみが許可され、`implement` フェーズは存在しません。
+- **セッションゲート**: 呼び出しをまたいで「いまどのワークフローか」を記憶します。`WAWOO_INTENT_RESUME=1` なら再起動後に復元、`WAWOO_INTENT_CLIENT` で複数クライアントの衝突を防ぎます。
+- **終了**: `workflow_clear` で現在のセッションゲートを解除します。
+- **ルーティングを上書き**: `/name` を直接書くか、`interpret_intent` に `scoring` を渡します。**誤選択 / 見つからない場合**: [§8 トラブルシューティング](#s8) を参照してください（多くの場合、MCP の再起動忘れが原因です）。
+
+<a id="s1-4"></a>
+
+### 1.4 アセットを追加する（skill / agent / workflow）
+
+- **skill**: `.kilo/skills/<name>/SKILL.md` を作成します。`name` はディレクトリ名と一致させ、エントリポイントは 4KB 以下に抑え、詳細は `references/` へ記述してください。
+- **agent**: `.kilo/agents/<name>.md` を作成します（`mode: primary|subagent`、権限は必要に応じて）。
+- **workflow**: `.kilo/commands/<name>.md` を作成します（frontmatter: `description` / `agent` / `replay`）。
+- その後: `python3 scripts/validate_assets.py` を実行し、`python3 scripts/gen_capabilities.py` を実行してください。MCP / Kilo は起動時にコマンドをキャッシュするため、**再起動が必要**です。
+
+<a id="s2"></a>
+
+## 2. クライアント別の接続（Kilo / Cursor / OpenCode / Codex / Paseo）
+
+<a id="s2-1"></a>
+
+### 2.1 Kilo（CLI / Kilo Code）
+
+0. **事前のログイン**: `kilo auth login`（プロバイダーを選んでログイン）。Paseo から Kilo を起動する前にもログインが必要です。
+1. このリポジトリを開くだけ（`.kilo/` を自動検出、MCP は `kilo.json` で有効化）。
+2. ワークフローは `/feature-delivery` などのスラッシュコマンド。スキルはモデルが選ぶか、明示的に指定します。
+
+**グローバルインストール**（全プロジェクトで使える、再実行可能）:
+
 ```bash
-python3 scripts/install_global.py --dry-run    # 変更内容の確認
-python3 scripts/install_global.py              # 適用（既定ミラー＝余剰を削除）
-python3 scripts/install_global.py --no-delete  # 余剰を残す
-KILO_GLOBAL_DIR=/path/to/config python3 scripts/install_global.py  # 別の配置先
+python3 scripts/install_global.py --dry-run     # 変更をプレビュー
+python3 scripts/install_global.py               # 適用（ミラー: 余分なファイルを削除）
+python3 scripts/install_global.py --no-delete   # 余分なファイルを残す
+python3 scripts/install_global.py --memory-writable   # memory_save を許可
+KILO_GLOBAL_DIR=/path/to/config python3 scripts/install_global.py   # 出力先を指定
 ```
-- MCP は絶対パス登録（`/usr/bin/python3` ＋ `WAWOO_SKILLS_ROOT`／`WAWOO_MEMORY_READONLY`）。既定は recall-only（`=1`）で、書込を有効化するには `--memory-writable`（`=0`）。詳細は `mcp/README.md`。
-- 併せて **`ROUTER.md` を生成**し、`instructions` に **絶対パス**で冪等登録、`default_agent` を `wawoo-auto` に設定する（既定）。
-  - Kilo の `instructions` は**絶対パス必須**（相対 `ROUTER.md` は実行時コンテキストに注入されない）。
-  - 既定 agent `wawoo-auto` が「最初のツール＝`workflow_get`／`interpret_intent`」を強制し、`code` 既定時のルーティング漏れを防ぐ。
-  - 変更は `--default-agent <name>`／`--no-default-agent`／`--force-default-agent` で制御。
-- **反映には Kilo の再起動が必要**（agent／command／instruction はサーバ起動時にキャッシュ。VS Code は Reload Window）。
-- キットの repo 相対 SSOT を前提とする手順は**キット内でのみ有効**。グローバル `AGENTS.md` にその旨を追記する。
-- `validate_assets`：同名 skill／command は **command 側で入口を明文化していれば警告しない**（`design-review`・`research` は対応済み）。未記載の衝突は `WARN` として出る（`scripts/validate_assets.py` の `documents_entry`）。
 
-## 2.5 OpenCode（https://opencode.ai）
+- **以下の 3 つの処理を行います**: ① MCP を書き込む（絶対パスの `python3` + `WAWOO_SKILLS_ROOT` / `WAWOO_MEMORY_READONLY`）。② `ROUTER.md` を生成し、**絶対パス**で `instructions` に登録。③ 既定ロールを `wawoo-auto` に設定（`--default-agent` / `--no-default-agent` で変更）。
+- Kilo の `instructions` は**絶対パスでなければなりません**（相対パスは認識されません）。
+- **変更後は Kilo の再起動が必要**（agents / commands / instructions は起動時にキャッシュされます。VS Code: Reload Window）。
 
-OpenCode は `AGENTS.md` を読み、MCP サーバへ **stdio** で接続します。`opencode.json` にローカル MCP として追加します:
+<a id="s2-2"></a>
+
+### 2.2 OpenCode
+
+`opencode.json` にローカル stdio MCP として追加します:
 
 ```json
 {
@@ -59,85 +161,131 @@ OpenCode は `AGENTS.md` を読み、MCP サーバへ **stdio** で接続しま�
   }
 }
 ```
-- OpenCode は slash／skill のネイティブ実行を持たない。`AGENTS.md` ＋ MCP（`interpret_intent` → `workflow_get` → `skill_get`）で使う。
-- **一括登録**: `python3 scripts/install_opencode.py`（既定 recall-only）。**`--memory-writable`** で `WAWOO_MEMORY_READONLY=0`（§5.1）。Paseo 内蔵 OpenCode も同じ `opencode.json`。
-- `opencode_stdio_contract` E2E（MCP handshake＋`tools/list`）で検証。
 
-## 3. Cursor（https://cursor.com）
-1. このディレクトリを開く（`AGENTS.md` と `.cursor/rules` を読む）。
+- 一括設定: `python3 scripts/install_opencode.py`（既定は読み取り専用）。書き込み可にするには `--memory-writable` を指定します。
+- OpenCode には**標準のスラッシュコマンド / スキル実行がありません**。MCP 経由で実行する必要があります: `interpret_intent` → `workflow_get` → `skill_get`。
+
+<a id="s2-3"></a>
+
+### 2.3 Cursor
+
+1. ディレクトリを開く（`AGENTS.md` と `.cursor/rules` を読みます）。
 2. **Settings → MCP** で `wawoo-skills` を有効化（`.cursor/mcp.json`）。
-3. ツール `capabilities`／`skill_search`／`skill_get` を利用。
-
-**導入（MCP ＋ 任意でネイティブ skills symlink）**
 
 ```bash
-python3 scripts/install_cursor_workspace.py --workspace /path/to/workspace   # MCP のみ（プロジェクト mcp.json 上書き）
-python3 scripts/install_cursor_global.py                                     # ユーザー ~/.cursor（他 MCP とマージ）
-# memory_save を有効化（§5.1）:
+python3 scripts/install_cursor_workspace.py --workspace /path/to/workspace   # MCP のみ（プロジェクトの mcp.json を上書き）
+python3 scripts/install_cursor_global.py                                     # ユーザー階層 ~/.cursor（既存 mcp.json にマージ）
+# memory_save を許可:
 python3 scripts/install_cursor_global.py --memory-writable
 python3 scripts/install_cursor_workspace.py --workspace /path/to/workspace --memory-writable
 ```
 
-**Cursor の制約**：
-- slash command（`/feature-delivery` 等）は**動かない**。
-- agent の切替は**無い**（役割は `@.kilo/agents/<role>.md` を読んで適用）。
-- `SKILL.md` の**自動発見・自動起動**は**無い**。
+**Cursor の制限:**
 
-**フォールバック（MCP 無し）**：
-```
-@.kilo/CAPABILITIES.md を見て候補を選び、必要な @.kilo/skills/<name>/SKILL.md を読んで従って。
-@.kilo/commands/<name>.md の手順を適用して。
+- スラッシュコマンド（`/feature-delivery` など）は**動作しません**。
+- **エージェント切替なし**（`@.kilo/agents/<role>.md` を参照し、手動でロールを適用してください）。
+- **`SKILL.md` の自動検出 / 自動実行なし**。
+
+**MCP がないときの代替**: `@.kilo/CAPABILITIES.md` から候補を選び → `@.kilo/skills/<name>/SKILL.md` を読む → 手順を実行。ワークフローは `@.kilo/commands/<name>.md` を読みます。
+
+<a id="s2-4"></a>
+
+### 2.4 Paseo（OpenCode 内蔵、他とは別物）
+
+Paseo は **マルチエージェント IDE** で、OpenCode を内蔵し、エージェントを独自の **daemon**（バックグラウンドサービス）で動作させます:
+
+- **設定**: **同じ** `~/.config/opencode/opencode.json` を使います（`wawoo-skills` の MCP はここに接続）。インストールは `python3 scripts/install_opencode.py`。
+- **事前のログイン**: Paseo が `kilo` / `cursor` を起動する前に、各 CLI でログインしてください（Kilo は `kilo auth login`）。ログインしないと起動しません。
+- **再起動のルール**: 環境変数や MCP を変更したら
+  ```bash
+  paseo daemon stop && paseo daemon start     # 完全に切り替える
+  # または: paseo daemon restart              # worker だけ再起動
+  ```
+  **daemon を再起動すると、それが起動したセッションも一緒に再起動します。**
+- **独立プロセス**: VS Code の Kilo 拡張、Cursor デスクトップ、自分のターミナルの opencode/kilo/cursor は **daemon の影響を受けません**。
+- **プラグインは別物**: Paseo 自身のプラグインスキル（`npx skills add getpaseo/paseo`）は本キットと無関係です。MCP と daemon を合わせれば併用できます。
+
+<a id="s2-5"></a>
+
+### 2.5 Codex（OpenAI Codex CLI / 拡張）
+
+Codex は `AGENTS.md` を読み、スキルをロードし、MCP に対応します（`~/.codex/config.toml`）。本キットを stdio MCP として追加:
+
+```toml
+[mcp_servers.wawoo-skills]
+command = "python3"
+args = ["/abs/path/to/wawoo-skills/mcp/server.py"]
+env = { WAWOO_SKILLS_ROOT = "/abs/path/to/wawoo-skills", WAWOO_MEMORY_READONLY = "1" }
 ```
 
-## 4. MCP（Model Context Protocol: https://modelcontextprotocol.io）
+- スキルディレクトリは `.agents/skills/` を指します（`.kilo/skills/` の内容を置く場合）。
+- Codex は現在**手動設定**が必要で、本リポジトリに一括スクリプトはありません。Codex は `/skills`、`$skill` 呼び出しと MCP（`codex mcp add ...`）に対応します。
+
+<a id="s2-6"></a>
+
+### 2.6 Claude Code（Anthropic CLI）
+
+Claude Code は MCP、`CLAUDE.md`、`.claude/skills/`、`.claude/commands/`（標準のスラッシュコマンド）に対応します。
+
 ```bash
-python3 mcp/server.py        # stdio（通常はクライアントが起動）
-python3 scripts/e2e_flows.py   # 公開スモーク（契約/E2E）
+claude mcp add wawoo-skills \
+  --env WAWOO_SKILLS_ROOT=/abs/path/to/wawoo-skills \
+  --env WAWOO_MEMORY_READONLY=1 \
+  -- python3 /abs/path/to/wawoo-skills/mcp/server.py
 ```
-**カタログ系**: `capabilities`・`skill_search`・`skill_get`・`workflow_get`・`agent_get`・`memory_recall`・`memory_save`・`evidence_check`。
 
-**意図ルーティング**（任意だが推奨）: `interpret_intent` → `workflow_get` → … → `workflow_clear`。サブタスクは `delegate_subtask`。
+- **スキル**: `.kilo/skills` を `.claude/skills` にコピーまたはシンボリックリンクします。
+- **ワークフロー**: `.kilo/commands/*.md` を `.claude/commands/` にコピーします（標準のスラッシュコマンド）。
+- **契約**: `AGENTS.md` と `CLAUDE.md` は**どちらか一方**を使用してください。両方作成しないでください。
+- **サブエージェント**: `Agent`（`subagent_type`）を使用します。`swarm` / `reflect` は並列で動作します。
 
-- 対外ガイド：**[docs/INTENT-ROUTING.ja.md](INTENT-ROUTING.ja.md)**（L0–L3・スコア JSON・ツールゲート）
-- 実装・常駐：`mcp/README.md`
+> **Pi などの他の MCP クライアント**: stdio MCP に対応していれば、同じ `python3 mcp/server.py` で接続できます。スキルディレクトリはクライアントの規則（例: `.pi/skills/`）に従います。サブエージェント拡張があれば `swarm` / `reflect` は並列、なければ順次実行（どちらも対応）。
 
-## 5. 呼び出しの順序
-1. **Workflow**（入口）を選ぶ。曖昧な依頼は MCP **`interpret_intent`** で **12 workflow** から選ぶ（[INTENT-ROUTING.ja.md](INTENT-ROUTING.ja.md)・一覧 [PRODUCT-OVERVIEW.ja.md](PRODUCT-OVERVIEW.ja.md)）。明示できるときは **`/delivery-lite`**（`docs/plans/ACTIVE.md` が進捗 SSOT）。セレモニーレベル（L0–L3）は `AGENTS.md` §3（`INTENT-ROUTING.md` の**ルート層** `L0–L3` とは別の軸）。
-2. **カタログ／MCP** で候補を選ぶ（全部読まない）。
-3. 必要な **Skill** だけ開く。
-4. Workflow の**出力スキーマ**と**ゲート**（承認・証拠）に従う。
-5. 作業前に `memory` を想起、決定後に保存（設定は **§5.1**）。
+<a id="s3"></a>
 
-## 5.1 記憶（memory）— 想起・保存とクライアント別の設定
+## 3. MCP サービス
 
-### ツールの役割
+本キットの機能は**ローカル MCP サービス**として公開されます（stdio: ローカルプロセス間通信、クライアントが自動起動、ポート不要）。
 
-| MCP ツール | 用途 |
-|------------|------|
-| `memory_recall` | `docs/memory/`（INDEX＋topic）から過去の決定を読む。**書込禁止でも使える。** |
-| `memory_save` | INDEX＋topic へ 1 件追記（`docs/memory/TEMPLATE.md`）。`WAWOO_MEMORY_READONLY=1` のとき **拒否**。秘密パターンは常に拒否。 |
+```bash
+python3 mcp/server.py          # 通常はクライアントが起動
+python3 scripts/e2e_flows.py   # 契約 / E2E スモーク
+```
 
-**正本**: キット直下の `docs/memory/` の Markdown。Kilo ネイティブメモリは補助（矛盾時はファイル優先 — `docs/memory/MEMORY-TOOLS.md`）。
+よく使うツール: `capabilities`、`skill_search`、`skill_get`、`workflow_get`、`agent_get`、`memory_recall`、`memory_save`。意図ルーティング: `interpret_intent` → `workflow_get` → … → `workflow_clear`。サブタスク: `delegate_subtask`。
 
-### `WAWOO_MEMORY_READONLY`（利用者が必ず触るスイッチ）
+<a id="s4"></a>
 
-| 値 | 挙動 | 使い分け |
-|----|------|----------|
-| **`1`**（インストーラ **既定**） | **recall-only** — `memory_save` はエラー。`memory_recall` は可。 | 任意プロジェクトから MCP をぶら下げるとき・監査系・キットツリーへの書込を避けたいとき。 |
-| **`0`** | **読み書き可** — `memory_save` が `<kit>/docs/memory/` へ追記。 | キット repo または同じ memory レイアウトの workspace で日常的に使うとき。**Kilo / Cursor / Paseo·OpenCode を揃えるなら 0。** |
+## 4. メモリ設定
 
-MCP は **クライアント起動時の env** を読む。json を直しただけでは足りない — **クライアント再起動**（Kilo Reload、Cursor Reload、OpenCode 再起動、Paseo は `paseo daemon restart`）。
+### 4.1 ツールの役割
 
-### どこに書くか（クライアント別）
+| MCP ツール | 役割 |
+|---|---|
+| `memory_recall` | `docs/memory/`（INDEX + トピックファイル）から過去の決定を読み込みます。**読み取り専用モードでも使えます。** |
+| `memory_save` | 決定を追記します（INDEX + トピックファイル、テンプレート `docs/memory/TEMPLATE.md`）。**`WAWOO_MEMORY_READONLY=1` では拒否されます**。秘密情報は常に拒否されます。 |
 
-| クライアント | 設定ファイル | 推奨コマンド（冪等） |
-|--------------|--------------|----------------------|
-| **Kilo グローバル** | `~/.config/kilo/kilo.jsonc` → `mcp.wawoo-skills.environment` | `python3 scripts/install_global.py`（既定 `1`）／**`--memory-writable`**（`0`） |
-| **OpenCode**（端末・**Paseo 内蔵**） | `~/.config/opencode/opencode.json` | `python3 scripts/install_opencode.py`／**`--memory-writable`** |
-| **Cursor ユーザー** | `~/.cursor/mcp.json` | `python3 scripts/install_cursor_global.py`（他 MCP とマージ）＋**`--memory-writable`** |
-| **Cursor ワークスペース** | `<workspace>/.cursor/mcp.json` | `python3 scripts/install_cursor_workspace.py --workspace <root>`＋**`--memory-writable`**（`mcp.json` 全上書き — 他サーバがある場合は手動マージ） |
+メモリの**唯一の信頼できる情報源**は `<kit>/docs/memory/` の Markdown です。クライアント内蔵メモリと衝突する場合は**ファイルを優先**します（`docs/memory/MEMORY-TOOLS.md` 参照）。
 
-**手動で書く場合**（パスは環境に合わせる）:
+### 4.2 `WAWOO_MEMORY_READONLY`（読み取り専用 / 書き込み可）
+
+| 値 | 効果 | いつ使うか |
+|---|---|---|
+| **`1`**（インストール既定） | **読み取り専用**: `memory_save` はエラー、`memory_recall` は通常どおり | 任意のプロジェクトに MCP を登録する場合、監査 / コンプライアンスのセッション、エージェントにキットへ書かせたくない場合 |
+| **`0`** | **読み書き可**: `WAWOO_SKILLS_ROOT/docs/memory/` へ書き込みを許可 | キットのリポジトリ、または同じ `docs/memory/` 構成のワークスペースで日常的に使う場合 |
+
+MCP サービスは**起動時**にクライアント設定の環境変数を読み込みます — **ファイルを変えるだけでは不十分で、クライアントの再起動が必要**です（Kilo Reload、Cursor Reload、OpenCode 再起動、Paseo 内蔵 OpenCode は `paseo daemon restart`）。
+
+### 4.3 クライアント別の設定場所
+
+| クライアント | 設定ファイル | 推奨コマンド（再実行可能） |
+|---|---|---|
+| Kilo（グローバル） | `~/.config/kilo/kilo.jsonc` → `mcp.wawoo-skills.environment` | `python3 scripts/install_global.py`（既定 `1`）または `--memory-writable`（`0`） |
+| OpenCode（ターミナルまたは **Paseo 内蔵**） | `~/.config/opencode/opencode.json` → `mcp.wawoo-skills.environment` | `python3 scripts/install_opencode.py` または `--memory-writable` |
+| Cursor（ユーザー） | `~/.cursor/mcp.json` → `mcpServers.wawoo-skills.env` | `python3 scripts/install_cursor_global.py`（他の MCP をマージ）+ `--memory-writable` |
+| Cursor（プロジェクト） | `<workspace>/.cursor/mcp.json` | `install_cursor_workspace.py --workspace <root>` + `--memory-writable`（上書き、手動マージが必要） |
+
+**手動設定用のスニペット**（どのクライアントでも、パスだけ変更）:
 
 ```json
 "environment": {
@@ -146,9 +294,9 @@ MCP は **クライアント起動時の env** を読む。json を直しただ�
 }
 ```
 
-任意: `WAWOO_MEMORY_ROOT` でディレクトリ上書き（既定 `<kit>/docs/memory`）。
+任意: `WAWOO_MEMORY_ROOT` でディレクトリを変更（既定 `<kit>/docs/memory`）。
 
-### 変更後の確認
+### 4.4 確認方法
 
 ```bash
 grep -A2 WAWOO_MEMORY_READONLY ~/.config/kilo/kilo.jsonc
@@ -156,60 +304,174 @@ grep -A2 WAWOO_MEMORY_READONLY ~/.config/opencode/opencode.json
 grep -A2 WAWOO_MEMORY_READONLY ~/.cursor/mcp.json
 ```
 
-クライアント再起動後、テストセッションで `memory_save` を 1 回試す。readonly 時はエラーメッセージに `WAWOO_MEMORY_READONLY` と出る。
+そのあと**クライアントを再起動**し、テストセッションで `memory_save` を一度呼んで確認します。
 
-### workflow 側の制限（このフラグとは別）
+### 4.5 ワークフロー側の制限
 
-`compliance-review` など一部 workflow は **`READONLY=0` でも** ツールゲートで `memory_save` 不可。`docs/INTENT-ROUTING.ja.md` 参照。
+`READONLY=0` でも、一部のワークフローは `memory_save` を**禁止**します（例: `/compliance-review`）。
 
-### 関連
+### 4.6 他のプロジェクトで使う
 
-- 手順・優先順: `docs/memory/MEMORY-TOOLS.md`・`TEMPLATE.md`・skill `memory`
-- `/feature-delivery` 入口・出口でも想起／保存
-- CI: `validate_assets.py` が memory 内の秘密らしき文字列を検出
+`docs/memory/INDEX.example.md` を `docs/memory/INDEX.md` にコピーすれば、同じメモリの仕組みを使えます。
 
-## 6. コンテキスト予算
-- 契約 ≤500tok／カタログ ≤1k／Workflow ≤1.5k／**Skill 1 個 ≤2〜4KB**／Memory top-5。
-- 段階的開示：全部を一度に渡さない。
-- 予算例外：入口 `SKILL.md` のみ先読み。詳細は各 skill の `references/`（例：`imagegen-frontend-mobile`・`ask-matt`・`wayfinder`・`design-brief`・`writing-for-agents`）。
+<a id="s5"></a>
 
-### 6.1 Skill 拡充チェックリスト（保守者向け）
+## 5. 呼び出し順（MCP ツールチェーン）
 
-skill を増やすときのトークン／コスト対策。ゲートは `AGENTS.ja.md` §8 と `validate_assets.py` と併用する。
+1. **ワークフロー**を選ぶ（入口）。迷ったら MCP `interpret_intent`。
+2. **カタログ / MCP** で候補を選ぶ（全部読まない）。
+3. 必要な **skill** だけ開く。
+4. ワークフローの**出力形式とゲート**（承認・証拠）に従って実行。
+5. 着手前に `memory_recall`、決定したら `memory_save`。
 
-| # | やること | 備考 |
-|---|----------|------|
-| 1 | 入口 `SKILL.md` は手順・ゲートのみ。重い本文は `references/` | 新規自作 skill は **4KB 超えたら references 必須**（`skill_budget_warnings`） |
-| 2 | Cursor **ネイティブ skill は curated**（よく使う 15〜30）。残りは **MCP `skill_get` のみ** | `install_cursor_workspace.py` は MCP のみ。全件 symlink は `install_cursor_global.py`（任意）— 一覧例: `scripts/cursor-skills-curated.example.txt` |
-| 3 | frontmatter `description` は **1 行・160 文字目安** | `CAPABILITIES.md` は 130 字で切り詰め自動生成。長い description は Cursor `available_skills` を太らせる |
-| 4 | 社内専用は `internal/skills` または workspace-only | `publication-boundary` skill。汎用キットに載せすぎない |
-| 5 | 長セッションは `compress_context`（MCP）・`/compact`・`memory_save` | 1 セッション = 1 成果物（`AGENTS.ja.md` §4.1） |
-| 6 | 監視 | `validate_assets` の 4KB WARN。実運用は **cache_read** と **1 turn の read < 4KB** を先に疑う |
+> **基本構造は固定ですが、各手順は状況に応じて調整可能です。** 不要な段階は飛ばし、順序が違えば並べ替え、優先度が変われば調整、方向が違えば範囲変更や中止、互いに独立したサブタスクは同時に進められます。この調整はシステムが証拠に基づいて**自動**で行います。いつでも介入できますが、手作業で組み立てる必要はありません。
 
-**Workflow と Skill の分担**: 手順の骨格・ゲート・出力形は **Workflow**（`.kilo/commands/`）。Skill はその中の **1 フェーズ手順**（例: `/writing` → `writing-beats` → `writing-shape`。`/research` → `research-decision-room`）。長い synthesis は skill を workflow に置き換えず、`references/` に逃がす。
+<a id="s5-1"></a>
 
-### 6.2 Uplift pilot（P0–P3）
+### 5.1 よくある場面: ひとことで、どのワークフロー
 
-| 段 | 内容 |
-|----|------|
-| P0 | **`modern-web-guidance-bridge`** · MCP `mwg_search` / `mwg_retrieve` · `scripts/mwg_bridge.py` |
-| P1 | **`web-design-guidelines/expectations.md`** · `scripts/skill_uplift_check.py` |
-| P1.1 | **`accessibility-audit` / `deployment`** の expectations · checker · `/ui-delivery` **5b** 証拠パス |
-| P1b | **`internal/skill-uplift-ab`** · `scripts/skill_uplift_ab.py`（Playwright A/B） |
-| P1.5 | **`frontend-guides-hub`**（UI 線の索引） |
-| P2 | uplift/prune 規則 — **`docs/SKILL-UPLIFT-PILOT.ja.md`** |
-| P3 | **`legacy-web-scan`** · `scripts/legacy_web_scan.py` + MWG `legacy-scan` |
+| やりたいこと | ひとこと | 動くもの |
+|---|---|---|
+| バグを直す | 「このバグを直して」 | `/self-review`: まず再現、修正、証拠つきで完了 |
+| 小さな機能を足す | 「設定画面を足して」 | `/delivery-lite`: 計画 → 実装 → 検証、`ACTIVE.md` に記録 |
+| ブランチをレビュー | 「このブランチをレビューして」 | `/self-review`: 標準と仕様の二軸で並行レビュー |
+| リリース準備 | 「リリース準備をして」 | `/release-review`: 法務 / プライバシー / 版 / セキュリティの読み取り専用ゲート |
+| 調べてから判断 | 「X を調べて結論を出して」 | `/research`: 調査 → プロダクト発見 → 仕様化 |
+| ページを作り直す | 「トップページを作り直して」 | `/ui-delivery`: 設計 → 実装 → アクセシビリティ確認 |
+| 障害対応 | 「本番でエラーが出てる」 | `/incident-response`: まず証拠 → 緩和 → 振り返り |
 
-**Prune ルール（要約）**: 無 skill で ~90% 達成 → 入口を短縮；uplift 低 → **guide/skill を直す**（workflow は維持）；証拠は `docs/evidence/skill-uplift/`。
+<a id="s6"></a>
 
-## 7. 前提が必要なスキル（3）
-`to-spec`・`to-tickets`・`triage` は issue tracker が必要。初回に `setup-matt-pocock-skills` を実行。
-`scripts/readiness.json` に記載。
+## 6. 保守と検証
 
-## 8. 保守
 ```bash
-python3 scripts/validate_assets.py
-python3 scripts/gen_capabilities.py
-python3 scripts/e2e_flows.py
+python3 scripts/validate_assets.py    # 資産の検証（name=dir、参照、重複、JSON）
+python3 scripts/gen_capabilities.py   # 能力一覧を再生成（手動で編集しない）
+python3 scripts/e2e_flows.py          # MCP 契約 / E2E スモーク
 ```
-版管理：`docs/VERSIONING.md`。
+
+<a id="s7"></a>
+
+## 7. 注意事項（依存 / キー / 制限）
+
+- **issue tracker が必要なスキル**: `to-spec`、`to-tickets`、`triage` は先に設定（GitHub Issues など）し、`setup-matt-pocock-skills` を一度実行してください。
+- **画像生成**: `imagegen-frontend-mobile` はプロンプトのみを生成します。実画像は `fal-gen`（`FAL_KEY`）または `openrouter-gen`（`OPENROUTER_API_KEY`）を使用します。
+- **Cursor** の制限は §2.3 を参照してください。
+
+> [!WARNING]
+> **キーをコミットしない**: API キー / トークン / `.env` をリポジトリにコミットしないでください。`memory_save` は秘密情報を拒否します。
+
+<a id="s8"></a>
+
+## 8. トラブルシューティング（FAQ）
+
+| 症状 | 対応 |
+|---|---|
+| `memory_save` がエラー（readonly の言及） | `WAWOO_MEMORY_READONLY` を `0` にして**クライアントを再起動**（§4.2） |
+| 設定を変えたのに MCP が変わらない | クライアントを再起動してください。Paseo は `paseo daemon stop && paseo daemon start` を実行します。 |
+| `python3` が見つからない / 名前が違う | 各設定の `command` を実際のコマンド（`python` / `py`）に |
+| Kilo のルーティング説明が効かない | `instructions` は**絶対パス**である必要あり（§2.1） |
+| インストール確認 | `python3 scripts/validate_assets.py` で `OK` |
+
+<a id="s9"></a>
+
+## 9. 設定一覧（環境変数と設定）
+
+先に結論: **ほとんどの場合、2 つの設定のみで十分です**すれば十分です — `WAWOO_SKILLS_ROOT`（キットのパス）と `WAWOO_MEMORY_READONLY`（メモリを書き込み可にするか）。
+
+### 9.1 コア（ほぼ必須）
+
+| 変数 | 役割 | 既定 | 設定方法 |
+|---|---|---|---|
+| `WAWOO_SKILLS_ROOT` | キットのルートの絶対パス | `server.py` の 2 階層上 | クライアント MCP の `environment` / `env`。一括スクリプトが自動で書き込み |
+| `WAWOO_MEMORY_READONLY` | `1`=読み取り専用（保存不可）、`0`=書き込み可 | インストールスクリプトは既定 `1` | `install_*.py --memory-writable`、または設定を手動で編集（[§4](#s4)） |
+| `WAWOO_MEMORY_ROOT` | メモリのディレクトリ | `<kit>/docs/memory` | 別の場所に置くときに設定 |
+
+### 9.2 作業言語（3 層ポリシー）
+
+既定: **コード = 英語、エンジニアリング記録と応答 = プロジェクトの作業言語（本キット = 日本語）、説明文書 = 英語主体 + 日本語副**。
+
+**変更方法（プロジェクトごとに 1 回）:**
+
+1. `AGENTS.md` §1（マスター定義）を変更;
+2. `.kilo/skills/language-policy/SKILL.md` の「(wawoo-skills: Japanese)」2 か所を同期;
+3. ルーティング説明を再生成: `python3 scripts/gen_router.py`;
+4. この文書の言語説明も合わせる。
+
+> 「文書全体をどの言語にするか」を変える場合は、`README.<lang>.md` / `docs/USAGE.<lang>.md` をその言語で用意します（本キットは `en / ja / zh-CN / ko`）。
+
+### 9.3 画像生成
+
+実際に画像を生成するにはキーを設定します。`imagegen-frontend-mobile` はプロンプトだけを書き、モデルは呼び出しません。
+
+| 機能 | 必要なキー | 置き場所 | 説明 |
+|---|---|---|---|
+| `fal-gen`（実画像、fal.ai） | `FAL_KEY`（形式 `key_id:secret`） | `.kilo/skills/fal-gen/.env`（`.env.example` をコピー） | **コミット・表示しない**。既定は最安モデル `flux/schnell` |
+| `openrouter-gen`（実画像、OpenRouter） | `OPENROUTER_API_KEY`（形式 `sk-or-v1-...`） | `.kilo/skills/openrouter-gen/.env`（`.env.example` をコピー） | 既定 `google/gemini-2.5-flash-image`。`OPENROUTER_IMAGE_MODEL` で変更、より安価な `google/gemini-3.1-flash-lite-image` も可 |
+| `imagegen-frontend-mobile` | 不要 | — | **プロンプトのみ**、モデル呼び出しなし |
+
+- 任意: `FAL_BASE_URL` で fal.ai のエンドポイントを指定。
+- 2 つの画像スキルは**マニフェスト**で一括生成し、既存ファイルは自動でスキップ（再実行安全）。まず `--dry-run` で確認し、それから生成（画像生成は費用がかかります）。
+
+> [!WARNING]
+> **キーをリポジトリに書かない**（`.env` もコミットしない）。キーはローカルの `.env` だけに置き、`.gitignore` で無視されていることを確認してください（本リポジトリは `.env` / `.env.*` を無視し、`.env.example` のみ残します）。
+
+### 9.4 Google Modern Web Guidance
+
+**何か**: Google がまとめた「現代の Web の作り方」オンラインガイド（約 262 本）。
+
+**何を解決するか**: AI の知識は古くなります。Web を作るとき、最新の書き方を必要に応じて取得でき、古くなった書き方も見つけられます。
+
+**使い方**: ひとこと伝えるだけ。エージェントが `modern-web-guidance-bridge` で検索（`mwg_search`）し、取得（`mwg_retrieve`）します。ガイドはリポジトリにコピーしません。
+
+**前提**: Node.js とネットワークが必要。オフラインなら `WAWOO_MWG_DISABLE=1` で無効化。
+
+**既存の基準と衝突するとき**: プロダクト基準 / Vercel を優先。
+
+### 9.5 意図ルーティング（上級、通常は変更不要）
+
+`interpret_intent` が「ワークフローの自動選択」を担います。以下はそのマッチングの細部にだけ影響し、**通常は変更不要**です。
+
+| 変数 | 役割 | 既定 |
+|---|---|---|
+| `WAWOO_INTENT_LEARN_DB` | 学習済みトリガーの保存先 | `data/intent_learned.db` |
+| `WAWOO_INTENT_SESSION` | セッションゲートの状態ファイル | `<root>/data/intent_session.json` |
+| `WAWOO_INTENT_RESUME` | `1` で再起動後にゲートを復元 | オフ |
+| `WAWOO_INTENT_CLIENT` | クライアント別ファイル、ゲートの衝突を防ぐ | 空 |
+| `WAWOO_INTENT_SOCKET` | 常駐 `intent_receiver.py` のソケット | 空 |
+| `WAWOO_INTENT_LEXICAL` / `_THRESHOLD` / `_MARGIN` / `_MIN_TOKENS` / `_MAX_ABSTAIN` / `_DEBUG` | 語彙ルーティングのスイッチ・しきい値・デバッグ | `mcp/README.md` 参照 |
+
+### 9.6 インストールと CI
+
+インストールと CI にだけ影響し、日常利用には影響しません。
+
+| 変数 / 引数 | 役割 |
+|---|---|
+| `KILO_GLOBAL_DIR` | `install_global.py` の出力先（既定 `~/.config/kilo`） |
+| `CURSOR_API_KEY` | Cursor CLI の**自動化された CI 環境** 専用（ローカルは通常 `agent login`） |
+
+### 9.7 文書レビュースクリプト（任意）
+
+任意。レビュースクリプト専用で、メインの流れには関与しません。
+
+`scripts/audit_docs_dual.py` / `scripts/openrouter_doc_audit.py` は OpenRouter で文書をレビューします:
+
+- `OPENROUTER_API_KEY`（必須）
+- `OPENROUTER_DOC_MODEL`（既定 `google/gemini-2.5-flash`）
+- `OPENROUTER_QWEN_MODEL`（既定 `qwen/qwen3-30b-a3b`）
+
+### 9.8 外部の前提
+
+issue tracker が必要な 3 つのスキル: `to-spec`、`to-tickets`、`triage`（`scripts/readiness.json` 参照）。1 回設定: `setup-matt-pocock-skills`。
+
+### 9.9 設定ファイルの対応表
+
+クライアントごとの設定ファイルの場所。**変更後はクライアントを再起動**。
+
+| クライアント / 用途 | ファイル |
+|---|---|
+| Kilo | `~/.config/kilo/kilo.jsonc`（プロジェクト内 `kilo.json`） |
+| Cursor（ユーザー / プロジェクト） | `~/.cursor/mcp.json` / `<workspace>/.cursor/mcp.json` |
+| OpenCode / Paseo | `~/.config/opencode/opencode.json` |
+| Codex | `~/.codex/config.toml` |
+| 画像キー | `.kilo/skills/fal-gen/.env`、`.kilo/skills/openrouter-gen/.env`（**コミット禁止**） |

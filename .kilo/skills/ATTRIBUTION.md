@@ -1,6 +1,6 @@
 # Skill and agent provenance & licenses
 
-Origins of `.kilo/skills` (94) and `.kilo/agents` (21). **Keep each license when reusing or redistributing.**
+Origins of `.kilo/skills` (98) and `.kilo/agents` (21). **Keep each license when reusing or redistributing.**
 Full license texts: `LICENSES/`.
 
 ## Skills
