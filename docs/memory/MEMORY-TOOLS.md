@@ -1,5 +1,7 @@
 # Memory tool priority (Kilo / Cursor / MCP)
 
+**Client setup** (`WAWOO_MEMORY_READONLY`, per-installer commands, verification): **`docs/USAGE.md` §5.1** (JA: `docs/USAGE.ja.md` §5.1).
+
 **Conflict-resolution rules** for when several memory mechanisms are available at once. Detailed steps: `.kilo/skills/memory/SKILL.md`.
 
 ## Recall
