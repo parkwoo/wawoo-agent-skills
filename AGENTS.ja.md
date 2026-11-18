@@ -53,7 +53,7 @@ docs/                      … 使い方・意図ルーティング・版管理�
 | **横断の決定・制約** | `docs/memory/` | タスク完了ではなく、再発する知識のみ |
 | **監査（キット資産）** | CI／`validate_assets.py` | エージェントが口頭で「監査した」と言う代わりに実行 |
 
-**セレモニーレベル（L0–L3）**: 上の表（`docs/INTENT-ROUTING.md` の**ルート層** `L0–L3` とは別の軸）。迷ったら **L1＋`/delivery-lite`**。本番・法務・大規模は `/feature-delivery` または L2 へ。
+**セレモニーレベル（L0–L3）**: 上の表（`internal/docs/archive/INTENT-ROUTING.md` の**ルート層** `L0–L3` とは別の軸）。迷ったら **L1＋`/delivery-lite`**。本番・法務・大規模は `/feature-delivery` または L2 へ。
 
 **git commit**: 利用者が依頼したときのみ（タスク `done` と commit は別）。
 
@@ -65,7 +65,7 @@ docs/                      … 使い方・意図ルーティング・版管理�
 
 **Kilo 実運用（強制・0 番）**: MCP `wawoo-skills` が接続されている環境では、コード変更・調査・設計・文書生成などの**非自明な依頼では、最初のツール呼び出しを `wawoo-skills_workflow_get`（判断不能なら `wawoo-skills_interpret_intent`）にする**。ネイティブ `skill` ツール（`plan-md` 等）や記憶で代替して作業を始めたら §4 違反として扱い、途中でも `workflow_get` に戻る。接続不能な場合のみネイティブを使い、その旨を報告する。
 
-1. **入口＝Workflow**：通常は **`/delivery-lite`**（セレモニー L1）。大規模・ゲート多めは `/feature-delivery`。Kilo は `/name`、Cursor は `@.kilo/commands/<name>.md`。依頼が曖昧なときは MCP **`interpret_intent`** → `schedule.workflow`（`docs/INTENT-ROUTING.md`）。`interpret_intent` が `needs_scoring` を返したら `scoring` を付けて再呼び出しする。
+1. **入口＝Workflow**：通常は **`/delivery-lite`**（セレモニー L1）。大規模・ゲート多めは `/feature-delivery`。Kilo は `/name`、Cursor は `@.kilo/commands/<name>.md`。依頼が曖昧なときは MCP **`interpret_intent`** → `schedule.workflow`（`internal/docs/archive/INTENT-ROUTING.md`）。`interpret_intent` が `needs_scoring` を返したら `scoring` を付けて再呼び出しする。
 2. **候補選定＝カタログ／MCP**：`.kilo/CAPABILITIES.md` または MCP `capabilities`／`skill_search`。**全部読まない**。`interpret_intent` 後は **`mcp_tools_allow` 外のツールを呼ばない**（終了時 `workflow_clear`）。
 3. **手順＝Skill**：Workflow が挙げた skill を**必要分だけ** `skill_get`／`@.kilo/skills/<name>/SKILL.md` で開く。phase があるときは `workflow_get {name, phase:<id>}` で goal／agent／skills／`exit_criteria` を取得し、`implement` を持たない workflow（監査系）では実装に進まず**切替を宣言**する。
 4. **出力＝スキーマ**：Workflow の出力形に従う。ゲート（承認・証拠・失敗観察）を飛ばさない。
@@ -149,7 +149,7 @@ docs/                      … 使い方・意図ルーティング・版管理�
   - skill/agent/command の追加・後方互換の追加 = **MINOR**
   - 誤字・文言・内部リファクタ = **PATCH**
 - リリース時は `v<version>` タグを付ける（例 `v0.1.0`）。
-- 詳細：`docs/VERSIONING.md`。
+- 詳細：`internal/docs/archive/VERSIONING.md`。
 
 ---
 
@@ -159,7 +159,7 @@ docs/                      … 使い方・意図ルーティング・版管理�
 |---|---|
 | 2026-10-25 | 汎用キットとして初版（既存プロジェクトから抽出・一般化） |
 | 2026-10-25 | §3 SSOT（ACTIVE・L0–L3）、既定入口 `/delivery-lite` |
-| 2026-10-26 | §4 `interpret_intent`・ツールゲート・`docs/INTENT-ROUTING.md` |
+| 2026-10-26 | §4 `interpret_intent`・ツールゲート・`internal/docs/archive/INTENT-ROUTING.md` |
 | 2026-10-27 | §4 に MCP 先呼びを強制（`workflow_get`／`interpret_intent`）。Kilo の `instructions` は絶対パス必須（相対 `ROUTER.md` は注入されない）と判明し修正 |
 | 2026-10-27 | 全 agent 定義（21）に `## Routing (MCP first)` を追加（subagent でネイティブ `skill` が先行する事象への対応） |
 | 2026-10-27 | 既定 agent `wawoo-auto` を新設（`default_agent` 既定）。`install_global.py` が `ROUTER.md` 生成・`instructions` 絶対パス登録・`default_agent` 設定を冪等に実施 |

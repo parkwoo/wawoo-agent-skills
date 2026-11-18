@@ -1,0 +1,46 @@
+
+===== README.md =====
+Of course. Here is a review of the document with suggested improvements, following the requested format.
+
+---
+
+1.  `leaving verifiable evidence` -> `producing verifiable artifacts` -> "Artifacts" is the standard term for generated outputs (logs, files, test results) in a development context.
+2.  `Every skill dumped in` -> `Loading all skills into the context` -> "Dumping" is too informal; "loading into the context" is the precise technical action.
+3.  `Experience is remembered` -> `Knowledge is persisted` -> Avoids anthropomorphism; "persisted" is the correct technical term for saving state between sessions.
+4.  `Want it to go another way? Just say so.` -> `You can also redirect the agent with a new prompt.` -> The original is too conversational for technical documentation; the suggestion is more direct and professional.
+5.  `it's not the model grading itself` -> `the model is not evaluating its own work` -> "Grading itself" is informal jargon; the replacement is a more precise and professional description.
+6.  `nothing compels it to use its capabilities` -> `nothing enforces the use of its capabilities` -> "Enforces" is a stronger, more idiomatic term than "compels" in a systems context.
+7.  `You say "fix this bug"` -> `You prompt the agent with "fix this bug"` -> "Prompt" is the standard term for user input to an AI model; "say" is too conversational.
+8.  `The tool gate locks down tools` -> `The tool gate restricts available tools` -> "Locks down" is informal; "restricts" is more precise and professional.
+9.  `Parked in a wiki` -> `Isolated in a wiki` -> "Parked" is colloquial; "isolated" or "siloed" better describes knowledge that isn't being used.
+10. `the agent simply isn't reading them` -> `the agent doesn't adhere to them` -> The agent "reads" the rules, but fails to follow them; "adhere to" is more accurate.
+11. `no "trust me, it's faster."` -> `to validate performance gains empirically` -> Replaces an informal quote with a professional explanation of the benefit.
+12. `The conclusion is saved to memory` -> `The outcome is persisted for future sessions` -> "Outcome" is more neutral than "conclusion," and "persisted" is more technically accurate than "saved to memory."
+13. `if the flow is so fixed, can the plan only proceed in one direction?` -> `Does a fixed workflow prevent the agent from adapting?` -> The original sentence is clunky and reads like a literal translation; the suggestion is more natural and direct.
+14. `It adapts itself.` -> `The agent adapts within each phase.` -> This sentence is redundant; the suggestion clarifies *how* it adapts, adding value.
+15. `every required check and record is made` -> `every required check is performed and recorded` -> The passive "is made" is unnatural; "is performed and recorded" uses stronger, more common verbs.
+16. `The parts we wrote` -> `The components developed for this project` -> "The parts we wrote" is too casual for a license section; the replacement is more formal.
+17. `audit-type workflows are read-only` -> `Audit workflows are restricted to read-only operations` -> The suggestion is more explicit and uses a more standard phrasing.
+18. `The steps may seem abstract; a quick example clarifies:` -> `This process can be abstract, so let's walk through an example:` -> Provides a smoother and more professional transition.
+19. `Skills are fetched on demand` -> `Skills are fetched dynamically` -> "Dynamically" or "on-demand" are both good, but this section already uses "on demand" in the next sentence. "Dynamically" offers variety.
+20. `the skeleton maintains order; dynamic adjustment prevents stagnation.` -> `the workflow provides structure, while dynamic adjustment provides flexibility.` ->
+
+
+===== docs/USAGE.md =====
+Excellent. Here is a review of the provided markdown document, following the requested format.
+
+---
+1.  `Install it, configure it, use it well.` -> `A guide to installation, configuration, and usage.` -> The original is too informal for a document subtitle; the suggestion is more professional and descriptive.
+2.  `If they aren't met, it isn't done.` -> `If these criteria are not met, the workflow is not considered complete.` -> Replaces a simplistic phrase with a more professional and precise one.
+3.  `the files win` -> `the content of these files takes precedence.` -> Replaces informal jargon with a standard, professional term for describing configuration priority.
+4.  `The skeleton is fixed; the steps can be adjusted.` -> `While the overall workflow structure is fixed, the individual steps are flexible.` -> Rewrites an awkward, slightly metaphorical sentence into natural, idiomatic English.
+5.  `you don't have to plan it by hand` -> `manual planning is not required.` -> More concise and professional phrasing suitable for technical documentation.
+6.  `this repo ships no one-shot script` -> `this repository does not include an automated installation script for Codex.` -> Replaces informal jargon ("ships," "one-shot") with a clear, professional sentence.
+7.  `tick "Add python.exe to PATH"` -> `select the "Add python.exe to PATH" option` -> Replaces a regionalism ("tick") with a more universally understood term ("select" or "check").
+8.  `AI knowledge goes stale.` -> `An AI model's training data can become outdated.` -> Replaces a casual, anthropomorphic phrase with a more technical and precise explanation.
+9.  `It does three things` -> `This script performs three actions:` -> More formal and appropriate for describing a script's behavior in technical documentation.
+10. `workflows live in` -> `workflows are defined in` -> Replaces a casual, imprecise verb with a more accurate one for describing file locations.
+11. `editing the file isn't enough; restart the client` -> `After editing the configuration, you must restart the client for the changes to take effect.` -> Rewrites a terse note into a complete, professional instruction.
+12. `Bottom line first` -> `Key Variables` -> Replaces informal business jargon with a standard, descriptive heading for technical docs.
+13. `Just say what you need` -> `Describe your requirements in a prompt.` -> Provides a more professional and specific instruction for a developer audience.
+

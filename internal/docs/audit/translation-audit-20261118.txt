@@ -1,0 +1,158 @@
+
+===== gemini / en (google/gemini-2.5-flash) =====
+Here are the localization issues found in the document:
+
+1.  `"Install it, configure it, use it well." -> unnatural phrasing -> "Install, configure, and use it effectively."`
+2.  `"Python 3 standard library only." -> unclear scope -> "Python 3 (standard library only)"` (The parenthetical clarifies it's a constraint on Python 3, not a separate item.)
+3.  `"Everything else (MCP parameters, memory settings, troubleshooting) is in the table of contents below." -> slightly informal -> "Other topics, such as MCP parameters, memory settings, and troubleshooting, are covered in the table of contents below."`
+4.  `"Need to change a setting? Working language, image-generation keys, memory, routing tuning, install target — all in §9 Settings." -> informal, sentence fragment -> "Need to change a setting? Working language, image-generation keys, memory, routing tuning, and install target are all covered in §9 Settings."`
+5.  `"What gets installed" -> slightly informal -> "Installation Overview"`
+6.  `"How to look things up" -> informal -> "How to Reference Asset Types"`
+7.  `"What a workflow looks like" -> informal -> "Workflow Structure"`
+8.  `"Intent routing (router)" -> redundant, "router" is often implied -> "Intent Routing"`
+9.  `"How it's managed after selection" -> slightly ambiguous -> "How it's Managed"`
+10. `"Add your own (skill / agent / workflow)" -> informal, parenthetical is awkward -> "Adding Custom Skills, Agents, and Workflows"`
+11. `"Per-client setup (Kilo / Cursor / OpenCode / Codex / Paseo)" -> parenthetical is awkward -> "Per-Client Setup (Kilo, Cursor, OpenCode, Codex, Paseo)"`
+12. `"Kilo (CLI / Kilo Code)" -> parenthetical is awkward -> "Kilo (CLI and Kilo Code)"`
+13. `"Paseo (built-in OpenCode; different from the rest)" -> parenthetical is awkward -> "Paseo (Built-in OpenCode; Unique Setup)"`
+14. `"Codex (OpenAI Codex CLI / extension)" -> parenthetical is awkward -> "Codex (OpenAI Codex CLI and Extension)"`
+15. `"Claude Code (Anthropic CLI)" -> parenthetical is awkward -> "Claude Code (Anthropic CLI)"`
+16. `"One line: a skill is "what it can do", an agent role is "whose viewpoint", and a workflow is "in what order, and what counts as done"." -> informal, conversational -> "In brief: a skill defines 'what it can do,' an agent role specifies 'whose viewpoint,' and a workflow outlines 'in what order, and what constitutes completion.'" `
+17. `"The list of 12 workflows is in the README "12 workflows"." -> missing punctuation -> "The list of 12 workflows is in the README under "12 workflows"."`
+18. `"Wrong pick / not found: see §8 Troubleshooting (usually a missing MCP restart)." -> informal, sentence fragment -> "Wrong pick or not found: see §8 Troubleshooting (this usually indicates a missing MCP restart)." `
+19. `"Paseo is a multi-agent IDE that ships OpenCode and runs agents inside its own daemon (a background service):" -> "ships" is informal -> "Paseo is a multi-agent IDE that includes OpenCode and runs agents within its own daemon (a background service):"`
+20. `"The skeleton is fixed; the steps can be adjusted." -> slightly informal -> "The overall structure is fixed, but the individual steps can be adjusted."`
+
+
+===== qwen / en (qwen/qwen3-30b-a3b) =====
+None
+
+
+===== gemini / ja (google/gemini-2.5-flash) =====
+Here are the localization issues for the Japanese document, focusing on unnatural phrasing, non-standard terminology, and other quality concerns:
+
+1.  `「何か・なぜ使うか」は -> problem -> This phrasing is too colloquial and sounds like a direct translation of "what and why."` -> `「概要と目的」は` (or similar, depending on the nuance. "概要" for "what," "目的" for "why.")
+
+2.  `対応: Kilo、Cursor、OpenCode、Codex、Claude Code、Paseo — Python 3 標準ライブラリのみ。 -> problem -> The "対応:" (supported) part is fine, but the dash and "Python 3 標準ライブラリのみ" feel disconnected and unnatural in Japanese. It reads like two separate thoughts jammed together.` -> `対応: Kilo、Cursor、OpenCode、Codex、Claude Code、Paseo。本キットはPython 3 標準ライブラリのみで動作します。`
+
+3.  `最短ルート（まずこれ） -> problem -> "まずこれ" is too informal for a technical document title.` -> `最短ルート` (or `クイックスタート` if it implies a quick start)
+
+4.  `使うクライアントに接続 -> problem -> "使うクライアント" is a bit clunky. "使用するクライアント" is more formal.` -> `使用するクライアントに接続`
+
+5.  `検証 — `python3 scripts/validate_assets.py` で `OK` が出れば完了 -> problem -> The dash is unnatural. "が出れば完了" is also a bit informal.` -> `検証: `python3 scripts/validate_assets.py` を実行し、`OK` が表示されれば完了です。`
+
+6.  `設定を変えたい？ -> problem -> Informal question. Should be a statement or a more formal question.` -> `設定を変更したい場合` (or `設定の変更について`)
+
+7.  `何が入るか -> problem -> Too colloquial. "何が含まれるか" or "内容" would be more appropriate.` -> `内容` (or `含まれるもの`)
+
+8.  `三種類の資産: 探し方 -> problem -> "資産" (assets) is okay, but "探し方" (how to find) is a bit too direct. "検索方法" or "参照方法" might be better depending on context.` -> `3種類の資産: 参照方法` (assuming it's about how to look them up)
+
+9.  `MCP サービス -> problem -> This is a title. "MCP サービス" is fine, but the table below lists "MCP サービス" as a row item, which is confusing. The table is about "探し方" for assets, and MCP service isn't an asset in the same way.` -> (Remove "MCP サービス" from the table in 1.1. It's not an asset to be "searched" in the same way as skills/roles/workflows.)
+
+10. `意図ルーティング（ルーター） -> problem -> "ルーター" is a direct English loanword, but in this context, "ルーティング" is already the established term. The parenthetical "ルーター" is redundant and slightly confusing.` -> `意図ルーティング`
+
+11. `選び方の順序（明示 → ローカル語彙 → 学習済み → モデル採点）は [README](../README.ja.md) を見てください。ここでは選ばれた後の管理を扱います: -> problem -> The arrow notation is fine, but the sentence structure "ここでは選ばれた後の管理を扱います" is a bit stiff. "ここでは、選択後の管理について説明します。" is more natural.` -> `選び方の順序（明示 → ローカル語彙 → 学習済み → モデル採点）については [README](../README.ja.md) を参照してください。ここでは、選択後の管理について説明します。`
+
+12. `ツールゲート: そのワークフローの許可ツール一覧（mcp_tools_allow）で MCP ツールを制限。監査系は読み取りツールのみで、implement フェーズもありません。 -> problem -> "監査系は読み取りツールのみで、implement フェーズもありません。" is a bit abrupt. "監査系のワークフローでは、読み取りツールのみが許可され、implement フェーズは存在しません。" would be more natural.` -> `ツールゲート: そのワークフローの許可ツール一覧（mcp_tools_allow）で MCP ツールを制限します。監査系のワークフローでは、読み取りツールのみが許可され、implement フェーズは存在しません。`
+
+13. `誤選択 / 見つからない: [§8 トラブルシューティング](#s8)（多くは MCP の再起動漏れ）。 -> problem -> The parenthetical explanation is too informal for a technical document. It should be a complete sentence.` -> `誤選択 / 見つからない場合: [§8 トラブルシューティング](#s8) を参照してください（多くの場合、MCP の再起動忘れが原因です）。`
+
+14. `入口は 4KB 以下、詳細は references/ へ。 -> problem -> "入口は 4KB 以下" is a bit too direct. "エントリポイントは4KB以下に抑え、詳細は..." is more formal.` -> `エントリポイントは4KB以下に抑え、詳細は `references/` へ記述してください。`
+
+15. `そのあと: `python3 scripts/validate_assets.py` → `python3 scripts/gen_capabilities.py` → **MCP / Kilo を再起動**（コマンドは起動時にキャッシュされます）。 -> problem -> The arrow notation is fine, but the parenthetical explanation is too informal. "コマンドは起動時にキャッシュされます" should be a full sentence explaining *why* a restart is needed.` -> `その後: `python3 scripts/validate_assets.py` を実行し、`python3 scripts/gen_capabilities.py` を実行してください。MCP / Kilo は起動時にコマンドをキャッシュするため、**再起動が必要**です。`
+
+16. `Kilo（CLI / Kilo Code） -> problem -> "Kilo Code" is not a standard product name. It should be "Kilo Code (VS Code Extension)" or similar if it refers to the VS Code extension.` -> `Kilo（CLI / VS Code拡張）` (Assuming "Kilo Code" refers to the VS Code extension for Kilo)
+
+17. `3 つのことをします: -> problem -> Too colloquial. "以下の3つの処理を行います:" is more appropriate.` -> `以下の3つの処理を行います:`
+
+18. `Kilo の instructions は絶対パスでなければなりません（相対パスは注入されません）。 -> problem -> "注入されません" is a bit technical and could be simpler. "認識されません" or "適用されません" might be better.` -> `Kilo の instructions は絶対パスである必要があります（相対パスは認識されません）。`
+
+19. `OpenCode にはネイティブのスラッシュコマンド / スキル実行がありません。必ず MCP 経由で: interpret_intent → workflow_get → skill_get。 -> problem -> The arrow notation is fine, but the sentence "必ず MCP 経由で:" is a bit strong. "MCP 経由で実行する必要があります:" is more formal.` -> `OpenCode にはネイティブのスラッシュコマンドやスキル実行機能がありません。MCP 経由で実行する必要があります: `interpret_intent` → `workflow_get` → `skill_get`。`
+
+20. `エージェント切替なし（@.kilo/agents/<role>.md を読んで自分でロールを適用）。 -> problem -> The parenthetical explanation is too informal. It should be a complete sentence.` -> `エージェント切替なし（`@.kilo/agents/<role>.md` を参照し、手動でロールを適用してください）。`
+
+
+===== qwen / ja (qwen/qwen3-30b-a3b) =====
+None
+
+
+===== gemini / ko (google/gemini-2.5-flash) =====
+Here are the localization issues found in the Korean document:
+
+1.  `설치하고, 설정하고, 잘 쓰기. -> unnatural phrasing -> 설치, 설정, 사용 가이드.`
+    *   "잘 쓰기" sounds informal and less like a technical document title. "사용 가이드" is more standard.
+
+2.  `대상: 처음 도입하는 개발자. 따라 하면 약 10분이면 동작합니다. -> unnatural phrasing -> 대상: 처음 도입하는 개발자. 약 10분 내에 설치 및 실행이 가능합니다.`
+    *   "따라 하면 약 10분이면 동작합니다" is a bit colloquial. "설치 및 실행이 가능합니다" is more formal and precise.
+
+3.  `지원: Kilo, Cursor, OpenCode, Codex, Claude Code, Paseo — Python 3 표준 라이브러리만 사용합니다. -> unnatural phrasing -> 지원: Kilo, Cursor, OpenCode, Codex, Claude Code, Paseo (Python 3 표준 라이브러리만 사용).`
+    *   The dash (—) followed by a full sentence feels a bit off in Korean. Parentheses are more natural for an explanatory note.
+
+4.  `나머지(MCP 파라미터, 기억 설정, 문제 해결)는 아래 목차에서 필요할 때 찾아보세요. -> unnatural phrasing -> 나머지(MCP 매개변수, 메모리 설정, 문제 해결)는 아래 목차에서 필요할 때 참조하세요.`
+    *   "파라미터" is often localized as "매개변수" in technical contexts. "기억" for "memory" is acceptable but "메모리" is more common in IT. "찾아보세요" is a bit informal; "참조하세요" is more appropriate.
+
+5.  `설정을 바꿔야 하나요? 작업 언어, 이미지 생성 key, 기억, 라우팅 튜닝, 설치 대상은 모두 [§9 설정 일람](#s9)에 있습니다. -> unnatural phrasing -> 설정을 변경해야 하나요? 작업 언어, 이미지 생성 키, 메모리, 라우팅 튜닝, 설치 대상은 모두 [**§9 설정 일람**](#s9)에 있습니다.`
+    *   "바꿔야 하나요?" is informal. "변경해야 하나요?" is more formal. "key" should be localized as "키". "기억" again, "메모리" is more common.
+
+6.  `0. 전제: Python 3 -> terminology -> 0. 전제 조건: Python 3`
+    *   "전제" alone can be ambiguous. "전제 조건" is clearer for "prerequisite".
+
+7.  `PATH에 python3가 있어야 합니다(Windows는 python). 확인: python3 --version → 3.x. -> grammar/spelling -> PATH에 `python3`가 있어야 합니다(Windows는 `python`). 확인: `python3 --version` → `3.x`.`
+    *   Code snippets like `python3` should be in backticks for clarity, especially when mixed with regular text.
+
+8.  `MCP는 python3로 실행합니다(kilo.json, .cursor/mcp.json). 이름이 다르면(python / py) 각 설정의 command를 실제 명령으로 바꾸세요. -> unnatural phrasing -> MCP는 `python3`로 실행합니다(`kilo.json`, `.cursor/mcp.json`). 이름이 다를 경우(`python` / `py`), 각 설정의 `command`를 실제 명령으로 변경하세요.`
+    *   "이름이 다르면" is a bit abrupt. "이름이 다를 경우" is smoother. "바꾸세요" is informal; "변경하세요" is more appropriate.
+
+9.  `한 줄로: 스킬은 「무엇을 할 줄 아는가」, 역할은 「누구의 시선으로 보는가」, 워크플로는 「어떤 순서로, 무엇을 완료로 볼 것인가」입니다. -> unnatural phrasing -> 요약: 스킬은 '무엇을 할 수 있는가', 역할은 '누구의 관점에서 보는가', 워크플로는 '어떤 순서로, 무엇을 완료로 간주할 것인가'입니다.`
+    *   "한 줄로" is informal. "요약" or "간단히 말해" is better. The use of `「」` is more common in Japanese; `''` or `""` are more common in Korean for emphasis or quotes. "시선" is okay, but "관점" is more precise in this context. "완료로 볼 것인가" is a bit clunky; "완료로 간주할 것인가" is more formal.
+
+10. `세 가지 자산: 어떻게 찾나 -> unnatural phrasing -> 세 가지 자산: 찾는 방법`
+    *   "어떻게 찾나" is informal. "찾는 방법" is standard for documentation.
+
+11. `게이트(gate): 승인, 증거, 실패 관찰; 검토 계열은 읽기 전용(implement 단계 없음). -> unnatural phrasing -> 게이트(gate): 승인, 증거, 실패 관찰; 검토 계열 워크플로는 읽기 전용이며(구현 단계 없음).`
+    *   "검토 계열은" is a bit vague. "검토 계열 워크플로는" is clearer. "implement 단계 없음" is a bit abrupt; "구현 단계 없음" is better, and ending with "이며" makes the sentence flow better.
+
+12. `의도 라우팅(router) -> terminology -> 의도 라우팅(Intent Routing)`
+    *   "router" is often used as a direct loanword, but "Intent Routing" is the more common English term, and it's good to keep the original English term in parentheses for clarity, especially since "라우터" usually refers to network hardware.
+
+13. `도구 게이트: 해당 워크플로의 허용 도구 목록(mcp_tools_allow)으로 MCP 도구를 제한 — 감사 계열은 읽기 도구만, implement 단계도 없음. -> unnatural phrasing -> 도구 게이트: 해당 워크플로의 허용 도구 목록(`mcp_tools_allow`)으로 MCP 도구를 제한합니다. 감사 계열은 읽기 도구만 사용하며, 구현 단계는 없습니다.`
+    *   The dash (—) again. Separate sentences or use proper conjunctions. "implement 단계도 없음" -> "구현 단계는 없습니다."
+
+14. `라우팅 덮어쓰기: /name을 직접 쓰거나, interpret_intent에 scoring을 넘깁니다. 잘못 선택/찾을 수 없음: [§8 문제 해결](#s8)(대개 MCP 재시작 안 함). -> unnatural phrasing -> 라우팅 재정의: `/name`을 직접 사용하거나, `interpret_intent`에 `scoring`을 전달합니다. 잘못 선택되거나 찾을 수 없는 경우: [§8 문제 해결](#s8) (대개 MCP를 재시작하지 않은 경우).`
+    *   "덮어쓰기" is okay, but "재정의" is more common for "override" in technical contexts. "쓰거나" -> "사용하거나". "넘깁니다" -> "전달합니다". "잘못 선택/찾을 수 없음" is too terse; "잘못 선택되거나 찾을 수 없는 경우" is better. "재시작 안 함" -> "재시작하지 않은 경우".
+
+15. `그다음: python3 scripts/validate_assets.py → python3 scripts/gen_capabilities.py → MCP / Kilo 재시작(명령은 시작 시 캐시됨). -> grammar/spelling -> 그다음: `python3 scripts/validate_assets.py` → `python3 scripts/gen_capabilities.py` → MCP / Kilo 재시작(명령은 시작 시 캐시됨).`
+    *   Add backticks for code snippets.
+
+16. `Kilo의 instructions는 절대 경로여야 합니다(상대 경로는 주입되지 않음). -> unnatural phrasing -> Kilo의 `instructions`는 절대 경로여야 합니다(상대 경로는 주입되지 않습니다).`
+    *   "주입되지 않음" is a bit abrupt. "주입되지 않습니다" is more natural.
+
+17. `Cursor의 제한: -> unnatural phrasing -> Cursor의 제한 사항:`
+    *   "제한" is okay, but "제한 사항" is more common for a list of limitations.
+
+18. `agent 전환 없음(@.kilo/agents/<role>.md를 읽어 직접 역할 적용); -> unnatural phrasing -> 에이전트 전환 없음(`@.kilo/agents/<role>.md`를 읽어 직접 역할 적용);`
+    *   "agent" should be localized as "에이전트". Add backticks for the path.
+
+19. `MCP가 없을 때 폴백: @.kilo/CAPABILITIES.md에서 후보 선택 → @.kilo/skills/<name>/SKILL.md 읽기 → 절차 수행; 워크플로는 @.kilo/commands/<name
+
+
+===== qwen / ko (qwen/qwen3-30b-a3b) =====
+`MCP는 `python3`로 실행합니다(`kilo.json`, `.cursor/mcp.json`). 이름이 다르면(`python` / `py`) 각 설정의 `command`를 실제 명령으로 바꾸세요.` -> `MCP는 `python3`로 실행합니다(`kilo.json`, `.cursor/mcp.json`). 명령어가 다를 경우(`python` / `py`) 각 설정의 `command`를 실제 명령으로 바꾸세요.` -> `이름이 다르면`은 `명령어가 다를 경우`로 수정하여 더 자연스러운 표현
+
+`그다음: `python3 scripts/validate_assets.py` → `python3 scripts/gen_capabilities.py` → **MCP / Kilo 재시작**(명령은 시작 시 캐시됨).` -> `그다음: `python3 scripts/validate_assets.py` → `python3 scripts/gen_capabilities.py` → **MCP / Kilo 재시작**(명령은 시작 시 캐시됩니다).` -> 문장 종결어 `됨`을 `됩니다`로 수정하여 문법 정확도 향상
+
+`Paseo로 Kilo를 띄우기 전에도 로그인이 필요합니다.` -> `Paseo에서 Kilo를 실행하기 전에도 로그인이 필요합니다.` -> `띄우기`는 `실행하기`로 변경하여 더 자연스러운 표현
+
+`키는 어떤 경우에도 거부.` -> `키는 어떤 경우에도 거부됩니다.` -> 문장 종결어 `거부`를 `거부됩니다`로 수정하여 문법 정확도 향상
+
+`key를 설정; `imagegen-frontend-mobile`은 프롬프트만 작성하고 모델을 호출하지 않습니다.` -> `키를 설정; `imagegen-frontend-mobile`은 프롬프트만 작성하고 모델을 호출하지 않습니다.` -> `key`를 `키`로 통일하여 용어 일관성 유지
+
+`한마디 → 어느 워크플로` -> `한 번의 작업 → 어떤 워크플로` -> `한마디`는 `한 번의 작업`으로 변경하여 더 명확한 표현
+
+`설정 파일 대조` -> `설정 파일 비교` -> `대조`는 `비교`로 변경하여 더 자연스러운 표현
+
+`의존성 / 키 / 제한` -> `의존성, 키, 제한` -> 쉼표 추가로 문장 구조 개선
+
+`워크플로 선택 순서`(명시 → 로컬 어휘 → 학습됨 → 모델 점수) -> `워크플로 선택 순서`(명시적 → 로컬 어휘 → 학습된 → 모델 점수) -> `명시`, `학습됨`을 `명시적`, `학습된`으로 수정하여 문법 정확도 향상
+
+`워크플로는 `/feature-delivery` 같은 슬래시 명령; 스킬은 모델이 고르거나 직접 지정.` -> `워크플로는 `/feature-delivery` 같은 슬래

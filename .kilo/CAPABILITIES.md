@@ -4,7 +4,7 @@
 > Pick candidates from this catalog first and open only the `SKILL.md` you need (progressive disclosure).
 > `⚠️` marks items needing external setup (`scripts/readiness.json`). Not used in the standard flow.
 
-## Skills（97）
+## Skills（98）
 
 | name | ready | size | description | path |
 |---|---|---|---|---|
@@ -51,6 +51,7 @@
 | `maintain-verification-skill` | ✅ | 4.9KB | "Periodic pass that keeps a project's verification skill and feature map honest: parallel source readers per feature, one live se… | `.kilo/skills/maintain-verification-skill/SKILL.md` |
 | `memory` | ✅ | 1.8KB | Persist and recall durable project knowledge (decisions, constraints, gotchas, recurring fixes) across sessions. Use before start… | `.kilo/skills/memory/SKILL.md` |
 | `modern-web-guidance-bridge` | ✅ | 1.7KB | On-demand Modern Web Guidance via npx (search/retrieve/legacy-scan). External OSS bridge — do not fork guides into this kit. | `.kilo/skills/modern-web-guidance-bridge/SKILL.md` |
+| `openrouter-gen` | ✅ | 2.8KB | Batch-generate design images via OpenRouter image models (default google/gemini-2.5-flash-image). Use for generated design assets… | `.kilo/skills/openrouter-gen/SKILL.md` |
 | `pdca-cycle` | ✅ | 1.6KB | Run a lightweight Plan-Do-Check-Act cycle for product, engineering, quality, or process improvements. Use when a request needs me… | `.kilo/skills/pdca-cycle/SKILL.md` |
 | `performance-audit` | ✅ | 1.1KB | Measure and improve application or web performance using representative workloads, bottleneck evidence, and regression safeguards… | `.kilo/skills/performance-audit/SKILL.md` |
 | `plan-md` | ✅ | 1.7KB | Always save planning deliverables (fix plans, implementation plans, design direction, review responses) as a Markdown file. Use f… | `.kilo/skills/plan-md/SKILL.md` |
@@ -104,7 +105,7 @@
 | `web-design-guidelines` | ✅ | 2.4KB | Review UI code for Web Interface Guidelines compliance by the Vercel engineering team. Covers layout, typography, color, motion, … | `.kilo/skills/web-design-guidelines/SKILL.md` |
 | `web-experience-design` | ✅ | 3.5KB | Design, implement, audit, and hand off web interfaces with evidence for user tasks, visual hierarchy, responsive behavior, access… | `.kilo/skills/web-experience-design/SKILL.md` |
 | `why` | ✅ | 8.9KB | "Use for 'why does X work this way', 'why we picked Y', design rationale, regressions, postmortems, or data-backed thresholds. Di… | `.kilo/skills/why/SKILL.md` |
-| `writing-for-agents` | ✅ | 0.5KB | Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md or CLAUDE.md. | `.kilo/skills/writing-for-agents/SKILL.md` |
+| `writing-for-agents` | ✅ | 1.0KB | Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md or CLAUDE.md. | `.kilo/skills/writing-for-agents/SKILL.md` |
 
 > `size` = entry `SKILL.md` size (budget 2–4KB; see `AGENTS.md` §5).
 

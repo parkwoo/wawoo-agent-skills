@@ -6,8 +6,6 @@ description: Writing documents for agents. Use when creating or editing skills, 
 
 How to write **human-readable** docs agents actually follow (skills, `AGENTS.md`, guides).
 
-**User-facing map (public kit):** `docs/COPY-WRITING-GUIDE.md` (EN · 简体中文 · 日本語 · 한국어).
-
 ## Context budget
 
 - Entry: this `SKILL.md`.

@@ -13,6 +13,24 @@
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-11-18
+
+### 変更
+- **ドキュメント全面改稿（4 言語）**: README / USAGE を Paseo 形式に再構成（フック → なぜ → 仕組み → 得られるもの → クライアント → クイックスタート → 能力 → 用語 → ライセンス）。ロゴ・言語バー・目次/アンカーを整備。
+- **能力一覧を分離**: `docs/CAPABILITIES.zh-CN.md` を追加。README は「数量＋分類＋例」に圧縮。
+- **対応クライアント表**: Claude Code を追加。Paseo provider 列と支持レベル（支持 / 部分支持）を明記。
+- **用語統一**: 「AI coding agent」に統一（assistant を廃止）。日/韓も「エージェント / 에이전트」に統一。
+- **新規 skill**: `openrouter-gen`（OpenRouter 画像生成、`OPENROUTER_API_KEY`）。
+- **公開境界**: 公開リポジトリをプログラミング専用に。`.public-programming-only` マーカーと `scripts/check_public_boundary.py`（CI 組込）を追加。
+- **内部移管 / 削除**: 写作・营销・文案・SEO・校正 系の skill/command と `COPY-WRITING-GUIDE` を内部源へ。旧文書（PRODUCT-OVERVIEW / CLIENT-INTEGRATION-GUIDE / MEMORY-CLIENT-GUIDE / GUIDES / INTEGRATIONS / INTENT-ROUTING / VERSIONING / SEO-KEYWORDS / GITHUB-ABOUT / SKILL-UPLIFT-PILOT）を削除（一部は `internal/docs/archive/` へ）。
+- **コントリビューション**: `CONTRIBUTING.md`（英語）と GitHub issue / PR テンプレートを追加（Paseo の規定を参考、英語のみ）。
+- **翻訳**: 英 / 日 / 韓の README・USAGE を同期し、用語と表現を校正。
+
+### 修正
+- README / USAGE の古い記述（107 / 22 / 16）を **98 / 21 / 12** に統一。
+- 日 / 韓の中国語混入、死リンクを修正。日文の計数表現（98のスキル → 98 スキル）を修正。
+
+
 ## [0.7.2] - 2026-11-18
 
 ### 追加

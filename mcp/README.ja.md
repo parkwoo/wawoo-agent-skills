@@ -4,7 +4,7 @@ skill／agent／workflow／memory／evidence と **意図ルーティング**を
 
 - 実装：`mcp/server.py`（**stdlib のみ**）
 - トランスポート：**stdio / JSON-RPC 2.0**（改行区切り）
-- 対外ガイド（意図ルーティング）：**[docs/INTENT-ROUTING.md](../docs/INTENT-ROUTING.md)**
+- 対外ガイド（意図ルーティング）：**[docs/INTENT-ROUTING.md](../internal/docs/archive/INTENT-ROUTING.md)**
 
 ## Tools
 
@@ -52,7 +52,7 @@ skill／agent／workflow／memory／evidence と **意図ルーティング**を
 3. サブタスク分割 → `delegate_subtask` → 上流で並列実行。
 4. 終了 → `workflow_clear`。
 
-詳細は [docs/INTENT-ROUTING.md](../docs/INTENT-ROUTING.md)。
+詳細は [docs/INTENT-ROUTING.md](../internal/docs/archive/INTENT-ROUTING.md)。
 
 ## 設定
 

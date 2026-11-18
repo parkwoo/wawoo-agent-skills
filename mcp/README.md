@@ -6,7 +6,7 @@ Provides skills / agents / workflows / memory / evidence and **intent routing** 
 
 - Implementation: `mcp/server.py` (**stdlib only**)
 - Transport: **stdio / JSON-RPC 2.0** (newline-delimited)
-- Public guide (intent routing): **[docs/INTENT-ROUTING.md](../docs/INTENT-ROUTING.md)**
+- Public guide (intent routing): **[docs/INTENT-ROUTING.md](../internal/docs/archive/INTENT-ROUTING.md)**
 
 ## Tools
 
@@ -54,7 +54,7 @@ Once a `schedule` is fixed, the **MCP tool gate** activates and tools outside `m
 3. Split subtasks → `delegate_subtask` → run in parallel upstream.
 4. Finish → `workflow_clear`.
 
-Details: [docs/INTENT-ROUTING.md](../docs/INTENT-ROUTING.md).
+Details: [docs/INTENT-ROUTING.md](../internal/docs/archive/INTENT-ROUTING.md).
 
 ## Configuration
 

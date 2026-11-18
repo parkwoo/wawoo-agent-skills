@@ -1,0 +1,33 @@
+name: Feature request
+description: Suggest a capability or workflow improvement
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe the problem before the solution. Feature requests may be moved to Discussions.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+    validations:
+      required: true
+  - type: textarea
+    id: today
+    attributes:
+      label: How do you do it today?
+  - type: textarea
+    id: blocker
+    attributes:
+      label: Where does the kit get in the way?
+  - type: textarea
+    id: better
+    attributes:
+      label: What would a better workflow look like?
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - label: This is a general, reusable improvement (not a one-off integration).

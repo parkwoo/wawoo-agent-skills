@@ -50,5 +50,3 @@ exclude_docs: |
 nav:
   - Introduction: index.md
   - Usage: USAGE.md
-  - Intent routing: INTENT-ROUTING.md
-  - Versioning: VERSIONING.md

@@ -1,0 +1,4 @@
+# This repository is the PUBLIC, programming-only kit.
+# Writing / marketing / SEO / proofreading assets belong to the internal source
+# (workspace/skills), not here. Enforced by scripts/check_public_boundary.py.
+# See CONTRIBUTING.md.
