@@ -21,15 +21,11 @@ mcp/
 .github/workflows/docs.yml
 mkdocs.yml
 requirements-docs.txt
-scripts/adapters.py
 scripts/cli_adapters_mock.py
 scripts/e2e_flows.py
 scripts/gen_capabilities.py
 scripts/gen_router.py
-scripts/install_cursor_global.py
-scripts/install_cursor_workspace.py
 scripts/install_global.py
-scripts/install_opencode.py
 scripts/kilo_snapshot_gc.sh
 scripts/plan_active.py
 scripts/plan_content.py
@@ -38,6 +34,15 @@ scripts/plan_l3_record.py
 scripts/readiness.json
 scripts/run-intent-receiver.sh
 scripts/task-router.py
+scripts/adapters.py
+scripts/install_cursor_global.py
+scripts/install_cursor_workspace.py
+scripts/install_opencode.py
+scripts/legacy_web_scan.py
+scripts/mwg_bridge.py
+scripts/skill_uplift_ab.py
+scripts/skill_uplift_check.py
+scripts/uplift_pilot.py
 scripts/validate_assets.py
 scripts/wawoo-route.sh
 scripts/wawoo-zle.zsh
@@ -58,3 +63,5 @@ docs/plans/ACTIVE.example.md
 docs/plans/BACKLOG.example.md
 docs/plans/CONTENT.example.md
 docs/plans/RETRO.example.md
+docs/SKILL-UPLIFT-PILOT.md
+docs/SKILL-UPLIFT-PILOT.ja.md

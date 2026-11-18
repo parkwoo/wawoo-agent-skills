@@ -4,11 +4,11 @@
 > Pick candidates from this catalog first and open only the `SKILL.md` you need (progressive disclosure).
 > `⚠️` marks items needing external setup (`scripts/readiness.json`). Not used in the standard flow.
 
-## Skills（94）
+## Skills（97）
 
 | name | ready | size | description | path |
 |---|---|---|---|---|
-| `accessibility-audit` | ✅ | 1.2KB | Audit and improve web accessibility for semantic structure, keyboard operation, forms, focus, contrast, motion, assistive technol… | `.kilo/skills/accessibility-audit/SKILL.md` |
+| `accessibility-audit` | ✅ | 1.4KB | Audit and improve web accessibility for semantic structure, keyboard operation, forms, focus, contrast, motion, assistive technol… | `.kilo/skills/accessibility-audit/SKILL.md` |
 | `api-contract-design` | ✅ | 1.1KB | Design or review HTTP, RPC, event, or internal API contracts for clear inputs, outputs, errors, authentication, compatibility, an… | `.kilo/skills/api-contract-design/SKILL.md` |
 | `architecture-decision` | ✅ | 1.1KB | Evaluate software architecture choices, dependencies, interfaces, constraints, and tradeoffs, then produce a concise decision rec… | `.kilo/skills/architecture-decision/SKILL.md` |
 | `ask-matt` | ✅ | 3.1KB | Ask which skill or flow fits your situation. A router over the skills in this repo. | `.kilo/skills/ask-matt/SKILL.md` |
@@ -25,7 +25,7 @@
 | `data-egress-guard` | ✅ | 3.0KB | Deterministically mask PII and secrets before sending text to an external LLM/API (no model, no network) — replaces spans with nu… | `.kilo/skills/data-egress-guard/SKILL.md` |
 | `database-change-safety` | ✅ | 1.2KB | Plan, implement, and review schema changes, data migrations, backfills, and cleanup with integrity, availability, observability, … | `.kilo/skills/database-change-safety/SKILL.md` |
 | `dependency-upgrade` | ✅ | 1.2KB | Safely evaluate, apply, and verify software dependency, runtime, container-image, or toolchain upgrades with compatibility, secur… | `.kilo/skills/dependency-upgrade/SKILL.md` |
-| `deployment` | ✅ | 1.2KB | Plan, execute, and verify a deployment or release (Docker Compose, image tagging, environment, migrations, health checks, rollbac… | `.kilo/skills/deployment/SKILL.md` |
+| `deployment` | ✅ | 1.3KB | Plan, execute, and verify a deployment or release (Docker Compose, image tagging, environment, migrations, health checks, rollbac… | `.kilo/skills/deployment/SKILL.md` |
 | `design-brief` | ✅ | 1.7KB | Parse a structured design brief written in I-Lang protocol format into a concrete design spec. Eliminates ambiguity from vague re… | `.kilo/skills/design-brief/SKILL.md` |
 | `design-md` | ✅ | 2.9KB | Create and maintain a DESIGN.md — a plain-text design-system document (Google Stitch format) that design and coding agents read t… | `.kilo/skills/design-md/SKILL.md` |
 | `design-review` | ✅ | 1.2KB | Designer Who Codes: visual audit then fixes with atomic commits and before/after screenshots. Useful for tightening shipped UI be… | `.kilo/skills/design-review/SKILL.md` |
@@ -36,6 +36,7 @@
 | `fal-gen` | ✅ | 2.9KB | Batch-generate design images (avatars / illustrations / backgrounds / textures) with fal.ai. Use when a task needs generated or f… | `.kilo/skills/fal-gen/SKILL.md` |
 | `figure-it-out` | ✅ | 4.0KB | "Design an auditable playbook when no narrower one fits: a large migration, an ambitious multi-part change, or work a human revie… | `.kilo/skills/figure-it-out/SKILL.md` |
 | `frontend-design` | ✅ | 5.1KB | Create distinctive, production-grade frontend interfaces with strong visual direction, polished typography, considered layout, an… | `.kilo/skills/frontend-design/SKILL.md` |
+| `frontend-guides-hub` | ✅ | 1.9KB | Frontend/UI skill ラッター — /ui-delivery 向けに既存 skill へ段階的にルートする（110 個平铺を避ける）。 | `.kilo/skills/frontend-guides-hub/SKILL.md` |
 | `grill-with-docs` | ✅ | 0.2KB | A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go. | `.kilo/skills/grill-with-docs/SKILL.md` |
 | `grilling` | ✅ | 2.0KB | Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any '… | `.kilo/skills/grilling/SKILL.md` |
 | `handoff` | ✅ | 0.9KB | Compact the current conversation into a handoff document for another agent to pick up. | `.kilo/skills/handoff/SKILL.md` |
@@ -46,8 +47,10 @@
 | `in-your-own-words` | ✅ | 0.3KB | "Restate in your own words what you think the user's goals are and what problem they're trying to solve. Use for /in-your-own-wor… | `.kilo/skills/in-your-own-words/SKILL.md` |
 | `incident-debugging` | ✅ | 1.1KB | Diagnose a software incident or high-impact defect through reproduction, evidence collection, fault isolation, mitigation, verifi… | `.kilo/skills/incident-debugging/SKILL.md` |
 | `language-policy` | ✅ | 2.4KB | Decide and enforce the writing language for code, engineering records, and explanatory docs via a three-tier policy (code = Engli… | `.kilo/skills/language-policy/SKILL.md` |
+| `legacy-web-scan` | ✅ | 0.8KB | Legacy Web パターン掃引 — MWG legacy-scan と社内ルールで modernization 候補を plan-md へ。 | `.kilo/skills/legacy-web-scan/SKILL.md` |
 | `maintain-verification-skill` | ✅ | 4.9KB | "Periodic pass that keeps a project's verification skill and feature map honest: parallel source readers per feature, one live se… | `.kilo/skills/maintain-verification-skill/SKILL.md` |
 | `memory` | ✅ | 1.8KB | Persist and recall durable project knowledge (decisions, constraints, gotchas, recurring fixes) across sessions. Use before start… | `.kilo/skills/memory/SKILL.md` |
+| `modern-web-guidance-bridge` | ✅ | 1.7KB | On-demand Modern Web Guidance via npx (search/retrieve/legacy-scan). External OSS bridge — do not fork guides into this kit. | `.kilo/skills/modern-web-guidance-bridge/SKILL.md` |
 | `pdca-cycle` | ✅ | 1.6KB | Run a lightweight Plan-Do-Check-Act cycle for product, engineering, quality, or process improvements. Use when a request needs me… | `.kilo/skills/pdca-cycle/SKILL.md` |
 | `performance-audit` | ✅ | 1.1KB | Measure and improve application or web performance using representative workloads, bottleneck evidence, and regression safeguards… | `.kilo/skills/performance-audit/SKILL.md` |
 | `plan-md` | ✅ | 1.7KB | Always save planning deliverables (fix plans, implementation plans, design direction, review responses) as a Markdown file. Use f… | `.kilo/skills/plan-md/SKILL.md` |
