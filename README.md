@@ -185,5 +185,5 @@ This project extracts executable components from public engineering methodologie
 
 ## Version
 
-*   Current: **0.7.2** (`VERSION`)
+*   Current: **0.8.0** (`VERSION`)
 *   Change history: `CHANGELOG.md`

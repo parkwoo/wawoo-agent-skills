@@ -23,6 +23,19 @@ KILO = ROOT / ".kilo"
 MEMORY = ROOT / "docs" / "memory"
 
 
+def _readme_version_issues() -> list[str]:
+    """README 版表示と VERSION の一致（scripts/sync_readme_version.py）。"""
+    import importlib.util
+
+    path = ROOT / "scripts" / "sync_readme_version.py"
+    spec = importlib.util.spec_from_file_location("sync_readme_version", path)
+    if not spec or not spec.loader:
+        return ["sync_readme_version.py: cannot load"]
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.readme_version_issues()
+
+
 def fm(path: Path) -> dict[str, str]:
     text = path.read_text(encoding="utf-8", errors="ignore")
     if not text.startswith("---"):
@@ -223,6 +236,7 @@ def main() -> int:
         issues.append(f"publish allowlist must not include internal path: {b}")
 
     issues.extend(command_replay_issues())
+    issues.extend(_readme_version_issues())
     warnings.extend(skill_budget_warnings())
 
     for w in warnings:
