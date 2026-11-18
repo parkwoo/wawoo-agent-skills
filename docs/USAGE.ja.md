@@ -49,18 +49,32 @@ OpenCode は `AGENTS.md` を読み、MCP サーバへ **stdio** で接続しま�
       "type": "local",
       "command": ["python3", "/abs/path/to/wawoo-skills/mcp/server.py"],
       "enabled": true,
-      "environment": { "WAWOO_SKILLS_ROOT": "/abs/path/to/wawoo-skills" }
+      "environment": {
+        "WAWOO_SKILLS_ROOT": "/abs/path/to/wawoo-skills",
+        "WAWOO_MEMORY_READONLY": "1"
+      }
     }
   }
 }
 ```
 - OpenCode は slash／skill のネイティブ実行を持たない。`AGENTS.md` ＋ MCP（`interpret_intent` → `workflow_get` → `skill_get`）で使う。
+- **一括登録**: `python3 scripts/install_opencode.py`（既定 recall-only）。**`--memory-writable`** で `WAWOO_MEMORY_READONLY=0`（§5.1）。Paseo 内蔵 OpenCode も同じ `opencode.json`。
 - `opencode_stdio_contract` E2E（MCP handshake＋`tools/list`）で検証。
 
 ## 3. Cursor（https://cursor.com）
 1. このディレクトリを開く（`AGENTS.md` と `.cursor/rules` を読む）。
 2. **Settings → MCP** で `wawoo-skills` を有効化（`.cursor/mcp.json`）。
 3. ツール `capabilities`／`skill_search`／`skill_get` を利用。
+
+**導入（MCP ＋ 任意でネイティブ skills symlink）**
+
+```bash
+python3 scripts/install_cursor_workspace.py --workspace /path/to/workspace   # MCP のみ（プロジェクト mcp.json 上書き）
+python3 scripts/install_cursor_global.py                                     # ユーザー ~/.cursor（他 MCP とマージ）
+# memory_save を有効化（§5.1）:
+python3 scripts/install_cursor_global.py --memory-writable
+python3 scripts/install_cursor_workspace.py --workspace /path/to/workspace --memory-writable
+```
 
 **Cursor の制約**：
 - slash command（`/feature-delivery` 等）は**動かない**。
@@ -90,15 +104,67 @@ python3 scripts/e2e_flows.py   # 公開スモーク（契約/E2E）
 2. **カタログ／MCP** で候補を選ぶ（全部読まない）。
 3. 必要な **Skill** だけ開く。
 4. Workflow の**出力スキーマ**と**ゲート**（承認・証拠）に従う。
-5. 作業前に `memory` を想起、決定後に保存（MCP `memory_save` は INDEX＋topic ファイル。`docs/memory/TEMPLATE.md`）。
+5. 作業前に `memory` を想起、決定後に保存（設定は **§5.1**）。
 
-### 記憶（memory）
+## 5.1 記憶（memory）— 想起・保存とクライアント別の設定
 
-- 正本: `docs/memory/`（`MEMORY-TOOLS.md` で Kilo／MCP の優先順）
-- 納品経路 `/feature-delivery` の入口・出口でも想起／保存
+### ツールの役割
+
+| MCP ツール | 用途 |
+|------------|------|
+| `memory_recall` | `docs/memory/`（INDEX＋topic）から過去の決定を読む。**書込禁止でも使える。** |
+| `memory_save` | INDEX＋topic へ 1 件追記（`docs/memory/TEMPLATE.md`）。`WAWOO_MEMORY_READONLY=1` のとき **拒否**。秘密パターンは常に拒否。 |
+
+**正本**: キット直下の `docs/memory/` の Markdown。Kilo ネイティブメモリは補助（矛盾時はファイル優先 — `docs/memory/MEMORY-TOOLS.md`）。
+
+### `WAWOO_MEMORY_READONLY`（利用者が必ず触るスイッチ）
+
+| 値 | 挙動 | 使い分け |
+|----|------|----------|
+| **`1`**（インストーラ **既定**） | **recall-only** — `memory_save` はエラー。`memory_recall` は可。 | 任意プロジェクトから MCP をぶら下げるとき・監査系・キットツリーへの書込を避けたいとき。 |
+| **`0`** | **読み書き可** — `memory_save` が `<kit>/docs/memory/` へ追記。 | キット repo または同じ memory レイアウトの workspace で日常的に使うとき。**Kilo / Cursor / Paseo·OpenCode を揃えるなら 0。** |
+
+MCP は **クライアント起動時の env** を読む。json を直しただけでは足りない — **クライアント再起動**（Kilo Reload、Cursor Reload、OpenCode 再起動、Paseo は `paseo daemon restart`）。
+
+### どこに書くか（クライアント別）
+
+| クライアント | 設定ファイル | 推奨コマンド（冪等） |
+|--------------|--------------|----------------------|
+| **Kilo グローバル** | `~/.config/kilo/kilo.jsonc` → `mcp.wawoo-skills.environment` | `python3 scripts/install_global.py`（既定 `1`）／**`--memory-writable`**（`0`） |
+| **OpenCode**（端末・**Paseo 内蔵**） | `~/.config/opencode/opencode.json` | `python3 scripts/install_opencode.py`／**`--memory-writable`** |
+| **Cursor ユーザー** | `~/.cursor/mcp.json` | `python3 scripts/install_cursor_global.py`（他 MCP とマージ）＋**`--memory-writable`** |
+| **Cursor ワークスペース** | `<workspace>/.cursor/mcp.json` | `python3 scripts/install_cursor_workspace.py --workspace <root>`＋**`--memory-writable`**（`mcp.json` 全上書き — 他サーバがある場合は手動マージ） |
+
+**手動で書く場合**（パスは環境に合わせる）:
+
+```json
+"environment": {
+  "WAWOO_SKILLS_ROOT": "/abs/path/to/wawoo-skills",
+  "WAWOO_MEMORY_READONLY": "0"
+}
+```
+
+任意: `WAWOO_MEMORY_ROOT` でディレクトリ上書き（既定 `<kit>/docs/memory`）。
+
+### 変更後の確認
+
+```bash
+grep -A2 WAWOO_MEMORY_READONLY ~/.config/kilo/kilo.jsonc
+grep -A2 WAWOO_MEMORY_READONLY ~/.config/opencode/opencode.json
+grep -A2 WAWOO_MEMORY_READONLY ~/.cursor/mcp.json
+```
+
+クライアント再起動後、テストセッションで `memory_save` を 1 回試す。readonly 時はエラーメッセージに `WAWOO_MEMORY_READONLY` と出る。
+
+### workflow 側の制限（このフラグとは別）
+
+`compliance-review` など一部 workflow は **`READONLY=0` でも** ツールゲートで `memory_save` 不可。`docs/INTENT-ROUTING.ja.md` 参照。
+
+### 関連
+
+- 手順・優先順: `docs/memory/MEMORY-TOOLS.md`・`TEMPLATE.md`・skill `memory`
+- `/feature-delivery` 入口・出口でも想起／保存
 - CI: `validate_assets.py` が memory 内の秘密らしき文字列を検出
-- E2E: `python3 scripts/e2e_flows.py`（**L0–L3**・MCP・workflow）。`python3 scripts/cli_adapters_mock.py`（**Kilo/Cursor 入口モック**）
-- 検証 CLI: `plan_active` / `plan_l2_backlog` / `plan_l3_record` / `plan_content`
 
 ## 6. コンテキスト予算
 - 契約 ≤500tok／カタログ ≤1k／Workflow ≤1.5k／**Skill 1 個 ≤2〜4KB**／Memory top-5。

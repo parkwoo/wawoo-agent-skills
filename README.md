@@ -30,7 +30,7 @@ It lays **rails of reproducible steps and tool calls** — it does not take away
 - **Delegation** — `delegate_subtask` carves off parallel, read-only subtasks and can target a **model tier** (`fast` or `reasoning`).
 - **Gates** — approval (Gₐ), evidence (Gₑ), observed failure (Gₒ): never "done" on inference alone.
 - **Progressive disclosure** — catalog → candidates → open only the skills you need (bounded context).
-- **Memory** — `memory_recall` / `memory_save` (secrets rejected).
+- **Memory** — `memory_recall` / `memory_save` (secrets rejected). **Client setup** (`WAWOO_MEMORY_READONLY`, Kilo/Cursor/OpenCode): [`docs/USAGE.md` §5.1](docs/USAGE.md#51-memory-recall-save-and-how-to-configure-clients).
 
 ## What changes (2 minutes)
 
@@ -49,9 +49,9 @@ It lays **rails of reproducible steps and tool calls** — it does not take away
 
 ## Supported environments
 
-- **Kilo CLI / Kilo Code**: discovery of `.kilo/`, slash workflows (`/feature-delivery`, etc.), MCP via `kilo.json`; global install with `scripts/install_global.py`.
-- **Cursor**: `AGENTS.md`, `.cursor/rules`, MCP, native skills & subagents, and references via `@.kilo/commands` / `@.kilo/skills`; install project-level (`scripts/install_cursor_workspace.py`) or user-level (`scripts/install_cursor_global.py`).
-- **OpenCode**: `AGENTS.md`, native skills via `skills.paths`, and MCP via `opencode.json`; global install with `scripts/install_opencode.py` (mirrors agents/commands, registers MCP + `instructions` + `skills.paths` + `default_agent`).
+- **Kilo CLI / Kilo Code**: discovery of `.kilo/`, slash workflows (`/feature-delivery`, etc.), MCP via `kilo.json`.
+- **Cursor**: `AGENTS.md`, `.cursor/rules`, MCP, and references via `@.kilo/commands` / `@.kilo/skills` (no slash or native agent switching; the same steps apply).
+- **OpenCode**: `AGENTS.md` + MCP via `opencode.json` (no native slash/skill execution; use `interpret_intent` → `workflow_get` → `skill_get`).
 
 ### Prerequisites (runtime)
 
@@ -84,7 +84,7 @@ The kit's **MCP server and maintenance scripts run on Python 3 (standard library
 |---|---|
 | Skills | `.kilo/skills/<name>/SKILL.md` |
 | Agents | `.kilo/agents/<name>.md` |
-| Workflows | `.kilo/commands/<name>.md` (code L1: `/delivery-lite`) |
+| Workflows | `.kilo/commands/<name>.md` (code L1: `/delivery-lite`, knowledge L1: `/content-delivery-lite`) |
 | MCP server | `mcp/server.py` (stdio, stdlib only) |
 | Cursor rules | `.cursor/rules/*.mdc` |
 

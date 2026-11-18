@@ -84,7 +84,7 @@ skill／agent／workflow／memory／evidence と **意図ルーティング**を
 |------|------|------|
 | `WAWOO_SKILLS_ROOT` | `server.py` の親の親 | `.kilo` / `scripts` / `docs` の基点 |
 | `WAWOO_MEMORY_ROOT` | `<root>/docs/memory` | memory ツールの対象 |
-| `WAWOO_MEMORY_READONLY` | 無効 | `1` で `memory_save` 拒否（recall-only）。`install_global.py --memory-writable` は `0` を登録して書込を許可 |
+| `WAWOO_MEMORY_READONLY` | 未設定時は off 扱い | **`1`** = recall-only（`memory_save` 拒否）。**`0`** = `docs/memory/` へ書込可。各 install スクリプトは既定 **`1`** — **`--memory-writable`** で **`0`**。利用者向け手順: **`docs/USAGE.ja.md` §5.1** |
 | `WAWOO_INTENT_LEARN_DB` | `data/intent_learned.db` | 学習 trigger |
 | `WAWOO_INTENT_SOCKET` | 空 | 常駐 `intent_receiver.py`（任意） |
 | `WAWOO_INTENT_SESSION` | `<root>/data/intent_session.json` | セッション永続化ファイル（ゲート最小項目のみ・本文は保存しない） |

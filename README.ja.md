@@ -28,7 +28,7 @@ wawoo-skills は、この「**能力はあるのに呼ばれない**」問題に
 - **委譲** — `delegate_subtask` で並列の読み取り専用サブタスクを切り出し、**モデル階層**（`fast`／`reasoning`）を指定できる。
 - **ゲート** — 承認（Gₐ）・証拠（Gₑ）・失敗観察（Gₒ）。推測だけで「完了」にしない。
 - **段階的開示** — カタログ → 候補 → 必要な skill だけ開く（コンテキスト予算）。
-- **記憶** — `memory_recall` / `memory_save`（秘密は拒否）。
+- **記憶** — `memory_recall` / `memory_save`（秘密は拒否）。**クライアント設定**（`WAWOO_MEMORY_READONLY`・Kilo/Cursor/OpenCode）: [`docs/USAGE.ja.md` §5.1](docs/USAGE.ja.md#51-記憶memory想起保存とクライアント別の設定)。
 
 ## 何が変わるか（2 分）
 
@@ -47,9 +47,9 @@ wawoo-skills は、この「**能力はあるのに呼ばれない**」問題に
 
 ## 対応環境
 
-- **Kilo CLI / Kilo Code**：`.kilo/` の探索、slash ワークフロー（`/feature-delivery` 等）、`kilo.json` の MCP。グローバル導入は `scripts/install_global.py`。
-- **Cursor**：`AGENTS.md`・`.cursor/rules`・MCP＋**ネイティブ skills／subagents**、`@.kilo/commands`／`@.kilo/skills` の参照。導入はプロジェクト単位 `scripts/install_cursor_workspace.py`、ユーザ単位 `scripts/install_cursor_global.py`。
-- **OpenCode**：`AGENTS.md`＋`skills.paths` による**ネイティブ skills**＋ MCP（`opencode.json`）。グローバル導入は `scripts/install_opencode.py`（agents/commands をミラーし、MCP＋`instructions`＋`skills.paths`＋`default_agent` を登録）。
+- **Kilo CLI / Kilo Code**：`.kilo/` の探索、slash ワークフロー（`/feature-delivery` 等）、`kilo.json` の MCP。
+- **Cursor**：`AGENTS.md`・`.cursor/rules`・MCP、および `@.kilo/commands`／`@.kilo/skills` の参照（slash／ネイティブ agent 切替は非対応。手順は同等に適用）。
+- **OpenCode**：`AGENTS.md`＋MCP（`opencode.json`）。slash／skill のネイティブ実行は無し（`interpret_intent` → `workflow_get` → `skill_get`）。
 
 ### 前提条件（ランタイム）
 
@@ -82,7 +82,7 @@ wawoo-skills は、この「**能力はあるのに呼ばれない**」問題に
 |---|---|
 | Skills | `.kilo/skills/<name>/SKILL.md` |
 | Agents | `.kilo/agents/<name>.md` |
-| Workflows | `.kilo/commands/<name>.md`（コード L1: `/delivery-lite`） |
+| Workflows | `.kilo/commands/<name>.md`（コード L1: `/delivery-lite`、知識 L1: `/content-delivery-lite`） |
 | MCP サーバ | `mcp/server.py`（stdio・stdlib のみ） |
 | Cursor ルール | `.cursor/rules/*.mdc` |
 

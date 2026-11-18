@@ -86,7 +86,7 @@ Details: [docs/INTENT-ROUTING.md](../docs/INTENT-ROUTING.md).
 |------|------|------|
 | `WAWOO_SKILLS_ROOT` | `server.py`'s grandparent | Base for `.kilo` / `scripts` / `docs` |
 | `WAWOO_MEMORY_ROOT` | `<root>/docs/memory` | Target of the memory tools |
-| `WAWOO_MEMORY_READONLY` | disabled | `1` rejects `memory_save` (recall-only). `install_global.py --memory-writable` registers `0` to allow writes |
+| `WAWOO_MEMORY_READONLY` | unset behaves like off | **`1`** = recall-only (`memory_save` disabled). **`0`** = allow writes to `docs/memory/`. Installers default **`1`**; pass **`--memory-writable`** on `install_global.py`, `install_opencode.py`, `install_cursor_global.py`, or `install_cursor_workspace.py` to register **`0`**. Full user guide: **`docs/USAGE.md` §5.1** |
 | `WAWOO_INTENT_LEARN_DB` | `data/intent_learned.db` | Learned trigger DB |
 | `WAWOO_INTENT_SOCKET` | empty | Resident `intent_receiver.py` (optional) |
 | `WAWOO_INTENT_SESSION` | `<root>/data/intent_session.json` | Persisted session file (minimal gate fields; no prompt text) |

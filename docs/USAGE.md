@@ -54,12 +54,16 @@ OpenCode reads `AGENTS.md` and connects MCP servers over stdio. Add the kit as a
       "type": "local",
       "command": ["python3", "/abs/path/to/wawoo-skills/mcp/server.py"],
       "enabled": true,
-      "environment": { "WAWOO_SKILLS_ROOT": "/abs/path/to/wawoo-skills" }
+      "environment": {
+        "WAWOO_SKILLS_ROOT": "/abs/path/to/wawoo-skills",
+        "WAWOO_MEMORY_READONLY": "1"
+      }
     }
   }
 }
 ```
 - OpenCode has no native slash / skill execution; use `AGENTS.md` + MCP (`interpret_intent` → `workflow_get` → `skill_get`).
+- **One-shot install**: `python3 scripts/install_opencode.py` (recall-only by default). Use **`--memory-writable`** for `WAWOO_MEMORY_READONLY=0` (§5.1). Paseo's built-in OpenCode uses the same `opencode.json`.
 - Verified by the `opencode_stdio_contract` E2E (MCP handshake + `tools/list`).
 
 ## 3. Cursor (https://cursor.com)
@@ -67,6 +71,16 @@ OpenCode reads `AGENTS.md` and connects MCP servers over stdio. Add the kit as a
 1. Open this directory (it reads `AGENTS.md` and `.cursor/rules`).
 2. Enable `wawoo-skills` in **Settings → MCP** (`.cursor/mcp.json`).
 3. Use the tools `capabilities` / `skill_search` / `skill_get`.
+
+**Install (MCP + optional native skill symlinks)**
+
+```bash
+python3 scripts/install_cursor_workspace.py --workspace /path/to/workspace   # MCP only; overwrites project mcp.json
+python3 scripts/install_cursor_global.py                                     # user ~/.cursor; merges wawoo-skills into mcp.json
+# Enable memory_save (see §5.1):
+python3 scripts/install_cursor_global.py --memory-writable
+python3 scripts/install_cursor_workspace.py --workspace /path/to/workspace --memory-writable
+```
 
 **Cursor limitations**:
 - Slash commands (`/feature-delivery`, etc.) **do not work**.
@@ -98,15 +112,70 @@ python3 scripts/e2e_flows.py   # public smoke (contract/E2E)
 2. Select candidates via the **catalog / MCP** (do not read everything).
 3. Open only the **Skills** you need.
 4. Follow the workflow's **output schema** and **gates** (approval, evidence).
-5. Recall `memory` before work; save decisions after (`memory_save` writes INDEX + a topic file; `docs/memory/TEMPLATE.md`).
+5. Recall `memory` before work; save decisions after (see **§5.1**).
 
-### Memory
+## 5.1 Memory: recall, save, and how to configure clients
 
-- SSOT: `docs/memory/` (priority order for Kilo / MCP in `MEMORY-TOOLS.md`)
-- Recall/save also at the entry and exit of `/feature-delivery`
-- CI: `validate_assets.py` detects secret-like strings in memory
-- E2E: `python3 scripts/e2e_flows.py` (**L0–L3**, MCP, workflow). `python3 scripts/cli_adapters_mock.py` (**Kilo/Cursor entry mock**)
-- Validation CLIs: `plan_active` / `plan_l2_backlog` / `plan_l3_record` / `plan_content`
+### What the tools do
+
+| MCP tool | Purpose |
+|----------|---------|
+| `memory_recall` | Read prior decisions from `docs/memory/` (INDEX + topic files). **Works even when writes are disabled.** |
+| `memory_save` | Append one decision to INDEX + a topic file (`docs/memory/TEMPLATE.md`). **Rejected** when `WAWOO_MEMORY_READONLY=1`. Secrets are rejected in all cases. |
+
+**SSOT**: Markdown under `<kit>/docs/memory/`. Kilo native memory is auxiliary — on conflict, the files win (`docs/memory/MEMORY-TOOLS.md`).
+
+### `WAWOO_MEMORY_READONLY` (the switch users must set)
+
+| Value | Effect | When to use |
+|-------|--------|-------------|
+| **`1`** (install **default**) | **Recall-only** — `memory_save` returns an error; agents can still `memory_recall`. | MCP registered from a **random project**; audit / compliance sessions; you do not want the agent writing into the kit tree. |
+| **`0`** | **Read + write** — `memory_save` allowed into `WAWOO_SKILLS_ROOT/docs/memory/`. | Daily dev on the kit repo or a workspace that mirrors the same `docs/memory/` layout; Kilo / Cursor / Paseo·OpenCode parity. |
+
+The MCP server reads this from the **client config env** when it starts. Changing the file alone is not enough — **restart the client** (Kilo Reload, Cursor Reload, OpenCode restart, `paseo daemon restart` for built-in OpenCode).
+
+### Where to set it (by client)
+
+| Client | Config file | Recommended command (idempotent) |
+|--------|-------------|----------------------------------|
+| **Kilo (global)** | `~/.config/kilo/kilo.jsonc` → `mcp.wawoo-skills.environment` | `python3 scripts/install_global.py` (default `1`) or **`--memory-writable`** (`0`) |
+| **OpenCode** (terminal or **Paseo built-in**) | `~/.config/opencode/opencode.json` → `mcp.wawoo-skills.environment` | `python3 scripts/install_opencode.py` or **`--memory-writable`** |
+| **Cursor (user)** | `~/.cursor/mcp.json` → `mcpServers.wawoo-skills.env` | `python3 scripts/install_cursor_global.py` (**merges** other MCP servers) + **`--memory-writable`** |
+| **Cursor (workspace)** | `<workspace>/.cursor/mcp.json` | `python3 scripts/install_cursor_workspace.py --workspace <root>` + **`--memory-writable`** (overwrites `mcp.json` — merge manually if you have other servers) |
+
+**Manual snippet** (any client — adjust path):
+
+```json
+"environment": {
+  "WAWOO_SKILLS_ROOT": "/abs/path/to/wawoo-skills",
+  "WAWOO_MEMORY_READONLY": "0"
+}
+```
+
+Optional: `WAWOO_MEMORY_ROOT` overrides the directory (default `<kit>/docs/memory`).
+
+### Verify after changing
+
+```bash
+# Kilo
+grep -A2 WAWOO_MEMORY_READONLY ~/.config/kilo/kilo.jsonc
+# OpenCode / Paseo
+grep -A2 WAWOO_MEMORY_READONLY ~/.config/opencode/opencode.json
+# Cursor
+grep -A2 WAWOO_MEMORY_READONLY ~/.cursor/mcp.json
+```
+
+Then restart the client and call `memory_save` once in a test session — or confirm the agent no longer sees “memory_save disabled” in `workflow_get` hints when readonly.
+
+### Workflow limits (independent of this flag)
+
+Some workflows **forbid** `memory_save` via the tool gate even when `READONLY=0` (e.g. `compliance-review`). See `docs/INTENT-ROUTING.md`.
+
+### Related
+
+- Process: `docs/memory/MEMORY-TOOLS.md`, `docs/memory/TEMPLATE.md`, skill `memory`
+- `/feature-delivery` entry/exit: recall before, save after
+- CI: `validate_assets.py` scans memory for secret-like strings
 
 ## 6. Context budget
 
