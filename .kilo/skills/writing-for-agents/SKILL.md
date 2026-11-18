@@ -17,7 +17,7 @@ How to write **human-readable** docs agents actually follow (skills, `AGENTS.md`
 
 1. One file, one job (link out instead of duplicating USAGE or guides).
 2. Lead with **who it is for** and **what to do first** (tables beat jargon).
-3. Paseo-style language bar: English · 简体中文 · 日本語 · 한국어 on every user guide.
+3. Paseo-style language bar: English · 日本語 · 简体中文 · 한국어 on every user guide.
 4. No secrets in examples; counts match `gen_capabilities.py` (public: **97 / 21 / 12**).
 
 ## Gates
