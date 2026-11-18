@@ -5,6 +5,14 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 # Tool names exposed by MCP server.py (the allow-set per workflow)
+_MWG_TOOLS: frozenset[str] = frozenset(
+    {
+        "mwg_search",
+        "mwg_retrieve",
+        "mwg_legacy_scan",
+    }
+)
+
 MCP_TOOL_NAMES: frozenset[str] = frozenset(
     {
         "capabilities",
@@ -22,7 +30,7 @@ MCP_TOOL_NAMES: frozenset[str] = frozenset(
         "redact_infra",
         "guard_content",
     }
-)
+) | _MWG_TOOLS
 
 _MCP_READ: frozenset[str] = frozenset(
     {
@@ -39,7 +47,7 @@ _MCP_READ: frozenset[str] = frozenset(
         "redact_infra",
         "guard_content",
     }
-)
+) | _MWG_TOOLS
 
 _MCP_FULL: frozenset[str] = MCP_TOOL_NAMES
 

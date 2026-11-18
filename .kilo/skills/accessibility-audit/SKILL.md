@@ -6,6 +6,12 @@ license: MIT
 
 # Accessibility Audit
 
+## Uplift pilot (optional static check)
+
+[`expectations.md`](expectations.md) · `python3 scripts/skill_uplift_check.py accessibility-audit --path <ui-root>`
+
+## Audit
+
 Make core tasks usable without relying on a mouse, colour perception, or one viewport.
 
 1. Identify critical user journeys, page structure, interactive controls, forms, dynamic updates, media, and target accessibility standard if provided.

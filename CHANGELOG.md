@@ -11,74 +11,27 @@
 > （見出しは後続 commit、主に `c6d07f4` で追記された）ため **タグを付与しない**（誤った出所を作らない）。
 > 以降は `v0.6.0` から連番でタグ付けする。
 
-## [0.7.1] - 2026-11-17
+## [Unreleased]
 
-### Fixed — phase overrides additive + utility tools exempt from the gate + module cache
+## [0.7.2] - 2026-11-18
 
-- `phases_for` now **merges** override skills with the base phase (privacy/security/context/engineering no longer dropped by workflow overrides).
-- `compress_context` / `mask_pii` / `redact_infra` / `guard_content` added to the MCP allow-sets (`MCP_TOOL_NAMES`, `_MCP_READ`, `_MCP_AUDIT`) and to `_GATE_EXEMPT`, so egress/guard/context tools stay usable inside an active workflow.
-- `mcp/server.py` caches the loaded compression/PII/guard modules (no per-call re-exec/regex recompile).
-- JA sync: AGENTS.ja §4.1 bullets; INTENT-ROUTING.ja reordered.
+### 追加
+- **P1.1 uplift**: `accessibility-audit` / `deployment` の `expectations.md`、静的 checker 拡張、`uplift_pilot` に 2 skill 登録。
+- **配線**: `ui-delivery` 手順 5b（証拠パス `docs/evidence/skill-uplift/` 固定）、`web-designer` agent に skill ルーティング 3 行。
 
-### Changed — intent order + workflow optimization (pstack principles, privacy, context)
+## [0.7.1] - 2026-11-18
 
-- **Routing order**: `interpret_intent` now resolves **L0 slash → L1 local lexical (threshold/abstain) → L1.5 learned (substring) → L2 upstream**; a broad learned substring can no longer override a clear local match. Tests updated (`WAWOO_INTENT_LEXICAL=0` where learned is under test).
-- **Workflow (pstack-aligned)**: new `understand` phase (`recall`/`why`/`how`) for feature-delivery & incident-response; `principle-guard-the-context-window` in implement; `principle-build-the-lever` in verify; `maintain-verification-skill` in self-improve.
-- **Privacy/security in workflows**: `audit` includes `privacy-review`; `verify`/`report` include `data-egress-guard` + `content-guardrail`; commands gained a Privacy/security/context section.
-- **Contract**: AGENTS §4.1 adds “restate the goal first”, “classify before asking / reversible work proceeds”, “name the principle”, “privacy/egress”.
+### 追加
+- **Playwright A/B（uplift）**: `internal/skill-uplift-ab/`（`accessible-dialog` シナリオ）、`scripts/skill_uplift_ab.py`、証拠 JSON の書き出し。
 
+## [0.7.0] - 2026-11-18
 
-### Changed — move creative/marketing to the internal kit
+### 追加
+- **MWG bridge / uplift pilot（P0–P3）**: skills `modern-web-guidance-bridge`・`frontend-guides-hub`・`legacy-web-scan`、MCP `mwg_search` / `mwg_retrieve` / `mwg_legacy_scan`、`scripts/mwg_bridge.py`・`skill_uplift_check.py`・`legacy_web_scan.py`・`uplift_pilot.py`（SSOT）、`docs/SKILL-UPLIFT-PILOT`（EN/JA）。
 
-- Removed from the public kit (kept in the internal operational copy): skills `writing-fragments`, `writing-beats`, `writing-shape`, `science-writing`, `viral-hooks`, `marketing-psychology`, `brand-guidelines`, `slides`, `screenshots-marketing`, `research-decision-room`; workflows `writing`, `market-plan`, `deck`, `content-delivery-lite`; agent `market-researcher`. Public: skills 104→94, commands 16→12, agents 22→21.
-- Engineering plans/design docs are unaffected: `plan-md`, `architecture-decision`, `domain-modeling`, `engineering-quality`, `research`, `product-discovery`, `change-readiness`, `documentation-localization` stay. Routers/tests (`intent_catalog`, `intent_routes`, `intent_eval`, e2e) and docs updated accordingly.
-
-## [0.7.0] - 2026-11-16
-
-### Added — cross-tool adapters (OpenCode native, Cursor native)
-
-- **OpenCode adapter**: new `scripts/install_opencode.py` mirrors `.kilo/{agents,commands}` into `~/.config/opencode/{agent,command}` (stripping `name:` / `id:` so the agent key equals the file name) and idempotently registers `mcp.wawoo-skills` + `instructions` + `skills.paths` + `default_agent` in `opencode.json`. Root `opencode.json` now declares `instructions` and `skills.paths` (native skill discovery).
-- **Cursor adapter**: `scripts/install_cursor_workspace.py` now installs rules/agents/skills alongside `mcp.json` (project scope); new `scripts/install_cursor_global.py` installs user-level `~/.cursor/{rules,agents,skills,mcp.json}`. Shared helpers in `scripts/adapters.py`; new `.cursor/rules/30-agents.mdc`.
-- Docs: `docs/USAGE.md` §2.5 (OpenCode) and §3 (Cursor), `README.md` supported environments, `AGENTS.md` §6 per tool; `.publish-allowlist` updated.
-
-### Added — `context-compression` skill
-
-- New skill `.kilo/skills/context-compression` (pure Python, deterministic, **no LLM/network**): heuristic filters + fuzzy dedup + information-density scoring. Reference `compress.py` (library + CLI + `--selftest`) for offline context cleaning and RAG post-processing. Skills 64 → 65.
-- New MCP tool **`compress_context`** (`mcp/server.py`) so Kilo / Cursor / OpenCode can clean context in one call; e2e `mcp_compress_context`. OpenCode can run it automatically per model call via the `experimental.chat.messages.transform` plugin hook.
-
-### Added — `data-egress-guard` skill + `mask_pii` MCP tool
-
-- New skill `.kilo/skills/data-egress-guard` (pure Python, deterministic, **no model/network**): masks PII/secrets (email, phone, URL, IP, MAC, card, IBAN, JWT, AWS/GitHub/API tokens, PEM keys; optional JP identifiers) with numbered placeholders + a reversible mapping; fail-closed by default, `--strict` uses checksums. Mechanism inspired by Radlab LLM Router's masker pipeline (no bundled ML).
-- New MCP tool **`mask_pii`** (`mcp/server.py`): mask/unmask single text or batches with `locale` / `rules` / `strict`; e2e `mcp_mask_pii`. Skills 65 → 66.
-
-### Added — local lexical intent layer (zero-token)
-
-- `interpret_intent` gains an **L1.5 local lexical** layer between learned and the upstream LLM: tf-idf cosine against per-workflow utterance examples (`mcp/intent_routes.json`), adopted only when the cosine and its margin clear a threshold (`source: "local"`), otherwise it **abstains** to L2. Inspired by Semantic Router (local, threshold, abstain) and Radlab's deterministic-first routing; stdlib only, no embeddings.
-- Env: `WAWOO_INTENT_LEXICAL=0` disables; `WAWOO_INTENT_LEXICAL_THRESHOLD` / `_MARGIN` tune. e2e `local_lexical_router`; `docs/INTENT-ROUTING(.ja)` updated.
-
-### Added — outbound guardrails + intent calibration/complexity
-
-- **A2** `data-egress-guard` now redacts internal infrastructure (private IPs, internal hostnames, credentials in URLs, host=/port=) — new MCP tool **`redact_infra`**; error/log sanitization (`mask_pii --profile infra`).
-- **A3** new skill **`content-guardrail`** (`guard.py` + `policy.example.json`) and MCP tool **`guard_content`**: policy-as-data gate (deny terms, regex, secret/private-infra detectors) with optional **fail-closed**. Skills 66 → 67.
-- **B2** `mcp/intent_calibrate.py` + `intent_eval.json`: grid-search the lexical threshold/margin, report precision/recall/abstain, print env values.
-- **B3** `mcp/intent_complexity.py`: deterministic complexity + `model_tier` on every schedule; local lexical layer is **fail-open** (errors fall through to the upstream LLM).
-
-### Added — pstack `principle-*` methodology (24 skills)
-
-- Absorbed pstack's engineering-principle skills (`principle-*`) from the standalone mirror (MIT, © 2026 Lauren Tan): apply-before rules for design, debugging, verification, context management, concurrency, and scope. `LICENSES/pstack-MIT.txt`; ATTRIBUTION updated. Skills 67 → 91.
-- Batch 2: absorbed `blast-radius`, `create-verification-skill`, `maintain-verification-skill`, `show-me-your-work`, `benchmark-checklist`, `sharpen`, `in-your-own-words`, `figure-it-out`, `swarm`, **`why`/`how`/`recall`/`reflect`** (intent & code understanding, context reconstruction, reflection) — generalized harness references; **skipped** `statechart` (heavy toolchain), `interrogate` (depends on `arena`), and the `t3-pstack` port.
-- Did **not** absorb the `t3-pstack` port (T3 Code wiring + mixed Cursor/thermos licenses); only its port/sync methodology is noted (see `repo-docs/wawoo-skills/plans/PSTACK-ABSORPTION-PLAN.md`).
-
-### Changed — `design-md` made actionable (Google Stitch DESIGN.md format)
-
-- `design-md` was a catalogue stub pointing at upstream; it now carries the **Google Stitch DESIGN.md format** as an actionable skill: 9-section structure, workflow, tips, `references/stitch-format.md`, and `templates/DESIGN.template.md`.
-- Absorbed the **format/spec only** — not `DESIGN.md` files extracted from third-party brand sites (trademark/trade-dress/uncertain-license risk).
-
-### Changed — public kit English-only + self-contained docs
-
-- Localized → English: `.kilo/skills/README.md`, `.kilo/skills/ATTRIBUTION.md`, `reference-design-contract` (`ja_name` / JA triggers / i18n example), `web-design-guidelines`, `science-writing`, `.kilo/commands/writing.md`; `scripts/*.py` and `mcp/*.py` comments, docstrings and messages; OpenDesign `NOTICE.txt` (7). Fixed the `validate_assets` entry marker (`**入口**` → `**Entry**`).
-- `language-policy` now documents the default working language and how to change it (`.kilo/skills/language-policy/SKILL.md`, `docs/USAGE.md` §9).
-- Docs are now **real files** (no vault symlinks), so the public publish renders: `docs/{USAGE,INTENT-ROUTING,VERSIONING,index}*` and `docs/{memory,plans}/*` materialized; private pointer docs removed (`docs/README.md`, `docs/PROJECT_MANAGEMENT.md`, `docs/AGENTS-PROGRESS.md`, `docs/TASKS.md`, `PROGRESS.md`).
+### 修正
+- **意図ゲート**: `intent_catalog.MCP_TOOL_NAMES` に `mwg_*` を登録し workflow 許可集合に含める（AUD-001）。
+- uplift: expectations とルール id の対応、`img` 複数行タグ検出、legacy scan の二重走査削除・Bootstrap 3 向けルール調整。
 
 ### ドキュメント
 - **公開面の縮小（読む文書を README／USAGE／INTENT-ROUTING に限定）**: 設計・工程文書を公開ツリーから `internal/` へ移動（`docs/METHODOLOGY.md`・`docs/PROCESS-PHILOSOPHY.md`・`docs/PUBLICATION.md`・`docs/README.md`・`docs/design/INTENT-RECEIVER.md`、EN+JA）。公開文書の参照を `AGENTS.md` §3／`mcp/README.md` に張り替え、`scripts/e2e_flows.py` は `internal/` 不在時に該当検査をスキップ、`publication-boundary` skill と `README` のディレクトリ表記を更新。

@@ -3,13 +3,13 @@
 
 The resident entry for intent scoring (stdio / Unix socket). The decision is made by the upstream LLM; DB writes are async.
 
-Run:
+起動:
   python3 mcp/intent_receiver.py
   python3 mcp/intent_receiver.py --socket /run/user/1000/wawoo-intent.sock
 
 Protocol (one JSON per line):
   request: {"id":"1","text":"I want to fix a bug","meta":{}}
-  response: {"id":"1","ok":true,"schedule":{...}}
+  応答: {"id":"1","ok":true,"schedule":{...}}
 """
 from __future__ import annotations
 
@@ -123,7 +123,7 @@ def run_socket(path: str) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="wawoo-skills intent receiver (resident)")
+    parser = argparse.ArgumentParser(description="wawoo-skills 意図受信器（常駐）")
     parser.add_argument(
         "--socket",
         default=os.environ.get("WAWOO_INTENT_SOCKET", "").strip() or None,

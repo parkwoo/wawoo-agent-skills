@@ -8,7 +8,8 @@ Transport: newline-delimited JSON-RPC 2.0 over stdio.
 Tools:
   capabilities, skill_search, skill_get, workflow_get, agent_get,
   memory_recall, memory_save, evidence_check,
-  interpret_intent, route_task, workflow_clear, delegate_subtask, compress_context, mask_pii, redact_infra, guard_content
+  interpret_intent, route_task, workflow_clear, delegate_subtask, compress_context, mask_pii, redact_infra, guard_content,
+  mwg_search, mwg_retrieve, mwg_legacy_scan
 """
 from __future__ import annotations
 
@@ -465,6 +466,53 @@ def do_guard_content(args: dict) -> dict:
     return tool_result(json.dumps(res, ensure_ascii=False))
 
 
+def _load_mwg_bridge():
+    import importlib.util
+
+    path = ROOT / "scripts" / "mwg_bridge.py"
+    spec = importlib.util.spec_from_file_location("wawoo_mwg_bridge", path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"cannot load {path}")
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules["wawoo_mwg_bridge"] = mod
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def do_mwg_search(args: dict) -> dict:
+    q = str(args.get("query", "")).strip()
+    if not q:
+        return tool_result("mwg_search: query required", True)
+    mod = _load_mwg_bridge()
+    return tool_result(json.dumps(mod.search(q), ensure_ascii=False))
+
+
+def do_mwg_retrieve(args: dict) -> dict:
+    gid = str(args.get("id", "")).strip()
+    if not gid:
+        return tool_result("mwg_retrieve: id required", True)
+    mod = _load_mwg_bridge()
+    res = mod.retrieve(gid)
+    if res.get("ok"):
+        content = str(res.get("content", ""))
+        if len(content) > 24000:
+            res["content"] = content[:24000] + "\n… [truncated for context budget]"
+    return tool_result(json.dumps(res, ensure_ascii=False))
+
+
+def do_mwg_legacy_scan(args: dict) -> dict:
+    p = str(args.get("path", "")).strip()
+    if not p:
+        return tool_result("mwg_legacy_scan: path required", True)
+    mod = _load_mwg_bridge()
+    res = mod.legacy_scan(p)
+    if res.get("ok"):
+        report = str(res.get("report", ""))
+        if len(report) > 24000:
+            res["report"] = report[:24000] + "\n… [truncated]"
+    return tool_result(json.dumps(res, ensure_ascii=False))
+
+
 TOOLS = [
     ("capabilities", "List skills/agents/workflows with one-line descriptions.", {"type": "object", "properties": {"ready_only": {"type": "boolean"}}}),
     ("skill_search", "Search skills/agents/workflows by query.", {"type": "object", "properties": {"query": {"type": "string"}, "limit": {"type": "integer"}}, "required": ["query"]}),
@@ -624,6 +672,21 @@ TOOLS = [
             },
         },
     ),
+    (
+        "mwg_search",
+        "Search Modern Web Guidance guides (npx modern-web-guidance; network required). Returns JSON {ok, results}. Disable with WAWOO_MWG_DISABLE=1.",
+        {"type": "object", "properties": {"query": {"type": "string"}}, "required": ["query"]},
+    ),
+    (
+        "mwg_retrieve",
+        "Retrieve one Modern Web Guidance guide by id. Content may be truncated (~24KB). Requires npx/network.",
+        {"type": "object", "properties": {"id": {"type": "string"}}, "required": ["id"]},
+    ),
+    (
+        "mwg_legacy_scan",
+        "Run MWG legacy-scan on a directory path (npx; network). Returns JSON plus report text.",
+        {"type": "object", "properties": {"path": {"type": "string"}}, "required": ["path"]},
+    ),
 ]
 
 HANDLERS = {
@@ -644,6 +707,9 @@ HANDLERS = {
     "mask_pii": do_mask_pii,
     "redact_infra": do_redact_infra,
     "guard_content": do_guard_content,
+    "mwg_search": do_mwg_search,
+    "mwg_retrieve": do_mwg_retrieve,
+    "mwg_legacy_scan": do_mwg_legacy_scan,
 }
 
 
