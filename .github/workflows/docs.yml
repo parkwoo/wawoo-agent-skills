@@ -38,6 +38,7 @@ jobs:
           path: site
   deploy:
     needs: build
+    if: github.repository == 'parkwoo/wawoo-skills'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
