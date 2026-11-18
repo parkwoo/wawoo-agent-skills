@@ -1,10 +1,30 @@
-# wawoo-skills
+<p align="center">
+  <img src="docs/assets/wawoo-skills-logo.svg" width="128" alt="wawoo-skills logo" />
+</p>
 
-**Your agent has the skills. It just doesn't use them.**
+<h1 align="center">wawoo-skills</h1>
 
-> **Invocation by design.** A generic kit of reusable **skills / agents / workflows / MCP servers** for AI coding agents — so the same request takes the same steps, every time.
+<p align="center">
+  <strong>Your agent has the skills. It just doesn't use them.</strong>
+</p>
 
-> Japanese version: [README.ja.md](https://github.com/parkwoo/wawoo-skills/blob/master/README.ja.md)
+<p align="center">
+  <a href="README.md">English</a> ·
+  <a href="README.zh-CN.md">简体中文</a> ·
+  <a href="README.ja.md">日本語</a> ·
+  <a href="README.ko.md">한국어</a>
+</p>
+
+<p align="center">
+  <a href="docs/GUIDES.md">Guides</a> ·
+  <a href="docs/INTEGRATIONS.md">Paseo · Google · pstack</a> ·
+  <a href="https://github.com/parkwoo/wawoo-skills">GitHub</a>
+</p>
+
+Open-source, **product-neutral** kit for **AI coding agents** (Cursor, Kilo, OpenCode): **97 skills**, **21 agent roles**, **12 workflows**, and an **MCP** (Model Context Protocol) server. It designs *which workflow to run* and *which skills to open*, so the same request gets **reproducible, evidence-backed** steps—not a new improvisation every time.
+
+**New here?** [**Product overview**](docs/PRODUCT-OVERVIEW.md) · [**Memory setup**](docs/MEMORY-CLIENT-GUIDE.md) · [**Install**](docs/CLIENT-INTEGRATION-GUIDE.md) · [**Write docs**](docs/COPY-WRITING-GUIDE.md)  
+Guides (4 languages): [docs/GUIDES.md](docs/GUIDES.md) · Inventory: [`.kilo/CAPABILITIES.md`](.kilo/CAPABILITIES.md)
 
 ## Why this kit
 
@@ -28,7 +48,7 @@ It lays **rails of reproducible steps and tool calls** — it does not take away
 - **Phases & gates** — every workflow decomposes into **phases** (`goal`, `agent`, `skills`, `mcp_tools_allow`, `exit_criteria`); **audit workflows are read-only** (no `implement`).
 - **Dynamic steering** — `steer_task` amends a running plan (add / reorder / reprioritize / scope_change / abort) at a step boundary.
 - **Delegation** — `delegate_subtask` carves off parallel, read-only subtasks and can target a **model tier** (`fast` or `reasoning`).
-- **Gates** — approval (Gₐ), evidence (Gₑ), observed failure (Gₒ): never "done" on inference alone.
+- **Gates** — approval, evidence, and observed failure: never "done" on inference alone.
 - **Progressive disclosure** — catalog → candidates → open only the skills you need (bounded context).
 - **Memory** — `memory_recall` / `memory_save` (secrets rejected). **Client setup** (`WAWOO_MEMORY_READONLY`, Kilo/Cursor/OpenCode): [`docs/USAGE.md` §5.1](docs/USAGE.md#51-memory-recall-save-and-how-to-configure-clients).
 
@@ -36,7 +56,7 @@ It lays **rails of reproducible steps and tool calls** — it does not take away
 
 **Before — no routing.** You say "fix this bug". The agent improvises, skips the gates, and the next identical request takes a different path.
 
-**After — routed.** The request enters `/self-review`; the agent opens `test-engineering`, reaches the evidence gate (Gₑ) with a reproduction, and the next identical request follows the same chain.
+**After — routed.** The request enters `/self-review`; the agent opens `test-engineering`, passes the **evidence gate** with a reproduction, and the next identical request follows the same chain.
 
 ## Who this is for
 
@@ -52,6 +72,7 @@ It lays **rails of reproducible steps and tool calls** — it does not take away
 - **Kilo CLI / Kilo Code**: discovery of `.kilo/`, slash workflows (`/feature-delivery`, etc.), MCP via `kilo.json`.
 - **Cursor**: `AGENTS.md`, `.cursor/rules`, MCP, and references via `@.kilo/commands` / `@.kilo/skills` (no slash or native agent switching; the same steps apply).
 - **OpenCode**: `AGENTS.md` + MCP via `opencode.json` (no native slash/skill execution; use `interpret_intent` → `workflow_get` → `skill_get`).
+- **[Paseo](https://github.com/getpaseo/paseo)**: built-in OpenCode — same `opencode.json` + `install_opencode.py`; restart daemon after env changes ([`docs/INTEGRATIONS.md`](docs/INTEGRATIONS.md)).
 
 ### Prerequisites (runtime)
 
@@ -75,6 +96,7 @@ The kit's **MCP server and maintenance scripts run on Python 3 (standard library
 | Kilo Code | Kilo Code (VS Code extension) | https://kilocode.ai |
 | Cursor | Cursor | https://cursor.com |
 | OpenCode | OpenCode | https://opencode.ai |
+| Paseo | Paseo (multi-agent IDE) | https://github.com/getpaseo/paseo |
 | MCP | Model Context Protocol | https://modelcontextprotocol.io |
 | AGENTS.md | AGENTS.md | https://agents.md |
 
