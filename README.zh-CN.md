@@ -53,7 +53,7 @@ wawoo-skills 和你的产品、技术栈都无关，装上就能用：**98 个�
 
 核心一句话：**router 选流程，门禁锁工具，工作流编排阶段。** 具体是五件事：
 
-1. **router 选流程**：`interpret_intent` 按「显式 `/name` → 本地词法 → 已学习触发词 → 模型评分」选流程（L0 → L1 → L1 → L2）。
+1. **router 选流程**：`interpret_intent` 按「显式 `/name` → 本地词法 → 已学习触发词 → 模型评分」选流程（L0 → L1 → L1.5 → L2）。
 2. **门禁锁工具**：选中后激活会话门禁，按流程的 `mcp_tools_allow` 限制 **MCP 工具**——审查类只给读工具，也没有 implement 阶段（`implement_allowed = false`）。
 3. **工作流编排阶段**：10 个可复用阶段拼出 12 条流程，每阶段有 `exit_criteria`；`evidence_check` 实际校验，不是模型自评。
 4. **按需取技能**：先给目录，要用时只取一个——省 token，也不「看不见就不用」。
