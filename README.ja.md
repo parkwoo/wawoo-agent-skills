@@ -66,23 +66,23 @@ sequenceDiagram
     participant A as AIコーディングエージェント
     participant M as MCP（wawoo-skills）
     participant W as ワークフロー
-    U->>A: 「このバグを修正して」
-    Note over A,M: 1. ワークフローを選ぶ
+    U->>A: 依頼
     A->>M: ワークフローを選択（interpret_intent）
-    M-->>A: 返却ワークフロー：自己修正
-    Note over A,M: 2. ツールを固定する
-    M-->>A: 許可ツールのみ（mcp_tools_allow）
-    Note over A,W: 3. フェーズを実行（骨格は固定、経路は動的）
-    A->>W: 最適な経路を決定（steer_task）
-    W-->>A: 並べ替えたステップ
-    A->>W: フェーズを実行（exit_criteria）
-    Note over A,M: 4. スキルを必要時に取得
-    A->>M: 必要なものだけ取得（skill_get）
-    M-->>A: スキル
-    Note over W,M: 完了を検証
-    W->>M: 完了を検証（evidence_check）
-    M-->>W: 検証済み — または FAILED
-    Note over A,M: 5. 経験を記録
+    M-->>A: ワークフロー：自己修正
+    A->>A: ツールゲートを有効化（mcp_tools_allow）
+    A->>W: 経路を決定（steer_task）
+    W-->>A: 実行順序
+    loop フェーズを実行
+        A->>M: フェーズのスキルを取得（skill_get）
+        M-->>A: スキル
+        A->>W: 実行（exit_criteria）
+        W->>M: 検証（evidence_check）
+        alt 合格
+            M-->>W: 合格
+        else 不合格
+            M-->>W: FAILED
+        end
+    end
     A->>M: 経験を記録（memory_save）
     A-->>U: 結果 + 証拠
 ```

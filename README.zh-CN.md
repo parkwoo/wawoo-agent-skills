@@ -66,23 +66,23 @@ sequenceDiagram
     participant A as AI 编程助手
     participant M as MCP（wawoo-skills）
     participant W as 工作流
-    U->>A: 「修一下这个 bug」
-    Note over A,M: 1. 选流程
+    U->>A: 提出请求
     A->>M: 选流程（interpret_intent）
-    M-->>A: 返回流程：自纠错
-    Note over A,M: 2. 锁工具
-    M-->>A: 只放行这些工具（mcp_tools_allow）
-    Note over A,W: 3. 按阶段执行（骨架固定，路径动态）
-    A->>W: 定最佳路径（steer_task）
-    W-->>A: 排好的步骤
-    A->>W: 按阶段执行（exit_criteria）
-    Note over A,M: 4. 按需取技能
-    A->>M: 只取需要的（skill_get）
-    M-->>A: 技能
-    Note over W,M: 校验完成
-    W->>M: 校验完成（evidence_check）
-    M-->>W: 通过 —— 或 FAILED
-    Note over A,M: 5. 记住经验
+    M-->>A: 流程：自纠错
+    A->>A: 开启门禁（mcp_tools_allow）
+    A->>W: 定路径（steer_task）
+    W-->>A: 执行顺序
+    loop 按阶段执行
+        A->>M: 取该阶段技能（skill_get）
+        M-->>A: 技能
+        A->>W: 执行（exit_criteria）
+        W->>M: 校验（evidence_check）
+        alt 通过
+            M-->>W: 通过
+        else 未通过
+            M-->>W: FAILED
+        end
+    end
     A->>M: 记录经验（memory_save）
     A-->>U: 结果 + 证据
 ```

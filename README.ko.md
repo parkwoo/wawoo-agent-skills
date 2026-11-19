@@ -66,23 +66,23 @@ sequenceDiagram
     participant A as AI 코딩 에이전트
     participant M as MCP(wawoo-skills)
     participant W as 워크플로
-    U->>A: "이 버그를 수정해줘"
-    Note over A,M: 1. 워크플로 선택
+    U->>A: 요청
     A->>M: 워크플로 선택(interpret_intent)
     M-->>A: 워크플로: 자기 수정
-    Note over A,M: 2. 도구 잠금
-    M-->>A: 허용 도구만(mcp_tools_allow)
-    Note over A,W: 3. 단계 실행 (골격 고정, 경로 동적)
-    A->>W: 최적 경로 결정(steer_task)
-    W-->>A: 정렬된 단계
-    A->>W: 단계 실행(exit_criteria)
-    Note over A,M: 4. 스킬 필요 시 로드
-    A->>M: 필요한 것만 로드(skill_get)
-    M-->>A: 스킬
-    Note over W,M: 완료 검증
-    W->>M: 완료 검증(evidence_check)
-    M-->>W: 검증됨 — 또는 FAILED
-    Note over A,M: 5. 경험 기억
+    A->>A: 도구 게이트 활성화(mcp_tools_allow)
+    A->>W: 경로 결정(steer_task)
+    W-->>A: 실행 순서
+    loop 단계 실행
+        A->>M: 단계 스킬 로드(skill_get)
+        M-->>A: 스킬
+        A->>W: 실행(exit_criteria)
+        W->>M: 검증(evidence_check)
+        alt 통과
+            M-->>W: 통과
+        else 실패
+            M-->>W: FAILED
+        end
+    end
     A->>M: 경험 저장(memory_save)
     A-->>U: 결과 + 증거
 ```

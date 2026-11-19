@@ -84,23 +84,23 @@ sequenceDiagram
     participant A as AI coding agent
     participant M as MCP (wawoo-skills)
     participant W as Workflow
-    U->>A: "fix this bug"
-    Note over A,M: 1. pick a workflow
+    U->>A: request
     A->>M: pick a workflow (interpret_intent)
     M-->>A: workflow: self-correct
-    Note over A,M: 2. lock the tools
-    M-->>A: allowed tools only (mcp_tools_allow)
-    Note over A,W: 3. run the phases (fixed skeleton, dynamic path)
-    A->>W: choose the best path (steer_task)
-    W-->>A: ordered steps
-    A->>W: run the phases (exit_criteria)
-    Note over A,M: 4. fetch skills on demand
-    A->>M: fetch only what is needed (skill_get)
-    M-->>A: skills
-    Note over W,M: verify completion
-    W->>M: verify completion (evidence_check)
-    M-->>W: verified — or FAILED
-    Note over A,M: 5. remember what was learned
+    A->>A: activate the tool gate (mcp_tools_allow)
+    A->>W: choose the path (steer_task)
+    W-->>A: execution order
+    loop run the phases
+        A->>M: fetch the phase's skill (skill_get)
+        M-->>A: skill
+        A->>W: execute (exit_criteria)
+        W->>M: verify (evidence_check)
+        alt pass
+            M-->>W: pass
+        else fail
+            M-->>W: FAILED
+        end
+    end
     A->>M: save what was learned (memory_save)
     A-->>U: result + evidence
 ```
