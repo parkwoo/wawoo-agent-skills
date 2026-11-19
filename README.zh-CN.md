@@ -30,7 +30,7 @@ wawoo-skills 只做一件事：**把「什么时候用哪个技能」提前定�
 
 **先精选，再打造。** 我们筛遍社区最火的 skills 与 agent 工作流，提取编程真正用得上的那部分，再改造、原创，收进同一套目录、同一个路由、同一组关卡。
 
-它和你的产品、技术栈都无关，装上就能用：**98 个技能、21 个角色、12 条工作流**，外加一个本地服务（MCP）。Cursor、Kilo、OpenCode、Codex、Claude Code、Paseo 都能用。安装和使用见 [**使用说明**](docs/USAGE.zh-CN.md)。
+wawoo-skills 和你的产品、技术栈都无关，装上就能用：**98 个技能、21 个角色、12 条工作流**，外加一个本地服务（MCP）。Cursor、Kilo、OpenCode、Codex、Claude Code、Paseo 都能用。安装和使用见 [**使用说明**](docs/USAGE.zh-CN.md)。
 
 ## 这是什么
 
@@ -150,11 +150,11 @@ wawoo-skills 只做一件事：**把「什么时候用哪个技能」提前定�
 
 | 词 | 一句话 |
 |---|---|
-| AI 编程助手（简称「助手」） | 你日常用的那个工具（Cursor / Kilo / OpenCode / Codex / Paseo）；本套件作用于它 |
+| AI 编程助手（简称「助手」） | 你日常用的那个工具（Cursor / Kilo / OpenCode / Codex / Paseo）；wawoo-skills 作用于它 |
 | 技能 skills | 一段可复用的操作说明（`SKILL.md`），比如「怎么排查 bug」 |
-| 角色 agents | 套件内定义的「视角」，如「评审者」「实现者」「产品负责人」；由流程调度 |
+| 角色 agents | wawoo-skills 内定义的「视角」，如「评审者」「实现者」「产品负责人」；由流程调度 |
 | 工作流 workflows | 一条有阶段、有完成条件的流程，如 `/delivery-lite` |
-| MCP | Model Context Protocol，连接外部工具的协议；本套件的 MCP 服务只用 Python 标准库 |
+| MCP | Model Context Protocol，连接外部工具的协议；wawoo-skills 的 MCP 服务只用 Python 标准库 |
 | 路由（router） | 自动替你挑一条工作流 |
 | 闸门 | 批准、证据、失败观察——「不许跳过」的检查点 |
 

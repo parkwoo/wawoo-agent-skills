@@ -187,9 +187,9 @@ Full list (group / subgroup / name / description): `.kilo/CAPABILITIES.md` (mach
 
 | Term | In one line |
 |---|---|
-| AI coding agent (the "agent") | The tool you use daily (Cursor / Kilo / OpenCode / Codex / Paseo); this kit acts upon it |
+| AI coding agent (the "agent") | The tool you use daily (Cursor / Kilo / OpenCode / Codex / Paseo); wawoo-skills acts upon it |
 | Skill | A reusable instruction file (`SKILL.md`), e.g., "how to diagnose a bug" |
-| Agent role | A viewpoint defined in the kit, e.g., reviewer / implementer / product owner; scheduled by workflows |
+| Agent role | A viewpoint defined in wawoo-skills, e.g., reviewer / implementer / product owner; scheduled by workflows |
 | Workflow | An ordered process with phases and a definition of done, e.g., `/delivery-lite` |
 | MCP | Model Context Protocol, a method for connecting external tools; our MCP server uses only the Python standard library |
 | Router | Automatically selects a workflow for you |
@@ -197,7 +197,7 @@ Full list (group / subgroup / name / description): `.kilo/CAPABILITIES.md` (mach
 
 ## License & sources
 
-The components **developed for this kit** (skills / agents / commands / MCP) are **MIT** (`LICENSE`, Copyright (c) 2026 wawoo.jp). The kit also bundles **third-party work**—**per-file provenance is in `.kilo/skills/ATTRIBUTION.md`; full license texts are in `LICENSES/` and each skill's `LICENSE` / `LICENSE.txt` / `NOTICE.txt`**.
+The components **developed for wawoo-skills** (skills / agents / commands / MCP) are **MIT** (`LICENSE`, Copyright (c) 2026 wawoo.jp). wawoo-skills also bundles **third-party work**—**per-file provenance is in `.kilo/skills/ATTRIBUTION.md`; full license texts are in `LICENSES/` and each skill's `LICENSE` / `LICENSE.txt` / `NOTICE.txt`**.
 
 | Source | Content | License | Link (URL or in-repo path) |
 |---|---|---|---|
