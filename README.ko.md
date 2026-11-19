@@ -124,7 +124,7 @@ sequenceDiagram
 | Cursor | Cursor | `cursor` | **부분 지원** | 슬래시 명령 / 에이전트 전환 없음 · https://cursor.com |
 | Kilo CLI | Kilo (CLI) | `kilo` | **지원** | 먼저 Kilo에 로그인. 설정은 `~/.config/kilo` · https://kilo.ai |
 | Kilo Code | Kilo Code(VS Code 확장) | `kilo` | **지원** | VS Code 확장. 먼저 Kilo에 로그인 · https://kilocode.ai |
-| OpenCode | OpenCode | `opencode` | **지원** | 내장. 같은 `opencode.json`(우리 agents가 modes로 표시됨) · https://opencode.ai |
+| OpenCode | OpenCode | `opencode` | **지원** | 같은 `opencode.json`. 우리 agent 역할은 OpenCode agent로 설치되며, Paseo에서는 modes로 표시 · https://opencode.ai |
 | Paseo | Paseo(멀티 에이전트 IDE) | — | **지원** | OpenCode 내장 · https://github.com/getpaseo/paseo |
 | Pi | Pi | `pi` | **부분 지원** | 서브에이전트 확장이 있으면 병렬, 없으면 순차(둘 다 지원) |
 

@@ -135,7 +135,7 @@ sequenceDiagram
 | Cursor | Cursor | `cursor` | **部分支持** | 无斜杠命令 / agent 切换 · https://cursor.com |
 | Kilo CLI | Kilo (CLI) | `kilo` | **支持** | 先登录 Kilo；配置在 `~/.config/kilo` · https://kilo.ai |
 | Kilo Code | Kilo Code（VS Code 扩展） | `kilo` | **支持** | VS Code 扩展；先登录 Kilo · https://kilocode.ai |
-| OpenCode | OpenCode | `opencode` | **支持** | 内置；同一 `opencode.json`（我们的 agents 已作为 modes 出现） · https://opencode.ai |
+| OpenCode | OpenCode | `opencode` | **支持** | 同一 `opencode.json`；agent 角色装成 OpenCode agent（Paseo 里显示为 modes） · https://opencode.ai |
 | Paseo | Paseo（多智能体 IDE） | — | **支持** | 内置 OpenCode · https://github.com/getpaseo/paseo |
 | Pi | Pi | `pi` | **部分支持** | 有子代理扩展时并行；没有时按顺序执行（两种都支持） |
 

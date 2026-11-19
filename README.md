@@ -142,7 +142,7 @@ Beyond the mechanism described above, it also provides:
 | Cursor | Cursor | `cursor` | **Partial** | No slash commands / agent switching · https://cursor.com |
 | Kilo CLI | Kilo (CLI) | `kilo` | **Supported** | Sign in to Kilo first; config in `~/.config/kilo` · https://kilo.ai |
 | Kilo Code | Kilo Code (VS Code extension) | `kilo` | **Supported** | VS Code extension; sign in to Kilo first · https://kilocode.ai |
-| OpenCode | OpenCode | `opencode` | **Supported** | Built-in; same `opencode.json` (our agents appear as modes) · https://opencode.ai |
+| OpenCode | OpenCode | `opencode` | **Supported** | Same `opencode.json`; agent roles install as OpenCode agents (shown as modes in Paseo) · https://opencode.ai |
 | Paseo | Paseo (multi-agent IDE) | — | **Supported** | Built-in OpenCode · https://github.com/getpaseo/paseo |
 | Pi | Pi | `pi` | **Partial** | Parallel with a subagent extension; sequential without one (both supported) |
 

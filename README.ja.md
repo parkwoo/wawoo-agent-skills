@@ -124,7 +124,7 @@ sequenceDiagram
 | Cursor | Cursor | `cursor` | **部分対応** | スラッシュコマンド / エージェント切替なし · https://cursor.com |
 | Kilo CLI | Kilo (CLI) | `kilo` | **対応** | 事前にKiloへログイン。設定は`~/.config/kilo` · https://kilo.ai |
 | Kilo Code | Kilo Code（VS Code 拡張） | `kilo` | **対応** | VS Code拡張。事前にKiloへログイン · https://kilocode.ai |
-| OpenCode | OpenCode | `opencode` | **対応** | 内蔵。同じ`opencode.json`（当方のagentsがmodesとして表示） · https://opencode.ai |
+| OpenCode | OpenCode | `opencode` | **対応** | 同じ`opencode.json`。当方の agent 役割は OpenCode の agent として入り、Paseo では modes として表示 · https://opencode.ai |
 | Paseo | Paseo（マルチエージェントIDE） | — | **対応** | OpenCode内蔵 · https://github.com/getpaseo/paseo |
 | Pi | Pi | `pi` | **部分対応** | サブエージェント拡張があれば並列、なければ順次（どちらも対応） |
 
