@@ -36,7 +36,7 @@ The problem isn't a lack of intelligence. It's that **nothing compels it to use 
 
 wawoo-skills does one thing: **it dictates *which* skill to use, and *when*.** It establishes a fixed path for the agent—what to read first, which workflow to execute, and which gates cannot be bypassed. This ensures that the same request follows the same steps every time, leaving verifiable evidence.
 
-**Curated first, then built.** We go through the most popular community skills and agent workflows, keep only what programming actually needs, then **extract, adapt, or write** it—normalized into one catalog, one router, and one set of gates. Credits: [License & sources](#license--sources) · method: [Where the methodology comes from](#where-the-methodology-comes-from).
+**Curated first, then built.** We go through the most popular community skills and agent workflows, keep only what programming actually needs, then **extract, adapt, or write** it—normalized into one catalog, one router, and one set of gates.
 
 It's product and stack-agnostic—install and go: **98 skills, 21 agent roles, 12 workflows**, plus a local service (MCP). Works with Cursor, Kilo, OpenCode, Codex, Claude Code, Paseo. See [**Usage**](docs/USAGE.md).
 
