@@ -63,6 +63,7 @@ wawoo-skills 不依赖你的产品和技术栈，装上就能用：**98 个技�
 sequenceDiagram
     autonumber
     participant A as Agent
+    participant G as Agent 角色
     participant R as MCP Router
     participant W as 工作流
     participant S as Skill
@@ -70,8 +71,10 @@ sequenceDiagram
     R-->>A: 流程：自纠错
     A->>R: 开启门禁（mcp_tools_allow）
     A->>W: 取流程（workflow_get）
-    W-->>A: 阶段 + exit_criteria
+    W-->>A: 阶段 + 各阶段 agent 角色 + exit_criteria
     loop 按阶段执行
+        A->>G: 采用该阶段角色（implementer / qa-engineer / …）
+        G-->>A: 角色指令
         A->>S: 取技能（skill_get）
         S-->>A: SKILL.md
         A->>W: 执行阶段

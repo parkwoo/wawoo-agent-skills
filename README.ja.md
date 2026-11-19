@@ -63,6 +63,7 @@ wawoo-skillsが提供するのは、ただ一つ: **「いつ、どのスキル�
 sequenceDiagram
     autonumber
     participant A as エージェント
+    participant G as エージェント役割
     participant R as MCPルーター
     participant W as ワークフロー
     participant S as スキル
@@ -70,8 +71,10 @@ sequenceDiagram
     R-->>A: ワークフロー：自己修正
     A->>R: ツールゲートを有効化（mcp_tools_allow）
     A->>W: フェーズを取得（workflow_get）
-    W-->>A: フェーズ + exit_criteria
+    W-->>A: フェーズ + 各フェーズのエージェント役割 + exit_criteria
     loop フェーズごと
+        A->>G: フェーズの役割を採用（implementer / qa-engineer / …）
+        G-->>A: 役割の指示
         A->>S: スキルを取得（skill_get）
         S-->>A: SKILL.md
         A->>W: フェーズを実行

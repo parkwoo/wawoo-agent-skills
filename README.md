@@ -81,6 +81,7 @@ In one line: **pick the workflow from the request, lock down the tools it allows
 sequenceDiagram
     autonumber
     participant A as Agent
+    participant G as Agent role
     participant R as MCP Router
     participant W as Workflow
     participant S as Skill
@@ -88,8 +89,10 @@ sequenceDiagram
     R-->>A: workflow: self-correct
     A->>R: activate the tool gate (mcp_tools_allow)
     A->>W: load the phases (workflow_get)
-    W-->>A: phases + exit_criteria
+    W-->>A: phases + agent role per phase + exit_criteria
     loop per phase
+        A->>G: adopt the phase's role (implementer / qa-engineer / ...)
+        G-->>A: role instructions
         A->>S: load the skill (skill_get)
         S-->>A: SKILL.md
         A->>W: execute the phase

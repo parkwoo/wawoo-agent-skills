@@ -63,6 +63,7 @@ wawoo-skills는 제품이나 기술 스택에 구애받지 않습니다. 설치 
 sequenceDiagram
     autonumber
     participant A as 에이전트
+    participant G as 에이전트 역할
     participant R as MCP 라우터
     participant W as 워크플로
     participant S as 스킬
@@ -70,8 +71,10 @@ sequenceDiagram
     R-->>A: 워크플로: 자기 수정
     A->>R: 도구 게이트 활성화(mcp_tools_allow)
     A->>W: 단계 로드(workflow_get)
-    W-->>A: 단계 + exit_criteria
+    W-->>A: 단계 + 단계별 에이전트 역할 + exit_criteria
     loop 단계별
+        A->>G: 단계의 역할 채택(implementer / qa-engineer / …)
+        G-->>A: 역할 지침
         A->>S: 스킬 로드(skill_get)
         S-->>A: SKILL.md
         A->>W: 단계 실행
