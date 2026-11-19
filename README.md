@@ -50,13 +50,13 @@ python3 scripts/install_global.py     # Kilo (global).  OpenCode / Cursor / Code
 
 Then ask your agent to *"fix this bug"* and watch it pick a workflow, fetch only the skills it needs, and refuse to call it done without evidence. Per-client setup → [**Usage**](docs/USAGE.md) · steps → [Quick start](#quick-start-10-minutes).
 
-## What it is
+## What wawoo-skills is
 
 In short: **it doesn't change *how* the agent thinks—it just ensures it *actually uses* the skills it possesses.**
 
 Think of it as a **clinical pathway**: every required check is performed and recorded, while the agent retains autonomy over *how* the work is performed.
 
-## Why you need it
+## Why you need wawoo-skills
 
 The difference is clear in this table:
 
@@ -67,7 +67,7 @@ The difference is clear in this table:
 | Context | Loading all skills into context | Catalog first, fetch only what's needed |
 | Team knowledge | Isolated in a wiki | Actively utilized by the agent |
 
-## How it works
+## How wawoo-skills works
 
 In one line: **the router selects the workflow, the tool gate restricts available tools, and the workflow orchestrates phases.** Five key components:
 
@@ -220,7 +220,7 @@ The components **developed for wawoo-skills** (skills / agents / commands / MCP)
 
 ## Where the methodology comes from
 
-This project extracts executable components from public engineering methodologies and orchestrates them into structured workflows—**not copied, but reused**. Sources and per-item mapping are detailed in a technical article (in progress).
+wawoo-skills extracts executable components from public engineering methodologies and orchestrates them into structured workflows—**not copied, but reused**. Sources and per-item mapping are detailed in a technical article (in progress).
 
 ## Version
 
