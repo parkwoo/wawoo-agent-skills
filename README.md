@@ -197,7 +197,7 @@ Full list (group / subgroup / name / description): `.kilo/CAPABILITIES.md` (mach
 
 ## License & sources
 
-The components **developed for this project** (skills / agents / commands / MCP) are **MIT** (`LICENSE`, Copyright (c) 2026 wawoo.jp). The kit also bundles **third-party work**—**per-file provenance is in `.kilo/skills/ATTRIBUTION.md`; full license texts are in `LICENSES/` and each skill's `LICENSE` / `LICENSE.txt` / `NOTICE.txt`**.
+The components **developed for this kit** (skills / agents / commands / MCP) are **MIT** (`LICENSE`, Copyright (c) 2026 wawoo.jp). The kit also bundles **third-party work**—**per-file provenance is in `.kilo/skills/ATTRIBUTION.md`; full license texts are in `LICENSES/` and each skill's `LICENSE` / `LICENSE.txt` / `NOTICE.txt`**.
 
 | Source | Content | License | Link (URL or in-repo path) |
 |---|---|---|---|
