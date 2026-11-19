@@ -91,6 +91,8 @@ sequenceDiagram
     A->>R: activate the tool gate (mcp_tools_allow)
     A->>W: load the phases (workflow_get)
     W-->>A: phases (per-phase agent overrides) + exit_criteria
+    A->>W: choose the path (steer_task)
+    W-->>A: execution order
     loop per phase
         A->>G: adopt the phase's role
         G-->>A: role instructions

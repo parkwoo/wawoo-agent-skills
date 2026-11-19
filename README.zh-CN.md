@@ -73,6 +73,8 @@ sequenceDiagram
     A->>R: 开启门禁（mcp_tools_allow）
     A->>W: 取流程（workflow_get）
     W-->>A: 阶段（含各阶段 agent 覆盖）+ exit_criteria
+    A->>W: 定路径（steer_task）
+    W-->>A: 执行顺序
     loop 按阶段执行
         A->>G: 采用当前阶段角色
         G-->>A: 角色指令

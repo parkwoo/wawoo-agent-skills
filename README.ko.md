@@ -73,6 +73,8 @@ sequenceDiagram
     A->>R: 도구 게이트 활성화(mcp_tools_allow)
     A->>W: 단계 로드(workflow_get)
     W-->>A: 단계(단계별 역할 재정의 포함) + exit_criteria
+    A->>W: 경로 결정(steer_task)
+    W-->>A: 실행 순서
     loop 단계별
         A->>G: 해당 단계의 역할 채택
         G-->>A: 역할 지침

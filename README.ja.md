@@ -73,6 +73,8 @@ sequenceDiagram
     A->>R: ツールゲートを有効化（mcp_tools_allow）
     A->>W: フェーズを取得（workflow_get）
     W-->>A: フェーズ（フェーズごとの役割上書き）+ exit_criteria
+    A->>W: 経路を決定（steer_task）
+    W-->>A: 実行順序
     loop フェーズごと
         A->>G: そのフェーズの役割を採用
         G-->>A: 役割の指示
