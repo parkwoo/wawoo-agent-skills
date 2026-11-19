@@ -85,14 +85,14 @@ sequenceDiagram
     participant M as MCP (wawoo-skills)
     participant W as Workflow
     U->>A: "fix this bug"
-    A->>M: interpret_intent
-    M-->>A: workflow = self-correct
-    A->>M: workflow_get / skill_get
+    A->>M: pick a workflow (interpret_intent)
+    M-->>A: workflow: self-correct
+    A->>M: load the workflow and skills (workflow_get / skill_get)
     M-->>A: phases + only the skills needed
-    A->>W: run phases (gates + exit_criteria)
-    W->>M: evidence_check
+    A->>W: run the phases (gates + exit_criteria)
+    W->>M: verify completion (evidence_check)
     M-->>W: verified — or FAILED
-    A->>M: memory_save
+    A->>M: save what was learned (memory_save)
     A-->>U: result + evidence
 ```
 

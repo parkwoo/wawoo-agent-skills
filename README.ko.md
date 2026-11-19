@@ -67,14 +67,14 @@ sequenceDiagram
     participant M as MCP(wawoo-skills)
     participant W as 워크플로
     U->>A: "이 버그를 수정해줘"
-    A->>M: interpret_intent
-    M-->>A: 워크플로 = 자기 수정
-    A->>M: workflow_get / skill_get
+    A->>M: 워크플로 선택(interpret_intent)
+    M-->>A: 워크플로: 자기 수정
+    A->>M: 워크플로와 스킬 로드(workflow_get / skill_get)
     M-->>A: 단계 + 필요한 스킬만
     A->>W: 단계 실행 (게이트 + exit_criteria)
-    W->>M: evidence_check
+    W->>M: 완료 검증(evidence_check)
     M-->>W: 검증됨 — 또는 FAILED
-    A->>M: memory_save
+    A->>M: 경험 저장(memory_save)
     A-->>U: 결과 + 증거
 ```
 

@@ -67,14 +67,14 @@ sequenceDiagram
     participant M as MCP（wawoo-skills）
     participant W as 工作流
     U->>A: 「修一下这个 bug」
-    A->>M: interpret_intent
-    M-->>A: 选中流程 = 自纠错
-    A->>M: workflow_get / skill_get
+    A->>M: 选流程（interpret_intent）
+    M-->>A: 返回流程：自纠错
+    A->>M: 取流程与技能（workflow_get / skill_get）
     M-->>A: 阶段 + 只取需要的技能
     A->>W: 按阶段执行（门禁 + exit_criteria）
-    W->>M: evidence_check
+    W->>M: 校验完成（evidence_check）
     M-->>W: 通过 —— 或 FAILED
-    A->>M: memory_save
+    A->>M: 记录经验（memory_save）
     A-->>U: 结果 + 证据
 ```
 

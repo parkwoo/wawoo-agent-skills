@@ -67,14 +67,14 @@ sequenceDiagram
     participant M as MCP（wawoo-skills）
     participant W as ワークフロー
     U->>A: 「このバグを修正して」
-    A->>M: interpret_intent
-    M-->>A: ワークフロー = 自己修正
-    A->>M: workflow_get / skill_get
+    A->>M: ワークフローを選択（interpret_intent）
+    M-->>A: 返却ワークフロー：自己修正
+    A->>M: ワークフローとスキルを取得（workflow_get / skill_get）
     M-->>A: フェーズ + 必要なスキルのみ
-    A->>W: フェーズ実行（ゲート + exit_criteria）
-    W->>M: evidence_check
+    A->>W: フェーズを実行（ゲート + exit_criteria）
+    W->>M: 完了を検証（evidence_check）
     M-->>W: 検証済み — または FAILED
-    A->>M: memory_save
+    A->>M: 経験を記録（memory_save）
     A-->>U: 結果 + 証拠
 ```
 
