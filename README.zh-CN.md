@@ -63,8 +63,8 @@ wawoo-skills 不依赖你的产品和技术栈，装上就能用：**98 个技�
 sequenceDiagram
     autonumber
     participant A as Agent
-    participant G as Agent 角色
     participant R as MCP Router
+    participant G as Agent 角色
     participant W as 工作流
     participant S as Skill
     A->>R: 选流程（interpret_intent）

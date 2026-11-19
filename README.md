@@ -81,8 +81,8 @@ In one line: **pick the workflow from the request, lock down the tools it allows
 sequenceDiagram
     autonumber
     participant A as Agent
-    participant G as Agent role
     participant R as MCP Router
+    participant G as Agent role
     participant W as Workflow
     participant S as Skill
     A->>R: pick a workflow (interpret_intent)

@@ -63,8 +63,8 @@ wawoo-skillsが提供するのは、ただ一つ: **「いつ、どのスキル�
 sequenceDiagram
     autonumber
     participant A as エージェント
-    participant G as エージェント役割
     participant R as MCPルーター
+    participant G as エージェント役割
     participant W as ワークフロー
     participant S as スキル
     A->>R: ワークフローを選択（interpret_intent）

@@ -63,8 +63,8 @@ wawoo-skills는 제품이나 기술 스택에 구애받지 않습니다. 설치 
 sequenceDiagram
     autonumber
     participant A as 에이전트
-    participant G as 에이전트 역할
     participant R as MCP 라우터
+    participant G as 에이전트 역할
     participant W as 워크플로
     participant S as 스킬
     A->>R: 워크플로 선택(interpret_intent)
