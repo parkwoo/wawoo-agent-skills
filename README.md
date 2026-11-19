@@ -12,7 +12,7 @@
   <a href="https://github.com/parkwoo/wawoo-skills/stargazers"><img src="https://img.shields.io/github/stars/parkwoo/wawoo-skills?style=flat-square&color=0b7285&label=stars" alt="GitHub stars"></a>
   <a href="LICENSE"><img src="https://img.shields.io/github/license/parkwoo/wawoo-skills?style=flat-square&color=2f9e44" alt="License: MIT"></a>
   <a href="https://github.com/parkwoo/wawoo-skills/releases"><img src="https://img.shields.io/github/v/release/parkwoo/wawoo-skills?style=flat-square&color=1c7ed6" alt="Latest release"></a>
-  <a href="docs/USAGE.md"><img src="https://img.shields.io/badge/clients-8%20supported-495057?style=flat-square" alt="8 supported clients"></a>
+  <a href="docs/USAGE.md"><img src="https://img.shields.io/badge/clients-8-495057?style=flat-square" alt="8 clients"></a>
   <a href="mcp/server.py"><img src="https://img.shields.io/badge/MCP-capability%20server-6f42c1?style=flat-square" alt="MCP capability server"></a>
 </p>
 
@@ -114,14 +114,14 @@ Every workflow includes **phases, gates, and exit criteria**; **audit workflows 
 
 ### More capabilities
 
-Beyond the mechanism described above, it also:
+Beyond the mechanism described above, it also provides:
 
 | Capability | In one line |
 |---|---|
 | **Predictable, still flexible** | One request → one workflow (e.g. "fix this bug" → self-correct); phases and exit criteria are fixed, but inside a phase the agent can skip, reorder, or narrow scope. |
 | **Saves tokens** | Instead of dumping hundreds of skills at once, it presents a catalog and fetches only what's needed. It can also shorten long chats locally. Less context, lower cost. |
 | **Security & compliance** | Built-in read-only security, privacy, and legal checks. Before content leaves for an external service, it can mask sensitive data, secrets, and internal addresses. |
-| **Performance & tuning** | Measures speed and resources *before* tuning—performance claims must be validated |
+| **Performance & tuning** | Measures speed and resources *before* tuning—performance claims must be validated. |
 | **Size limits** | Each skill entry `SKILL.md` stays within **2–4KB** (over 4KB triggers a warning; details go to `references/`). Descriptions are one line, about 160 characters. Small context, fast loading, lower cost. |
 
 ## Supported clients
@@ -198,7 +198,7 @@ The components **developed for wawoo-skills** (skills / agents / commands / MCP)
 
 ## Where the methodology comes from
 
-wawoo-skills extracts executable components from public engineering methodologies and orchestrates them into structured workflows—**not copied, but reused**. Sources and per-item mapping are detailed in a technical article (in progress).
+wawoo-skills extracts executable components from public engineering methodologies and orchestrates them into structured workflows—**adapted and credited, not copied wholesale**. Sources and per-item mapping are detailed in a technical article (in progress).
 
 ## Version
 
