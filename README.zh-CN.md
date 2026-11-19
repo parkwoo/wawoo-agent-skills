@@ -30,7 +30,7 @@ wawoo-skills 只做一件事：**把「什么时候用哪个技能」提前定�
 
 **先精选，再打造。** 我们筛遍社区最火的 skills 与 agent 工作流，提取编程真正用得上的那部分，再改造、原创，收进同一套目录、同一个路由、同一组关卡。
 
-wawoo-skills 和你的产品、技术栈都无关，装上就能用：**98 个技能、21 个角色、12 条工作流**，外加一个本地服务（MCP）。Cursor、Kilo、OpenCode、Codex、Claude Code、Paseo 都能用。安装和使用见 [**使用说明**](docs/USAGE.zh-CN.md)。
+wawoo-skills 不依赖你的产品和技术栈，装上就能用：**98 个技能、21 个角色、12 条工作流**，外加一个本地服务（MCP）。Cursor、Kilo、OpenCode、Codex、Claude Code、Paseo 都能用。安装和使用见 [**使用说明**](docs/USAGE.zh-CN.md)。
 
 ## wawoo-skills 是什么
 
