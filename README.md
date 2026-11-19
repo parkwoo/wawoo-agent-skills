@@ -80,29 +80,23 @@ In one line: **pick the workflow from the request, lock down the tools it allows
 ```mermaid
 sequenceDiagram
     autonumber
-    participant U as Developer
-    participant A as AI coding agent
-    participant M as MCP (wawoo-skills)
+    participant A as Agent
+    participant R as MCP Router
     participant W as Workflow
-    U->>A: request
-    A->>M: pick a workflow (interpret_intent)
-    M-->>A: workflow: self-correct
-    A->>A: activate the tool gate (mcp_tools_allow)
-    A->>W: choose the path (steer_task)
-    W-->>A: execution order
-    loop run the phases
-        A->>M: fetch the phase's skill (skill_get)
-        M-->>A: skill
-        A->>W: execute (exit_criteria)
-        W->>M: verify (evidence_check)
-        alt pass
-            M-->>W: pass
-        else fail
-            M-->>W: FAILED
-        end
+    participant S as Skill
+    A->>R: pick a workflow (interpret_intent)
+    R-->>A: workflow: self-correct
+    A->>R: activate the tool gate (mcp_tools_allow)
+    A->>W: load the phases (workflow_get)
+    W-->>A: phases + exit_criteria
+    loop per phase
+        A->>S: load the skill (skill_get)
+        S-->>A: SKILL.md
+        A->>W: execute the phase
+        W->>R: verify (evidence_check)
+        R-->>W: pass / FAILED
     end
-    A->>M: save what was learned (memory_save)
-    A-->>U: result + evidence
+    A->>R: save what was learned (memory_save)
 ```
 
 ## What you get

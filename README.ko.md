@@ -62,29 +62,23 @@ wawoo-skills는 제품이나 기술 스택에 구애받지 않습니다. 설치 
 ```mermaid
 sequenceDiagram
     autonumber
-    participant U as 개발자
-    participant A as AI 코딩 에이전트
-    participant M as MCP(wawoo-skills)
+    participant A as 에이전트
+    participant R as MCP 라우터
     participant W as 워크플로
-    U->>A: 요청
-    A->>M: 워크플로 선택(interpret_intent)
-    M-->>A: 워크플로: 자기 수정
-    A->>A: 도구 게이트 활성화(mcp_tools_allow)
-    A->>W: 경로 결정(steer_task)
-    W-->>A: 실행 순서
-    loop 단계 실행
-        A->>M: 단계 스킬 로드(skill_get)
-        M-->>A: 스킬
-        A->>W: 실행(exit_criteria)
-        W->>M: 검증(evidence_check)
-        alt 통과
-            M-->>W: 통과
-        else 실패
-            M-->>W: FAILED
-        end
+    participant S as 스킬
+    A->>R: 워크플로 선택(interpret_intent)
+    R-->>A: 워크플로: 자기 수정
+    A->>R: 도구 게이트 활성화(mcp_tools_allow)
+    A->>W: 단계 로드(workflow_get)
+    W-->>A: 단계 + exit_criteria
+    loop 단계별
+        A->>S: 스킬 로드(skill_get)
+        S-->>A: SKILL.md
+        A->>W: 단계 실행
+        W->>R: 검증(evidence_check)
+        R-->>W: 통과 / FAILED
     end
-    A->>M: 경험 저장(memory_save)
-    A-->>U: 결과 + 증거
+    A->>R: 경험 저장(memory_save)
 ```
 
 ## 무엇을 얻나

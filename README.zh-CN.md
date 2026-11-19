@@ -62,29 +62,23 @@ wawoo-skills 不依赖你的产品和技术栈，装上就能用：**98 个技�
 ```mermaid
 sequenceDiagram
     autonumber
-    participant U as 开发者
-    participant A as AI 编程助手
-    participant M as MCP（wawoo-skills）
+    participant A as Agent
+    participant R as MCP Router
     participant W as 工作流
-    U->>A: 提出请求
-    A->>M: 选流程（interpret_intent）
-    M-->>A: 流程：自纠错
-    A->>A: 开启门禁（mcp_tools_allow）
-    A->>W: 定路径（steer_task）
-    W-->>A: 执行顺序
+    participant S as Skill
+    A->>R: 选流程（interpret_intent）
+    R-->>A: 流程：自纠错
+    A->>R: 开启门禁（mcp_tools_allow）
+    A->>W: 取流程（workflow_get）
+    W-->>A: 阶段 + exit_criteria
     loop 按阶段执行
-        A->>M: 取该阶段技能（skill_get）
-        M-->>A: 技能
-        A->>W: 执行（exit_criteria）
-        W->>M: 校验（evidence_check）
-        alt 通过
-            M-->>W: 通过
-        else 未通过
-            M-->>W: FAILED
-        end
+        A->>S: 取技能（skill_get）
+        S-->>A: SKILL.md
+        A->>W: 执行阶段
+        W->>R: 校验（evidence_check）
+        R-->>W: 通过 / FAILED
     end
-    A->>M: 记录经验（memory_save）
-    A-->>U: 结果 + 证据
+    A->>R: 记录经验（memory_save）
 ```
 
 ## 你能得到什么

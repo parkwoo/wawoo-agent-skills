@@ -62,29 +62,23 @@ wawoo-skillsが提供するのは、ただ一つ: **「いつ、どのスキル�
 ```mermaid
 sequenceDiagram
     autonumber
-    participant U as 開発者
-    participant A as AIコーディングエージェント
-    participant M as MCP（wawoo-skills）
+    participant A as エージェント
+    participant R as MCPルーター
     participant W as ワークフロー
-    U->>A: 依頼
-    A->>M: ワークフローを選択（interpret_intent）
-    M-->>A: ワークフロー：自己修正
-    A->>A: ツールゲートを有効化（mcp_tools_allow）
-    A->>W: 経路を決定（steer_task）
-    W-->>A: 実行順序
-    loop フェーズを実行
-        A->>M: フェーズのスキルを取得（skill_get）
-        M-->>A: スキル
-        A->>W: 実行（exit_criteria）
-        W->>M: 検証（evidence_check）
-        alt 合格
-            M-->>W: 合格
-        else 不合格
-            M-->>W: FAILED
-        end
+    participant S as スキル
+    A->>R: ワークフローを選択（interpret_intent）
+    R-->>A: ワークフロー：自己修正
+    A->>R: ツールゲートを有効化（mcp_tools_allow）
+    A->>W: フェーズを取得（workflow_get）
+    W-->>A: フェーズ + exit_criteria
+    loop フェーズごと
+        A->>S: スキルを取得（skill_get）
+        S-->>A: SKILL.md
+        A->>W: フェーズを実行
+        W->>R: 検証（evidence_check）
+        R-->>W: 合格 / FAILED
     end
-    A->>M: 経験を記録（memory_save）
-    A-->>U: 結果 + 証拠
+    A->>R: 経験を記録（memory_save）
 ```
 
 ## 何が得られるか
