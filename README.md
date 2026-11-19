@@ -69,13 +69,14 @@ The difference is clear in this table:
 
 ## How wawoo-skills works
 
-In one line: **pick the workflow from the request, lock down the tools it allows, then run its phases.** Five key components:
+In one line: **pick the workflow from the request, lock down the tools it allows, then run its phases—fixed skeleton, dynamic path.** Six key components:
 
 1.  **Pick the workflow**: match the request in four steps—explicit `/name` → local keywords → learned triggers → model judgment (`interpret_intent`).
 2.  **Lock the tools**: once a workflow is chosen, a session gate allows only the MCP tools that workflow lists—audit workflows get read-only tools and no implement phase (`mcp_tools_allow`, `implement_allowed`).
 3.  **Run the phases**: 10 reusable phases compose 12 workflows; each phase has a definition of done that a tool actually checks, not the model's self-report (`exit_criteria`, `evidence_check`).
 4.  **Fetch skills on demand**: show the catalog first, fetch only what's needed—saves tokens and avoids "invisible, so unused."
 5.  **Remember what was learned**: save decisions and pitfalls, load them next session—no re-explaining from scratch (`memory_save`).
+6.  **Decide the path dynamically**: the skeleton is fixed, but the system chooses each request's execution path from evidence as it goes—skip unnecessary steps, reorder, change priority or scope, run independent subtasks in parallel, or stop (`steer_task`). No hand planning; step in anytime.
 
 ```mermaid
 sequenceDiagram
