@@ -96,29 +96,6 @@ sequenceDiagram
     A-->>U: result + evidence
 ```
 
-### Walk through it (fixing a bug)
-
-This can seem abstract; a quick example makes it concrete:
-
-1.  You say "fix this bug" → it automatically selects the "self-correction" workflow.
-2.  That workflow first requires the "diagnose bugs" and "test engineering" skills.
-3.  The agent pulls in *only* those two skills (avoiding bloated context).
-4.  Without reproduction steps or logs, it may not declare the bug "fixed."
-5.  The outcome is persisted and automatically loaded next time.
-
-In short: **the agent's abilities don't change—what changes is that it actually uses them, every time.**
-
-### Can the plan change?
-
-You might worry: does a fixed workflow prevent the agent from adapting? **No—this allows for dynamic adjustment.**
-
-*   **The skeleton remains fixed**: The phases you progress through and what constitutes "done" in each are immutable. This layer cannot be skipped.
-*   **Inside a phase, it adjusts dynamically**: It can skip unnecessary steps, reorder tasks, change priorities, modify scope, or stop if the direction is incorrect. It can also run independent subtasks in parallel.
-
-**The agent adapts within each phase.** Midway through, if a step is unnecessary, the order is wrong, or the direction is off, it adjusts on the spot—skipping, reordering, or changing scope. You can also redirect it with a new prompt.
-
-> In one line: **the workflow provides structure, while dynamic adjustment provides flexibility.**
-
 ## What you get
 
 Beyond the core mechanism, you gain **12 fixed workflows** plus additional capabilities.
@@ -141,6 +118,7 @@ Beyond the mechanism described above, it also:
 
 | Capability | In one line |
 |---|---|
+| **Predictable, still flexible** | One request → one workflow (e.g. "fix this bug" → self-correct); phases and exit criteria are fixed, but inside a phase the agent can skip, reorder, or narrow scope. |
 | **Saves tokens** | Instead of dumping hundreds of skills at once, it presents a catalog and fetches only what's needed. It can also shorten long chats locally. Less context, lower cost. |
 | **Security & compliance** | Built-in read-only security, privacy, and legal checks. Before content leaves for an external service, it can mask sensitive data, secrets, and internal addresses. |
 | **Performance & tuning** | Measures speed and resources *before* tuning—performance claims must be validated |
