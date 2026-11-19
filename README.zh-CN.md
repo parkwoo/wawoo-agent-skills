@@ -9,6 +9,14 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/parkwoo/wawoo-skills/stargazers"><img src="https://img.shields.io/github/stars/parkwoo/wawoo-skills?style=flat-square&color=0b7285&label=stars" alt="GitHub stars"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/parkwoo/wawoo-skills?style=flat-square&color=2f9e44" alt="License: MIT"></a>
+  <a href="https://github.com/parkwoo/wawoo-skills/releases"><img src="https://img.shields.io/github/v/release/parkwoo/wawoo-skills?style=flat-square&color=1c7ed6" alt="Latest release"></a>
+  <a href="docs/USAGE.zh-CN.md"><img src="https://img.shields.io/badge/clients-8-495057?style=flat-square" alt="8 个客户端"></a>
+  <a href="mcp/server.py"><img src="https://img.shields.io/badge/MCP-capability%20server-6f42c1?style=flat-square" alt="MCP capability server"></a>
+</p>
+
+<p align="center">
   <a href="README.md">English</a> ·
   <a href="README.ja.md">日本語</a> ·
   <a href="README.zh-CN.md">简体中文</a> ·
