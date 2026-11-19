@@ -59,6 +59,25 @@ wawoo-skills는 제품이나 기술 스택에 구애받지 않습니다. 설치 
 4.  **스킬은 필요할 때 로드**: 스킬 목록을 먼저 보여주고, 필요할 때 단 하나의 스킬만 로드합니다. 이는 토큰을 절약하고, "보이지 않아서 사용하지 못하는" 문제를 방지합니다.
 5.  **경험 기억**: 이전 결정과 함정을 저장하고 다음 작업 시 자동으로 불러옵니다. 매번 처음부터 설명할 필요가 없습니다.
 
+```mermaid
+sequenceDiagram
+    autonumber
+    participant U as 사용자
+    participant A as 에이전트
+    participant M as MCP(wawoo-skills)
+    participant W as 워크플로
+    U->>A: "이 버그를 수정해줘"
+    A->>M: interpret_intent
+    M-->>A: 워크플로 = 자기 수정 (L0 → L1 → L1.5 → L2)
+    A->>M: workflow_get / skill_get
+    M-->>A: 단계 + 필요한 스킬만
+    A->>W: 단계 실행 (게이트 + exit_criteria)
+    W->>M: evidence_check
+    M-->>W: 검증됨 — 또는 FAILED
+    A->>M: memory_save
+    A-->>U: 결과 + 증거
+```
+
 ### "버그 수정" 예시 따라가기
 
 단계만 보면 추상적일 수 있습니다. 다음 예시를 통해 명확히 이해할 수 있습니다:

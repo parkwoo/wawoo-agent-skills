@@ -59,6 +59,25 @@ wawoo-skills 不依赖你的产品和技术栈，装上就能用：**98 个技�
 4. **按需取技能**：先给目录，要用时只取一个——省 token，也不「看不见就不用」。
 5. **记住经验**：把决定和踩过的坑存下来，下次自动加载——不用从头解释。
 
+```mermaid
+sequenceDiagram
+    autonumber
+    participant U as 你
+    participant A as 助手
+    participant M as MCP（wawoo-skills）
+    participant W as 工作流
+    U->>A: 「修一下这个 bug」
+    A->>M: interpret_intent
+    M-->>A: 选中流程 = 自纠错（L0 → L1 → L1.5 → L2）
+    A->>M: workflow_get / skill_get
+    M-->>A: 阶段 + 只取需要的技能
+    A->>W: 按阶段执行（门禁 + exit_criteria）
+    W->>M: evidence_check
+    M-->>W: 通过 —— 或 FAILED
+    A->>M: memory_save
+    A-->>U: 结果 + 证据
+```
+
 ### 走一遍（以「修个 bug」为例）
 
 光看步骤有点抽象，走一遍就清楚：

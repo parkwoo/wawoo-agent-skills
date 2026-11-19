@@ -59,6 +59,25 @@ wawoo-skillsが提供するのは、ただ一つ: **「いつ、どのスキル�
 4.  **スキルは必要時に取得**: まず目録を提示し、必要に応じて1つだけスキルを取得します。これによりトークンを節約し、「見えないから使わない」という状況を防ぎます。
 5.  **経験を記憶する**: 決定事項や課題を保存し、次回自動的に読み込みます。毎回最初から説明する必要はありません。
 
+```mermaid
+sequenceDiagram
+    autonumber
+    participant U as あなた
+    participant A as エージェント
+    participant M as MCP（wawoo-skills）
+    participant W as ワークフロー
+    U->>A: 「このバグを修正して」
+    A->>M: interpret_intent
+    M-->>A: ワークフロー = 自己修正（L0 → L1 → L1.5 → L2）
+    A->>M: workflow_get / skill_get
+    M-->>A: フェーズ + 必要なスキルのみ
+    A->>W: フェーズ実行（ゲート + exit_criteria）
+    W->>M: evidence_check
+    M-->>W: 検証済み — または FAILED
+    A->>M: memory_save
+    A-->>U: 結果 + 証拠
+```
+
 ### 実行例（「バグを修正する」例）
 
 手順だけでは抽象的かもしれません。一度なぞってみましょう:
