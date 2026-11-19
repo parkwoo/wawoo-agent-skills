@@ -68,7 +68,7 @@ sequenceDiagram
     participant W as 워크플로
     U->>A: "이 버그를 수정해줘"
     A->>M: interpret_intent
-    M-->>A: 워크플로 = 자기 수정 (L0 → L1 → L1.5 → L2)
+    M-->>A: 워크플로 = 자기 수정
     A->>M: workflow_get / skill_get
     M-->>A: 단계 + 필요한 스킬만
     A->>W: 단계 실행 (게이트 + exit_criteria)

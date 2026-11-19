@@ -68,7 +68,7 @@ sequenceDiagram
     participant W as ワークフロー
     U->>A: 「このバグを修正して」
     A->>M: interpret_intent
-    M-->>A: ワークフロー = 自己修正（L0 → L1 → L1.5 → L2）
+    M-->>A: ワークフロー = 自己修正
     A->>M: workflow_get / skill_get
     M-->>A: フェーズ + 必要なスキルのみ
     A->>W: フェーズ実行（ゲート + exit_criteria）

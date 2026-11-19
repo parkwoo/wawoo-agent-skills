@@ -68,7 +68,7 @@ sequenceDiagram
     participant W as 工作流
     U->>A: 「修一下这个 bug」
     A->>M: interpret_intent
-    M-->>A: 选中流程 = 自纠错（L0 → L1 → L1.5 → L2）
+    M-->>A: 选中流程 = 自纠错
     A->>M: workflow_get / skill_get
     M-->>A: 阶段 + 只取需要的技能
     A->>W: 按阶段执行（门禁 + exit_criteria）

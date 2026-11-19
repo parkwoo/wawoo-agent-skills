@@ -86,7 +86,7 @@ sequenceDiagram
     participant W as Workflow
     U->>A: "fix this bug"
     A->>M: interpret_intent
-    M-->>A: workflow = self-correct  (L0 → L1 → L1.5 → L2)
+    M-->>A: workflow = self-correct
     A->>M: workflow_get / skill_get
     M-->>A: phases + only the skills needed
     A->>W: run phases (gates + exit_criteria)
