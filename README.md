@@ -80,8 +80,8 @@ In one line: **the router selects the workflow, the tool gate restricts availabl
 ```mermaid
 sequenceDiagram
     autonumber
-    participant U as You
-    participant A as Agent
+    participant U as Developer
+    participant A as AI coding agent
     participant M as MCP (wawoo-skills)
     participant W as Workflow
     U->>A: "fix this bug"

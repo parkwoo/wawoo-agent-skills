@@ -62,8 +62,8 @@ wawoo-skills 不依赖你的产品和技术栈，装上就能用：**98 个技�
 ```mermaid
 sequenceDiagram
     autonumber
-    participant U as 你
-    participant A as 助手
+    participant U as 开发者
+    participant A as AI 编程助手
     participant M as MCP（wawoo-skills）
     participant W as 工作流
     U->>A: 「修一下这个 bug」

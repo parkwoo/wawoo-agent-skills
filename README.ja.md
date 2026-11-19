@@ -62,8 +62,8 @@ wawoo-skillsが提供するのは、ただ一つ: **「いつ、どのスキル�
 ```mermaid
 sequenceDiagram
     autonumber
-    participant U as あなた
-    participant A as エージェント
+    participant U as 開発者
+    participant A as AIコーディングエージェント
     participant M as MCP（wawoo-skills）
     participant W as ワークフロー
     U->>A: 「このバグを修正して」

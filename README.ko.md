@@ -62,8 +62,8 @@ wawoo-skills는 제품이나 기술 스택에 구애받지 않습니다. 설치 
 ```mermaid
 sequenceDiagram
     autonumber
-    participant U as 사용자
-    participant A as 에이전트
+    participant U as 개발자
+    participant A as AI 코딩 에이전트
     participant M as MCP(wawoo-skills)
     participant W as 워크플로
     U->>A: "이 버그를 수정해줘"
