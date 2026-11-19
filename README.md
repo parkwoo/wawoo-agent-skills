@@ -107,9 +107,18 @@ sequenceDiagram
 
 ## What you get
 
-Beyond the core mechanism, you gain **12 fixed workflows** plus additional capabilities.
+**98 skills, 21 agent roles, 12 workflows**—primarily programming, covering writing, review, testing, and release.
 
-### 12 workflows
+### Skills (98)
+
+- Delivery & planning (13) · Debugging & testing (5) · Review & quality (6) · Architecture & code design (7) · Security & compliance (7)
+- Design & frontend (14) · Research & writing (7) · Ops & performance (4) · Memory & context (6) · Engineering principles (24) · Process & orchestration (5)
+
+### Agent roles (21)
+
+- Entry / Delivery / Review / Architecture / Design / Docs / Ops
+
+### Workflows (12)
 
 *   **Delivery**: `/delivery-lite` (small change, default), `/feature-delivery` (full feature)
 *   **Design**: `/ui-delivery` (change UI), `/design-review` (read-only UI review)
@@ -118,6 +127,8 @@ Beyond the core mechanism, you gain **12 fixed workflows** plus additional capab
 *   **Planning**: `/sprint-plan` (sprint), `/status-report` (progress)
 *   **Ops**: `/incident-response` (incident: evidence → mitigate → review)
 *   **Process**: `/self-improve` (retro → PDCA)
+
+Full list (skills / agent roles / workflows): [`.kilo/CAPABILITIES.md`](.kilo/CAPABILITIES.md).
 
 Every workflow includes **phases, gates, and exit criteria**; **audit workflows are restricted to read-only operations**. For per-workflow usage, see [Usage §1.2](docs/USAGE.md#s1-2).
 
@@ -128,9 +139,9 @@ Beyond the mechanism described above, it also provides:
 | Capability | In one line |
 |---|---|
 | **Predictable, still flexible** | One request → one workflow (e.g. "fix this bug" → self-correct); phases and exit criteria are fixed, but inside a phase the agent can skip, reorder, or narrow scope. |
-| **Saves tokens** | Instead of dumping hundreds of skills at once, it presents a catalog and fetches only what's needed. It can also shorten long chats locally. Less context, lower cost. |
 | **Security & compliance** | Built-in read-only security, privacy, and legal checks. Before content leaves for an external service, it can mask sensitive data, secrets, and internal addresses. |
 | **Performance & tuning** | Measures speed and resources *before* tuning—performance claims must be validated. |
+| **Saves tokens** | Instead of dumping hundreds of skills at once, it presents a catalog and fetches only what's needed. It can also shorten long chats locally. Less context, lower cost. |
 | **Size limits** | Each skill entry `SKILL.md` stays within **2–4KB** (over 4KB triggers a warning; details go to `references/`). Descriptions are one line, about 160 characters. Small context, fast loading, lower cost. |
 
 ## Supported clients
@@ -155,20 +166,6 @@ Beyond the mechanism described above, it also provides:
 3.  Run `python3 scripts/validate_assets.py`; `OK` confirms your setup.
 
 Installation scripts, per-client setup (including Paseo / Codex), and troubleshooting: [**Usage**](docs/USAGE.md).
-
-## Capabilities at a glance
-
-**98 skills, 21 agent roles, 12 workflows**—**primarily programming**, covering the development flow from writing to review, testing, and release.
-
-| Type | Count | Groups |
-|---|---|---|
-| Skills | 98 | Delivery & planning 13 · Debugging & testing 5 · Review & quality 6 · Architecture & code design 7 · Security & compliance 7 · Design & frontend 14 · Research & writing 7 · Ops & performance 4 · Memory & context 6 · Engineering principles 24 · Process & orchestration 5 |
-| Agent roles | 21 | Entry / Delivery / Review / Architecture / Design / Docs / Ops |
-| Workflows | 12 | Delivery / Design / Review / Research / Planning / Ops / Process |
-
-Skill examples: `diagnosing-bugs`, `security-review`, `memory`, `principle-fix-root-causes`.
-
-Full list (group / subgroup / name / description): `.kilo/CAPABILITIES.md` (machine-readable).
 
 ## Glossary
 
