@@ -68,12 +68,12 @@ sequenceDiagram
     participant W as 워크플로
     participant S as 스킬
     A->>R: 워크플로 선택(interpret_intent)
-    R-->>A: 워크플로: 자기 수정
+    R-->>A: 워크플로 + 에이전트 역할(예: implementer)
     A->>R: 도구 게이트 활성화(mcp_tools_allow)
     A->>W: 단계 로드(workflow_get)
-    W-->>A: 단계 + 단계별 에이전트 역할 + exit_criteria
+    W-->>A: 단계(단계별 역할 재정의 포함) + exit_criteria
     loop 단계별
-        A->>G: 단계의 역할 채택(implementer / qa-engineer / …)
+        A->>G: 해당 단계의 역할 채택
         G-->>A: 역할 지침
         A->>S: 스킬 로드(skill_get)
         S-->>A: SKILL.md

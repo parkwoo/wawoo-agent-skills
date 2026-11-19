@@ -68,12 +68,12 @@ sequenceDiagram
     participant W as 工作流
     participant S as Skill
     A->>R: 选流程（interpret_intent）
-    R-->>A: 流程：自纠错
+    R-->>A: 流程 + agent 角色（如 implementer）
     A->>R: 开启门禁（mcp_tools_allow）
     A->>W: 取流程（workflow_get）
-    W-->>A: 阶段 + 各阶段 agent 角色 + exit_criteria
+    W-->>A: 阶段（含各阶段 agent 覆盖）+ exit_criteria
     loop 按阶段执行
-        A->>G: 采用该阶段角色（implementer / qa-engineer / …）
+        A->>G: 采用当前阶段角色
         G-->>A: 角色指令
         A->>S: 取技能（skill_get）
         S-->>A: SKILL.md

@@ -86,12 +86,12 @@ sequenceDiagram
     participant W as Workflow
     participant S as Skill
     A->>R: pick a workflow (interpret_intent)
-    R-->>A: workflow: self-correct
+    R-->>A: workflow + agent role (e.g. implementer)
     A->>R: activate the tool gate (mcp_tools_allow)
     A->>W: load the phases (workflow_get)
-    W-->>A: phases + agent role per phase + exit_criteria
+    W-->>A: phases (per-phase agent overrides) + exit_criteria
     loop per phase
-        A->>G: adopt the phase's role (implementer / qa-engineer / ...)
+        A->>G: adopt the phase's role
         G-->>A: role instructions
         A->>S: load the skill (skill_get)
         S-->>A: SKILL.md

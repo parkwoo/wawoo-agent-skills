@@ -68,12 +68,12 @@ sequenceDiagram
     participant W as ワークフロー
     participant S as スキル
     A->>R: ワークフローを選択（interpret_intent）
-    R-->>A: ワークフロー：自己修正
+    R-->>A: ワークフロー + エージェント役割（例: implementer）
     A->>R: ツールゲートを有効化（mcp_tools_allow）
     A->>W: フェーズを取得（workflow_get）
-    W-->>A: フェーズ + 各フェーズのエージェント役割 + exit_criteria
+    W-->>A: フェーズ（フェーズごとの役割上書き）+ exit_criteria
     loop フェーズごと
-        A->>G: フェーズの役割を採用（implementer / qa-engineer / …）
+        A->>G: そのフェーズの役割を採用
         G-->>A: 役割の指示
         A->>S: スキルを取得（skill_get）
         S-->>A: SKILL.md
