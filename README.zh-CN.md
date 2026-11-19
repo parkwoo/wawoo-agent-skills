@@ -102,8 +102,6 @@ sequenceDiagram
 
 ### 流程（12）
 
-
-
 - **交付**：`/delivery-lite`（小改动，默认）、`/feature-delivery`（完整功能）
 - **设计**：`/ui-delivery`（改 UI）、`/design-review`（只读 UI 评审）
 - **评审**：`/self-review`（自纠错）、`/compliance-review`（法务 / 隐私 / 安全）、`/release-review`（发布包）
