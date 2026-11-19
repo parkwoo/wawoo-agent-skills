@@ -69,13 +69,13 @@ The difference is clear in this table:
 
 ## How wawoo-skills works
 
-In one line: **the router selects the workflow, the tool gate restricts available tools, and the workflow orchestrates phases.** Five key components:
+In one line: **pick the workflow from the request, lock down the tools it allows, then run its phases.** Five key components:
 
-1.  **The router selects the workflow**: `interpret_intent` chooses it in this order: explicit `/name` → local lexical → learned triggers → model score (L0 → L1 → L1.5 → L2).
-2.  **The tool gate restricts tools**: Selection activates a session gate that limits **MCP tools** to the workflow's `mcp_tools_allow`. For example, audit workflows are restricted to read-only tools and disallow an implement phase (`implement_allowed = false`).
-3.  **The workflow orchestrates phases**: 10 reusable phases compose 12 workflows. Each phase has `exit_criteria`, and `evidence_check` genuinely verifies completion—the model is not evaluating its own work.
-4.  **Skills are fetched on demand**: The catalog is presented first, then only the necessary skills are pulled. This saves tokens and prevents skills from being "invisible and thus unused."
-5.  **Knowledge is persisted**: Decisions and common pitfalls are saved and loaded for future sessions, eliminating the need to re-explain from scratch.
+1.  **Pick the workflow**: match the request in four steps—explicit `/name` → local keywords → learned triggers → model judgment (`interpret_intent`).
+2.  **Lock the tools**: once a workflow is chosen, a session gate allows only the MCP tools that workflow lists—audit workflows get read-only tools and no implement phase (`mcp_tools_allow`, `implement_allowed`).
+3.  **Run the phases**: 10 reusable phases compose 12 workflows; each phase has a definition of done that a tool actually checks, not the model's self-report (`exit_criteria`, `evidence_check`).
+4.  **Fetch skills on demand**: show the catalog first, fetch only what's needed—saves tokens and avoids "invisible, so unused."
+5.  **Remember what was learned**: save decisions and pitfalls, load them next session—no re-explaining from scratch (`memory_save`).
 
 ```mermaid
 sequenceDiagram
