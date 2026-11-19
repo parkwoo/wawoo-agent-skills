@@ -62,11 +62,11 @@ wawoo-skills는 제품이나 기술 스택에 구애받지 않습니다. 설치 
 ```mermaid
 sequenceDiagram
     autonumber
-    participant A as 에이전트
-    participant R as MCP 라우터
-    participant G as 에이전트 역할
-    participant W as 워크플로
-    participant S as 스킬
+    participant A as Agent
+    participant R as MCP Router
+    participant G as Agent role
+    participant W as Workflow
+    participant S as Skill
     A->>R: 워크플로 선택(interpret_intent)
     R-->>A: 워크플로 + 에이전트 역할(예: implementer)
     A->>R: 도구 게이트 활성화(mcp_tools_allow)

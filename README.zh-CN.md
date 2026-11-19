@@ -64,8 +64,8 @@ sequenceDiagram
     autonumber
     participant A as Agent
     participant R as MCP Router
-    participant G as Agent 角色
-    participant W as 工作流
+    participant G as Agent role
+    participant W as Workflow
     participant S as Skill
     A->>R: 选流程（interpret_intent）
     R-->>A: 流程 + agent 角色（如 implementer）

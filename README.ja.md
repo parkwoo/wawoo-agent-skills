@@ -62,11 +62,11 @@ wawoo-skillsが提供するのは、ただ一つ: **「いつ、どのスキル�
 ```mermaid
 sequenceDiagram
     autonumber
-    participant A as エージェント
-    participant R as MCPルーター
-    participant G as エージェント役割
-    participant W as ワークフロー
-    participant S as スキル
+    participant A as Agent
+    participant R as MCP Router
+    participant G as Agent role
+    participant W as Workflow
+    participant S as Skill
     A->>R: ワークフローを選択（interpret_intent）
     R-->>A: ワークフロー + エージェント役割（例: implementer）
     A->>R: ツールゲートを有効化（mcp_tools_allow）
