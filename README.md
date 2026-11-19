@@ -38,10 +38,6 @@ wawoo-skills does one thing: **it dictates *which* skill to use, and *when*.** I
 
 It's product and stack-agnostic—install and go: **98 skills, 21 agent roles, 12 workflows**, plus a local service (MCP). Works with Cursor, Kilo, OpenCode, Codex, Claude Code, Paseo. See [**Usage**](docs/USAGE.md).
 
-<p align="center">
-  <a href="https://parkwoo.github.io/wawoo-skills/"><img src="docs/assets/demo-home.png" width="840" alt="wawoo-skills (live docs)"></a>
-</p>
-
 ### Install in 30 seconds
 
 ```bash
