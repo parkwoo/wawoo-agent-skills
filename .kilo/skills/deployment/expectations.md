@@ -1,18 +1,18 @@
-# deployment — expectations (uplift pilot)
+# deployment — expectations（uplift pilot）
 
-Static checks for Docker Compose YAML. Secret commit policy is a separate gate.
+Docker Compose / compose YAML の静的チェック。シークレットのコミット可否は別ゲート（本 checker は平文っぽい env の検出のみ）。
 
 ## Compose
 
-- `[deploy-no-latest-tag]` Avoid `image: ...:latest`
-- `[deploy-plain-secret-env]` Plaintext-looking `password`/`secret`/`api_key` values (not `${}` / `$$` refs)
-- `[deploy-missing-healthcheck]` Service with `ports` but no `healthcheck`
+- `[deploy-no-latest-tag]` `image:` に `:latest` を使わない（イミュータブルタグ推奨）
+- `[deploy-plain-secret-env]` 環境変数値に `password`/`secret`/`api_key` らしき平文（`.env` 参照 `$$` / `${}` は除外）
+- `[deploy-missing-healthcheck]` `ports` を公開するサービスに `healthcheck` ブロックが無い
 
-## Files
+## 対象ファイル
 
-`docker-compose.yml`, `compose.yml`, etc. (`.yml`/`.yaml`).
+`docker-compose.yml`・`compose.yml` 等（`.yml`/`.yaml`）。`Dockerfile` 単体は P1.2 候補。
 
-## Check
+## 検証
 
 ```bash
 python3 scripts/skill_uplift_check.py deployment --path <repo-or-compose-dir>

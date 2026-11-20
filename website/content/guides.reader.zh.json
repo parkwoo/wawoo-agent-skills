@@ -1,0 +1,98 @@
+{
+  "_note": "收录页读者向中文摘要（构建时注入静态 HTML）。工作流/角色全量；技能可按名扩展。",
+  "reader_steps": [
+    {
+      "title": "① 先对场景",
+      "body": "你正在做的事更像「改界面」「上线前审查」「线上故障」还是「写文档」？先在下面工作流表里找最接近的一项。"
+    },
+    {
+      "title": "② 叫工作流",
+      "body": "在 Cursor 等客户端里用一句话触发 workflow_get（例如「走 /ui-delivery」），不要一次读完所有 SKILL.md。"
+    },
+    {
+      "title": "③ 再拉技能",
+      "body": "流程正文里点到哪个 skill，再用 skill_get 打开那一份。技能和 Agent 的英文名与 CAPABILITIES.md 一致。"
+    }
+  ],
+  "skill_groups": {
+    "workflow": {
+      "title": "工作流（先看这里）",
+      "lead": "入口命令。选一条最接近你当前任务的流程，再在对话里触发。"
+    },
+    "agent": {
+      "title": "Agent 角色",
+      "lead": "谁以什么视角执行（审代码、做 UI、写文档等）。通常由工作流或 MCP 路由指定。"
+    },
+    "delivery": {
+      "title": "交付 · 测试 · 实现",
+      "lead": "写代码、改代码、审代码、证明改对了。"
+    },
+    "design": {
+      "title": "界面 · 设计 · 可访问性",
+      "lead": "改 UI、设计评审、WCAG 与体验交付。"
+    },
+    "reliability": {
+      "title": "事故 · 性能 · 调试",
+      "lead": "线上问题、性能回归、疑难 bug。"
+    },
+    "safety": {
+      "title": "安全 · 隐私 · 发版",
+      "lead": "只读审查、合规与上线门禁。"
+    },
+    "planning": {
+      "title": "规划 · 调研 · 记忆",
+      "lead": "从模糊需求到计划，以及跨会话记忆。"
+    },
+    "principles": {
+      "title": "工程原则族（principle-*）",
+      "lead": "短纪律提示：根因、边界、上下文、可观测等。与具体业务无关，偏资深工程师共识。"
+    },
+    "meta": {
+      "title": "写 Skill · 守门 · 桥接",
+      "lead": "维护本库、输出闸门、现代化 Web 检索桥接等。"
+    },
+    "other": {
+      "title": "其他通用能力",
+      "lead": "未归入上列的技能，按名点击查看 SKILL.md。"
+    }
+  },
+  "workflows": {
+    "/compliance-review": "合规审查链：法务、隐私、安全、发版就绪（只读为主）。",
+    "/delivery-lite": "默认轻交付：用 ACTIVE 计划表跟踪小功能，证据过关再收工。",
+    "/design-review": "UI 审稿：视觉审计 → Web 指南 → 可访问性。",
+    "/feature-delivery": "完整功能交付：发现 → 设计 → 实现 → 测试 → 评审。",
+    "/incident-response": "事故响应：复现、隔离、缓解、永久修复。",
+    "/release-review": "发版包：法务/隐私/版本/安全/产物/回滚证据。",
+    "/research": "调研 → 产品发现 → 可选拆票或规格。",
+    "/self-improve": "自我改进：复盘 → PDCA → 自审 → 计划。",
+    "/self-review": "合入前自审：代码评审 → 挑刺 → 诊断/TDD → 验证。",
+    "/sprint-plan": "冲刺计划（L2  backlog 与容量）。",
+    "/status-report": "进度/风险报告（ACTIVE 或工单）。",
+    "/ui-delivery": "改 Web UI：设计、实现、响应式与 a11y 证据。"
+  },
+  "agents": {
+    "wawoo-auto": "默认入口：非琐碎请求先走 MCP 选工作流，再执行。",
+    "delivery-lead": "交付负责人：证据导向，不偏门禁。",
+    "project-manager": "项目经理：计划、风险、进度协调。",
+    "implementer": "实现者：按约定写代码与测试。",
+    "qa-engineer": "测试：策略、复现、覆盖率与证据。",
+    "Code Reviewer": "资深代码评审（双轴：规范与业务）。",
+    "Code Skeptic": "极端挑刺视角审代码。",
+    "Code Simplifier": "简化与重构。",
+    "frontend-specialist": "前端：React/TS/CSS 实现。",
+    "web-designer": "Web 设计实现与可访问性审计。",
+    "security-reviewer": "安全只读审查。",
+    "compliance-reviewer": "合规/隐私审查闸门（法务人工拍板）。",
+    "accessibility-reviewer": "可访问性只读审查。",
+    "performance-reviewer": "性能与测量设计审查。",
+    "architect": "架构权衡与迁移风险。",
+    "product-owner": "澄清验收标准（不代做业务决策）。",
+    "release-manager": "发版：版本、法务产物、回滚。",
+    "sre-operator": "运维/日志/事故分析（谨慎只读）。",
+    "docs-specialist": "文档撰写。",
+    "docs-localization-reviewer": "多语言文档事实一致性。",
+    "market-researcher": "市场与竞品调研。",
+    "data": "笔记本优先的数据分析。"
+  },
+  "skills": {}
+}

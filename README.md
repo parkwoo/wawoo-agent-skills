@@ -1,189 +1,204 @@
-<p align="center">
-  <img src="docs/assets/wawoo-skills-logo.png" width="128" alt="wawoo-skills logo" />
-</p>
+# wawoo-skills
 
-<h1 align="center">wawoo-skills</h1>
+[English](README.md) · [日本語](README.ja.md) · **Guides:** [English](docs/GUIDES.md) · [日本語](docs/GUIDES.ja.md) · [简体中文](docs/GUIDES.zh-CN.md) · [한국어](docs/GUIDES.ko.md)
 
-<p align="center">
-  <strong>Your AI coding agent has the skills. It just doesn't use them.</strong>
-</p>
+**Your agent has the skills. It just doesn't use them.**
 
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ko.md">한국어</a>
-</p>
+> **Invocation by design.** A generic kit of reusable **skills / agents / workflows / MCP servers** for AI coding agents — so the same request takes the same steps, every time.
 
-<p align="center">
-  <a href="docs/USAGE.md">Usage</a> ·
-  <a href="https://github.com/parkwoo/wawoo-skills">GitHub</a>
-</p>
+**New here?** [Product overview & inventory (4 languages)](docs/PRODUCT-OVERVIEW.md) — pains, FAQ, 112-skill map, workflow cheat sheet. Machine list: `.kilo/CAPABILITIES.md`.
 
-**You've defined skills, agent roles, and coding rules. Your AI coding agent still ignores them.**
+## Make AI agent work repeatable
 
-Ever set up an agent with specific skills, roles, and coding guidelines, only to watch it improvise—bypassing skills, ignoring workflows, and quietly skipping reviews and tests? The same task yields different results daily. The more detailed your rules, the more apparent it becomes that the agent simply isn't reading them.
+wawoo-skills is an open-source kit for **AI coding agents** (Cursor, Kilo, OpenCode/Paseo): **112 skills**, **23 agents**, **20 workflows**, plus an **MCP** (Model Context Protocol) server. It routes each request into a workflow so review, tests, and evidence gates are not skipped.
 
-The problem isn't a lack of intelligence. It's that **nothing compels it to use its capabilities.**
+Same bug fix on Tuesday and Thursday should follow the **same steps** — not two different improvisations.
 
-wawoo-skills does one thing: **it dictates *which* skill to use, and *when*.** It establishes a fixed path for the agent—what to read first, which workflow to execute, and which gates cannot be bypassed. This ensures that the same request follows the same steps every time, leaving verifiable evidence.
+### FAQ
 
-It's product and stack-agnostic—install and go: **98 skills, 21 agent roles, 12 workflows**, plus a local service (MCP). Works with Cursor, Kilo, OpenCode, Codex, Claude Code, Paseo. See [**Usage**](docs/USAGE.md).
+### Why does my agent need this if it already has skills?
+Skills in the repo are useless if the agent never opens them. wawoo-skills **designs the invocation**: `interpret_intent` → workflow → phased `skill_get`.
 
-## What it is
+### How do you avoid pasting 100 skills into context?
+**Progressive disclosure** — catalog, shortlist, then one SKILL at a time per phase.
 
-In short: **it doesn't change *how* the agent thinks—it just ensures it *actually uses* the skills it possesses.**
+### What is the MCP server?
+A **stdlib-only Python** server exposing `workflow_get`, `skill_get`, memory, and safety tools to the IDE. No extra pip install.
 
-Think of it as a **clinical pathway**: every required check is performed and recorded, while the agent retains autonomy over *how* the work is performed.
+### Which clients are supported?
+**Kilo, Cursor, OpenCode** (and Paseo with OpenCode). See [CLIENT-INTEGRATION-GUIDE.md](docs/CLIENT-INTEGRATION-GUIDE.md).
 
-## Why you need it
+> Japanese version: [README.ja.md](https://github.com/parkwoo/wawoo-agent-skills/blob/master/README.ja.md)
 
-The difference is clear in this table:
+## Why this kit
 
-| | Without wawoo-skills | With wawoo-skills |
-|---|---|---|
-| The same bug | A different path every time | A consistent chain: reproduce → fix → evidence |
-| Review / legal / tests | Quietly skipped | Read-only gates; artifacts required |
-| Context | Loading all skills into context | Catalog first, fetch only what's needed |
-| Team knowledge | Isolated in a wiki | Actively utilized by the agent |
+Even with skill and role (agent) definitions available, agents often **proceed in prose only — not reading, choosing, or following the steps**. Quality then varies for the same task, gates (review, legal, tests) become hollow, and the knowledge a team prepared goes unused.
 
-## How it works
+wawoo-skills addresses this "**the capability exists but is never invoked**" problem by **designing the invocation**:
 
-In one line: **the router selects the workflow, the tool gate restricts available tools, and the workflow orchestrates phases.** Five key components:
-
-1.  **The router selects the workflow**: `interpret_intent` chooses it in this order: explicit `/name` → local lexical → learned triggers → model score (L0 → L1 → L1 → L2).
-2.  **The tool gate restricts tools**: Selection activates a session gate that limits **MCP tools** to the workflow's `mcp_tools_allow`. For example, audit workflows are restricted to read-only tools and disallow an implement phase (`implement_allowed = false`).
-3.  **The workflow orchestrates phases**: 10 reusable phases compose 12 workflows. Each phase has `exit_criteria`, and `evidence_check` genuinely verifies completion—the model is not evaluating its own work.
-4.  **Skills are fetched on demand**: The catalog is presented first, then only the necessary skills are pulled. This saves tokens and prevents skills from being "invisible and thus unused."
-5.  **Knowledge is persisted**: Decisions and common pitfalls are saved and loaded for future sessions, eliminating the need to re-explain from scratch.
-
-### Walk through it (fixing a bug)
-
-This can seem abstract; a quick example makes it concrete:
-
-1.  You say "fix this bug" → it automatically selects the "self-correction" workflow.
-2.  That workflow first requires the "diagnose bugs" and "test engineering" skills.
-3.  The agent pulls in *only* those two skills (avoiding bloated context).
-4.  Without reproduction steps or logs, it may not declare the bug "fixed."
-5.  The outcome is persisted and automatically loaded next time.
-
-In short: **the agent's abilities don't change—what changes is that it actually uses them, every time.**
-
-### Can the plan change?
-
-You might worry: does a fixed workflow prevent the agent from adapting? **No—this allows for dynamic adjustment.**
-
-*   **The skeleton remains fixed**: The phases you progress through and what constitutes "done" in each are immutable. This layer cannot be skipped.
-*   **Inside a phase, it adjusts dynamically**: It can skip unnecessary steps, reorder tasks, change priorities, modify scope, or stop if the direction is incorrect. It can also run independent subtasks in parallel.
-
-**The agent adapts within each phase.** Midway through, if a step is unnecessary, the order is wrong, or the direction is off, it adjusts on the spot—skipping, reordering, or changing scope. You can also redirect it with a new prompt.
-
-> In one line: **the workflow provides structure, while dynamic adjustment provides flexibility.**
-
-## What you get
-
-Beyond the core mechanism, you gain **12 fixed workflows** plus additional capabilities.
-
-### 12 workflows
-
-*   **Delivery**: `/delivery-lite` (small change, default), `/feature-delivery` (full feature)
-*   **Design**: `/ui-delivery` (change UI), `/design-review` (read-only UI review)
-*   **Review**: `/self-review` (self-correction), `/compliance-review` (legal / privacy / security), `/release-review` (release package)
-*   **Research**: `/research` (research → decision)
-*   **Planning**: `/sprint-plan` (sprint), `/status-report` (progress)
-*   **Ops**: `/incident-response` (incident: evidence → mitigate → review)
-*   **Process**: `/self-improve` (retro → PDCA)
-
-Every workflow includes **phases, gates, and exit criteria**; **audit workflows are restricted to read-only operations**. For per-workflow usage, see [Usage §1.2](docs/USAGE.md#s1-2).
-
-### More capabilities
-
-Beyond the mechanism described above, it also:
-
-| Capability | In one line |
+| Layer | Role |
 |---|---|
-| **Saves tokens** | Instead of dumping hundreds of skills at once, it presents a catalog and fetches only what's needed. It can also shorten long chats locally. Less context, lower cost. |
-| **Security & compliance** | Built-in read-only security, privacy, and legal checks. Before content leaves for an external service, it can mask sensitive data, secrets, and internal addresses. |
-| **Performance & tuning** | Measures speed and resources *before* tuning—performance claims must be validated |
-| **Size limits** | Each skill entry `SKILL.md` stays within **2–4KB** (over 4KB triggers a warning; details go to `references/`). Descriptions are one line, about 160 characters. Small context, fast loading, lower cost. |
+| **Contract** (`AGENTS.md`, Cursor rules) | Fix what to read first and what may not be skipped |
+| **Workflows** (`.kilo/commands`) | Process entry points. State which skills to use, in what order |
+| **Catalog / MCP** | Never pass every skill at once; select candidates → fetch only what you need (progressive disclosure) |
+| **Intent routing** | Select the workflow with `interpret_intent`, learn triggers, gate tool permissions ([docs/INTENT-ROUTING.md](docs/INTENT-ROUTING.md)) |
+| **Gates** | Approval, evidence, observed failure. Never call it "done" on inference alone |
 
-## Supported clients
+It lays **rails of reproducible steps and tool calls** — it does not take away the agent's creativity.
 
-| Tool | Official name | Paseo provider | Support | Site / notes |
-|---|---|---|---|---|
-| Claude Code | Claude Code (Anthropic CLI) | `claude` | **Supported** | MCP + `CLAUDE.md` · https://claude.com/claude-code |
-| Codex | OpenAI Codex (CLI / VS Code extension) | `codex` | **Supported** | MCP + `AGENTS.md` · https://developers.openai.com/codex |
-| Cursor | Cursor | `cursor` | **Partial** | No slash commands / agent switching · https://cursor.com |
-| Kilo CLI | Kilo (CLI) | `kilo` | **Supported** | Sign in to Kilo first; config in `~/.config/kilo` · https://kilo.ai |
-| Kilo Code | Kilo Code (VS Code extension) | `kilo` | **Supported** | VS Code extension; sign in to Kilo first · https://kilocode.ai |
-| OpenCode | OpenCode | `opencode` | **Supported** | Built-in; same `opencode.json` (our agents appear as modes) · https://opencode.ai |
-| Paseo | Paseo (multi-agent IDE) | — | **Supported** | Built-in OpenCode · https://github.com/getpaseo/paseo |
-| Pi | Pi | `pi` | **Partial** | Parallel with a subagent extension; sequential without one (both supported) |
+## Capabilities
 
-**Support levels**: **Supported** = MCP + skills / workflows run fully; **Partial** = it connects, with constraints (noted).
+- **Intent routing** — `interpret_intent` selects the workflow (explicit `/name` → **learned** SQLite → **upstream** LLM score; no static keyword table) and **gates which MCP tools** each workflow may call.
+- **Phases & gates** — every workflow decomposes into **phases** (`goal`, `agent`, `skills`, `mcp_tools_allow`, `exit_criteria`); **audit workflows are read-only** (no `implement`).
+- **Dynamic steering** — `steer_task` amends a running plan (add / reorder / reprioritize / scope_change / abort) at a step boundary.
+- **Delegation** — `delegate_subtask` carves off parallel, read-only subtasks and can target a **model tier** (`fast` or `reasoning`).
+- **Gates** — approval (Gₐ), evidence (Gₑ), observed failure (Gₒ): never "done" on inference alone.
+- **Progressive disclosure** — catalog → candidates → open only the skills you need (bounded context).
+- **Memory** — `memory_recall` / `memory_save` (secrets rejected). **Client setup** (`WAWOO_MEMORY_READONLY`, Kilo/Cursor/OpenCode): [`docs/USAGE.md` §5.1](docs/USAGE.md#51-memory-recall-save-and-how-to-configure-clients).
 
-## Quick start (10 minutes)
+## What changes (2 minutes)
 
-1.  Say one sentence to your AI coding agent; read the workflow it returns.
-2.  Run `/delivery-lite` once; observe `docs/plans/ACTIVE.md` advance a row (Kilo uses slash commands; Cursor goes through MCP).
-3.  Run `python3 scripts/validate_assets.py`; `OK` confirms your setup.
+**Before — no routing.** You say "fix this bug". The agent improvises, skips the gates, and the next identical request takes a different path.
 
-Installation scripts, per-client setup (including Paseo / Codex), and troubleshooting: [**Usage**](docs/USAGE.md).
+**After — routed.** The request enters `/self-review`; the agent opens `test-engineering`, reaches the evidence gate (Gₑ) with a reproduction, and the next identical request follows the same chain.
 
-## Capabilities at a glance
+## Who this is for
 
-**98 skills, 21 agent roles, 12 workflows**—**primarily programming**, covering the development flow from writing to review, testing, and release.
-
-| Type | Count | Groups |
-|---|---|---|
-| Skills | 98 | Delivery & planning 13 · Debugging & testing 5 · Review & quality 6 · Architecture & code design 7 · Security & compliance 7 · Design & frontend 14 · Research & writing 7 · Ops & performance 4 · Memory & context 6 · Engineering principles 24 · Process & orchestration 5 |
-| Agent roles | 21 | Entry / Delivery / Review / Architecture / Design / Docs / Ops |
-| Workflows | 12 | Delivery / Design / Review / Research / Planning / Ops / Process |
-
-Skill examples: `diagnosing-bugs`, `security-review`, `memory`, `principle-fix-root-causes`.
-
-Full list (group / subgroup / name / description): `.kilo/CAPABILITIES.md` (machine-readable).
-
-## Glossary
-
-| Term | In one line |
+| This is for you if… | This is **not** for you if… |
 |---|---|
-| AI coding agent (the "agent") | The tool you use daily (Cursor / Kilo / OpenCode / Codex / Paseo); this kit acts upon it |
-| Skill | A reusable instruction file (`SKILL.md`), e.g., "how to diagnose a bug" |
-| Agent role | A viewpoint defined in the kit, e.g., reviewer / implementer / product owner; scheduled by workflows |
-| Workflow | An ordered process with phases and a definition of done, e.g., `/delivery-lite` |
-| MCP | Model Context Protocol, a method for connecting external tools; our MCP server uses only the Python standard library |
-| Router | Automatically selects a workflow for you |
-| Gate | A mandatory checkpoint—approval, evidence, observed failure—that cannot be skipped |
+| You use Kilo / Cursor and have skills + agents, but they are **never invoked** | You only want one-off code generation |
+| You want the same request to take the same steps every time | You value free improvisation over process |
+| Your team needs review / legal / test **gates** you can actually run | You don't need gates or evidence |
+| You want team knowledge **used by the agent**, not parked in a wiki | — |
 
-## License & sources
+## Supported environments
 
-The components **developed for this project** (skills / agents / commands / MCP) are **MIT** (`LICENSE`, Copyright (c) 2026 wawoo.jp). The kit also bundles **third-party work**—**per-file provenance is in `.kilo/skills/ATTRIBUTION.md`; full license texts are in `LICENSES/` and each skill's `LICENSE` / `LICENSE.txt` / `NOTICE.txt`**.
+- **Kilo CLI / Kilo Code**: discovery of `.kilo/`, slash workflows (`/feature-delivery`, etc.), MCP via `kilo.json`.
+- **Cursor**: `AGENTS.md`, `.cursor/rules`, MCP, and references via `@.kilo/commands` / `@.kilo/skills` (no slash or native agent switching; the same steps apply).
+- **OpenCode**: `AGENTS.md` + MCP via `opencode.json` (no native slash/skill execution; use `interpret_intent` → `workflow_get` → `skill_get`).
 
-| Source | Content | License | Link (URL or in-repo path) |
-|---|---|---|---|
-| Anthropic skills | `frontend-design` | Apache-2.0 | https://github.com/anthropics/skills · in-repo `.kilo/skills/frontend-design/LICENSE.txt` |
-| garrytan/gstack | `design-review` | Apache-2.0 | https://github.com/garrytan/gstack · in-repo `.kilo/skills/design-review/LICENSE.txt` |
-| Google Labs (`google-labs-code/skills`) | `design-md` (Stitch DESIGN.md format) | Apache-2.0 | https://github.com/google-labs-code/skills · in-repo `.kilo/skills/design-md/LICENSE.txt` |
-| GoogleChrome/modern-web-guidance | `modern-web-guidance-bridge` (**no copied guides—upstream on demand**) | see upstream | https://github.com/GoogleChrome/modern-web-guidance-src |
-| Kilo built-in | Some skills (16) | MIT (`SKILL.md` frontmatter) | https://kilo.ai · each `SKILL.md` |
-| Kilo Marketplace (fork of Awesome Claude Skills) | Agents: `frontend-specialist`, `docs-specialist`, `data`, `code-reviewer`, `code-skeptic`, `code-simplifier` | **Apache-2.0** | https://kilo.ai · in-repo `LICENSES/kilo-marketplace-*.txt` |
-| Leonxlnx/taste-skill | `imagegen-frontend-mobile` | see upstream | https://github.com/Leonxlnx/taste-skill · in-repo `.kilo/skills/imagegen-frontend-mobile/LICENSE` |
-| OpenDesign and derivatives | Design skills: `design-brief`, `design-md`, `design-review`, `reference-design-contract`, `web-experience-design`, … | **Apache-2.0** | https://open-design.ai · https://github.com/nexu-io/open-design · in-repo `LICENSES/open-design-Apache-2.0.txt` |
-| pstack (Lauren Tan / Poteto) | `principle-*` and verification / thinking skills (37) | MIT | https://github.com/backnotprop/pstack · in-repo `LICENSES/pstack-MIT.txt` |
-| Skills For Real Engineers (Matt Pocock) | Engineering-workflow skills (22) | MIT | https://github.com/mattpocock/skills · in-repo `LICENSES/skills-for-real-engineers-MIT.txt` |
-| vercel-labs/web-interface-guidelines | Basis for `web-design-guidelines` | see upstream | https://github.com/vercel-labs/web-interface-guidelines |
-| wawoo (this repo) | skills / agents / commands / MCP | MIT | https://github.com/parkwoo/wawoo-skills · in-repo `LICENSE` |
+### Prerequisites (runtime)
 
-*   **No warranty (AS IS).**
-*   **Unverified-license third-party assets are not shipped**—e.g., the 3 Marketplace "business" skills (`license: NOASSERTION`).
-*   When you redistribute or reuse any part, **retain the matching copyright and NOTICE**.
+The kit's **MCP server and maintenance scripts run on Python 3 (standard library only)**. No extra packages are needed, but a **`python3` on `PATH` (or `python` on Windows) is required**.
 
-## Where the methodology comes from
+| OS | Extra step |
+|---|---|
+| macOS | Usually none (otherwise `xcode-select --install`, or https://www.python.org/downloads/) |
+| Linux | Usually none (otherwise `apt install python3`, etc.) |
+| Windows | Install from https://www.python.org/downloads/ and enable **"Add python.exe to PATH"** (Microsoft Store version works too) |
 
-This project extracts executable components from public engineering methodologies and orchestrates them into structured workflows—**not copied, but reused**. Sources and per-item mapping are detailed in a technical article (in progress).
+- Check: `python3 --version` (Windows: `python --version`) returns `3.x` → OK.
+- MCP launches with `python3` as the command (`kilo.json`, `.cursor/mcp.json`). If `python3` has another name, set each config's `command` to the real binary (`python` / `py`, etc.; a global install registers an **absolute path** via `install_global.py`).
+- No extra dependencies, network, or `.env` are needed (`stdio` only).
+
+## Supported tools (official)
+
+| Tool | Official name | Official URL |
+|---|---|---|
+| Kilo CLI | Kilo (CLI) | https://kilo.ai |
+| Kilo Code | Kilo Code (VS Code extension) | https://kilocode.ai |
+| Cursor | Cursor | https://cursor.com |
+| OpenCode | OpenCode | https://opencode.ai |
+| MCP | Model Context Protocol | https://modelcontextprotocol.io |
+| AGENTS.md | AGENTS.md | https://agents.md |
+
+## Contents
+
+| Kind | Location |
+|---|---|
+| Skills | `.kilo/skills/<name>/SKILL.md` |
+| Agents | `.kilo/agents/<name>.md` |
+| Workflows | `.kilo/commands/<name>.md` (code L1: `/delivery-lite`, knowledge L1: `/content-delivery-lite`) |
+| MCP server | `mcp/server.py` (stdio, stdlib only) |
+| Cursor rules | `.cursor/rules/*.mdc` |
+
+- Catalog (generated) — **counts live here** (source of truth): `.kilo/CAPABILITIES.md`
+- Readiness (external prerequisites): `scripts/readiness.json`
+- Invocation & context design: `docs/USAGE.md`
+- Intent routing (public): `docs/INTENT-ROUTING.md`
+
+## Quick start
+
+### Kilo
+```bash
+# Open this directory (it discovers .kilo/; MCP is enabled by kilo.json)
+```
+- Workflows: `/feature-delivery`, etc.
+- Skills: `/` or the model selects a `SKILL.md`
+
+**First 10 minutes** (a small win up front):
+1. Send one sentence to `interpret_intent` and read the workflow it returns.
+2. Run `/delivery-lite` once — `docs/plans/ACTIVE.md` advances one row.
+3. `python3 scripts/validate_assets.py` → `OK: skills=… agents=… commands=…` means you're set.
+
+### Cursor
+1. Open this directory (it reads `AGENTS.md` and `.cursor/rules`)
+2. Enable `wawoo-skills` in **Settings → MCP** (`.cursor/mcp.json`)
+3. Use MCP `interpret_intent` (entry selection) → `workflow_get` / `skill_get`, etc. ([INTENT-ROUTING.md](docs/INTENT-ROUTING.md))
+- **No slash command / agent support.** Open `@.kilo/commands/<name>.md` and apply the steps.
+- Details: `docs/USAGE.md`
+
+### MCP
+```bash
+python3 mcp/server.py        # stdio (the client usually launches it)
+python3 scripts/e2e_flows.py   # public smoke (contract/E2E)
+```
+
+## Maintenance
+
+```bash
+python3 scripts/validate_assets.py   # asset validation (name=dir, refs, dup, JSON)
+python3 scripts/gen_capabilities.py  # regenerate the catalog (do not hand-edit)
+python3 scripts/e2e_flows.py           # MCP contract smoke
+```
+
+## Directory
+
+```
+.kilo/{skills,agents,commands,CAPABILITIES.md}
+.cursor/{rules,mcp.json}
+mcp/{server.py,intent_*.py,README.md}
+scripts/{gen_capabilities.py,validate_assets.py,readiness.json,…}
+docs/{USAGE.md,INTENT-ROUTING.md,VERSIONING.md,memory,plans}
+LICENSES/
+AGENTS.md
+kilo.json
+```
+
+## License and attribution (plain explanation)
+
+This repository mixes **what we wrote** with **what others published**.
+
+| Kind | License | Location |
+|---|---|---|
+| Skills / agents / commands / MCP newly written here | **MIT** (free to use; keep the copyright notice) | `LICENSE` |
+| Skills derived from Skills For Real Engineers (25) | **MIT** | `LICENSES/skills-for-real-engineers-MIT.txt` |
+| Skills derived from OpenDesign (10) | **Apache-2.0** (keep the copyright notice and NOTICE) | `LICENSES/open-design-Apache-2.0.txt` |
+| Agents derived from Kilo Marketplace (6) | **Apache-2.0** | `LICENSES/kilo-marketplace-*` |
+| Others (Kilo built-in skills, etc.) | Per-file frontmatter / MIT | `.kilo/skills/ATTRIBUTION.md` |
+
+- `.kilo/skills/ATTRIBUTION.md` lists which file comes from where.
+- **We exclude anything whose license is unverified** (the 3 Marketplace "business" items are excluded). `fal-gen` is a skill **we wrote ourselves** (MIT) — see `.kilo/skills/ATTRIBUTION.md`.
+- No warranty (**AS IS**). Verify each license as needed before use.
+
+### Sources (official)
+
+| Source | Official URL |
+|---|---|
+| Skills For Real Engineers (Matt Pocock) | https://github.com/mattpocock/skills · https://skills.sh/mattpocock/skills |
+| OpenDesign | https://open-design.ai · https://github.com/nexu-io/open-design |
+| Kilo Marketplace (Kilo ecosystem) | https://kilo.ai |
+| Semantic Versioning | https://semver.org |
+
+## Cautions (read first)
+
+- **Image generation**: `imagegen-frontend-mobile` provides **prompts only**. To generate actual images, use the bundled **`fal-gen`** skill (fal.ai; requires `FAL_KEY`, see its `SKILL.md`). If no key is available, deliver **prompts only**.
+- **3 skills need an issue tracker**: `to-spec`, `to-tickets`, `triage` assume a tracker such as GitHub Issues. Run `setup-matt-pocock-skills` once to configure it.
+- **Never write secrets**: do not commit API keys, tokens, or `.env` contents. `memory_save` rejects secrets.
+- **Cursor has no slash command / agent support**: use `AGENTS.md` + `.cursor/rules` + MCP + `@file` (`docs/USAGE.md`).
 
 ## Version
 
-*   Current: **0.8.0** (`VERSION`)
-*   Change history: `CHANGELOG.md`
+- Current: **0.8.0** (`VERSION`)
+- Change history: `CHANGELOG.md` (**a Japanese project record**, per the language policy in `AGENTS.md` §1)
+- Versioning and release steps: `docs/VERSIONING.md`

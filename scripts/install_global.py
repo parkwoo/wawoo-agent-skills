@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Install wawoo-skills into the Kilo global config (idempotent, re-runnable).
 
-Target: $KILO_GLOBAL_DIR (default ~/.config/kilo)
+配置先: $KILO_GLOBAL_DIR（既定 ~/.config/kilo）
   - Sync .kilo/{skills,agents,commands} (default mirror = delete extras outside the kit)
   - Idempotently register `wawoo-skills` in the mcp of kilo.jsonc (or kilo.json if absent)
-    (absolute python3 + WAWOO_SKILLS_ROOT / WAWOO_MEMORY_READONLY)
+    （絶対 python3 ＋ WAWOO_SKILLS_ROOT／WAWOO_MEMORY_READONLY）
   - Idempotently append a kit-scope section to AGENTS.md
   - Finally run validate_assets and the MCP smoke
 

@@ -1,13 +1,13 @@
 # CONTENT — 長文・書籍 SSOT（例）
 
-`plan_content.py` が検証する章・節の進捗表（内部の content ワークフロー用のテンプレート）。コードタスクは `ACTIVE.md`、ここは**原稿・調査レポート・書籍**向け。
+`/content-delivery-lite` が参照する章・節の進捗表。コードタスクは `ACTIVE.md`、ここは**原稿・調査レポート・書籍**向け。
 
 ## メタ
 
 | 項目 | 値 |
 |------|-----|
 | 儀式レベル | L1（知識納品） |
-| 入口 | `plan_content.py`（内部 content ワークフロー） |
+| 入口 | `/content-delivery-lite` |
 | 最終更新 | 2026-10-25 |
 
 ## 章・節

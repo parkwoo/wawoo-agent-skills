@@ -1,26 +1,34 @@
-# web-design-guidelines — expectations (uplift pilot)
+# web-design-guidelines — expectations（uplift pilot）
 
-Rule ids match `ACTIVE_STATIC_RULES` in `scripts/uplift_pilot.py`. Checks are **per-file heuristics** (false positives possible).
+ルール id は `scripts/uplift_pilot.py` の `ACTIVE_STATIC_RULES` と一致。チェッカーは **ファイル単位のヒューリスティック**（偽陽性あり）。
 
-## Images and accessibility
+## 画像・アクセシビリティ
 
-- `[img-alt]` `img` has `alt` (decorative: `alt=""`)
+- `[img-alt]` `img` に `alt`（装飾は `alt=""`）
+- `[img-alt]` アイコンボタンにアクセシブル名（`aria-label` 等）
 
-## Focus and input
+## フォーカス・入力
 
-- `[tabindex-positive]` Avoid positive `tabindex`
-- `[outline-none]` When `outline: none|0`, provide a focus substitute in the same file
+- `[tabindex-positive]` 正の `tabindex` を安易に使わない
+- `[outline-none]` `outline: none|0` 時は同一ファイル内に代替フォーカススタイル
 
-## Motion
+## モーション
 
-- `[reduced-motion]` Animations without `prefers-reduced-motion` in-file → review (global CSS not traced)
+- `[reduced-motion]` アニメありで当該ファイルに `prefers-reduced-motion` 無し →要確認（グローバル CSS は未追跡）
 
-## Interaction
+## インタラクション
 
-- `[clickable-div]` `onclick` on `div`/`span` without `role="button"` (or similar)
+- `[clickable-div]` `div`/`span` の `onclick` に `role="button"` 等
 
-## Check
+## 限界（偽陽性）
+
+- 複数ファイルに分かれたスタイルは未結合
+- Bootstrap 5 の `bootstrap.js` は本 pilot では対象外（`legacy_web_scan` は v3 系 URL のみ）
+
+## 検証コマンド
 
 ```bash
-python3 scripts/skill_uplift_check.py web-design-guidelines --path <ui-root>
+python3 scripts/skill_uplift_check.py web-design-guidelines --path <file-or-dir>
 ```
+
+証拠: `docs/evidence/skill-uplift/` · 設計: `docs/SKILL-UPLIFT-PILOT.ja.md`

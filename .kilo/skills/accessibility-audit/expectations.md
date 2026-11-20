@@ -1,20 +1,20 @@
-# accessibility-audit — expectations (uplift pilot)
+# accessibility-audit — expectations（uplift pilot）
 
-Static heuristics. Rule ids must match `ACTIVE_STATIC_RULES` in `scripts/uplift_pilot.py`.
+静的ヒューリスティック。ルール id は `scripts/uplift_pilot.py` の `ACTIVE_STATIC_RULES` と一致。
 
-## Structure and forms
+## 構造・フォーム
 
-- `[a11y-html-lang]` Root `html` has `lang`
-- `[a11y-page-h1]` Page has an `h1` (per-file scope)
-- `[a11y-input-label]` `input`/`select`/`textarea` has `id`+`label[for]` or `aria-label` / `aria-labelledby`
-- `[a11y-button-type]` `button` in forms has explicit `type` (avoid accidental submit)
-- `[a11y-skip-link]` Skip link near top (e.g. `#main`) — heuristic for landing HTML
+- `[a11y-html-lang]` ルート `html` に `lang`
+- `[a11y-page-h1]` ページに見出し `h1`（1 ファイルスコープ）
+- `[a11y-input-label]` `input`/`select`/`textarea` に `id`+`label[for]` または `aria-label` / `aria-labelledby`
+- `[a11y-button-type]` フォーム内の `button` に明示 `type`（`submit` 誤爆防止）
+- `[a11y-skip-link]` 本文先頭付近に skip link（`#main` 等）— ランディング級 HTML のみ目安
 
-## Limits
+## 限界
 
-Fragments may false-positive on `h1` / skip-link. Scan directories and triage findings.
+テンプレ断片・コンポーネント単体では `h1`/`skip-link` が偽陽性になりうる。ディレクトリ単位で走らせ、finding は手で triage する。
 
-## Check
+## 検証
 
 ```bash
 python3 scripts/skill_uplift_check.py accessibility-audit --path <ui-root>

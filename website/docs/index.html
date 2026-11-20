@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>文档未构建 — wawoo-skills</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="inner-page" style="padding: 2rem; max-width: 40rem; margin: 0 auto">
+    <h1>文档尚未并入预览</h1>
+    <p>
+      当前若只跑了 <code>preview-ui.sh</code> 或在 <code>website/</code> 里直接
+      <code>python3 -m http.server</code>，<strong>不会有</strong> MkDocs 生成的
+      <code>/docs/usage/</code>。
+    </p>
+    <p>请在 WSL 中运行：</p>
+    <pre><code>cd /home/git/workspace/skills/website
+PORT=8766 ./preview.sh</code></pre>
+    <p>然后打开：<a href="/cn/docs/usage/">/docs/usage/</a>（需 preview.sh 成功后再点）。</p>
+    <p><a href="/">返回首页</a></p>
+  </body>
+</html>

@@ -17,6 +17,16 @@ replay: safe
 6. Output: **applicable / not applicable / needs confirmation**, evidence (path/version/source), residual risk, and **required human approval**.
 7. Do **not** publish, contract, change terms, or ship to production **without approval**.
 
+## Platform overlay (co-taro-bz v2 — BR-009)
+
+When billing **gateway token arbitrage** (DEC-15):
+
+1. Confirm **Logical Input Tokens** (baseline) in ToS/customer docs (`TARO-PLATFORM-REQUIREMENTS-v2` BR-009).
+2. Confirm disclosure of **`GET /v1/savings`** and response `platform.tokens_saved` (BR-008).
+3. No silent SSE `usage` rewrite without `platform` metadata (BR-008).
+
+See `@.kilo/commands/platform-ops.md` §4.
+
 ## Known cautions
 
 - This project uses MIT/Apache-2.0 assets (`.kilo/skills/ATTRIBUTION.md`). **Marketplace "business" items come from a third-party source with unverified licenses.**

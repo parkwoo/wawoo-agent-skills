@@ -1,0 +1,54 @@
+{#- website/kit-header.fragment.html と揃える -#}
+{% import "partials/language.html" as lang with context %}
+{% set nav_hidden = page.meta and page.meta.hide and "navigation" in page.meta.hide %}
+<header class="site-header">
+  <a href="/" class="brand" title="返回 kit 首页"><span>WAWOO SKILLS</span></a>
+  <nav class="nav" aria-label="Primary">
+    <label class="kit-drawer-toggle md-icon" for="__drawer" aria-label="{{ '目录' if nav_hidden else lang.t('menu') }}">
+      {% set icon = config.theme.icon.menu or "material/menu" %}
+      {% include ".icons/" ~ icon ~ ".svg" %}
+    </label>
+    <a href="/" data-nav="home">首页</a>
+    <a href="/docs/usage/" class="is-active" data-nav="docs">文档</a>
+    <a href="/docs/skills-catalog/" data-nav="guides">Skill 收录</a>
+    <a href="/changelog/" data-nav="changelog">更新日志</a>
+    <a href="/download/" class="nav-cta" data-nav="download">免费下载</a>
+    <div class="kit-lang" data-kit-lang data-current="zh">
+      <button
+        type="button"
+        class="kit-lang-trigger"
+        aria-haspopup="listbox"
+        aria-expanded="false"
+        aria-label="选择语言（当前：简体中文）"
+      >
+        <span class="kit-lang-current">简体中文</span>
+        <svg class="kit-lang-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <ul class="kit-lang-menu" role="listbox" hidden>
+        <li role="presentation">
+          <a href="/docs/usage/" data-kit-lang-switch="zh" role="option" aria-selected="true">简体中文</a>
+        </li>
+        <li role="presentation">
+          <a href="/ja/docs/usage/" data-kit-lang-switch="ja" role="option" aria-selected="false">日本語</a>
+        </li>
+        <li role="presentation">
+          <a href="/en/docs/usage/" data-kit-lang-switch="en" role="option" aria-selected="false">English</a>
+        </li>
+        <li role="presentation">
+          <a href="/ko/docs/usage/" data-kit-lang-switch="ko" role="option" aria-selected="false">한국어</a>
+        </li>
+      </ul>
+    </div>
+    <a
+      href="https://github.com/parkwoo/wawoo-agent-skills"
+      class="github-link kit-nav-with-icon"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <svg class="kit-icon kit-icon--sm kit-icon--github" aria-hidden="true"><use href="/icons.svg#icon-github"></use></svg>
+      GitHub
+    </a>
+  </nav>
+</header>

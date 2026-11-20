@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """Validate and order the Markdown table of an L2 sprint backlog (issue-like). stdlib only.
 
-Validation:
+検証:
   - valid status; at most one in_progress; done requires evidence
   - dependencies (`depends` column) exist and there are no cycles
   - **row order satisfies dependencies (topological order)** (no dual ordering)
 
-Ordering:
+整列:
   - `--apply` reorders rows by dependency (content/evidence unchanged = order only)
 
-Columns: `issue | status | title | evidence | depends`
+列: `issue | status | title | evidence | depends`
   `depends` = comma-separated issue ids (`OS-*`). Decisions (`D3`, etc.) and `—` are ignored.
 """
 from __future__ import annotations
@@ -22,7 +22,7 @@ from pathlib import Path
 
 VALID_STATUS = frozenset({"open", "in_progress", "done", "blocked"})
 PLACEHOLDER = frozenset({"—", "-", "issue", ""})
-ID_RE = re.compile(r"^[A-Za-z]+-[0-9A-Za-z]+$")  # e.g. OS-1a, MEM-2
+ID_RE = re.compile(r"^[A-Za-z]+-[0-9A-Za-z]+$")  # 例: OS-1a, MEM-2
 SEP_RE = re.compile(r"^\|[\s\-:|]+\|$")
 
 

@@ -3,7 +3,7 @@
 # Default is dry-run. --apply actually deletes and GCs.
 #
 #   scripts/kilo_snapshot_gc.sh                 # dry-run (list targets only)
-#   scripts/kilo_snapshot_gc.sh --apply         # remove + git gc --auto
+#   scripts/kilo_snapshot_gc.sh --apply         # 除去 + git gc --auto
 #   scripts/kilo_snapshot_gc.sh --dir DIR --min-age 60
 #
 # Background: a kilo snapshot keeps <KILO_SNAPSHOT_DIR>/<projectID>/<dir> as a git directory.

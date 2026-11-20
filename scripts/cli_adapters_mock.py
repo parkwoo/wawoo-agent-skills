@@ -116,8 +116,10 @@ class CursorCLIMock:
 # Expect SSOT keywords per deliverable type (contract E2E)
 DELIVERABLE_SSOT = {
     "delivery-lite": ("ACTIVE.md", "plan_active"),
+    "content-delivery-lite": ("CONTENT.md", "plan_content"),
     "ui-delivery": ("ACTIVE.md",),
     "research": ("ACTIVE.md",),
+    "market-plan": ("ACTIVE.md",),
 }
 
 
@@ -149,8 +151,10 @@ def run_parity_check(workflow_names: list[str]) -> list[str]:
 def main() -> int:
     names = [
         "delivery-lite",
+        "content-delivery-lite",
         "ui-delivery",
         "research",
+        "market-plan",
     ]
     print("== cli_adapters_mock (Kilo / Cursor parity) ==")
     issues = run_parity_check(names)

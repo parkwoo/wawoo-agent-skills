@@ -36,6 +36,12 @@ def _readme_version_issues() -> list[str]:
     return mod.readme_version_issues()
 
 
+_SCRIPT_DIR = Path(__file__).resolve().parent
+if str(_SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(_SCRIPT_DIR))
+from uplift_pilot import UPLIFT_PILOT_SKILLS  # noqa: E402
+
+
 def fm(path: Path) -> dict[str, str]:
     text = path.read_text(encoding="utf-8", errors="ignore")
     if not text.startswith("---"):
@@ -75,6 +81,7 @@ INTERNAL_PUBLIC_PATTERNS = (
 
 # Context-budget check (AGENTS §5): entry SKILL.md should be 2-4KB.
 SKILL_BUDGET_BYTES = 4096
+DESCRIPTION_BUDGET_CHARS = 160
 # Upstream / reference-heavy entry skills whose detail lives in references/ (verbatim
 # third-party text or long procedures). New or own skills must stay <= 4KB.
 SKILL_BUDGET_EXCEPTIONS = frozenset(
@@ -115,10 +122,70 @@ def skill_budget_warnings() -> list[str]:
         except OSError:
             continue
         if size > SKILL_BUDGET_BYTES:
+            refs = entry.parent / "references"
+            if refs.is_dir() and any(refs.iterdir()):
+                continue
             over.append(f"{name} ({size / 1024:.1f}KB)")
     if not over:
         return []
     return [f"{len(over)} skills over 4KB budget (see AGENTS §5): " + ", ".join(over)]
+
+
+def fm_description(path: Path) -> str:
+    """Parse frontmatter description (supports folded `|` blocks)."""
+    text = path.read_text(encoding="utf-8", errors="ignore")
+    if not text.startswith("---"):
+        return ""
+    end = text.find("\n---", 3)
+    if end == -1:
+        return ""
+    block = text[3:end].splitlines()
+    key: str | None = None
+    buf: list[str] = []
+    out = ""
+    for line in block:
+        m = re.match(r"^([A-Za-z0-9_-]+):\s*(.*)$", line)
+        if m:
+            if key == "description" and buf:
+                out = " ".join(buf).strip()
+            key, val = m.group(1), m.group(2).strip()
+            if key == "description":
+                buf = [] if (val == "" or val == "|" or val[0:1] in "|>") else [val.strip('"')]
+            else:
+                buf = []
+        elif key == "description" and line.startswith((" ", "\t")):
+            buf.append(line.strip())
+    if key == "description" and buf:
+        out = " ".join(buf).strip()
+    return re.sub(r"\s+", " ", out).strip()
+
+
+def uplift_expectations_issues() -> list[str]:
+    """Pilot skills must ship expectations.md."""
+    issues: list[str] = []
+    for name in sorted(UPLIFT_PILOT_SKILLS):
+        exp = KILO / "skills" / name / "expectations.md"
+        if not exp.is_file():
+            issues.append(f"uplift pilot skill missing expectations.md: {name}")
+    return issues
+
+
+def description_length_warnings() -> list[str]:
+    """WARN when skill description exceeds the catalog/Cursor index budget."""
+    long_names: list[str] = []
+    for entry in sorted((ROOT / ".kilo" / "skills").glob("*/SKILL.md")):
+        desc = fm_description(entry)
+        if len(desc) > DESCRIPTION_BUDGET_CHARS:
+            long_names.append(f"{entry.parent.name} ({len(desc)}ch)")
+    if not long_names:
+        return []
+    show = ", ".join(long_names[:12])
+    if len(long_names) > 12:
+        show += f", … (+{len(long_names) - 12})"
+    return [
+        f"{len(long_names)} skills with description >{DESCRIPTION_BUDGET_CHARS}ch "
+        f"(see USAGE §6.1): {show}"
+    ]
 
 
 def public_boundary_violations() -> list[str]:
@@ -237,7 +304,9 @@ def main() -> int:
 
     issues.extend(command_replay_issues())
     issues.extend(_readme_version_issues())
+    issues.extend(uplift_expectations_issues())
     warnings.extend(skill_budget_warnings())
+    warnings.extend(description_length_warnings())
 
     for w in warnings:
         print("WARN:", w)

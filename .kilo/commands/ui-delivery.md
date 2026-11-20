@@ -14,7 +14,7 @@ replay: safe
 3. **Only if images are needed**, generate **just what you need** with `fal-gen` (requires `FAL_KEY`; hero / illustration / background / texture / mobile screens). If unset, proceed with a **placeholder + source**. Save outputs under `docs/.../assets/` and confirm whether they should be committed.
 4. Implement the smallest consistent UI change; retain semantic HTML and keyboard behavior.
 5. Use `test-engineering`, `accessibility-audit`, and `performance-audit` as applicable.
-5b. **Uplift evidence (verify, required)** — Let `<ui-root>` be the changed UI tree; use `<compose-dir>` when compose/images changed. Stamp UTC as `TS` (e.g. `20261118T120000Z`), write JSON under `docs/evidence/skill-uplift/`, and link paths in ACTIVE evidence.
+5b. **Uplift 証拠（verify・必須）** — 変更 UI パスを `<ui-root>`、compose 変更時は `<compose-dir>` とする。UTC タイムスタンプ `TS`（例 `20261118T120000Z`）を付け、`docs/evidence/skill-uplift/` に保存し ACTIVE 証拠列へリンクする。
 
 ```bash
 TS=$(date -u +%Y%m%dT%H%M%SZ)
@@ -22,7 +22,7 @@ python3 scripts/skill_uplift_check.py web-design-guidelines --path <ui-root> \
   > docs/evidence/skill-uplift/ui-delivery-web-design-${TS}.json
 python3 scripts/skill_uplift_check.py accessibility-audit --path <ui-root> \
   > docs/evidence/skill-uplift/ui-delivery-a11y-${TS}.json
-# Only when compose / image tags changed:
+# compose / イメージタグを触ったときのみ:
 python3 scripts/skill_uplift_check.py deployment --path <compose-dir> \
   > docs/evidence/skill-uplift/ui-delivery-deploy-${TS}.json
 ```

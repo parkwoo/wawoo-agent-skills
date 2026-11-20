@@ -1,0 +1,661 @@
+{
+  "version": 1,
+  "_note": "Skill 收录说明 SSOT：名称来自 wawoo-skills，zh 为人工/助手从英文译写的简体中文（非 CAPABILITIES 直出）。",
+  "items": {
+    "accessibility-audit": {
+      "source_hash": "16d018fc1f418a7f",
+      "en": "Audit and improve web accessibility for semantic structure, keyboard operation, forms, focus, contrast, motion, assistive technol…",
+      "zh": "审计并改进 Web 可访问性，涵盖语义结构、键盘操作、表单、焦点、对比度、动效与辅助技术兼容性。"
+    },
+    "api-contract-design": {
+      "source_hash": "3589e68451b168ff",
+      "en": "Design or review HTTP, RPC, event, or internal API contracts for clear inputs, outputs, errors, authentication, compatibility, an…",
+      "zh": "设计或评审 HTTP、RPC、事件及内部 API 契约，明确输入输出、错误、认证与向后兼容。"
+    },
+    "architecture-decision": {
+      "source_hash": "7ed852f730445154",
+      "en": "Evaluate software architecture choices, dependencies, interfaces, constraints, and tradeoffs, then produce a concise decision rec…",
+      "zh": "评估架构选型、依赖、接口、约束与权衡，并产出简洁的架构决策记录（ADR）。"
+    },
+    "ask-matt": {
+      "source_hash": "785fdddf1164ede9",
+      "en": "Ask which skill or flow fits your situation. A router over the skills in this repo.",
+      "zh": "根据当前情境推荐合适的 skill 或工作流，充当本仓库 skill 的路由器。"
+    },
+    "benchmark-checklist": {
+      "source_hash": "566deb7029e0b100",
+      "en": "\"Vet a perf measurement (limiter, tuning, limits, errors, repeatability, relevance, and whether the work happened) before you rep…",
+      "zh": "在对外汇报性能数据前，核查基准方法、限流、误差、可重复性与场景相关性。"
+    },
+    "blast-radius": {
+      "source_hash": "d2ad433b5c9a5f3a",
+      "en": "\"Find what a change could break somewhere else before it ships, beyond the diff, and prove the one fact it's safe because of by r…",
+      "zh": "在发布前评估变更的潜在爆炸半径，并用可验证证据说明关键安全前提成立。"
+    },
+    "change-readiness": {
+      "source_hash": "ad39f483c3b5f09d",
+      "en": "Perform an evidence-based pre-handoff review of a non-trivial software change before requesting human or external audit. Use afte…",
+      "zh": "在请求人工或外部审计前，对非平凡软件变更做有证据的交接前审查。"
+    },
+    "changelog": {
+      "source_hash": "4694e0f2e4816277",
+      "en": "Generate and maintain user-facing changelog/release notes from git history (Conventional Commits) and keep version/tags consisten…",
+      "zh": "从 git 历史（Conventional Commits）生成并维护面向用户的 CHANGELOG/发布说明，并保持版本与 tag 一致。"
+    },
+    "code-review": {
+      "source_hash": "3eb80228530cfb5c",
+      "en": "\"Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes: Standards (does the code follow this…",
+      "zh": "自固定基准点审阅 diff，从规范符合度与正确性/风险两条轴线给出可执行反馈。"
+    },
+    "codebase-design": {
+      "source_hash": "bca81bb29e2e9b1b",
+      "en": "Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module's interface, find deepening o…",
+      "zh": "设计深层模块的共享词汇表；用于设计/改进模块接口、寻找可深化抽象的时机。"
+    },
+    "compliance-legal": {
+      "source_hash": "63e2bd7841347dc1",
+      "en": "Review OSS license obligations (MIT/Apache-2.0 attribution, NOTICE), SBOM, and product/service legal checklists (terms, privacy, …",
+      "zh": "审查 OSS 许可义务（MIT/Apache-2.0 署名、NOTICE）、SBOM 及产品/服务法务清单（条款、隐私等）。"
+    },
+    "content-guardrail": {
+      "source_hash": "0a9b4a859dba13dc",
+      "en": "Deterministic policy-as-data content gate (no model, no network) — checks text against deny terms, named regexes, built-in secret…",
+      "zh": "确定性策略即数据的内容闸门（无模型、无网络），对文本做违禁词、正则与内置密钥检测。"
+    },
+    "context-compression": {
+      "source_hash": "7357dd4ca03d2510",
+      "en": "Deterministically compress and clean multi-turn conversation context with pure Python (no LLM, no network) — drop stale turns, de…",
+      "zh": "用纯 Python 确定性压缩多轮对话上下文（无 LLM、无网络），去陈旧轮次并去重。"
+    },
+    "create-verification-skill": {
+      "source_hash": "4f73a1f02cc90bff",
+      "en": "\"Generate a project-local verification skill that drives your app the way a user does — any language, framework, or platform. Use…",
+      "zh": "生成项目本地 verification skill，以用户视角驱动任意语言/框架/平台的应用验证。"
+    },
+    "data-egress-guard": {
+      "source_hash": "b7b0719c7fcf7f43",
+      "en": "Deterministically mask PII and secrets before sending text to an external LLM/API (no model, no network) — replaces spans with nu…",
+      "zh": "在文本发往外部 LLM/API 前确定性脱敏 PII 与密钥（无模型、无网络），用占位符替换命中片段。"
+    },
+    "database-change-safety": {
+      "source_hash": "56a6c9e6472a3c6d",
+      "en": "Plan, implement, and review schema changes, data migrations, backfills, and cleanup with integrity, availability, observability, …",
+      "zh": "规划、实施并评审 schema 变更、迁移、回填与清理，兼顾完整性、可用性与可观测性。"
+    },
+    "dependency-upgrade": {
+      "source_hash": "c6a48f4eee919eae",
+      "en": "Safely evaluate, apply, and verify software dependency, runtime, container-image, or toolchain upgrades with compatibility, secur…",
+      "zh": "安全评估、应用并验证依赖、运行时、容器镜像或工具链升级，关注兼容性与安全风险。"
+    },
+    "deployment": {
+      "source_hash": "87449a0fb9509471",
+      "en": "Plan, execute, and verify a deployment or release (Docker Compose, image tagging, environment, migrations, health checks, rollbac…",
+      "zh": "规划、执行并验证部署/发布（Docker Compose、镜像 tag、环境、迁移、健康检查、回滚）。"
+    },
+    "design-brief": {
+      "source_hash": "76de2a4448e694f0",
+      "en": "Parse a structured design brief written in I-Lang protocol format into a concrete design spec. Eliminates ambiguity from vague re…",
+      "zh": "将 I-Lang 协议格式的结构化设计简报解析为可执行的设计规格，消除模糊需求。"
+    },
+    "design-md": {
+      "source_hash": "0d50e4418949cb09",
+      "en": "Create and maintain a DESIGN.md — a plain-text design-system document (Google Stitch format) that design and coding agents read t…",
+      "zh": "创建并维护 DESIGN.md（Google Stitch 格式的纯文本设计系统文档），供设计与编码 agent 读取。"
+    },
+    "design-review": {
+      "source_hash": "16f06f44720b3eea",
+      "en": "Designer Who Codes: visual audit then fixes with atomic commits and before/after screenshots. Useful for tightening shipped UI be…",
+      "zh": "会写代码的设计师：先做视觉审计，再以原子提交配合前后截图修复已上线 UI。"
+    },
+    "diagnosing-bugs": {
+      "source_hash": "b2efea450870acd5",
+      "en": "Diagnosis loop for hard bugs and performance regressions. Use when the user says \"diagnose\"/\"debug this\", or reports something br…",
+      "zh": "针对疑难缺陷与性能回退的诊断闭环；适用于用户说 diagnose/debug 或报告间歇性问题时。"
+    },
+    "documentation-localization": {
+      "source_hash": "8ab14daaa26133a1",
+      "en": "Write, review, and synchronize technical documentation and localized content for factual accuracy, usable instructions, links, me…",
+      "zh": "编写、审阅并同步技术文档与本地化内容，确保事实准确、指引可用、链接有效。"
+    },
+    "domain-modeling": {
+      "source_hash": "2c9f37e43b1b6706",
+      "en": "Build and sharpen a project's domain model. Use when discussing codebase terminology, writing or editing a GLOSSARY.md, or record…",
+      "zh": "构建并打磨项目领域模型；讨论术语、编写 GLOSSARY.md 或记录领域决策时使用。"
+    },
+    "engineering-quality": {
+      "source_hash": "297b4f36d3752552",
+      "en": "Plan and implement software changes with explicit scope, evidence-based verification, safe migrations, and rollback readiness. Us…",
+      "zh": "在明确范围内规划并实现软件变更，强调证据化验证、安全迁移与回滚就绪。"
+    },
+    "fal-gen": {
+      "source_hash": "e0532247b212b6b5",
+      "en": "Batch-generate design images (avatars / illustrations / backgrounds / textures) with fal.ai. Use when a task needs generated or f…",
+      "zh": "用 fal.ai 批量生成设计图（头像/插画/背景/纹理）；任务需要生成或占位视觉素材时使用。"
+    },
+    "figure-it-out": {
+      "source_hash": "e8abd2bb97ad5928",
+      "en": "\"Design an auditable playbook when no narrower one fits: a large migration, an ambitious multi-part change, or work a human revie…",
+      "zh": "当没有更窄流程可用时，设计可审计的大型迁移/多部件变更行动手册。"
+    },
+    "frontend-design": {
+      "source_hash": "7a8ff451dc028957",
+      "en": "Create distinctive, production-grade frontend interfaces with strong visual direction, polished typography, considered layout, an…",
+      "zh": "打造有鲜明视觉方向的生产级前端界面，兼顾字体、版式、色彩与微交互细节。"
+    },
+    "frontend-guides-hub": {
+      "source_hash": "8884d0b1b7a03843",
+      "en": "Frontend/UI skill ラッター — /ui-delivery 向けに既存 skill へ段階的にルートする（110 個平铺を避ける）。",
+      "zh": "Frontend/UI skill 分流入口，为 /ui-delivery 按阶段路由到既有 skill（避免 110 个平铺）。"
+    },
+    "grill-with-docs": {
+      "source_hash": "ed166c9bbf3797f2",
+      "en": "A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go.",
+      "zh": "通过高强度问答打磨计划或设计，并同步产出 ADR、术语表等文档沉淀。"
+    },
+    "grilling": {
+      "source_hash": "0c4b253e8216a727",
+      "en": "Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any '…",
+      "zh": "对用户计划、决策或想法进行追问式压力测试，检验假设与风险。"
+    },
+    "handoff": {
+      "source_hash": "ca459f68b5f4d982",
+      "en": "Compact the current conversation into a handoff document for another agent to pick up.",
+      "zh": "将当前会话压缩为交接文档，供其他 agent 无缝续作。"
+    },
+    "how": {
+      "source_hash": "b2ba9b3fdc7c50ca",
+      "en": "\"Use for \\\"how does X work\\\", code walkthroughs before changing something, and placement / ownership / layering questions (\\\"wher…",
+      "zh": "回答「X 如何工作」、变更前代码走读，以及模块归属/分层/放置类问题。"
+    },
+    "imagegen-frontend-mobile": {
+      "source_hash": "2166ce8b6d73f122",
+      "en": "A skill for high-quality image concepts for mobile apps. Provides prompts and visual direction for iOS/Android screens and flows …",
+      "zh": "为移动应用提供高质量图像概念与提示词，覆盖 iOS/Android 界面与流程的视觉方向。"
+    },
+    "implement": {
+      "source_hash": "e45cbfcd505b4723",
+      "en": "\"Implement a piece of work based on a spec or set of tickets.\"",
+      "zh": "依据规格或一组工单实现具体开发任务。"
+    },
+    "implement-spec": {
+      "source_hash": "4d021c6bf73afc0c",
+      "en": "\"Implement the result of /to-spec and /to-tickets in code.\"",
+      "zh": "将 /to-spec 与 /to-tickets 的产出落地为代码实现。"
+    },
+    "in-your-own-words": {
+      "source_hash": "048418f9d0cea34e",
+      "en": "\"Restate in your own words what you think the user's goals are and what problem they're trying to solve. Use for /in-your-own-wor…",
+      "zh": "用你自己的话复述用户目标与要解决的问题；用于 /in-your-own-words 对齐理解。"
+    },
+    "incident-debugging": {
+      "source_hash": "08fb187a7bfb7209",
+      "en": "Diagnose a software incident or high-impact defect through reproduction, evidence collection, fault isolation, mitigation, verifi…",
+      "zh": "通过复现、取证、隔离、缓解与验证，诊断软件事故或高影响缺陷。"
+    },
+    "language-policy": {
+      "source_hash": "c201845b5f956930",
+      "en": "Decide and enforce the writing language for code, engineering records, and explanatory docs via a three-tier policy (code = Engli…",
+      "zh": "用三层语言策略（代码英文、工程记录、说明文档双语等）决定并执行书写语言。"
+    },
+    "legacy-web-scan": {
+      "source_hash": "4395fb5337170449",
+      "en": "Legacy Web パターン掃引 — MWG legacy-scan と社内ルールで modernization 候補を plan-md へ。",
+      "zh": "Legacy Web 模式扫掠：结合 MWG legacy-scan 与社内规则，将现代化候选项写入 plan-md。"
+    },
+    "maintain-verification-skill": {
+      "source_hash": "2e2dd3a957db2bb6",
+      "en": "\"Periodic pass that keeps a project's verification skill and feature map honest: parallel source readers per feature, one live se…",
+      "zh": "周期性维护项目 verification skill 与特性地图：并行读源码、实机验证，保持映射诚实。"
+    },
+    "memory": {
+      "source_hash": "e526df88338b3a8d",
+      "en": "Persist and recall durable project knowledge (decisions, constraints, gotchas, recurring fixes) across sessions. Use before start…",
+      "zh": "跨会话持久化并召回项目知识（决策、约束、坑点、常见修复）；开工前先 recall。"
+    },
+    "modern-web-guidance-bridge": {
+      "source_hash": "9507018b09183504",
+      "en": "On-demand Modern Web Guidance via npx (search/retrieve/legacy-scan). External OSS bridge — do not fork guides into this kit.",
+      "zh": "通过 npx 按需调用 Modern Web Guidance（search/retrieve/legacy-scan）；外部 OSS 桥，勿 fork 进 kit。"
+    },
+    "openrouter-gen": {
+      "source_hash": "9296b569c0124fcc",
+      "en": "Batch-generate design images via OpenRouter image models (default google/gemini-2.5-flash-image). Use for generated design assets…",
+      "zh": "经 OpenRouter 图像模型（默认 google/gemini-2.5-flash-image）批量生成设计图素材。"
+    },
+    "pdca-cycle": {
+      "source_hash": "5c828f6dd03c2767",
+      "en": "Run a lightweight Plan-Do-Check-Act cycle for product, engineering, quality, or process improvements. Use when a request needs me…",
+      "zh": "对产品、工程、质量或流程改进运行轻量 PDCA（Plan-Do-Check-Act）闭环。"
+    },
+    "performance-audit": {
+      "source_hash": "f7a53ba8bfd9255f",
+      "en": "Measure and improve application or web performance using representative workloads, bottleneck evidence, and regression safeguards…",
+      "zh": "用代表性负载测量并改进应用/Web 性能，基于瓶颈证据并设置回归防护。"
+    },
+    "plan-md": {
+      "source_hash": "fbf2693f09c5e15c",
+      "en": "Always save planning deliverables (fix plans, implementation plans, design direction, review responses) as a Markdown file. Use f…",
+      "zh": "将规划交付物（修复方案、实施计划、设计方向、评审回复）固定写入 Markdown 文件。"
+    },
+    "pr": {
+      "source_hash": "5652ead13ad19f08",
+      "en": "\"Use when writing a PR body.\"",
+      "zh": "撰写 Pull Request 正文时使用。"
+    },
+    "principle-attack-the-premise": {
+      "source_hash": "9d5887412e306f19",
+      "en": "\"Apply when two or more fixes that share one premise have failed the same gate. Write the premise down and test it directly befor…",
+      "zh": "当多个共享同一前提的修复在同一门禁失败时，先写下前提并直接验证再改代码。"
+    },
+    "principle-boundary-discipline": {
+      "source_hash": "5c0b800930b63c1d",
+      "en": "\"Apply when wiring validation, error handling, or framework adapters. Concentrate guards at system boundaries (CLI, config, netwo…",
+      "zh": "在接线校验、错误处理或框架适配时，把守卫集中在系统边界（CLI、配置、网络等）。"
+    },
+    "principle-build-the-lever": {
+      "source_hash": "51bde1dec4893522",
+      "en": "\"Apply to any non-trivial work, not just bulk work: edits, migrations, analyses, checks. Build the tool that does it or proves it…",
+      "zh": "面对非平凡工作先造杠杆：编辑、迁移、分析、检查都先建工具或证明脚本再做。"
+    },
+    "principle-encode-lessons-in-structure": {
+      "source_hash": "d03d173841462fb9",
+      "en": "\"Apply when you catch yourself writing the same instruction a second time, or notice a recurring correction. Encode the rule as a…",
+      "zh": "当你第二次写同一条指示或反复纠正时，把规则编码进结构（skill、lint、类型）而非提示词。"
+    },
+    "principle-exhaust-the-design-space": {
+      "source_hash": "53b5939849a2a4ed",
+      "en": "\"Apply when facing a novel UI interaction or architectural decision with no precedent in the codebase. Build 2-3 competing protot…",
+      "zh": "面对代码库无先例的 UI 或架构决策时，先做 2–3 个竞争原型再收敛选型。"
+    },
+    "principle-experience-first": {
+      "source_hash": "b75fdea02c066e1e",
+      "en": "\"Apply when product, UX, or feature-scope tradeoffs come up. Choose user delight over implementation convenience; ship fewer poli…",
+      "zh": "在产品、UX 或范围权衡时优先用户体感，而非实现便利；少做妥协版功能。"
+    },
+    "principle-explain-the-number": {
+      "source_hash": "88a2966c1b8d920d",
+      "en": "\"Apply before you measure, and before you trust, report, or act on a number you measured: a speedup, a regression, a throughput, …",
+      "zh": "在测量、汇报或依据数值行动前，说清数字含义、方法与可信边界。"
+    },
+    "principle-fix-root-causes": {
+      "source_hash": "2fac3035a66b71cc",
+      "en": "\"Apply when debugging. Trace each symptom back to the first place the system went wrong and fix it there. A guard is a fix only w…",
+      "zh": "调试时把症状追到系统首次出错处并在那里修复；守卫只在无法根除根因时才算修复。"
+    },
+    "principle-foundational-thinking": {
+      "source_hash": "d44429049ccee645",
+      "en": "\"Apply before writing logic: choosing core types and data structures, sequencing scaffold-vs-feature work, asking what concurrent…",
+      "zh": "写逻辑前先做基础思考：核心类型与数据结构、脚手架 vs 功能顺序、并发假设等。"
+    },
+    "principle-guard-the-context-window": {
+      "source_hash": "fc14d099057c5c6a",
+      "en": "\"Apply when context is filling up: large outputs, long files, repeated reads, fan-out planning. Route bulk to subagents; keep sum…",
+      "zh": "上下文将满时：大输出、长文件、重复读取、扇出规划—— bulk 下沉子 agent，主会话留摘要。"
+    },
+    "principle-laziness-protocol": {
+      "source_hash": "a22a4f9c5b47808b",
+      "en": "\"Apply when refactoring, evaluating diff size, or tempted to add abstractions, layers, or signal threading. Bias toward deletion …",
+      "zh": "重构或想加抽象层时偏向删减；评估 diff 规模，避免无必要的信号穿层。"
+    },
+    "principle-make-operations-idempotent": {
+      "source_hash": "074550d29bfcc228",
+      "en": "\"Apply when designing commands, lifecycle steps, or processing loops that run amid crashes, restarts, and retries. Converge to th…",
+      "zh": "设计会在崩溃/重启/重试间运行的命令或生命周期步骤时，收敛到幂等语义。"
+    },
+    "principle-migrate-callers-then-delete-legacy-apis": {
+      "source_hash": "8e3f02f8351631eb",
+      "en": "\"Apply when introducing a new internal API while old callers still exist. Migrate callers and delete the old API in the same wave…",
+      "zh": "引入新内部 API 且旧调用方仍在时，同一波次迁移调用方并删除旧 API。"
+    },
+    "principle-minimize-reader-load": {
+      "source_hash": "f4f6035e63eeb5c0",
+      "en": "\"Apply when reviewing or shaping code that's hard to trace. Count layers between question and answer, and hidden state in the rea…",
+      "zh": "审阅难追踪代码时，统计从问题到答案的层级与读者需隐藏的隐式状态。"
+    },
+    "principle-model-the-domain": {
+      "source_hash": "23b562497cd20767",
+      "en": "\"Apply when writing stateful logic, or when code branches a lot or repeats a shape assumption across files.\"",
+      "zh": "编写有状态逻辑，或分支繁多、跨文件重复同一形状假设时，先建模领域状态。"
+    },
+    "principle-never-block-on-the-human": {
+      "source_hash": "d646d316cbb6a55e",
+      "en": "\"Apply when tempted to ask 'should I do X?' on reversible work.\"",
+      "zh": "对可逆工作别想「我该不该做 X」而阻塞；先做完再汇报。"
+    },
+    "principle-outcome-oriented-execution": {
+      "source_hash": "282872e33693ba18",
+      "en": "\"Apply during planned rewrites and migrations with explicit phase boundaries. Converge on the target architecture; don't preserve…",
+      "zh": "分阶段重写/迁移时以目标架构收敛，不为过渡态长期保留兼容层。"
+    },
+    "principle-prove-it-works": {
+      "source_hash": "c87f3cf680245230",
+      "en": "\"Apply after completing a task, before declaring done. Verify against the real artifact (run the feature, read the actual value, …",
+      "zh": "宣称完成前用真实产物验证（跑功能、读实际值、看截图），而非仅看 diff。"
+    },
+    "principle-redesign-from-first-principles": {
+      "source_hash": "fa35f127f2fa5daf",
+      "en": "\"Apply when integrating a new requirement into an existing design.\"",
+      "zh": "将新需求融入既有设计时，从第一性原理重审边界而非局部打补丁。"
+    },
+    "principle-separate-before-serializing-shared-state": {
+      "source_hash": "89199c496f7684a2",
+      "en": "\"Apply when concurrent actors might write to the same file, branch, key, or state object. Eliminate the sharing first; serialize …",
+      "zh": "并发可能写同一文件/分支/键/状态对象时，先消除共享再谈序列化。"
+    },
+    "principle-sequence-verifiable-units": {
+      "source_hash": "434e708d0316e1e3",
+      "en": "\"Apply to multi-step work (sweeps, migrations, runs of similar edits) and to how you stack commits and PRs. Break work into small…",
+      "zh": "多步工作或提交/PR 堆叠时，切成可独立验证的小单元逐步交付。"
+    },
+    "principle-subtract-before-you-add": {
+      "source_hash": "0f768d64a8fad63f",
+      "en": "\"Apply when sequencing an addition, refactor, or rewrite. Remove dead code, redundant validators, and stub references first, then…",
+      "zh": "追加、重构或重写前先删死代码、冗余校验与桩引用，再加新逻辑。"
+    },
+    "principle-test-behavior-not-implementation": {
+      "source_hash": "3fbd0d2c22e50e3e",
+      "en": "\"Apply when you write, change, or keep a test. Assert what the code's users can observe, so that the test fails when that behavio…",
+      "zh": "写/改/保留测试时断言用户可观察行为，使行为变坏时测试必失败。"
+    },
+    "principle-type-system-discipline": {
+      "source_hash": "a320839ffe0916ca",
+      "en": "\"Apply when designing types, reviewing a function signature, or writing code in any statically-typed language. Make illegal state…",
+      "zh": "设计类型或静态语言代码时，用类型让非法状态不可表示。"
+    },
+    "privacy-review": {
+      "source_hash": "ef0a1bc3a821686e",
+      "en": "Review personal data (PII) flows, minimization, retention, masking, logging, and cross-border handling for a feature or service. …",
+      "zh": "审查个人数据（PII）流、最小化、保留、脱敏、日志与跨境处理是否符合隐私要求。"
+    },
+    "product-discovery": {
+      "source_hash": "d095a2a7323bcc89",
+      "en": "Turn an ambiguous product or feature request into a scoped problem statement, user outcome, acceptance criteria, priorities, risk…",
+      "zh": "将模糊的产品/功能请求收敛为问题陈述、用户结果、验收标准、优先级与风险。"
+    },
+    "prototype": {
+      "source_hash": "4b8ea255f7e392a0",
+      "en": "Build a throwaway prototype to answer a design question. Use when the user wants to sanity-check whether a state model or logic f…",
+      "zh": "搭建可丢弃原型以回答设计问题；用于快速验证状态模型或逻辑是否成立。"
+    },
+    "publication-boundary": {
+      "source_hash": "21b8466e8168c94b",
+      "en": "Keep internal development materials out of the public tree of an open-source repo. Use when adding docs or scripts, or auditing w…",
+      "zh": "防止内部开发物料进入开源仓库公开树；新增文档/脚本或审计公开边界时使用。"
+    },
+    "recall": {
+      "source_hash": "dac94b3fd5703d40",
+      "en": "\"Reconstruct your recent working context from your own chat history, live state, and the shared record (user reports, prior fixes…",
+      "zh": "从自身对话历史、现场状态与共享记录（用户报告、既往修复）重建近期工作上下文。"
+    },
+    "reference-design-contract": {
+      "source_hash": "004fd0e08f6395de",
+      "en": "Turn vague taste, screenshots, URLs, product notes, or \"make it feel like this\" references into a grounded DESIGN.md plus an impl…",
+      "zh": "将模糊品味、截图、URL 或「做成这种感觉」的参考转为可落地的 DESIGN.md 与实现契约。"
+    },
+    "reflect": {
+      "source_hash": "02ecf8b9f0e49357",
+      "en": "Spawn three parallel review subagents over the active transcript, surface learnings, and route each to a concrete edit on an exis…",
+      "zh": "并行拉起三个评审子 agent 扫当前 transcript，提炼教训并路由到具体文件修改。"
+    },
+    "release-readiness": {
+      "source_hash": "0f3c2124e82dd471",
+      "en": "Prepare and review a software release for versioning, legal files, changelog accuracy, tags, release notes, deployment checks, an…",
+      "zh": "为软件发布准备并审阅版本、法务文件、CHANGELOG、tag、发布说明与部署检查。"
+    },
+    "research": {
+      "source_hash": "d7a0e6dae2b3d80a",
+      "en": "Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. Use when the u…",
+      "zh": "对照高可信一手资料调查问题，并将结论写入仓库内 Markdown 文件。"
+    },
+    "retro": {
+      "source_hash": "71aad1362b51cb5e",
+      "en": "\"Conduct a retrospective on a coding session.\"",
+      "zh": "对一次编码会话进行回顾（retro）。"
+    },
+    "security-review": {
+      "source_hash": "85e3c00b03c7b09e",
+      "en": "Perform a read-first security review of application code, configuration, dependencies, and delivery changes. Use for requested se…",
+      "zh": "对应用代码、配置、依赖与交付变更做先读后写的安全评审。"
+    },
+    "setup-matt-pocock-skills": {
+      "source_hash": "6b6c534b539f04b8",
+      "en": "\"Configure this repo for the engineering skills: set up its issue tracker, triage label vocabulary, and domain doc layout. Run on…",
+      "zh": "为工程 skill 套件配置仓库：工单系统、分诊标签词汇表与领域文档布局。"
+    },
+    "sharpen": {
+      "source_hash": "059e2a6a6e7d173e",
+      "en": "\"Make a task deeper, not bigger, then rewrite the prompt. Use for /sharpen.\"",
+      "zh": "把任务做得更深而非更大，并重写提示词；用于 /sharpen。"
+    },
+    "show-me-your-work": {
+      "source_hash": "00c9028fdf4cc2bb",
+      "en": "\"Keep a reviewable decision trail for long-running or unattended work: a TSV log with one row per decision (what, why, evidence, …",
+      "zh": "为长跑或未值守工作保留可审阅决策轨迹：TSV 日志逐行列出决策、理由与证据。"
+    },
+    "swarm": {
+      "source_hash": "4f179a54ec08eb1d",
+      "en": "\"Fan out N parallel workers, drain them, and return one report. Use for /swarm, 'swarm this', or parallel coverage, races, gauntl…",
+      "zh": "扇出 N 个并行 worker、汇总 drain，返回一份报告；用于 /swarm 或并行覆盖面任务。"
+    },
+    "tdd": {
+      "source_hash": "38b334b77e2dea28",
+      "en": "Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions \"red-green-refactor\", or want…",
+      "zh": "测试驱动开发；用户要测试先行、提 red-green-refactor 或先写失败测试时使用。"
+    },
+    "teach": {
+      "source_hash": "c5209685860a0146",
+      "en": "Teach the user a new skill or concept, within this workspace.",
+      "zh": "在本工作区内向用户教授新 skill 或概念。"
+    },
+    "test-engineering": {
+      "source_hash": "349a7a90f02c97ac",
+      "en": "Design, implement, diagnose, and review software tests with evidence-focused coverage across unit, integration, and end-to-end la…",
+      "zh": "设计、实现、诊断并评审软件测试，强调有证据的单元/集成/E2E 覆盖。"
+    },
+    "to-spec": {
+      "source_hash": "23acbe1079edd760",
+      "en": "\"Turn the current conversation into a spec and publish it to the project issue tracker: no interview, just synthesis of what you'…",
+      "zh": "将当前对话合成为规格并发布到项目工单系统，无需访谈式澄清。"
+    },
+    "to-tickets": {
+      "source_hash": "878fa774bafb4098",
+      "en": "Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each declaring its blocking edges, published…",
+      "zh": "把计划、规格或当前对话拆成 tracer-bullet 工单，声明阻塞边并发布。"
+    },
+    "triage": {
+      "source_hash": "416d3d6b921d706b",
+      "en": "Move issues and external PRs through a state machine of triage roles, categorise, verify, grill if needed, and write agent-ready …",
+      "zh": "按分诊状态机推进 issue 与外部 PR：分类、核验、必要时 grilling，并写 agent 就绪说明。"
+    },
+    "wayfinder": {
+      "source_hash": "0fb39f299b4d8620",
+      "en": "Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision tickets on your issue tracker, and r…",
+      "zh": "将超出一个 agent 会话体量的大块工作规划为工单上的决策票地图，并编排依赖。"
+    },
+    "web-design-guidelines": {
+      "source_hash": "7d1b9b630d971c27",
+      "en": "Review UI code for Web Interface Guidelines compliance by the Vercel engineering team. Covers layout, typography, color, motion, …",
+      "zh": "按 Vercel Web Interface Guidelines 审阅 UI 代码，覆盖版式、字体、色彩、动效等。"
+    },
+    "web-experience-design": {
+      "source_hash": "7c96e12f2ae3ec58",
+      "en": "Design, implement, audit, and hand off web interfaces with evidence for user tasks, visual hierarchy, responsive behavior, access…",
+      "zh": "设计、实现、审计并交接 Web 界面，附用户任务、视觉层级、响应式与可访问性证据。"
+    },
+    "why": {
+      "source_hash": "3eb7426aaed08d38",
+      "en": "\"Use for 'why does X work this way', 'why we picked Y', design rationale, regressions, postmortems, or data-backed thresholds. Di…",
+      "zh": "回答「为何如此设计」、选型理由、回归、复盘或数据阈值背后的 why。"
+    },
+    "writing-for-agents": {
+      "source_hash": "d7c3ccc876056272",
+      "en": "Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md or CLAUDE.md.",
+      "zh": "为 agent 编写文档；创建/编辑 skill 或修改 AGENTS.md、CLAUDE.md 时使用。"
+    },
+    "accessibility-reviewer": {
+      "source_hash": "41391cbdb77dadc8",
+      "en": "Performs read-only accessibility review of user flows, semantic structure, keyboard operation, and responsive UI.",
+      "zh": "对用户流程、语义结构、键盘操作与响应式 UI 做只读可访问性评审。"
+    },
+    "architect": {
+      "source_hash": "83cebdfe613006cd",
+      "en": "Evaluates architecture alternatives, interfaces, dependencies, migration risk, and decision records.",
+      "zh": "评估架构备选方案、接口、依赖、迁移风险并维护决策记录。"
+    },
+    "Code Reviewer": {
+      "source_hash": "659fb45c57ed72a8",
+      "en": "Senior software engineer conducting thorough code reviews",
+      "zh": "资深软件工程师角色，进行透彻的代码评审。"
+    },
+    "Code Simplifier": {
+      "source_hash": "5ca11880b85b5623",
+      "en": "For simplifying/refactoring features of codebase",
+      "zh": "专注简化/重构代码库中的功能实现。"
+    },
+    "Code Skeptic": {
+      "source_hash": "87ee378c45a9f0b9",
+      "en": "For when you need your code criticized like nobody's business",
+      "zh": "以极度挑剔视角批评你的代码与假设。"
+    },
+    "compliance-reviewer": {
+      "source_hash": "600272556b2ad799",
+      "en": "Legal, compliance, and privacy review gate for a change or release. Collects evidence and checklists; final legal judgment requir…",
+      "zh": "变更或发布的法务/合规/隐私评审门禁；收集证据与清单，最终法务判断需人工。"
+    },
+    "Data": {
+      "source_hash": "50100e35409f0767",
+      "en": "Run notebook-first data analysis by appending and executing cells for each request.",
+      "zh": "以 notebook 为先：按请求追加并执行单元格完成数据分析。"
+    },
+    "delivery-lead": {
+      "source_hash": "49baec1b96acd51e",
+      "en": "Coordinates evidence-based delivery from scope through review without bypassing approvals.",
+      "zh": "从范围到评审协调基于证据的交付，不绕过审批门禁。"
+    },
+    "docs-localization-reviewer": {
+      "source_hash": "a06c35a054c29162",
+      "en": "Maintains factual technical documentation and equivalent localized content.",
+      "zh": "维护事实准确的技术文档及等价的本地化内容。"
+    },
+    "Documentation Specialist": {
+      "source_hash": "b985216b22413788",
+      "en": "Focus on writing documentation, markdown files, and other text-based files",
+      "zh": "专注撰写文档、Markdown 及其他文本类交付物。"
+    },
+    "Frontend Specialist": {
+      "source_hash": "24b8164991b0c573",
+      "en": "Frontend developer expert in React, TypeScript, and modern CSS",
+      "zh": "React、TypeScript 与现代 CSS 方向的前端专家 agent。"
+    },
+    "implementer": {
+      "source_hash": "e80a8d45095c1e1d",
+      "en": "Implements scoped software changes with project conventions, focused tests, and evidence-based reporting.",
+      "zh": "按项目约定实现有边界的软件变更，附聚焦测试与证据化报告。"
+    },
+    "performance-reviewer": {
+      "source_hash": "08d2052b76ab3970",
+      "en": "Reviews performance bottlenecks, measurement design, budgets, and regression safeguards.",
+      "zh": "评审性能瓶颈、测量设计、预算与回归防护策略。"
+    },
+    "product-owner": {
+      "source_hash": "ed92d7e209b6aad5",
+      "en": "Clarifies user outcomes, priorities, scope, and acceptance criteria without inventing business decisions.",
+      "zh": "澄清用户结果、优先级、范围与验收标准，不擅自做业务决策。"
+    },
+    "project-manager": {
+      "source_hash": "23d3a08da7b3be95",
+      "en": "Agile project and progress management for this project — sprint planning, status reporting, risk tracking, and delivery coordinat…",
+      "zh": "敏捷项目管理：冲刺规划、状态报告、风险跟踪与交付协调。"
+    },
+    "qa-engineer": {
+      "source_hash": "64592705bdd0065a",
+      "en": "Designs test strategy, reproduces defects, evaluates verification evidence, and identifies coverage gaps.",
+      "zh": "设计测试策略、复现缺陷、评估验证证据并识别覆盖缺口。"
+    },
+    "release-manager": {
+      "source_hash": "1eaeca865cb8ccf5",
+      "en": "Prepares releases with version, legal, artifact, compatibility, rollback, and remote-verification checks.",
+      "zh": "准备发布：版本、法务、产物、兼容性、回滚与远程验证检查。"
+    },
+    "security-reviewer": {
+      "source_hash": "ec10c320d09c724e",
+      "en": "Performs read-only security review of code, configuration, dependencies, and delivery changes.",
+      "zh": "对代码、配置、依赖与交付变更做只读安全评审。"
+    },
+    "sre-operator": {
+      "source_hash": "fab47a9c62211d64",
+      "en": "Performs cautious read-first operations analysis for logs, monitoring, incidents, and cloud environments.",
+      "zh": "以谨慎的先读方式分析日志、监控、事故与云环境运维问题。"
+    },
+    "wawoo-auto": {
+      "source_hash": "076a88ea9ce4567a",
+      "en": "Default entry agent. Routes non-trivial requests to a wawoo workflow via MCP before any other tool, then executes that workflow. …",
+      "zh": "默认入口 agent：非平凡请求先经 MCP 路由到 wawoo workflow，再执行该工作流。"
+    },
+    "web-designer": {
+      "source_hash": "a5b883939125449f",
+      "en": "Designs and implements accessible responsive web interfaces, then audits rendered behavior before handoff.",
+      "zh": "设计并实现可访问的响应式 Web 界面，交接前审计实际渲染行为。"
+    },
+    "/compliance-review": {
+      "source_hash": "5b02ec41c3814817",
+      "en": "Legal / privacy / security gate (compliance-legal → privacy-review → security-review → release-readiness)",
+      "zh": "法务/隐私/安全门禁工作流（compliance-legal → privacy-review → security-review → release-readiness）。"
+    },
+    "/delivery-lite": {
+      "source_hash": "84ea7713ab6d0b07",
+      "en": "Lightweight delivery — SSOT plan file state machine, minimal ceremony (L0–L1). Default for single-feature requests without full f…",
+      "zh": "轻量交付工作流：SSOT 计划文件状态机、最小仪式（L0–L1），单功能默认入口。"
+    },
+    "/design-review": {
+      "source_hash": "c2655a77627bb87c",
+      "en": "UI design review (design-review → web-design-guidelines → accessibility-audit)",
+      "zh": "UI 设计评审工作流（design-review → web-design-guidelines → accessibility-audit）。"
+    },
+    "/feature-delivery": {
+      "source_hash": "667c797899d92ef1",
+      "en": "Deliver a feature through discovery, design, implementation, testing, review, and approval gates.",
+      "zh": "经发现、设计、实现、测试、评审与审批门禁交付完整功能。"
+    },
+    "/incident-response": {
+      "source_hash": "2834e1990d478edc",
+      "en": "Investigate and safely resolve an incident or urgent regression with evidence and follow-up.",
+      "zh": "以证据调查并安全处置事故或紧急回归，并安排后续跟进。"
+    },
+    "/release-review": {
+      "source_hash": "0a0be2d04a22892d",
+      "en": "Prepare a release-review package with legal/compliance, privacy, version, security, test, artifact, remote, and rollback evidence…",
+      "zh": "准备发布评审包：法务/合规、隐私、版本、安全、测试、产物、远程与回滚证据。"
+    },
+    "/research": {
+      "source_hash": "5feb85160b269230",
+      "en": "Research → decision (research → product-discovery → to-spec/to-tickets)",
+      "zh": "研究到决策工作流（research → product-discovery → to-spec/to-tickets）。"
+    },
+    "/self-improve": {
+      "source_hash": "0ca20a3a66aab385",
+      "en": "Self-improvement (retro → pdca-cycle → self-review → plan-md)",
+      "zh": "自我改进工作流（retro → pdca-cycle → self-review → plan-md）。"
+    },
+    "/self-review": {
+      "source_hash": "45c2baca1c5349cf",
+      "en": "Self-correction (code-review → code-skeptic → diagnosing-bugs/tdd → fix → verify)",
+      "zh": "自我纠错工作流（code-review → code-skeptic → diagnosing-bugs/tdd → 修复 → 验证）。"
+    },
+    "/sprint-plan": {
+      "source_hash": "4f3e727d65632644",
+      "en": "Sprint planning L2 (wayfinder → to-tickets → priority/estimate/capacity → plan-md)",
+      "zh": "L2 冲刺规划（wayfinder → to-tickets → 优先级/估算/容量 → plan-md）。"
+    },
+    "/status-report": {
+      "source_hash": "eb3eb816f29e34fe",
+      "en": "Progress / status report (ACTIVE or triage/to-tickets → progress/risk → plan-md)",
+      "zh": "进度/状态报告（ACTIVE 或 triage/to-tickets → 进度/风险 → plan-md）。"
+    },
+    "/ui-delivery": {
+      "source_hash": "a68f4828f4dafa43",
+      "en": "Design, implement, and audit a web UI change across responsive and accessibility states.",
+      "zh": "设计、实现并审计 Web UI 变更，覆盖响应式与可访问性状态。"
+    }
+  }
+}

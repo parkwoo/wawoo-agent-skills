@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>更新日志（Changelog）— wawoo-skills | AI 编程工作流与 MCP 技能库演进记录</title>
+    <meta
+      name="description"
+      content="wawoo-skills 版本演进：interpret_intent、workflow_get、OpenCode/Cursor MCP 集成、安全闸门与 Skill uplift。当前 0.7.2，含 98 Skills 与持续发版记录。"
+    />
+    <meta
+      name="keywords"
+      content="wawoo-skills,changelog,MCP,Workflow,Cursor,Claude Code,OpenCode,Agent Skills,更新日志"
+    />
+    <link rel="canonical" href="https://skills.wawoo.jp/changelog/" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "wawoo-skills 更新日志",
+        "description": "AI 编程技能库与 MCP 工作流的版本发布记录",
+        "url": "https://skills.wawoo.jp/changelog/",
+        "isPartOf": { "@type": "WebSite", "name": "wawoo-skills", "url": "https://skills.wawoo.jp/" }
+      }
+    </script>
+    <link rel="icon" href="/wawoo-skills-logo.png" type="image/png" />
+    <link rel="stylesheet" href="/kit-header.css" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/kit-typography.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      body {
+        font-family: Inter, var(--font-sans);
+      }
+    </style>
+  </head>
+  <body class="inner-page changelog-body" data-kit-nav="changelog" data-kit-page="changelog" data-kit-ambience>
+    <div class="kit-topbar">
+      <div class="shell">
+        <header class="site-header">
+  <a href="/" class="brand"><span>WAWOO SKILLS</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="/" data-nav="home">首页</a>
+    <a href="/cn/docs/usage/" data-nav="docs">文档</a>
+    <a href="/cn/docs/skills-catalog/" data-nav="guides">Skill 收录</a>
+    <a href="/changelog/" data-nav="changelog">更新日志</a>
+    <a href="/download/" class="nav-cta" data-nav="download">免费下载</a>
+        <select class="kit-lang-select" data-kit-lang-select data-current="zh" aria-label="选择语言（当前：简体中文）">
+    <option value="zh" data-href="/changelog/" selected>简体中文</option>
+    <option value="ja" data-href="/ja/changelog/" disabled>日本語</option>
+    <option value="en" data-href="/en/changelog/" disabled>English</option>
+    <option value="ko" data-href="/ko/changelog/" disabled>한국어</option>
+    </select>
+    <a
+      href="https://github.com/parkwoo/wawoo-agent-skills"
+      class="github-link kit-nav-with-icon"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <svg class="kit-icon kit-icon--sm kit-icon--github" aria-hidden="true"><use href="/icons.svg#icon-github"></use></svg>
+      GitHub
+    </a>
+  </nav>
+</header>
+      </div>
+    </div>
+    <div class="shell shell--page">
+      <header class="page-hero">
+        <div class="trust-row" aria-label="当前版本">
+          <span class="trust-tag">
+            <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-tag"></use></svg>
+            当前 <strong data-kit-changelog-version>0.7.2</strong>
+          </span>
+          <span class="trust-tag trust-tag--mit">MIT · 持续维护</span>
+        </div>
+        <h1 data-kit-copy-text="page.title">更新日志（Changelog）— AI 编程工作流与 MCP 技能库演进记录</h1>
+        <p class="page-lead" data-kit-copy-text="page.lead">
+          wawoo-skills 持续迭代：MCP 意图路由、Workflow 与 98 个 Agent Skills。本页为开发者可读的版本摘要；工程正本为仓库
+          <a href="https://github.com/parkwoo/wawoo-agent-skills/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer"
+            >CHANGELOG.md</a
+          >（日语记录）。
+        </p>
+        <div class="hero-actions changelog-hero-actions">
+          <a class="btn btn-primary" href="/download/">
+            <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-plug"></use></svg>
+            免费下载 / 克隆
+          </a>
+          <a class="btn btn-secondary" href="/cn/docs/usage/">
+            <svg class="kit-icon kit-icon--sm kit-icon--muted" aria-hidden="true"><use href="/icons.svg#icon-book"></use></svg>
+            安装与 MCP 配置
+          </a>
+          <a
+            class="btn btn-secondary"
+            href="https://github.com/parkwoo/wawoo-agent-skills"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub Star / Watch
+          </a>
+        </div>
+      </header>
+
+      <nav class="changelog-version-nav" aria-label="版本快速跳转">
+        <span class="changelog-version-nav-label">跳转</span>
+        <a href="#unreleased">Unreleased</a>
+        <a href="#v0-7-2">0.7.2</a>
+        <a href="#v0-7-0">0.7.0</a>
+        <a href="#v0-6-0">0.6.0</a>
+        <a href="#v0-5-0">0.5.0</a>
+        <a href="#v0-4-0">0.4.0</a>
+        <a href="#v0-1-0">0.1.0</a>
+        <a href="https://github.com/parkwoo/wawoo-agent-skills/blob/master/CHANGELOG.md">完整历史 →</a>
+      </nav>
+
+      <div class="changelog-list">
+        <article class="changelog-item" id="unreleased">
+          <header class="changelog-item-head">
+            <h2 class="changelog-item-title">
+              <span class="version-tag">Unreleased</span>
+              <time datetime="2026-11-20">筹备中</time>
+            </h2>
+            <button
+              type="button"
+              class="changelog-link-copy btn btn-secondary btn-sm"
+              data-changelog-copy="unreleased"
+              title="复制本版本链接"
+            >
+              复制链接
+            </button>
+          </header>
+          <ul class="changelog-changes">
+            <li>
+              <span class="change-tag change-tag--add">新增</span>
+              skills.wawoo.jp 营销五页与 MkDocs 文档统一样式、locale 路径（<code>/docs/usage/</code>、<code>/en/docs/</code>）。
+            </li>
+            <li>
+              <span class="change-tag change-tag--add">新增</span>
+              Skill 收录与使用说明页：Workflow 映射、技能筛选、可复制 Prompt 示例。
+            </li>
+            <li>
+              <span class="change-tag change-tag--docs">文档</span>
+              使用说明扩充最短路径、客户端 Tab、FAQ 与 SEO 结构化数据。
+            </li>
+          </ul>
+        </article>
+
+        <article class="changelog-item" id="v0-7-2">
+          <header class="changelog-item-head">
+            <h2 class="changelog-item-title">
+              <span class="version-tag">0.7.2</span>
+              <time datetime="2026-11-18">2026-11-18</time>
+            </h2>
+            <button type="button" class="changelog-link-copy btn btn-secondary btn-sm" data-changelog-copy="v0-7-2">
+              复制链接
+            </button>
+          </header>
+          <ul class="changelog-changes">
+            <li>
+              <span class="change-tag change-tag--add">新增</span>
+              Skill uplift：强化 <code>accessibility-audit</code>、<code>deployment</code> 的期望清单与静态检查，便于
+              <a href="/guides/">/ui-delivery</a> 交付时留证据。
+            </li>
+            <li>
+              <span class="change-tag change-tag--add">新增</span>
+              <code>web-designer</code> 角色默认路由到 uplift 相关 skill，减少「叫了工作流却不知道拉哪份 SKILL.md」。
+            </li>
+          </ul>
+        </article>
+
+        <article class="changelog-item" id="v0-7-1">
+          <header class="changelog-item-head">
+            <h2 class="changelog-item-title">
+              <span class="version-tag">0.7.1</span>
+              <time datetime="2026-11-18">2026-11-18</time>
+            </h2>
+            <button type="button" class="changelog-link-copy btn btn-secondary btn-sm" data-changelog-copy="v0-7-1">
+              复制链接
+            </button>
+          </header>
+          <ul class="changelog-changes">
+            <li>
+              <span class="change-tag change-tag--add">新增</span>
+              Playwright A/B 框架验证 skill uplift 前后可访问性差异，输出可归档的 JSON 证据（适合 CI 或人工复核）。
+            </li>
+          </ul>
+        </article>
+
+        <article class="changelog-item changelog-item--spotlight" id="v0-7-0">
+          <header class="changelog-item-head">
+            <h2 class="changelog-item-title">
+              <span class="version-tag">0.7.0</span>
+              <span class="changelog-spotlight">亮点版本</span>
+              <time datetime="2026-11-18">2026-11-18</time>
+            </h2>
+            <button type="button" class="changelog-link-copy btn btn-secondary btn-sm" data-changelog-copy="v0-7-0">
+              复制链接
+            </button>
+          </header>
+          <p class="changelog-spotlight-lead">
+            对外可读文档瘦身 + Modern Web Guidance 桥接 + OpenCode MCP 契约 + 会话安全默认收紧——适合从旧版升级时重点阅读。
+          </p>
+          <ul class="changelog-changes">
+            <li>
+              <span class="change-tag change-tag--add">新增</span>
+              <code>mwg_search</code> / <code>mwg_retrieve</code> / <code>mwg_legacy_scan</code>：在 Agent 里按需检索现代 Web
+              指南，不必整库塞进上下文。
+            </li>
+            <li>
+              <span class="change-tag change-tag--client">客户端</span>
+              OpenCode 配置示例与 E2E 握手测试；<a href="/cn/docs/usage/">USAGE</a> 同步 Cursor / Claude Code / OpenCode 路径。
+            </li>
+            <li>
+              <span class="change-tag change-tag--guard">护栏</span>
+              意图会话 resume 默认关闭，仅存最小字段——降低多客户端混用时的上下文泄露风险。
+            </li>
+            <li>
+              <span class="change-tag change-tag--guard">护栏</span>
+              每步 workflow 标注 <code>replay: safe|unsafe</code>，委派支持幂等键，避免 incident 类流程被误重复执行。
+            </li>
+            <li>
+              <span class="change-tag change-tag--perf">性能</span>
+              技能体量可测（CAPABILITIES size 列）、上下文压缩与 handoff 契约写进 AGENTS——控制 Token 别爆。
+            </li>
+            <li>
+              <span class="change-tag change-tag--add">新增</span>
+              创作向 <code>/writing</code> 工作流；默认入口 agent 更名为 <code>wawoo-auto</code>。
+            </li>
+            <li>
+              <span class="change-tag change-tag--docs">文档</span>
+              公开面聚焦 README + USAGE + 意图路由；内部审计迁至 <code>internal/</code>，Fork 后更易审阅边界。
+            </li>
+          </ul>
+        </article>
+
+        <article class="changelog-item changelog-item--spotlight" id="v0-6-0">
+          <header class="changelog-item-head">
+            <h2 class="changelog-item-title">
+              <span class="version-tag">0.6.0</span>
+              <span class="changelog-spotlight">亮点版本</span>
+              <time datetime="2026-10-28">2026-10-28</time>
+            </h2>
+            <button type="button" class="changelog-link-copy btn btn-secondary btn-sm" data-changelog-copy="v0-6-0">
+              复制链接
+            </button>
+          </header>
+          <p class="changelog-spotlight-lead">
+            「先说人话 → 自动选 Workflow → 再按阶段 skill_get」成为默认路径；MCP 工具门控防止 Agent 跳过流程直接乱改仓库。
+          </p>
+          <ul class="changelog-changes">
+            <li>
+              <span class="change-tag change-tag--add">新增</span>
+              <code>interpret_intent</code>：L0 斜杠命令 / L1 学习库 / L2 上游评分，不确定时回落到人工澄清而非瞎猜 workflow。
+            </li>
+            <li>
+              <span class="change-tag change-tag--add">新增</span>
+              <code>workflow_get { phase }</code> 分阶段目标与退出条件；<code>delegate_subtask</code> 带上验收标准。
+            </li>
+            <li>
+              <span class="change-tag change-tag--guard">护栏</span>
+              意图确认后 <code>mcp_tools_allow</code> 白名单：未跑完审查环不宜直接写生产配置。
+            </li>
+            <li>
+              <span class="change-tag change-tag--client">客户端</span>
+              <code>install_global.py</code> 可选开启可写 memory；默认 recall-only 适合只读审代码场景。
+            </li>
+            <li>
+              <span class="change-tag change-tag--fix">修复</span>
+              pytest 与学习库非确定性、Unix socket 权限、路径遍历判定等 MCP 安全与测试稳定性问题。
+            </li>
+          </ul>
+        </article>
+
+        <article class="changelog-item" id="v0-5-0">
+          <header class="changelog-item-head">
+            <h2 class="changelog-item-title">
+              <span class="version-tag">0.5.0</span>
+              <time datetime="2026-10-25">2026-10-25</time>
+            </h2>
+            <button type="button" class="changelog-link-copy btn btn-secondary btn-sm" data-changelog-copy="v0-5-0">
+              复制链接
+            </button>
+          </header>
+          <ul class="changelog-changes">
+            <li>
+              <span class="change-tag change-tag--add">新增</span>
+              实机 E2E 与 CI 沙箱：<code>/delivery-lite</code> 等轻量交付可在无 API Key 时做 dry-run 验证。
+            </li>
+            <li>
+              <span class="change-tag change-tag--add">新增</span>
+              <code>/content-delivery-lite</code> 与 CLI 适配 mock，Kilo 斜杠与 Cursor @commands 行为对齐测试。
+            </li>
+          </ul>
+          <p class="changelog-more">
+            0.4.x 连续发版（<code>plan_active</code>、memory MCP、METHODOLOGY L0–L3）见
+            <a href="https://github.com/parkwoo/wawoo-agent-skills/blob/master/CHANGELOG.md#040---2026-10-25">CHANGELOG 0.4.0 段</a
+            >。
+          </p>
+        </article>
+
+        <article class="changelog-item" id="v0-4-0">
+          <header class="changelog-item-head">
+            <h2 class="changelog-item-title">
+              <span class="version-tag">0.4.0</span>
+              <time datetime="2026-10-25">2026-10-25</time>
+            </h2>
+            <button type="button" class="changelog-link-copy btn btn-secondary btn-sm" data-changelog-copy="v0-4-0">
+              复制链接
+            </button>
+          </header>
+          <ul class="changelog-changes">
+            <li>
+              <span class="change-tag change-tag--guard">护栏</span>
+              运维与审计资产移出公开 clone（<code>internal/</code>），降低 Fork 时误带内部资料的风险。
+            </li>
+            <li>
+              <span class="change-tag change-tag--docs">文档</span>
+              <code>PUBLICATION.md</code> 说明哪些目录会出现在公开发布树。
+            </li>
+          </ul>
+        </article>
+
+        <article class="changelog-item" id="v0-1-0">
+          <header class="changelog-item-head">
+            <h2 class="changelog-item-title">
+              <span class="version-tag">0.1.0</span>
+              <time datetime="2026-10-25">2026-10-25</time>
+            </h2>
+            <button type="button" class="changelog-link-copy btn btn-secondary btn-sm" data-changelog-copy="v0-1-0">
+              复制链接
+            </button>
+          </header>
+          <ul class="changelog-changes">
+            <li>
+              <span class="change-tag change-tag--add">新增</span>
+              首个公开发布：55+ Skills、21 Agents、MCP stdlib 服务（<code>capabilities</code>、<code>skill_get</code>、<code>workflow_get</code>
+              等）与 <code>AGENTS.md</code> 契约。
+            </li>
+            <li>
+              <span class="change-tag change-tag--add">新增</span>
+              <code>validate_assets.py</code> 与 GitHub Actions，保证 skill/workflow 目录可被机器校验。
+            </li>
+          </ul>
+        </article>
+      </div>
+
+      <aside class="changelog-cta-band" aria-labelledby="changelog-cta-heading">
+        <h2 id="changelog-cta-heading" class="skills-section-title">看完更新，下一步</h2>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/guides/">浏览 98 个 Skill 收录</a>
+          <a class="btn btn-secondary" href="/cn/docs/usage/">5 分钟接上 MCP</a>
+          <a
+            class="btn btn-secondary"
+            href="https://github.com/parkwoo/wawoo-agent-skills/releases"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub Releases</a
+          >
+        </div>
+      </aside>
+
+      <footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <p>产品</p>
+      <a href="/">首页</a>
+      <a href="/download/">免费下载</a>
+      <a href="https://github.com/parkwoo/wawoo-agent-skills/blob/master/README.zh-CN.md">README</a>
+    </div>
+    <div class="footer-col">
+      <p>资源</p>
+      <a href="/cn/docs/usage/">文档</a>
+      <a href="/cn/docs/skills-catalog/">Skill 收录</a>
+      <a href="/changelog/">更新日志</a>
+    </div>
+    <div class="footer-col">
+      <p>客户端</p>
+      <a href="/cn/docs/usage/#s2-3">Cursor</a>
+      <a href="/cn/docs/usage/#s2-1">Kilo</a>
+      <a href="/cn/docs/usage/#s2-2">OpenCode</a>
+    </div>
+    <div class="footer-col">
+      <p>社区</p>
+      <a
+        href="https://github.com/parkwoo/wawoo-agent-skills"
+        class="kit-footer-with-icon"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg class="kit-icon kit-icon--sm kit-icon--github" aria-hidden="true"><use href="/icons.svg#icon-github"></use></svg>
+        GitHub
+      </a>
+      <a href="https://github.com/parkwoo/wawoo-agent-skills/issues">Issues</a>
+      <a href="https://github.com/parkwoo/wawoo-agent-skills/blob/master/SECURITY.md">Security</a>
+    </div>
+  </div>
+  <p class="footer-meta">
+    wawoo-skills · MIT ·
+    <a href="https://github.com/parkwoo/wawoo-agent-skills/blob/master/README.zh-CN.md">README.zh-CN</a>
+    · <span data-kit-version>v0.8.0</span>
+  </p>
+</footer>
+    </div>
+    <script src="/main.js" defer></script>
+    <script src="/kit-ambience.js" defer></script>
+  </body>
+</html>

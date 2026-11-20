@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>wawoo-skills 专家技能收录（{{SKILLS}} Skills / {{AGENTS}} 角色 / {{WORKFLOWS}} 工作流）</title>
+    <meta
+      name="description"
+      content="按主题列出 wawoo-skills 全部 Skill、Agent 与 Workflow，与 CAPABILITIES.md 同步。"
+    />
+    <link rel="canonical" href="https://skills.wawoo.jp/guides/" />
+    <link rel="icon" href="/wawoo-skills-logo.png" type="image/png" />
+    <link rel="stylesheet" href="/kit-header.css" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/kit-typography.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      body {
+        font-family: Inter, var(--font-sans);
+      }
+    </style>
+  </head>
+  <body
+    class="inner-page"
+    data-kit-nav="guides"
+    data-kit-page="skills-catalog"
+    data-kit-ambience
+    data-guides-built="{{GENERATED_AT}}"
+  >
+    <div class="kit-topbar">
+      <div class="shell">
+        <header class="site-header">
+  <a href="/" class="brand"><span>WAWOO SKILLS</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="/" data-nav="home">首页</a>
+    <a href="/cn/docs/usage/" data-nav="docs">文档</a>
+    <a href="/cn/docs/skills-catalog/" data-nav="guides">Skill 收录</a>
+    <a href="/changelog/" data-nav="changelog">更新日志</a>
+    <a href="/download/" class="nav-cta" data-nav="download">免费下载</a>
+        <select class="kit-lang-select" data-kit-lang-select data-current="zh" aria-label="选择语言（当前：简体中文）">
+    <option value="zh" data-href="/guides/" selected>简体中文</option>
+    <option value="ja" data-href="/ja/guides/" disabled>日本語</option>
+    <option value="en" data-href="/en/guides/" disabled>English</option>
+    <option value="ko" data-href="/ko/guides/" disabled>한국어</option>
+    </select>
+    <a
+      href="https://github.com/parkwoo/wawoo-agent-skills"
+      class="github-link kit-nav-with-icon"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <svg class="kit-icon kit-icon--sm kit-icon--github" aria-hidden="true"><use href="/icons.svg#icon-github"></use></svg>
+      GitHub
+    </a>
+  </nav>
+</header>
+      </div>
+    </div>
+    <div class="shell shell--page">
+      <header class="page-hero">
+        <div class="trust-row" aria-label="馆藏规模">
+          <span class="trust-tag">
+            <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-layers"></use></svg>
+            <strong data-kit-stat="skills">{{SKILLS}}</strong> 个 Skill
+          </span>
+          <span class="trust-tag" data-kit-stat-inline="agent_roles">{{AGENTS}} 角色</span>
+          <span class="trust-tag" data-kit-stat-inline="workflows">{{WORKFLOWS}} 工作流</span>
+          <span class="trust-tag trust-tag--mit">
+            <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-scale"></use></svg>
+            MIT · 与 CAPABILITIES 同步
+          </span>
+        </div>
+        <h1>Skill 收录 — 全量列表</h1>
+        <p class="page-lead">
+          下面<strong>按主题列出仓库内全部</strong> Skill、Agent 与 Workflow（共 {{SKILLS}}+{{AGENTS}}+{{WORKFLOWS}}
+          项），说明与
+          <a href="https://github.com/parkwoo/wawoo-agent-skills/blob/master/.kilo/CAPABILITIES.md" target="_blank" rel="noopener noreferrer"
+            >CAPABILITIES.md</a
+          >
+          一致。先选工作流，再按需 <code>skill_get</code>。
+        </p>
+        <label class="guides-search">
+          <span class="guides-search-label">快速筛选</span>
+          <input type="search" id="guides-filter" placeholder="例：tdd、/ui-delivery、security…" autocomplete="off" />
+        </label>
+        <div class="hero-actions" style="margin-top: 1.25rem">
+          <a
+            class="btn btn-primary"
+            href="https://github.com/parkwoo/wawoo-agent-skills/blob/master/.kilo/CAPABILITIES.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            >完整目录 CAPABILITIES</a
+          >
+          <a class="btn btn-secondary" href="/cn/docs/usage/">何时用哪条 Workflow</a>
+        </div>
+      </header>
+
+      <!-- GEN:CATALOG_BODY -->
+
+      <section class="guides-prompts" aria-labelledby="guides-prompts-title">
+        <h2 id="guides-prompts-title" class="skills-section-title">复制一句就能试</h2>
+        <p class="skills-section-lead">MCP 接好后粘贴到对话：</p>
+        <div class="guides-prompt-cards">
+          <div class="prompt-copy-card">
+            <p class="prompt-copy-label">安全只读审查</p>
+            <p class="prompt-copy-text" id="guides-prompt-sec">走 /compliance-review，对当前分支做 security-review 与 privacy-review，只读、不要改代码。</p>
+            <button type="button" class="btn btn-secondary btn-sm" data-copy="#guides-prompt-sec">复制</button>
+          </div>
+          <div class="prompt-copy-card">
+            <p class="prompt-copy-label">TDD 小步改接口</p>
+            <p class="prompt-copy-text" id="guides-prompt-tdd">走 /delivery-lite：先写失败单测，再改实现，每步贴 pytest 输出作证据。</p>
+            <button type="button" class="btn btn-secondary btn-sm" data-copy="#guides-prompt-tdd">复制</button>
+          </div>
+          <div class="prompt-copy-card">
+            <p class="prompt-copy-label">UI 可访问性</p>
+            <p class="prompt-copy-text" id="guides-prompt-a11y">走 /ui-delivery，在改组件后跑 accessibility-audit 并列出 WCAG 问题清单。</p>
+            <button type="button" class="btn btn-secondary btn-sm" data-copy="#guides-prompt-a11y">复制</button>
+          </div>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <p>产品</p>
+      <a href="/">首页</a>
+      <a href="/download/">免费下载</a>
+      <a href="https://github.com/parkwoo/wawoo-agent-skills/blob/master/README.zh-CN.md">README</a>
+    </div>
+    <div class="footer-col">
+      <p>资源</p>
+      <a href="/cn/docs/usage/">文档</a>
+      <a href="/cn/docs/skills-catalog/">Skill 收录</a>
+      <a href="/changelog/">更新日志</a>
+    </div>
+    <div class="footer-col">
+      <p>客户端</p>
+      <a href="/cn/docs/usage/#s2-3">Cursor</a>
+      <a href="/cn/docs/usage/#s2-1">Kilo</a>
+      <a href="/cn/docs/usage/#s2-2">OpenCode</a>
+    </div>
+    <div class="footer-col">
+      <p>社区</p>
+      <a
+        href="https://github.com/parkwoo/wawoo-agent-skills"
+        class="kit-footer-with-icon"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg class="kit-icon kit-icon--sm kit-icon--github" aria-hidden="true"><use href="/icons.svg#icon-github"></use></svg>
+        GitHub
+      </a>
+      <a href="https://github.com/parkwoo/wawoo-agent-skills/issues">Issues</a>
+      <a href="https://github.com/parkwoo/wawoo-agent-skills/blob/master/SECURITY.md">Security</a>
+    </div>
+  </div>
+  <p class="footer-meta">
+    wawoo-skills · MIT ·
+    <a href="https://github.com/parkwoo/wawoo-agent-skills/blob/master/README.zh-CN.md">README.zh-CN</a>
+    · <span data-kit-version>v0.8.0</span>
+  </p>
+</footer>
+    </div>
+    <script src="/main.js" defer></script>
+    <script src="/kit-ambience.js" defer></script>
+  </body>
+</html>

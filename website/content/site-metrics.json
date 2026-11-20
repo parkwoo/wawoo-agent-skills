@@ -1,0 +1,21 @@
+{
+  "_note": "官网首页展示用数字 SSOT。skills/agent_roles/workflows 由 scripts/gen_site_capabilities_json.py 与 CAPABILITIES 对齐。",
+  "release_version": "0.8.0",
+  "counts": {
+    "skills": 98,
+    "agent_roles": 21,
+    "workflows": 12,
+    "clients": 8,
+    "workflow_phases": 10
+  },
+  "labels_zh": {
+    "skills": "技能",
+    "agent_roles": "角色",
+    "workflows": "工作流",
+    "clients": "客户端"
+  },
+  "meta_description_zh": "wawoo-skills：开源 AI 编程工作流引擎，{skills} 项内置技能、{workflows} 条研发流，支持 {clients} 大 IDE。强制流程与证据验收，按需加载省 Token。MIT 开源。",
+  "copy_zh": {
+    "workflow_phases_line": "{workflow_phases} 个阶段拼出 {workflows} 条流程；完成标准由工具校验，不是模型自评。"
+  }
+}

@@ -5,7 +5,7 @@ description: Plan, execute, and verify a deployment or release (Docker Compose, 
 
 # Deployment
 
-## Uplift pilot (optional compose static check)
+## Uplift pilot（compose 静的・任意）
 
 [`expectations.md`](expectations.md) · `python3 scripts/skill_uplift_check.py deployment --path <compose-dir>`
 

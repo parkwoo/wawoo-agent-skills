@@ -14,3 +14,7 @@ Before any other tool, call the MCP tool `wawoo-skills_workflow_get` (when the w
 ## Skills to apply
 
 Before changing code, open `how` (understand the subsystem) and apply `principle-foundational-thinking`, `principle-model-the-domain`, `principle-subtract-before-you-add`, `principle-type-system-discipline`.
+
+## OSS boundary
+
+Before adding/editing assets in `/home/git/wawoo-skills` (public OSS), follow `wawoo-oss-boundary`: only generic, product-independent, English assets; private/project-specific ones go to `/home/git/workspace/skills`.

@@ -1,0 +1,248 @@
+{
+  "_note": "Skill 収録ページのヒーロー・ハイライト・速查 SSOT。件数は gen が差し込む。",
+  "zh": {
+    "title": "wawoo-skills 技能与工作流目录（{{skills}} Skills / {{workflows}} Workflows）— AI 编程工程实践库",
+    "description": "开源 Agent Skills 与 MCP 工作流索引：Cursor、Claude Code 等客户端可用的工程交付、审查、安全与 UI 能力。",
+    "hero_title": "技能与工作流目录",
+    "hero_line1": "开源 AI 编程工作流引擎：把零散 Prompt 收成可验收的步骤，而不是一屏说明书。",
+    "hero_line2": "在已连接 MCP 的客户端里，用自然语言触发 <code>workflow_get</code> 选工作流，正文点到哪个再 <code>skill_get</code>。",
+    "hero_example": "例：小改动说「走 /delivery-lite」；完整功能说「走 /feature-delivery」。配置见 <a href=\"/docs/usage/\">使用说明</a> · <a href=\"/download/\">免费下载</a>。",
+    "hero_counts": "与 [GitHub CAPABILITIES](https://github.com/parkwoo/wawoo-agent-skills/blob/master/.kilo/CAPABILITIES.md) 同步 · {{skills}} 个 Skill · {{agents}} 个 Agent · {{workflows}} 条 Workflow",
+    "highlights_title": "精选亮点",
+    "highlights": [
+      {
+        "name": "工作流状态机",
+        "body": "用 `/delivery-lite`、`/feature-delivery` 等固定流程串联 skill，完成标准由工具校验，不是靠模型自评。"
+      },
+      {
+        "name": "context-compression",
+        "body": "纯 Python、无 LLM 的上下文压缩，长会话前先瘦身，省 Token。"
+      },
+      {
+        "name": "data-egress-guard",
+        "body": "外发 API 前确定性脱敏 PII/密钥，守门类 skill，不依赖模型自觉。"
+      },
+      {
+        "name": "code-review + self-review",
+        "body": "合入前双轴评审 + 挑刺视角，证据导向，适合严肃改码场景。"
+      }
+    ],
+    "quickref_title": "常见任务 → 工作流",
+    "quickref": [
+      {
+        "task": "日常小需求 / 单功能",
+        "workflow": "/delivery-lite",
+        "copy": "走 /delivery-lite，用 ACTIVE 计划表跟踪，证据过关再收工"
+      },
+      {
+        "task": "完整功能 / 多阶段",
+        "workflow": "/feature-delivery",
+        "copy": "走 /feature-delivery，从发现到评审全链路"
+      },
+      {
+        "task": "线上故障 / 回归",
+        "workflow": "/incident-response",
+        "copy": "走 /incident-response，先复现和隔离再 permanent fix"
+      },
+      {
+        "task": "改 Web UI / 无障碍",
+        "workflow": "/ui-delivery",
+        "copy": "走 /ui-delivery，设计实现和 a11y 证据一起交"
+      }
+    ],
+    "principle_picks": [
+      "principle-subtract-before-you-add",
+      "principle-fix-root-causes",
+      "principle-prove-it-works",
+      "principle-guard-the-context-window",
+      "principle-make-operations-idempotent"
+    ],
+    "principle_picks_title": "工程原则（优先看这 5 条）",
+    "principle_rest_title": "其余 principle-*（完整表）",
+    "footer_links": " [使用说明](usage.md) · [免费下载](/download/) · [更新日志](/changelog/) · [GitHub](https://github.com/parkwoo/wawoo-agent-skills)",
+    "footer_meta": "生成于 {{generated_at}} · [CAPABILITIES 正本]({{capabilities_url}})"
+  },
+  "en": {
+    "title": "wawoo-skills catalog ({{skills}} skills / {{workflows}} workflows) — AI engineering library",
+    "description": "Open Agent Skills and MCP workflow index for Cursor, Claude Code, and similar clients.",
+    "hero_title": "Skills & workflows",
+    "hero_line1": "Open-source workflow engine: **evidence-backed steps**, not one-shot prompts.",
+    "hero_line2": "Use **workflow_get** to pick a flow, then **skill_get** only what the flow names.",
+    "hero_counts": "Synced with [GitHub CAPABILITIES](https://github.com/parkwoo/wawoo-agent-skills/blob/master/.kilo/CAPABILITIES.md) · {{skills}} skills · {{agents}} agents · {{workflows}} workflows",
+    "highlights_title": "Highlights",
+    "highlights": [
+      {
+        "name": "Workflow state machines",
+        "body": "Chains like `/delivery-lite` and `/feature-delivery`; gates checked by tools, not model self-grade."
+      },
+      {
+        "name": "context-compression",
+        "body": "Deterministic context shrink (Python, no LLM) before long sessions."
+      },
+      {
+        "name": "data-egress-guard",
+        "body": "Mask PII/secrets before external APIs."
+      },
+      {
+        "name": "code-review + self-review",
+        "body": "Pre-merge review with skeptic pass and evidence."
+      }
+    ],
+    "quickref_title": "Task → workflow",
+    "quickref": [
+      {
+        "task": "Small feature",
+        "workflow": "/delivery-lite",
+        "copy": "Run /delivery-lite with ACTIVE plan tracking"
+      },
+      {
+        "task": "Full feature",
+        "workflow": "/feature-delivery",
+        "copy": "Run /feature-delivery end to end"
+      },
+      {
+        "task": "Incident",
+        "workflow": "/incident-response",
+        "copy": "Run /incident-response with reproduce → fix evidence"
+      },
+      {
+        "task": "Web UI",
+        "workflow": "/ui-delivery",
+        "copy": "Run /ui-delivery for UI + a11y evidence"
+      }
+    ],
+    "principle_picks": [
+      "principle-subtract-before-you-add",
+      "principle-fix-root-causes",
+      "principle-prove-it-works",
+      "principle-guard-the-context-window",
+      "principle-make-operations-idempotent"
+    ],
+    "principle_picks_title": "Principles (start with these 5)",
+    "principle_rest_title": "All other principle-* skills",
+    "footer_links": " [Manual](usage.md) · [Download](/en/download/) · [Changelog](/en/changelog/) · [GitHub](https://github.com/parkwoo/wawoo-agent-skills)",
+    "footer_meta": "Built {{generated_at}} · [CAPABILITIES]({{capabilities_url}})"
+  },
+  "ja": {
+    "title": "wawoo-skills スキル・ワークフロー目録（{{skills}} Skills / {{workflows}} Workflows）",
+    "description": "Agent Skills と MCP ワークフローの公開一覧。",
+    "hero_title": "スキル・ワークフロー目録",
+    "hero_line1": "オープンソースのワークフロー引擎：**証拠付きステップ**で Prompt を束ねる。",
+    "hero_line2": "まず **workflow_get** でフローを選び、本文で指された skill だけ **skill_get**。",
+    "hero_counts": "[GitHub CAPABILITIES](https://github.com/parkwoo/wawoo-agent-skills/blob/master/.kilo/CAPABILITIES.md) と同期 · {{skills}} Skills · {{agents}} Agents · {{workflows}} Workflows",
+    "highlights_title": "ハイライト",
+    "highlights": [
+      {
+        "name": "ワークフロー状態機",
+        "body": "`/delivery-lite` など。完了はツール検証。"
+      },
+      {
+        "name": "context-compression",
+        "body": "LLM なしのコンテキスト圧縮。"
+      },
+      {
+        "name": "data-egress-guard",
+        "body": "外部送信前の PII/秘密マスク。"
+      },
+      {
+        "name": "code-review",
+        "body": "合入前レビュー＋ skeptic。"
+      }
+    ],
+    "quickref_title": "タスク → ワークフロー",
+    "quickref": [
+      {
+        "task": "小機能",
+        "workflow": "/delivery-lite",
+        "copy": "/delivery-lite で ACTIVE 計画"
+      },
+      {
+        "task": "本格機能",
+        "workflow": "/feature-delivery",
+        "copy": "/feature-delivery を通す"
+      },
+      {
+        "task": "インシデント",
+        "workflow": "/incident-response",
+        "copy": "/incident-response"
+      },
+      {
+        "task": "Web UI",
+        "workflow": "/ui-delivery",
+        "copy": "/ui-delivery"
+      }
+    ],
+    "principle_picks": [
+      "principle-subtract-before-you-add",
+      "principle-fix-root-causes",
+      "principle-prove-it-works",
+      "principle-guard-the-context-window",
+      "principle-make-operations-idempotent"
+    ],
+    "principle_picks_title": "原則（まず 5 件）",
+    "principle_rest_title": "その他 principle-*",
+    "footer_links": " [利用ガイド](usage.md) · [ダウンロード](/ja/download/) · [CHANGELOG](/ja/changelog/)",
+    "footer_meta": "生成 {{generated_at}} · [CAPABILITIES]({{capabilities_url}})"
+  },
+  "ko": {
+    "title": "wawoo-skills 카탈로그（{{skills}} Skills / {{workflows}} Workflows）",
+    "description": "공개 Agent Skills 및 MCP 워크플로 인덱스.",
+    "hero_title": "스킬·워크플로 목록",
+    "hero_line1": "오픈소스 워크플로 엔진: **증거 기반 단계**.",
+    "hero_line2": "먼저 **workflow_get**, flow가 가리키는 skill만 **skill_get**.",
+    "hero_counts": "[GitHub CAPABILITIES](https://github.com/parkwoo/wawoo-agent-skills/blob/master/.kilo/CAPABILITIES.md) · {{skills}} Skills · {{agents}} Agents · {{workflows}} Workflows",
+    "highlights_title": "하이라이트",
+    "highlights": [
+      {
+        "name": "워크플로",
+        "body": "`/delivery-lite` 등 상태 기계."
+      },
+      {
+        "name": "context-compression",
+        "body": "LLM 없는 컨텍스트 압축."
+      },
+      {
+        "name": "data-egress-guard",
+        "body": "PII/비밀 마스킹."
+      },
+      {
+        "name": "code-review",
+        "body": "합입 전 리뷰."
+      }
+    ],
+    "quickref_title": "작업 → 워크플로",
+    "quickref": [
+      {
+        "task": "소규모",
+        "workflow": "/delivery-lite",
+        "copy": "/delivery-lite"
+      },
+      {
+        "task": "기능 전체",
+        "workflow": "/feature-delivery",
+        "copy": "/feature-delivery"
+      },
+      {
+        "task": "장애",
+        "workflow": "/incident-response",
+        "copy": "/incident-response"
+      },
+      {
+        "task": "Web UI",
+        "workflow": "/ui-delivery",
+        "copy": "/ui-delivery"
+      }
+    ],
+    "principle_picks": [
+      "principle-subtract-before-you-add",
+      "principle-fix-root-causes",
+      "principle-prove-it-works",
+      "principle-guard-the-context-window",
+      "principle-make-operations-idempotent"
+    ],
+    "principle_picks_title": "원칙（우선 5개）",
+    "principle_rest_title": "나머지 principle-*",
+    "footer_links": " [사용 설명](usage.md) · [다운로드](/ko/download/)",
+    "footer_meta": "생성 {{generated_at}} · [CAPABILITIES]({{capabilities_url}})"
+  }
+}

@@ -6,7 +6,7 @@ license: MIT
 
 # Frontend guides hub
 
-**Workflow 入口**: `/ui-delivery` · `/design-review`
+**Workflow 入口**: `/ui-delivery` · `/design-review` · `/writing`（UI 文脈）
 
 平铺カタログを読まない。下の **層** から 1 本ずつ `skill_get` する。
 

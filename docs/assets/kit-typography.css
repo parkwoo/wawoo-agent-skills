@@ -1,0 +1,98 @@
+/**
+ * 全站排版 = 文档页抄录（正本: docs/stylesheets/material-kit.css · .md-typeset）
+ * 各页在 styles.css / material-kit 之后用 <link> 引入本文件。
+ */
+:root {
+  --kit-doc-font: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --kit-doc-size: 16px;
+  --kit-doc-lh: 1.65;
+  --kit-doc-prose: 1rem;
+  --kit-doc-ui: 0.9375rem;
+  --kit-doc-code: 0.875rem;
+}
+
+html {
+  font-size: var(--kit-doc-size) !important;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* 与 body.kit-docs 相同 */
+body {
+  font-family: var(--kit-doc-font);
+  font-size: var(--kit-doc-size);
+  line-height: var(--kit-doc-lh);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 与 .md-typeset 正文相同（含 styles.css 里单独写小字的区块） */
+body p,
+body li,
+body dd,
+body .md-typeset,
+body .md-typeset p,
+body .md-typeset li,
+body .card p,
+body .section-lead,
+body .section-lead-center,
+body .skills-section-lead,
+body .skill-chip span,
+body .skills-sources-grid span,
+body .skills-sources-grid strong,
+body .hero-lead,
+body .hero-lead--secondary,
+body .hero-kit-duo,
+body .section-footnote,
+body .faq p,
+body .faq summary,
+body .changelog-body p,
+body .changelog-body li,
+body .platform-card p,
+body .skills-catalog-aside .steps-list {
+  font-family: var(--kit-doc-font);
+  font-size: var(--kit-doc-prose);
+  line-height: var(--kit-doc-lh);
+}
+
+/* 与 .md-typeset 标题相同 */
+body .md-typeset h2,
+body .section h2,
+body main h2 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+body .md-typeset h3,
+body .section h3,
+body main h3,
+body .card h3 {
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+/* 顶栏导航不参与「文档字号」 */
+.kit-topbar,
+.kit-topbar * {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* 辅助一行（比正文小半档，全站统一） */
+.hero-eyebrow,
+.hero-platform,
+.stats-subline,
+.pill,
+.footer-meta,
+.kit-doc-toc .kit-toc-heading,
+:not(pre) > code {
+  font-size: var(--kit-doc-ui);
+  line-height: 1.5;
+}
+
+pre,
+pre code {
+  font-size: var(--kit-doc-code);
+  line-height: 1.55;
+}

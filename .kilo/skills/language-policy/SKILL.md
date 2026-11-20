@@ -23,17 +23,6 @@ Use this skill when choosing the language for code, documents, or responses in a
 - Never mix: do not write code comments in Japanese; do not write engineering records in English.
 - Attribution: when translating a third-party asset, keep its original license/attribution (see `.kilo/skills/ATTRIBUTION.md`).
 
-## Default language and how to change
-
-The kit default is **code = English**, **engineering records and responses = Japanese**, **public docs = English primary + Japanese secondary**. This is documented for users in `docs/USAGE.md` §9.
-
-`project working language` is a per-project setting, not a fixed rule. To change it:
-
-1. Update `AGENTS.md` §1 (the authoritative contract).
-2. Update the two rows above that read "(wawoo-skills: Japanese)".
-3. Regenerate `ROUTER.md` if it restates the rule: `python3 scripts/gen_router.py`.
-4. Keep `docs/USAGE.md` §9 in sync.
-
 ## Authority
 
 The contract is authoritative: **`AGENTS.md` §1**. `ROUTER.md` restates it for routing.

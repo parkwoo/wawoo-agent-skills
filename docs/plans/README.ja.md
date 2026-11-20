@@ -7,7 +7,7 @@
 | **`ACTIVE.example.md`** → 複製して **`ACTIVE.md`** | **L1** 進行中タスク（状態機械）。実体 `ACTIVE.md` は**非公開**（各プロジェクトで作成） |
 | **`BACKLOG.example.md`** | **L2** バックログ表の例（issue tracker のローカル写し） |
 | **`RETRO.example.md`** | **L3** 振り返り・PDCA 記録の例 |
-| **`CONTENT.example.md`** | コンテンツ状態機械（`plan_content.py`） |
+| **`CONTENT.example.md`** | **L1 知識** 章・節の進捗（`/content-delivery-lite`） |
 | `<feature>.md` | 必要なときだけ `plan-md` による詳細計画（ACTIVE の id とリンク） |
 
 チャット内の「1,2,3 やった」は**証拠にならない**。`ACTIVE.md` の `status` と `証拠` 列を更新する。

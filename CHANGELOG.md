@@ -13,23 +13,19 @@
 
 ## [Unreleased]
 
-## [0.8.0] - 2026-11-18
+## [1.0.0] - 2026-11-20
 
 ### 変更
-- **ドキュメント全面改稿（4 言語）**: README / USAGE を Paseo 形式に再構成（フック → なぜ → 仕組み → 得られるもの → クライアント → クイックスタート → 能力 → 用語 → ライセンス）。ロゴ・言語バー・目次/アンカーを整備。
-- **能力一覧を分離**: `docs/CAPABILITIES.zh-CN.md` を追加。README は「数量＋分類＋例」に圧縮。
-- **対応クライアント表**: Claude Code を追加。Paseo provider 列と支持レベル（支持 / 部分支持）を明記。
-- **用語統一**: 「AI coding agent」に統一（assistant を廃止）。日/韓も「エージェント / 에이전트」に統一。
-- **新規 skill**: `openrouter-gen`（OpenRouter 画像生成、`OPENROUTER_API_KEY`）。
-- **公開境界**: 公開リポジトリをプログラミング専用に。`.public-programming-only` マーカーと `scripts/check_public_boundary.py`（CI 組込）を追加。
-- **内部移管 / 削除**: 写作・营销・文案・SEO・校正 系の skill/command と `COPY-WRITING-GUIDE` を内部源へ。旧文書（PRODUCT-OVERVIEW / CLIENT-INTEGRATION-GUIDE / MEMORY-CLIENT-GUIDE / GUIDES / INTEGRATIONS / INTENT-ROUTING / VERSIONING / SEO-KEYWORDS / GITHUB-ABOUT / SKILL-UPLIFT-PILOT）を削除（一部は `internal/docs/archive/` へ）。
-- **コントリビューション**: `CONTRIBUTING.md`（英語）と GitHub issue / PR テンプレートを追加（Paseo の規定を参考、英語のみ）。
-- **翻訳**: 英 / 日 / 韓の README・USAGE を同期し、用語と表現を校正。
+- **公開 GitHub 倉**を `parkwoo/wawoo-agent-skills` に rename（URL・収録リンク・publish/CI を追随）。
+- **公式サイト canonical** を `skills.wawoo.jp` に統一；`website/CNAME` 追加。
+- **サイトビルド SSOT**: `scripts/build_kit_site.sh`（`preview.sh` と `docs.yml` 共用）；`scripts/oss_root.py` / `apply_naming_ssot.py`。
+- ドキュメント URL: `/cn/docs/` レイアウト・短链（`kit_short_url_redirects.sh`）；`download.md` / `guides.md` を nav に追加。
 
-### 修正
-- README / USAGE の古い記述（107 / 22 / 16）を **98 / 21 / 12** に統一。
-- 日 / 韓の中国語混入、死リンクを修正。日文の計数表現（98のスキル → 98 スキル）を修正。
+## [0.8.0] - 2026-11-18
 
+### 変更（公開 OSS `parkwoo/wawoo-agent-skills` v0.8.0 と同期）
+- **ドキュメント全面改稿（4 言語・公開面）**、能力一覧分離、`openrouter-gen`、公開境界 `check_public_boundary`、CONTRIBUTING / issue テンプレ等（詳細は上流 `CHANGELOG`）。
+- **運用正本**: `sync_readme_version.py`・`release_preflight.sh` を追加し、`validate_assets` で README と `VERSION` の一致を検証。
 
 ## [0.7.2] - 2026-11-18
 

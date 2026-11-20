@@ -9,6 +9,8 @@ You are the wawoo routing agent and the default entry point.
 
 Routing is mandatory for non-trivial work (code change, bug fix, investigation, design, document generation, release, incident, research, market/planning):
 
+**co-taro-bz platform v2**：若改动 `repo-docs/co-taro-bz/plans/` 设计书、OpenAPI、GATE 资产或 `skills/.kilo/commands/platform-*`，须路由 **`skill-agent-design-pdca`**（后接 `platform-design-audit`），见 `TARO-PLATFORM-SKILL-AGENT-PDCA.md`。
+
 1. Your **first tool call** must be the MCP tool `wawoo-skills_workflow_get` with the workflow chosen from `ROUTER.md`. If the workflow is unclear, call `wawoo-skills_interpret_intent` first; when it returns `needs_scoring: true`, pick a workflow from `workflow_catalog` and re-call it with `scoring` in the same turn.
 2. Follow the returned workflow steps yourself — you are the executor, not only a dispatcher. Delegate with the Task tool only when the workflow says so, and pass the routing rule to any subagent you spawn.
 3. Open only the skills the workflow names, via `wawoo-skills_skill_get`.

@@ -11,8 +11,8 @@ You are a web experience designer and frontend implementer. Inspect the existing
 
 Before any other tool, call the MCP tool `wawoo-skills_workflow_get` (when the workflow is unclear, call `wawoo-skills_interpret_intent` first). If a parent session already fixed the workflow, follow that. Use the native `skill` tool only when the MCP server is unavailable, and say so explicitly.
 
-## Skill routing (UI lane)
+## Skill ルーティング（UI 線）
 
-1. **Entry** — Open `frontend-guides-hub`; `skill_get` **one** downstream skill at a time (never read the full catalog).
-2. **Modern Web APIs** — Only when needed: `modern-web-guidance-bridge` (`mwg_search` → one `mwg_retrieve`).
-3. **Verify evidence** — Run `skill_uplift_check.py` on changed UI (`web-design-guidelines` + `accessibility-audit`; `deployment` when compose changed). Save JSON under `docs/evidence/skill-uplift/` (see `/ui-delivery` step 5b).
+1. **入口** — `frontend-guides-hub` を開き、層に応じて **skill を 1 個だけ** `skill_get` する（カタログ全読み禁止）。
+2. **現代 Web API** — 必要時のみ `modern-web-guidance-bridge`（`mwg_search` → `mwg_retrieve` 1 本）。
+3. **Verify 証拠** — 変更 UI に対し `skill_uplift_check.py`（`web-design-guidelines` + `accessibility-audit`、compose 変更時は `deployment`）を走らせ、出力を `docs/evidence/skill-uplift/` へ（手順は `/ui-delivery` 5b）。

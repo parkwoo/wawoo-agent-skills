@@ -1,0 +1,105 @@
+{#- 文档页：与 kit 首页同顶栏、同海底画布、同页脚与版心 -#}
+{% extends "base.html" %}
+
+{% block site_meta %}
+  {{ super() }}
+  {# 値は website/kit-typography.css と同期 #}
+  <style id="kit-docs-first-paint">
+    :root {
+      --kit-doc-font: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+      --kit-doc-size: 16px;
+      --kit-doc-lh: 1.65;
+      --kit-doc-prose: 1rem;
+      --kit-doc-bg: #070a09;
+      --kit-doc-surface: #101615;
+    }
+    html {
+      background-color: var(--kit-doc-surface);
+      color-scheme: dark;
+      font-size: var(--kit-doc-size);
+    }
+    body {
+      font-family: var(--kit-doc-font);
+      font-size: var(--kit-doc-size);
+      line-height: var(--kit-doc-lh);
+      background-color: var(--kit-doc-bg);
+    }
+    .md-typeset,
+    .md-typeset p,
+    .md-typeset li {
+      font-family: var(--kit-doc-font);
+      font-size: var(--kit-doc-prose) !important;
+      line-height: var(--kit-doc-lh) !important;
+    }
+  </style>
+{% endblock %}
+
+{% block styles %}
+  {{ super() }}
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <style id="kit-ambience-critical">
+    .kit-ambience-canvas {
+      position: fixed !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      margin: 0 !important;
+      z-index: 0 !important;
+      pointer-events: none !important;
+    }
+    body.kit-docs[data-kit-ambience] .kit-topbar,
+    body.kit-docs[data-kit-ambience] .md-container {
+      position: relative;
+      z-index: 2;
+    }
+  </style>
+{% endblock %}
+
+{% block extrahead %}
+  {{ super() }}
+  {# material-kit.css の後に読み込み、顶栏・字号を Material に負けさせない #}
+  <link rel="stylesheet" href="{{ 'assets/kit-header.css' | url }}" />
+  <link rel="stylesheet" href="{{ 'assets/kit-typography.css' | url }}" />
+{% endblock %}
+
+{% block site_nav %}
+  {% if page.meta and page.meta.hide and "navigation" in page.meta.hide %}
+    {% if page.toc %}
+      <div class="md-sidebar md-sidebar--primary kit-sidebar-toc" data-md-component="sidebar" data-md-type="toc">
+        <div class="md-sidebar__scrollwrap">
+          <div class="md-sidebar__inner">
+            {% include "partials/toc.html" %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {% else %}
+    {{ super() }}
+  {% endif %}
+{% endblock %}
+
+{% block header %}
+  {# Material bundle.js 需要 [data-md-component=header]，不能完全删掉默认 header #}
+  <div class="kit-docs-material-header" aria-hidden="true">
+    {% include "partials/header.html" %}
+  </div>
+  <div class="kit-topbar" data-md-component="kit-header">
+    <div class="shell">
+      {% include "partials/kit-site-header.html" %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block footer %}
+  {% include "partials/kit-site-footer.html" %}
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    document.body.classList.add("inner-page", "kit-docs", "kit-doc-toc-left");
+    document.body.setAttribute("data-kit-ambience", "");
+    document.body.setAttribute("data-kit-nav", "docs");
+  </script>
+  {{ super() }}
+  <script src="{{ 'assets/kit-ambience.js' | url }}" defer></script>
+{% endblock %}

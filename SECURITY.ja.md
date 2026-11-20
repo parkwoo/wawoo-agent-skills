@@ -10,7 +10,7 @@
 
 疑わしい脆弱性は、リポジトリの GitHub Security Advisories（「Report a vulnerability」）から**非公開**で報告してください。
 
-  https://github.com/parkwoo/wawoo-skills/security/advisories/new
+  https://github.com/parkwoo/wawoo-agent-skills/security/advisories/new
 
 advisory が使えない場合は、非公開チャネルを求める最小限の issue を立ててください。公開 issue に**エクスプロイトの詳細・秘密・個人情報を含めない**でください。
 

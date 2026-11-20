@@ -12,7 +12,7 @@ the next tagged release. Older tags are not maintained.
 Please report suspected vulnerabilities **privately** via GitHub Security Advisories
 ("Report a vulnerability") on the repository:
 
-  https://github.com/parkwoo/wawoo-skills/security/advisories/new
+  https://github.com/parkwoo/wawoo-agent-skills/security/advisories/new
 
 If you cannot use advisories, open a minimal issue asking for a private channel — **do not**
 include exploit details, secrets, or personal data in public issues.

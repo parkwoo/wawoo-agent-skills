@@ -10,6 +10,11 @@ on:
       - 'AGENTS*.md'
       - 'SECURITY*.md'
       - 'docs/**'
+      - 'CHANGELOG.md'
+      - 'website/**'
+      - 'scripts/build_kit_site.sh'
+      - 'scripts/docs_*.sh'
+      - 'scripts/kit_*.sh'
       - 'mcp/README*.md'
       - '.github/workflows/docs.yml'
   workflow_dispatch:
@@ -32,7 +37,8 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -r requirements-docs.txt
-      - run: mkdocs build
+      - name: Build kit site (MkDocs + locale + marketing)
+        run: bash scripts/build_kit_site.sh site
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

@@ -1,189 +1,211 @@
-<p align="center">
-  <img src="docs/assets/wawoo-skills-logo.png" width="128" alt="wawoo-skills ロゴ" />
-</p>
+# wawoo-skills
 
-<h1 align="center">wawoo-skills</h1>
+[English](README.md) · [日本語](README.ja.md) · **ガイド:** [English](docs/GUIDES.md) · [日本語](docs/GUIDES.ja.md) · [简体中文](docs/GUIDES.zh-CN.md) · [한국어](docs/GUIDES.ko.md)
 
-<p align="center">
-  <strong>AIコーディングエージェントは、必要なスキルを使わないのはなぜか？</strong>
-</p>
+**エージェントは能力を持っている。ただ、使っていないだけだ。**
 
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ko.md">한국어</a>
-</p>
+> **Invocation by design（呼び出しを設計する）** — AI コーディングエージェント向けの**再利用可能な skills／agents／workflows／MCP サーバ**の汎用キット。同じ依頼は、毎回同じ手順で。
 
-<p align="center">
-  <a href="docs/USAGE.ja.md">使用ガイド</a> ·
-  <a href="https://github.com/parkwoo/wawoo-skills">GitHub</a>
-</p>
+**はじめて読むなら：** [製品概要（4 言語）](docs/PRODUCT-OVERVIEW.ja.md) — 痛点・FAQ・skill 112 の地図。全件は `.kilo/CAPABILITIES.md`。
 
-**スキルもルールも用意したのに、AIコーディングエージェントはなぜ従わないのか？**
+## AI エージェントの仕事を「毎回同じ品質」に
 
-スキル、ロール、コーディング規約をすべて揃えたにもかかわらず、エージェントが独自のやり方で進め、スキルを無視し、手順を守らず、いつの間にかレビューやテストを飛ばしてしまう——そんな経験はありませんか？同じタスクでも、今日と明日で成果物の品質が異なる。規約を細かくすればするほど、エージェントがそれを読んでいないことに気づかされます。
+wawoo-skills は **AI コーディングエージェント**（Cursor・Kilo・OpenCode/Paseo）向けのオープンソースキットです。**skill 112**・**agent 23**・**workflow 20** と **MCP**（Model Context Protocol）サーバで、依頼を workflow に乗せ、レビュー・テスト・証拠ゲートを飛ばしにくくします。
 
-問題はエージェントの能力が低いことではありません。**「スキルを使わせる」仕組みがないこと**です。
+火曜と木曜の同じバグ修正が、**別ルートの即興**にならないようにするためのキットです。
 
-wawoo-skillsが提供するのは、ただ一つ: **「いつ、どのスキルを使うか」を事前に決定する仕組み**です。エージェントに固定のレールを敷きます——最初に何を読むべきか、どのワークフローを実行すべきか、スキップできないゲートはどれか。これにより、同じ依頼は常に同じ手順をたどり、確認可能な証拠が残ります。
+### よくある質問
 
-プロダクトや技術スタックに依存しません。導入後すぐに利用可能です: **98 スキル・21 ロール・12 ワークフロー**に加え、ローカルサービス（MCP）を提供します。Cursor、Kilo、OpenCode、Codex、Claude Code、Paseoで動作します。使い方は[**使用ガイド**](docs/USAGE.ja.md)をご覧ください。
+### すでに skill があるのに、なぜ wawoo-skills？
+置いてある skill を**開かない**エージェントが多いからです。`interpret_intent` → workflow → フェーズごとの `skill_get` で**呼び出しを設計**します。
 
-## これは何か
+### 100 skill を一度に渡さないのはどうやる？
+**段階的開示** — カタログ → 候補 → フェーズごとに 1 SKILL ずつ開きます。
 
-一言で言えば: **エージェントの「思考プロセス」は変えません。持っているスキルを、毎回確実に使わせるだけです。**
+### MCP サーバとは？
+**Python 3 標準ライブラリのみ**の小さなサーバで、`workflow_get`・`skill_get`・memory・安全系を IDE から呼びます。追加 pip は不要です。
 
-例えるなら、エージェントへの**クリニカルパス**——必要な検査と記録は必ず残し、具体的な実行方法はエージェントの裁量に任せます。
+### 対応クライアントは？
+**Kilo・Cursor・OpenCode**（Paseo は OpenCode 経由）。手順は [CLIENT-INTEGRATION-GUIDE.ja.md](docs/CLIENT-INTEGRATION-GUIDE.ja.md)。
 
-## なぜ必要か
+## なぜこのキットか
 
-その違いは、この一枚の表で明らかです:
+エージェントに skill や役割（agent）定義を置いても、実際の対話では**散文だけで進め、手順を読まない・選ばない・飛ばす**ことがよく起きます。結果として、同じタスクでも品質がぶれ、レビュー・法務・テストなどの**ゲートが形骸化**し、チームが用意した知識が使われません。
 
-| | wawoo-skills 無し | wawoo-skills 有り |
-|---|---|---|
-| 同じバグ | 毎回異なるアプローチ | 常に同じ流れ: 再現 → 修正 → 証拠 |
-| レビュー / 法務 / テスト | いつも間にかスキップされる | 読み取り専用ゲート、成果物必須 |
-| コンテキスト | 全スキルを一度に詰め込む | まず目録、必要なものだけ取得 |
-| チームの知見 | Wikiに活用されていない | エージェントが実際に活用する |
+wawoo-skills は、この「**能力はあるのに呼ばれない**」問題に対し、次のように**呼び出しを設計**します。
 
-## どう実現しているか
-
-一言で言えば: **ルーターがワークフローを選択し、ツールゲートがツールを固定し、ワークフローがフェーズを編成します。** 具体的には以下の5つの要素で構成されます:
-
-1.  **ルーターがワークフローを選択**: `interpret_intent`が「明示的な`/name` → ローカル語彙 → 学習済みトリガー → モデル採点」の順でワークフローを選択します（L0 → L1 → L1 → L2）。
-2.  **ツールゲートがツールを固定する**: ワークフローが選択されるとセッションゲートが有効になり、ワークフローの`mcp_tools_allow`に従って**MCPツール**を制限します。監査系のワークフローでは読み取りツールのみが許可され、実装フェーズは存在しません（`implement_allowed = false`）。
-3.  **ワークフローがフェーズを編成する**: 10個の再利用可能なフェーズが12本のワークフローを構成し、各フェーズには`exit_criteria`が設定されています。`evidence_check`が実際に検証を行い、モデルの自己採点ではありません。
-4.  **スキルは必要時に取得**: まず目録を提示し、必要に応じて1つだけスキルを取得します。これによりトークンを節約し、「見えないから使わない」という状況を防ぎます。
-5.  **経験を記憶する**: 決定事項や課題を保存し、次回自動的に読み込みます。毎回最初から説明する必要はありません。
-
-### 実行例（「バグを修正する」例）
-
-手順だけでは抽象的かもしれません。一度なぞってみましょう:
-
-1.  「このバグを修正して」と指示すると、自動的に「自己修正」ワークフローが選択されます。
-2.  そのワークフローは、「バグ診断」と「テストエンジニアリング」のスキルを先に要求します。
-3.  エージェントはその2つのスキルのみを取得します（コンテキストを埋めすぎない）。
-4.  再現手順やログがなければ、「修正済み」とは見なされません。
-5.  結論はメモリに保存され、次回自動的に読み込まれます。
-
-つまり: **エージェントの能力は変わりません。変わるのは、その能力が毎回確実に使われることです。**
-
-### 計画は変わるのか？
-
-ここまで読んで、計画が固定されすぎて一本道しかないのではないかと心配されるかもしれません。**いいえ、これが動的調整です。**
-
-*   **基本構造は固定**: どのフェーズを経由するか、各フェーズで何をもって完了とするか。この層はスキップできません。
-*   **フェーズ内は動的調整**: 不要なステップはスキップし、順序が違えば並べ替え、優先度が変われば調整し、方向が違えば範囲を変更したり中止したり、互いに独立したサブタスクは同時に進めることができます。
-
-**エージェント自身が調整します。** 途中で「このステップは不要」「順序が違う」「方向が違う」と判断すれば、その場で調整します——スキップする、並べ替える、範囲を変更する。別の方向に進めたい場合は、一言伝えるだけで済みます。
-
-> 一言で言えば: **基本構造が秩序を保ち、動的調整が硬直を防ぐ。**
-
-## 何が得られるか
-
-仕組みに加えて、**12本の固定ワークフロー**と、いくつかの追加機能が手に入ります。
-
-### 12本のワークフロー
-
-*   **デリバリー**: `/delivery-lite`（小規模な変更、デフォルト）、`/feature-delivery`（機能一式）
-*   **デザイン**: `/ui-delivery`（UI変更）、`/design-review`（読み取り専用のUIレビュー）
-*   **レビュー**: `/self-review`（自己修正）、`/compliance-review`（法務 / プライバシー / セキュリティ）、`/release-review`（リリース一式）
-*   **調査**: `/research`（調査 → 判断）
-*   **計画**: `/sprint-plan`（スプリント）、`/status-report`（進捗）
-*   **運用**: `/incident-response`（障害: 証拠 → 緩和 → 振り返り）
-*   **プロセス**: `/self-improve`（振り返り → PDCA）
-
-どのワークフローにも**フェーズ、ゲート、完了条件**が設定されています。**レビュー系は読み取り専用**です。個別の使い方は[使用ガイド §1.2](docs/USAGE.ja.md#s1-2)をご覧ください。
-
-### その他の能力
-
-上記の仕組みに加え、以下の機能も利用できます:
-
-| 能力 | 一言で |
+| 層 | 役割 |
 |---|---|
-| **トークン節約** | 何百ものスキルを一度に渡すのではなく、目録を見せて必要な分だけ取得します。長い会話はローカルで要約。コンテキストが減り、コストも削減されます。 |
-| **セキュリティとコンプライアンス** | 読み取り専用のセキュリティ / プライバシー / 法務チェックを内蔵。外部に送信する前に、機微情報、秘密、内部アドレスを自動で伏せることができます。 |
-| **性能とチューニング** | まず速度とリソースを測定してから最適化。「体感で速くなった」は認めません。 |
-| **サイズ制限** | 各スキルのエントリポイント`SKILL.md`は**2〜4KB**以内（超えると警告、詳細は`references/`へ）。説明は1行、約160文字。コンテキストが小さく、読み込みが速く、コストも低い。 |
+| **契約**（`AGENTS.md`・Cursor rules） | 何を先に読み、何を勝手に省略しないかを固定 |
+| **ワークフロー**（`.kilo/commands`） | プロセスの入口。どの skill をどの順で使うかを明示 |
+| **カタログ／MCP** | 全 skill を一度に渡さず、候補選定→必要分だけ取得（段階的開示） |
+| **意図ルーティング** | `interpret_intent` で workflow 選定・学習 trigger・ツール権限ゲート（[docs/INTENT-ROUTING.ja.md](docs/INTENT-ROUTING.ja.md)） |
+| **ゲート** | 承認・証拠・失敗観察。推測だけで「完了」にしない |
 
-## 対応クライアント
+エージェントの創造性を奪うのではなく、**再現可能な手順とツール呼び出し**のレールを敷くためのキットです。
 
-| ツール | 正式名 | Paseo provider | サポート | サイト / 備考 |
-|---|---|---|---|---|
-| Claude Code | Claude Code（Anthropic CLI） | `claude` | **対応** | MCP + `CLAUDE.md` · https://claude.com/claude-code |
-| Codex | OpenAI Codex（CLI / VS Code 拡張） | `codex` | **対応** | MCP + `AGENTS.md` · https://developers.openai.com/codex |
-| Cursor | Cursor | `cursor` | **部分対応** | スラッシュコマンド / エージェント切替なし · https://cursor.com |
-| Kilo CLI | Kilo (CLI) | `kilo` | **対応** | 事前にKiloへログイン。設定は`~/.config/kilo` · https://kilo.ai |
-| Kilo Code | Kilo Code（VS Code 拡張） | `kilo` | **対応** | VS Code拡張。事前にKiloへログイン · https://kilocode.ai |
-| OpenCode | OpenCode | `opencode` | **対応** | 内蔵。同じ`opencode.json`（当方のagentsがmodesとして表示） · https://opencode.ai |
-| Paseo | Paseo（マルチエージェントIDE） | — | **対応** | OpenCode内蔵 · https://github.com/getpaseo/paseo |
-| Pi | Pi | `pi` | **部分対応** | サブエージェント拡張があれば並列、なければ順次（どちらも対応） |
+## 主な機能
 
-**サポート水準**: **対応** = MCP + スキル / ワークフローが完全に動作。**部分対応** = 接続可能だが制約あり（備考参照）。
+- **意図ルーティング** — `interpret_intent` が workflow を選ぶ（`/name` 明示 → **学習** SQLite → **上流** LLM スコア。静的なキーワード表は無し）。workflow ごとに使える **MCP ツールを限定**する。
+- **フェーズとゲート** — 各 workflow は **フェーズ**（`goal`・`agent`・`skills`・`mcp_tools_allow`・`exit_criteria`）に分解。**監査系は読み取り専用**（`implement` を持たない）。
+- **動的ステア** — `steer_task` が実行中プランを修正（add / reorder / reprioritize / scope_change / abort）。ステップ境界で適用。
+- **委譲** — `delegate_subtask` で並列の読み取り専用サブタスクを切り出し、**モデル階層**（`fast`／`reasoning`）を指定できる。
+- **ゲート** — 承認（Gₐ）・証拠（Gₑ）・失敗観察（Gₒ）。推測だけで「完了」にしない。
+- **段階的開示** — カタログ → 候補 → 必要な skill だけ開く（コンテキスト予算）。
+- **記憶** — `memory_recall` / `memory_save`（秘密は拒否）。**クライアント設定**（`WAWOO_MEMORY_READONLY`・Kilo/Cursor/OpenCode）: [`docs/USAGE.ja.md` §5.1](docs/USAGE.ja.md#51-記憶memory想起保存とクライアント別の設定)。
+- **文案・市場・長文** — `/writing`・`/market-plan` の読み順: [`docs/COPY-MARKETING-GUIDE.ja.md`](docs/COPY-MARKETING-GUIDE.ja.md)。
 
-## 10分で始める
+## 何が変わるか（2 分）
 
-1.  AIコーディングエージェントに一言送り、返ってきた「どのワークフローか」を読みます。
-2.  `/delivery-lite`を一度実行し、`docs/plans/ACTIVE.md`が1行進むのを確認（Kiloはスラッシュコマンド、CursorはMCP経由）。
-3.  `python3 scripts/validate_assets.py`を実行し、`OK`が出れば導入成功。
+**ビフォー（ルーティング無し）**：「このバグ直して」と言う。エージェントは場当たりで進め、ゲートを飛ばし、次の同じ依頼では別の道を行く。
 
-インストールスクリプト、各クライアントの接続（Paseo / Codex含む）、トラブルシューティングは[**使用ガイド**](docs/USAGE.ja.md)をご覧ください。
+**アフター（ルーティング有り）**：依頼は `/self-review` に入る。エージェントは `test-engineering` を開き、再現を伴って証拠ゲート（Gₑ）に到達し、次の同じ依頼は同じ手順をたどる。
 
-## 能力一覧
+## 向く人・向かない人
 
-**98 スキル・21 ロール・12 ワークフロー** — **プログラミング中心**で、記述、レビュー、テスト、リリースまでの開発フローをカバーします。
-
-| 種別 | 数 | グループ |
-|---|---|---|
-| スキル | 98 | デリバリーと計画 13 · デバッグとテスト 5 · レビューと品質 6 · アーキテクチャと設計 7 · セキュリティとコンプラ 7 · デザインとフロント 14 · 調査とライティング 7 · 運用と性能 4 · 記憶とコンテキスト 6 · エンジニアリング原則 24 · プロセスと編成 5 |
-| ロール | 21 | 入口 / デリバリー / レビュー / アーキテクチャ / デザイン / ドキュメント / 運用 |
-| ワークフロー | 12 | デリバリー / デザイン / レビュー / 調査 / 計画 / 運用 / プロセス |
-
-スキルの例: `diagnosing-bugs`、`security-review`、`memory`、`principle-fix-root-causes`。
-
-完全な一覧（大分類 / 小分類 / 名前 / 説明）は`.kilo/CAPABILITIES.md`（機械可読）にあります。
-
-## 用語
-
-| 用語 | 一言で |
+| こんな人に向く | こんな人には向かない |
 |---|---|
-| AIコーディングエージェント（「エージェント」） | 日常的に使用するツール（Cursor / Kilo / OpenCode / Codex / Paseo）。本キットはこれらに働きかけます。 |
-| スキル skills | 再利用可能な手順書（`SKILL.md`）。例:「バグの診断方法」。 |
-| ロール | キット内で定義される「視点」。例: レビュアー / 実装者 / プロダクトオーナー。ワークフローが割り当てます。 |
-| ワークフロー workflows | フェーズと完了条件を持つ手順。例: `/delivery-lite`。 |
-| MCP | Model Context Protocol。外部ツールを接続するための規格。本キットのMCPはPython標準ライブラリのみを使用します。 |
-| ルーター（router） | ワークフローを自動で選択する機能。 |
-| ゲート | 承認、証拠、失敗観察 — スキップできないチェックポイント。 |
+| Kilo／Cursor を使い、skills＋agents は用意したのに**呼ばれない** | 単発のコード生成だけが欲しい |
+| 同じ依頼を毎回同じ手順で進めたい | プロセスより自由な即興を重んじる |
+| レビュー・法務・テストの**ゲート**を実際に回したい | ゲートや証拠が不要 |
+| チームの知識を wiki に眠らせず**エージェントに使わせたい** | — |
 
-## ライセンスと出典
+## 対応環境
 
-**本リポジトリで作成された部分**（skills / agents / commands / MCP）は**MITライセンス**（`LICENSE`、Copyright (c) 2026 wawoo.jp）です。**第三者作品**も同梱しています — **ファイル単位の出典は`.kilo/skills/ATTRIBUTION.md`、ライセンス原文は`LICENSES/`および各スキルディレクトリ内の`LICENSE` / `LICENSE.txt` / `NOTICE.txt`**にあります。
+- **Kilo CLI / Kilo Code**：`.kilo/` の探索、slash ワークフロー（`/feature-delivery` 等）、`kilo.json` の MCP。
+- **Cursor**：`AGENTS.md`・`.cursor/rules`・MCP、および `@.kilo/commands`／`@.kilo/skills` の参照（slash／ネイティブ agent 切替は非対応。手順は同等に適用）。
+- **OpenCode**：`AGENTS.md`＋MCP（`opencode.json`）。slash／skill のネイティブ実行は無し（`interpret_intent` → `workflow_get` → `skill_get`）。
 
-| 出典 | 内容 | ライセンス | リンク（URL またはリポジトリ内パス） |
-|---|---|---|---|
-| Anthropic skills | `frontend-design` | Apache-2.0 | https://github.com/anthropics/skills · リポジトリ内 `.kilo/skills/frontend-design/LICENSE.txt` |
-| garrytan/gstack | `design-review` | Apache-2.0 | https://github.com/garrytan/gstack · リポジトリ内 `.kilo/skills/design-review/LICENSE.txt` |
-| Google Labs（`google-labs-code/skills`） | `design-md`（Stitch DESIGN.md 形式） | Apache-2.0 | https://github.com/google-labs-code/skills · リポジトリ内 `.kilo/skills/design-md/LICENSE.txt` |
-| GoogleChrome/modern-web-guidance | `modern-web-guidance-bridge`（**ガイドは複製せず上流を参照**） | 上流に同じ | https://github.com/GoogleChrome/modern-web-guidance-src |
-| Kilo built-in | 一部スキル（16） | MIT（`SKILL.md` frontmatter） | https://kilo.ai · 各 `SKILL.md` |
-| Kilo Marketplace（Awesome Claude Skills の分岐） | agents: `frontend-specialist`、`docs-specialist`、`data`、`code-reviewer`、`code-skeptic`、`code-simplifier` | **Apache-2.0** | https://kilo.ai · リポジトリ内 `LICENSES/kilo-marketplace-*.txt` |
-| Leonxlnx/taste-skill | `imagegen-frontend-mobile` | 上流に同じ | https://github.com/Leonxlnx/taste-skill · リポジトリ内 `.kilo/skills/imagegen-frontend-mobile/LICENSE` |
-| OpenDesign と派生 | デザイン系: `design-brief`、`design-md`、`design-review`、`reference-design-contract`、`web-experience-design` など | **Apache-2.0** | https://open-design.ai · https://github.com/nexu-io/open-design · リポジポジトリ内 `LICENSES/open-design-Apache-2.0.txt` |
-| pstack（Lauren Tan / Poteto） | `principle-*` と検証 / 思考系（37） | MIT | https://github.com/backnotprop/pstack · リポジトリ内 `LICENSES/pstack-MIT.txt` |
-| Skills For Real Engineers（Matt Pocock） | エンジニアリング手順系（22） | MIT | https://github.com/mattpocock/skills · リポジトリ内 `LICENSES/skills-for-real-engineers-MIT.txt` |
-| vercel-labs/web-interface-guidelines | `web-design-guidelines` の準拠根拠 | 上流に同じ | https://github.com/vercel-labs/web-interface-guidelines |
-| wawoo（本リポジトリ） | skills / agents / commands / MCP | MIT | https://github.com/parkwoo/wawoo-skills · リポジトリ内 `LICENSE` |
+### 前提条件（ランタイム）
 
-*   **保証はありません（AS IS）**。
-*   **ライセンス未確認の第三者資産は同梱しません** — 例: Marketplaceのビジネススキル3件（`license: NOASSERTION`）。
-*   再配布・再利用の際は、**対応する著作権表示とNOTICEを保持**してください。
+このキットの **MCP サーバと保守スクリプトは Python 3（標準ライブラリのみ）** で動作します。追加パッケージのインストールは不要ですが、**`PATH` の通った `python3`（Windows は `python`）が必要**です。
 
-## 方法論の出典
+| OS | 追加手順 |
+|---|---|
+| macOS | 通常は不要（無い場合は `xcode-select --install`、または https://www.python.org/downloads/） |
+| Linux | 通常は不要（無い場合は `apt install python3` 等） |
+| Windows | https://www.python.org/downloads/ から導入し、**「Add python.exe to PATH」** を有効化（Microsoft Store 版でも可） |
 
-公開されているエンジニアリング方法論から、実行可能な部分を抽出し、フローとして編成しています — **完全コピーではなく、取捨選択して活用**しています。出典と項目ごとの対応については、技術記事（準備中）で詳しく解説します。
+- 確認：`python3 --version`（Windows は `python --version`）が `3.x` を返せば OK。
+- MCP は `python3` を実行コマンドとして起動します（`kilo.json`・`.cursor/mcp.json`）。`python3` が別名の環境では、各設定の `command` を実体（`python`／`py` 等。グローバル配置は `install_global.py` が**絶対パス**を登録）に合わせてください。
+- 追加の依存パッケージ・ネットワーク・`.env` 設定は**不要**です（`stdio` のみ）。
+
+## 対応ツール（公式）
+
+| ツール | 正式名 | 公式 URL |
+|---|---|---|
+| Kilo CLI | Kilo（CLI） | https://kilo.ai |
+| Kilo Code | Kilo Code（VS Code 拡張） | https://kilocode.ai |
+| Cursor | Cursor | https://cursor.com |
+| OpenCode | OpenCode | https://opencode.ai |
+| MCP | Model Context Protocol | https://modelcontextprotocol.io |
+| AGENTS.md | AGENTS.md | https://agents.md |
+
+## 収録
+
+| 種別 | 場所 |
+|---|---|
+| Skills | `.kilo/skills/<name>/SKILL.md` |
+| Agents | `.kilo/agents/<name>.md` |
+| Workflows | `.kilo/commands/<name>.md`（コード L1: `/delivery-lite`、知識 L1: `/content-delivery-lite`） |
+| MCP サーバ | `mcp/server.py`（stdio・stdlib のみ） |
+| Cursor ルール | `.cursor/rules/*.mdc` |
+
+- カタログ（自動生成）— **件数はここが正本**：`.kilo/CAPABILITIES.md`
+- Readiness（外部前提）：`scripts/readiness.json`
+- 呼び出し・コンテキスト設計：`docs/USAGE.md`
+- 意図ルーティング（対外）：`docs/INTENT-ROUTING.md`
+
+## クイックスタート
+
+### Kilo
+```bash
+# このディレクトリを開く（.kilo/ を自動探索、kilo.json で MCP 有効）
+```
+- ワークフロー：`/feature-delivery` など
+- スキル：`/` やモデルが `SKILL.md` を選択
+
+**最初の 10 分**（先に小さな成功を 1 つ）:
+1. 一文を `interpret_intent` に渡し、返ってきた workflow を読む。
+2. `/delivery-lite` を 1 回走らせる — `docs/plans/ACTIVE.md` が 1 行進む。
+3. `python3 scripts/validate_assets.py` → `OK: skills=… agents=… commands=…` なら準備完了。
+
+### Cursor
+1. このディレクトリを開く（`AGENTS.md` と `.cursor/rules` を読む）
+2. **Settings → MCP** で `wawoo-skills` を有効化（`.cursor/mcp.json`）
+3. MCP で `interpret_intent`（入口選定）→ `workflow_get`／`skill_get` 等（[INTENT-ROUTING.ja.md](docs/INTENT-ROUTING.ja.md)）
+
+**モノレポ（例: ワークスペースが `/home/git` で wawoo-skills はサブディレクトリ）**  
+ワークスペース直下に MCP を置く:
+
+```bash
+python3 /path/to/wawoo-skills/scripts/install_cursor_workspace.py --workspace /home/git
+```
+
+その後 **Reload Window** → MCP で `wawoo-skills` を Enabled。
+- **slash command／agent は非対応**。手順は `@.kilo/commands/<name>.md` を開いて適用。
+- 詳細：`docs/USAGE.md`
+
+### MCP
+```bash
+python3 mcp/server.py        # stdio（通常はクライアントが起動）
+python3 scripts/e2e_flows.py   # 公開スモーク（契約/E2E）
+```
+
+## 保守
+
+```bash
+python3 scripts/validate_assets.py   # 資産検証（name=dir・参照・重複・JSON）
+python3 scripts/gen_capabilities.py  # カタログ再生成（手編集しない）
+python3 scripts/e2e_flows.py           # MCP 契約スモーク
+```
+
+## ディレクトリ
+
+```
+.kilo/{skills,agents,commands,CAPABILITIES.md}
+.cursor/{rules,mcp.json}
+mcp/{server.py,intent_*.py,test_*.py,README.md}
+scripts/{gen_capabilities.py,validate_assets.py,readiness.json,…}
+docs/{USAGE.md,INTENT-ROUTING.md,VERSIONING.md,memory,plans}
+LICENSES/
+AGENTS.md
+kilo.json
+```
+
+## ライセンスと帰属（かんたん説明）
+
+このリポジトリには、**自分で書いたもの**と、**他の人が公開しているもの**が混ざっています。
+
+| 種類 | ライセンス | 場所 |
+|---|---|---|
+| このリポジトリで新しく書いた skill／agent／command／MCP | **MIT**（自由に使える。著作権表示を残す） | `LICENSE` |
+| Skills For Real Engineers 由来の skill（25 件） | **MIT** | `LICENSES/skills-for-real-engineers-MIT.txt` |
+| OpenDesign 由来の skill（10 件） | **Apache-2.0**（著作権表示と NOTICE を残す） | `LICENSES/open-design-Apache-2.0.txt` |
+| Kilo Marketplace 由来の agent（6 件） | **Apache-2.0** | `LICENSES/kilo-marketplace-*` |
+| その他（Kilo 組み込み skill 等） | 各ファイルの frontmatter／MIT | `.kilo/skills/ATTRIBUTION.md` |
+
+- どのファイルがどこ由来かは `.kilo/skills/ATTRIBUTION.md` に一覧があります。
+- **ライセンスが確認できないものは入れていません**（Marketplace の business 3 件は除外）。`fal-gen` は**本リポジトリで自作**した skill（MIT）です（`.kilo/skills/ATTRIBUTION.md` 参照）。
+- 保証はありません（**AS IS**）。使う前に、必要なら各ライセンスを確認してください。
+
+### 収録元（公式）
+| 収録元 | 公式 URL |
+|---|---|
+| Skills For Real Engineers（Matt Pocock） | https://github.com/mattpocock/skills ・ https://skills.sh/mattpocock/skills |
+| OpenDesign | https://open-design.ai ・ https://github.com/nexu-io/open-design |
+| Kilo Marketplace（Kilo エコシステム） | https://kilo.ai |
+| Semantic Versioning | https://semver.org |
+
+## 注意（最初に読む）
+
+- **画像生成**：`imagegen-frontend-mobile` は「どんな画像を作るか」の**指示文（プロンプト）だけ**です。実際の生成は同梱の **`fal-gen`** skill（fal.ai。`FAL_KEY` が必要。`SKILL.md` 参照）を使います。キーが無い場合は**プロンプトのみ**納品します。
+- **3 つの skill は issue tracker が必要**：`to-spec`・`to-tickets`・`triage` は GitHub Issues 等の tracker を前提にしています。初回に `setup-matt-pocock-skills` を実行して設定してください。
+- **秘密を書かない**：API キー・トークン・`.env` の中身をコミットしないでください。`memory_save` は秘密を拒否します。
+- **Cursor は slash command／agent 非対応**：`AGENTS.md`＋`.cursor/rules`＋MCP＋`@file` で使います（`docs/USAGE.md`）。
 
 ## バージョン
 
-*   現在: **0.8.0**（`VERSION`）
-*   変更履歴: `CHANGELOG.md`
+- 現在：**0.8.0**（`VERSION`）
+- 変更履歴：`CHANGELOG.md`（**日本語のプロジェクト記録**。言語ポリシーは `AGENTS.md` §1）
+- 版の付け方・リリース手順：`docs/VERSIONING.md`

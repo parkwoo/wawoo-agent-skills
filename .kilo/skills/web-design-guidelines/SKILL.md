@@ -11,7 +11,7 @@ triggers:
   - "check accessibility"
   - "audit design"
   - "review UX"
-  - "design review"
+  - "デザインレビュー"
 metadata:
   author: vercel
   version: "1.0.0"
@@ -32,6 +32,16 @@ od:
 # Web Interface Guidelines
 
 Review files for compliance with Web Interface Guidelines.
+
+## Uplift pilot
+
+Static acceptance checks: [`expectations.md`](expectations.md). Run:
+
+```bash
+python3 scripts/skill_uplift_check.py web-design-guidelines --path <file-or-dir>
+```
+
+See `docs/SKILL-UPLIFT-PILOT.ja.md`.
 
 ## How It Works
 

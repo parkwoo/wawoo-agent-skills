@@ -5,6 +5,10 @@ description: Persist and recall durable project knowledge (decisions, constraint
 
 # Memory
 
+## Client setup (Kilo / Cursor / OpenCode)
+
+`memory_save` is off when `WAWOO_MEMORY_READONLY=1`. **How to set `0` or `1` per client**: `docs/MEMORY-CLIENT-GUIDE.md` (4 languages; index: `docs/GUIDES.md`).
+
 ## Order (recall / save)
 
 Full table: `docs/memory/MEMORY-TOOLS.md`

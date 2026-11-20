@@ -1,0 +1,8 @@
+{
+  "_note": "更新日志页导语 SSOT。条目正文以 changelog/index.html 为准；工程正本 CHANGELOG.md（日语）。",
+  "page": {
+    "title": "更新日志（Changelog）— AI 编程工作流与 MCP 技能库演进记录",
+    "lead": "wawoo-skills 持续迭代：MCP 意图路由、12+ 条 Workflow、98 个 Agent Skills，支持在 Cursor、Claude Code、OpenCode 等客户端按阶段 skill_get。本页为开发者可读的版本摘要；完整条目见仓库 CHANGELOG.md。",
+    "currentVersion": "0.7.2"
+  }
+}

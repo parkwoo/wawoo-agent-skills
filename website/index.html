@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101615" />
+    <title>wawoo-skills — 开源 AI 编程工作流引擎与 MCP 技能库 | Cursor / Claude Code / Codex</title>
+    <meta
+      name="description"
+      data-kit-meta="description"
+      content="wawoo-skills：开源 AI 编程工作流引擎与 MCP 技能库。98 项技能、12 条研发流，支持 Cursor / Claude Code / Codex 等 8 大客户端。按需加载省 Token，强制证据验收。MIT。"
+    />
+    <meta
+      name="keywords"
+      content="MCP Server, Cursor Rules, Claude Code 工作流, AI 编程规范, wawoo-skills, skill_get, 研发流程, Codex, OpenCode"
+    />
+    <link rel="canonical" href="https://skills.wawoo.jp/" />
+    <meta property="og:title" content="wawoo-skills — 开源 MCP 技能库与 AI 编程工作流" />
+    <meta property="og:url" content="https://skills.wawoo.jp/" />
+    <meta property="og:locale" content="zh_CN" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "wawoo-skills",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Windows, macOS, Linux",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "license": "https://opensource.org/licenses/MIT",
+        "softwareVersion": "0.8.0",
+        "description": "开源 AI 编程工作流引擎：MCP 按需注入技能与标准研发流，支持 Cursor、Claude Code、Codex 等客户端。",
+        "url": "https://skills.wawoo.jp/",
+        "downloadUrl": "https://github.com/parkwoo/wawoo-agent-skills",
+        "author": { "@type": "Organization", "name": "wawoo-skills", "url": "https://github.com/parkwoo/wawoo-agent-skills" }
+      }
+    </script>
+    <link rel="icon" href="/wawoo-skills-logo.png" type="image/png" />
+    <meta property="og:image" content="/assets/marketing/og-home-brand-1200x630.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="/assets/marketing/og-home-brand-1200x630.png" />
+    <link rel="stylesheet" href="/kit-header.css" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/kit-typography.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: Inter, var(--font-sans);
+      }
+    </style>
+  </head>
+  <body data-kit-nav="home" data-kit-ambience>
+    <a class="skip-link" href="#main">跳到主内容</a>
+    <div class="kit-topbar">
+      <div class="shell">
+        <header class="site-header">
+  <a href="/" class="brand"><span>WAWOO SKILLS</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="/" data-nav="home">首页</a>
+    <a href="/cn/docs/usage/" data-nav="docs">文档</a>
+    <a href="/cn/docs/skills-catalog/" data-nav="guides">Skill 收录</a>
+    <a href="/changelog/" data-nav="changelog">更新日志</a>
+    <a href="/download/" class="nav-cta" data-nav="download">免费下载</a>
+        <select class="kit-lang-select" data-kit-lang-select data-current="zh" aria-label="选择语言（当前：简体中文）">
+    <option value="zh" data-href="/" selected>简体中文</option>
+    <option value="ja" data-href="/ja/" disabled>日本語</option>
+    <option value="en" data-href="/index.en.html">English</option>
+    <option value="ko" data-href="/ko/" disabled>한국어</option>
+    </select>
+    <a
+      href="https://github.com/parkwoo/wawoo-agent-skills"
+      class="github-link kit-nav-with-icon"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <svg class="kit-icon kit-icon--sm kit-icon--github" aria-hidden="true"><use href="/icons.svg#icon-github"></use></svg>
+      GitHub
+    </a>
+  </nav>
+</header>
+      </div>
+    </div>
+    <div class="shell" id="main" tabindex="-1">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-mascot" data-hero-mascot>
+          <div class="hero-mascot-swim">
+            <img
+              src="/wawoo-skills-logo-transparent.png"
+              alt="wawoo-skills"
+              width="200"
+              height="200"
+              class="hero-logo hero-logo--brand hero-mascot-img"
+            />
+          </div>
+        </div>
+        <p class="hero-eyebrow" data-kit-copy-text="hero.eyebrow">开源 AI 编程工作流引擎 · 支持 MCP 协议</p>
+        <h1 id="hero-title" data-kit-copy-text="hero.title">给你的 AI 装了 98 个技能，它却一个都不用？</h1>
+        <p class="hero-mechanism">
+          <strong>和 .cursorrules 的本质区别：</strong>墙上的静态规则会在长对话里被遗忘；wawoo-skills 走
+          MCP，按工作流步骤<strong>动态</strong>调用 <code>skill_get</code>，并在关键门禁用工具输出验收，而不是让模型口头宣布「已完成」。
+        </p>
+        <p class="hero-lead" data-kit-copy-text="hero.lead_primary">
+          别再让 AI 自由发挥、跳过测试、盲目改代码了。wawoo-skills 为 Cursor、Claude Code、Codex 等 8
+          大主流工具装上「流程护栏」——自动匹配标准研发流，按需加载专家技能，没有验收证据绝不交差。
+        </p>
+        <div class="trust-row">
+          <span class="trust-tag" data-kit-trust="mit">
+            <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-scale"></use></svg>
+            MIT 永久开源
+          </span>
+          <span class="trust-tag" data-kit-trust="skills">
+            <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-layers"></use></svg>
+            内置 98 个专家技能
+          </span>
+          <span class="trust-tag" data-kit-trust="workflows">
+            <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-workflow"></use></svg>
+            12 条标准研发流
+          </span>
+          <span class="trust-tag" data-kit-trust="token">
+            <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-coins"></use></svg>
+            按需加载，省 Token
+          </span>
+          <a
+            class="trust-tag trust-tag--link"
+            href="https://github.com/parkwoo/wawoo-agent-skills"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-kit-github-badge
+          >
+            <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-spark"></use></svg>
+            GitHub Stars …
+          </a>
+          <span class="trust-tag" data-kit-version>v0.8.0</span>
+        </div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/download/">
+            <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-spark"></use></svg>
+            <span data-kit-cta="primary">一键免费接入</span>
+          </a>
+          <a class="btn btn-secondary" href="/guides/">
+            <svg class="kit-icon kit-icon--sm kit-icon--muted" aria-hidden="true"><use href="/icons.svg#icon-layers"></use></svg>
+            <span data-kit-cta="secondary">查看 98 项内置技能</span>
+          </a>
+        </div>
+      </section>
+
+      <figure class="mock-wrap">
+        <figcaption class="mock-caption" data-kit-copy-text="demo_caption">
+          <svg class="kit-icon kit-icon--sm kit-icon--muted" aria-hidden="true"><use href="/icons.svg#icon-layers"></use></svg>
+          你继续用熟悉的 IDE；背后多了一位按流程派活的「技术总监」
+        </figcaption>
+        <div class="mock">
+          <div class="mock-chrome">
+            <span class="mock-dot mock-dot--idle"></span>
+            <span class="mock-dot mock-dot--idle"></span>
+            <span class="mock-dot mock-dot--idle"></span>
+            <span class="mock-chrome-path">wawoo-skills/</span>
+            <span class="mock-chrome-meta">标准研发流 · 按需展开技能</span>
+          </div>
+          <div class="mock-body" style="min-height: 260px">
+            <aside class="mock-sidebar kit-tree-panel">
+              <p class="mock-sidebar-label">仓库</p>
+              <ul class="kit-tree">
+                <li>
+                  <span class="kit-tree-dir">.kilo/</span>
+                  <ul>
+                    <li><span class="kit-tree-file kit-tree-file--hi">交付流程（示例）</span></li>
+                    <li><span class="kit-tree-file">测试与合规技能</span></li>
+                    <li><span class="kit-tree-file">角色与分工说明</span></li>
+                  </ul>
+                </li>
+                <li><span class="kit-tree-file">IDE 后台服务</span></li>
+                <li><span class="kit-tree-file">技能总目录</span></li>
+              </ul>
+            </aside>
+            <div class="mock-main mock-main--demo">
+              <div class="mock-demo-tabs" role="tablist" aria-label="工作流场景预览">
+                <button type="button" class="mock-demo-tab is-active" role="tab" aria-selected="true" data-demo-tab="bug">
+                  修 Bug
+                </button>
+                <button type="button" class="mock-demo-tab" role="tab" aria-selected="false" data-demo-tab="security">
+                  安全审计
+                </button>
+                <button type="button" class="mock-demo-tab" role="tab" aria-selected="false" data-demo-tab="delivery">
+                  交付新功能
+                </button>
+              </div>
+              <div class="mock-demo-panel is-active" role="tabpanel" data-demo-panel="bug">
+                <p class="mock-line mock-line--dim">/feature-delivery-lite · diagnosing-bugs</p>
+                <p class="mock-line"><span class="warn">[MCP]</span> 请先运行复现脚本，附上失败日志后再申请改代码。</p>
+                <p class="mock-line"><span class="ok">证据</span> pytest tests/test_api.py — 1 failed, 已截图</p>
+                <p class="mock-line mock-line--note">只有 evidence_check 通过，工作流才进入「修复」步骤。</p>
+              </div>
+              <div class="mock-demo-panel" role="tabpanel" data-demo-panel="security" hidden>
+                <p class="mock-line mock-line--dim">/compliance-review · security-review</p>
+                <p class="mock-line"><span class="warn">[MCP]</span> 当前步骤只读：禁止 push / 改生产配置，请先完成 security-review 清单。</p>
+                <p class="mock-line"><span class="ok">输出</span> 密钥扫描 0 命中 · SBOM 已附</p>
+              </div>
+              <div class="mock-demo-panel" role="tabpanel" data-demo-panel="delivery" hidden>
+                <p class="mock-line mock-line--dim">/feature-delivery · implement → code-review</p>
+                <p class="mock-line">skill_get: <span class="str">tdd</span> · 本步仅加载实现规范，不塞入全书 98 技能。</p>
+                <p class="mock-line mock-line--note">完成后强制 code-review 门禁，再进入合并说明。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </figure>
+
+      <section class="section section--divider" id="why">
+        <header class="section-header">
+          <p class="section-eyebrow">
+            <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-scale"></use></svg>
+            <span data-kit-copy-text="sections.why.eyebrow">真实对比</span>
+          </p>
+          <h2 class="section-title-center" data-kit-copy-text="sections.why.title">
+            为什么你写了几千字 Rules，AI 依然我行我素？
+          </h2>
+          <p class="section-lead-center" data-kit-copy-text="sections.why.lead">
+            因为 Prompt 只是「建议」，而我们需要的是「铁律」。看看接入前后的差别：
+          </p>
+        </header>
+        <div class="stats-row" data-kit-stats>
+          <div class="stat-card" data-kit-stat="skills">
+            <div class="stat-icon-wrap" aria-hidden="true">
+              <svg class="kit-icon kit-icon--lg"><use href="/icons.svg#icon-layers"></use></svg>
+            </div>
+            <div class="stat-card-body"><strong>98</strong><span>技能</span></div>
+          </div>
+          <div class="stat-card" data-kit-stat="agent_roles">
+            <div class="stat-icon-wrap" aria-hidden="true">
+              <svg class="kit-icon kit-icon--lg"><use href="/icons.svg#icon-users"></use></svg>
+            </div>
+            <div class="stat-card-body"><strong>21</strong><span>角色</span></div>
+          </div>
+          <div class="stat-card" data-kit-stat="workflows">
+            <div class="stat-icon-wrap" aria-hidden="true">
+              <svg class="kit-icon kit-icon--lg"><use href="/icons.svg#icon-workflow"></use></svg>
+            </div>
+            <div class="stat-card-body"><strong>12</strong><span>工作流</span></div>
+          </div>
+          <div class="stat-card" data-kit-stat="clients">
+            <div class="stat-icon-wrap" aria-hidden="true">
+              <svg class="kit-icon kit-icon--lg"><use href="/icons.svg#icon-monitor"></use></svg>
+            </div>
+            <div class="stat-card-body"><strong>8</strong><span>客户端</span></div>
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th scope="col">研发场景</th>
+                <th scope="col" data-kit-compare="before">以前：靠 AI 自由发挥（开盲盒）</th>
+                <th scope="col" data-kit-compare="after">现在：接入 wawoo-skills（流水线）</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">修同一个 Bug</th>
+                <td class="cell-bad">
+                  <span class="cell-with-icon">
+                    <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-x"></use></svg>
+                    <span>每次改法都不一样，经常拆东墙补西墙</span>
+                  </span>
+                </td>
+                <td class="cell-good">
+                  <span class="cell-with-icon">
+                    <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-check"></use></svg>
+                    <span>铁律闭环：先复现 → 再定位 → 写修复 → 必须跑通测试才算完</span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">代码审查与安全</th>
+                <td class="cell-bad">
+                  <span class="cell-with-icon">
+                    <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-x"></use></svg>
+                    <span>嘴上说「已检查」，其实悄悄跳过了测试和合规</span>
+                  </span>
+                </td>
+                <td class="cell-good">
+                  <span class="cell-with-icon">
+                    <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-check"></use></svg>
+                    <span>强制安检门：审计阶段锁定只读权限，没生成检查报告绝不放行</span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">上下文与 Token 费</th>
+                <td class="cell-bad">
+                  <span class="cell-with-icon">
+                    <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-x"></use></svg>
+                    <span>规则文件全塞进对话框，不仅烧钱还把 AI 搞糊涂</span>
+                  </span>
+                </td>
+                <td class="cell-good">
+                  <span class="cell-with-icon">
+                    <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-check"></use></svg>
+                    <span>按需精准投喂：平时只看目录，做到哪一步才加载哪份技能</span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">团队踩坑经验</th>
+                <td class="cell-bad">
+                  <span class="cell-with-icon">
+                    <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-x"></use></svg>
+                    <span>写在文档里吃灰，换个新对话 AI 又犯同样的错</span>
+                  </span>
+                </td>
+                <td class="cell-good">
+                  <span class="cell-with-icon">
+                    <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-check"></use></svg>
+                    <span>永久项目记忆：自动沉淀架构决策与避坑指南，越用越懂你的项目</span>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="token-compare" aria-labelledby="token-compare-title">
+          <h3 id="token-compare-title" class="token-compare-title">上下文开销（示意）</h3>
+          <div class="token-bars">
+            <div class="token-bar token-bar--bad">
+              <span class="token-bar-label">整本 Rules 塞进对话</span>
+              <span class="token-bar-meter" style="--pct: 100%">约 15,000 tokens</span>
+            </div>
+            <div class="token-bar token-bar--good">
+              <span class="token-bar-label">wawoo-skills 目录 + 当前步骤技能</span>
+              <span class="token-bar-meter" style="--pct: 18%">约 400 + 1,200 tokens</span>
+            </div>
+          </div>
+          <p class="section-footnote">数字为典型配置示意；实际随工作流与 skill 体积变化。核心是「常驻少、按需多」。</p>
+        </div>
+        <p class="section-lead-center section-footnote" data-kit-copy-text="sections.why.footnote">
+          技能来源含 Skills for Real Engineers、Kilo、OpenDesign 等社区实践，MIT 可 Fork，也可换成你们自己的规范。
+        </p>
+      </section>
+
+      <section class="section section--divider" id="how">
+        <header class="section-header">
+          <p class="section-eyebrow">
+            <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-route"></use></svg>
+            <span data-kit-copy-text="sections.how.eyebrow">怎么运作</span>
+          </p>
+          <h2 class="section-title-center" data-kit-copy-text="sections.how.title">你只管提需求，剩下的交给「自动化流水线」</h2>
+          <p class="section-lead-center" data-kit-copy-text="sections.how.lead">
+            无需记忆复杂指令——就像给 AI 配了一位经验丰富的技术总监：
+          </p>
+        </header>
+        <div class="grid-3 how-steps">
+          <article class="card">
+            <div class="card-head">
+              <svg class="kit-icon kit-icon--on-card" aria-hidden="true"><use href="/icons.svg#icon-route"></use></svg>
+              <h3>1. 自动派单</h3>
+            </div>
+            <p>你说「帮我修个 Bug」或「做个新功能」，系统识别意图，自动匹配敏捷交付、安全审计、紧急排障等标准工作流。</p>
+          </article>
+          <article class="card">
+            <div class="card-head">
+              <svg class="kit-icon kit-icon--on-card" aria-hidden="true"><use href="/icons.svg#icon-book"></use></svg>
+              <h3>2. 分步拆解，按需加载</h3>
+            </div>
+            <p>不把 98 份技能书一次性塞给 AI。写代码时只给编码规范，测 Bug 时只给排障指南，精准高效，告别幻觉。</p>
+          </article>
+          <article class="card">
+            <div class="card-head">
+              <svg class="kit-icon kit-icon--on-card" aria-hidden="true"><use href="/icons.svg#icon-checklist"></use></svg>
+              <h3>3. 拿证据说话</h3>
+            </div>
+            <p>AI 不能自己宣布「我改好了」。必须拿出测试通过、报错消失等可核对证据，才能进入下一步。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section--divider section--library" id="capabilities">
+        <header class="section-header">
+          <p class="section-eyebrow">
+            <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-layers"></use></svg>
+            <span data-kit-copy-text="sections.capabilities.eyebrow">军火库</span>
+          </p>
+          <h2 class="section-title-center" data-kit-copy-text="sections.capabilities.title">开箱即用的 98 项大厂级研发技能</h2>
+          <p class="section-lead-center" data-kit-copy-text="sections.capabilities.lead">
+            融合社区顶级工程实践，覆盖软件开发全生命周期：
+          </p>
+        </header>
+        <div class="skill-preview" aria-label="内置技能示例">
+          <a class="skill-chip" href="/guides/#diagnosing-bugs"><span>diagnosing-bugs</span></a>
+          <a class="skill-chip" href="/guides/#security-review"><span>security-review</span></a>
+          <a class="skill-chip" href="/guides/#code-review"><span>code-review</span></a>
+          <a class="skill-chip" href="/guides/#tdd"><span>tdd</span></a>
+          <a class="skill-chip" href="/guides/#incident-debugging"><span>incident-debugging</span></a>
+          <a class="skill-chip" href="/guides/#release-readiness"><span>release-readiness</span></a>
+          <a class="skill-chip skill-chip--more" href="/guides/"><span>查看全部 98 项 →</span></a>
+        </div>
+        <div class="grid-2">
+          <article class="feature-card-lg feature-card-lg--hi">
+            <div class="card-head">
+              <svg class="kit-icon kit-icon--on-card" aria-hidden="true"><use href="/icons.svg#icon-layers"></use></svg>
+              <h3>写得稳</h3>
+            </div>
+            <p>实现、根因修复、防过度设计、代码简化等工程原则，让 AI 更接近资深工程师的写法。</p>
+          </article>
+          <article class="feature-card-lg">
+            <div class="card-head">
+              <svg class="kit-icon kit-icon--on-card" aria-hidden="true"><use href="/icons.svg#icon-shield"></use></svg>
+              <h3>审得严</h3>
+            </div>
+            <p>内置安全、隐私与合规审查流程，外发前自动扫描敏感密钥与内部地址。</p>
+          </article>
+          <article class="feature-card-lg">
+            <div class="card-head">
+              <svg class="kit-icon kit-icon--on-card" aria-hidden="true"><use href="/icons.svg#icon-gauge"></use></svg>
+              <h3>测得准</h3>
+            </div>
+            <p>先量性能指标再谈优化，拒绝「感觉变快了」的玄学调优。</p>
+          </article>
+          <article class="feature-card-lg">
+            <div class="card-head">
+              <svg class="kit-icon kit-icon--on-card" aria-hidden="true"><use href="/icons.svg#icon-monitor"></use></svg>
+              <h3>全兼容</h3>
+            </div>
+            <p>一次配置，通吃 Claude Code、Codex、Cursor、Kilo、OpenCode、Paseo 等主流编程工具（详见文档对照表）。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section--divider" id="start">
+        <header class="section-header">
+          <p class="section-eyebrow">
+            <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-terminal"></use></svg>
+            立即上手
+          </p>
+          <h2 class="section-title-center" data-kit-copy-text="sections.start.title">30 秒安装，让你的 AI 立刻脱胎换骨</h2>
+          <p class="section-lead-center" data-kit-copy-text="sections.start.lead">
+            纯 Python 标准库驱动，零外部依赖，一行命令接入现有 IDE：
+          </p>
+        </header>
+        <div class="start-stack">
+          <div class="mock start-terminal">
+            <div class="mock-chrome">
+              <span>终端</span>
+              <button type="button" class="mock-copy-btn" data-copy="#install-block" data-copied-label="已复制">
+                复制命令
+              </button>
+            </div>
+            <div class="mock-main" id="install-block">
+              <p class="mock-line mock-line--dim"><span class="kw"># 1. 克隆技能库</span></p>
+              <p class="mock-line"><span class="ok">$</span> git clone https://github.com/parkwoo/wawoo-agent-skills</p>
+              <p class="mock-line"><span class="ok">$</span> cd wawoo-skills</p>
+              <p class="mock-line mock-line--dim"><span class="kw"># 2. 一键装进你的 AI 客户端</span></p>
+              <p class="mock-line"><span class="ok">$</span> python3 scripts/install_global.py</p>
+            </div>
+          </div>
+          <div class="prompt-copy-card">
+            <p class="prompt-copy-label">装好后第一句（可粘贴到 Cursor / Claude Code）：</p>
+            <p class="prompt-copy-text" id="first-prompt">按 /feature-delivery-lite 规范：先写验收标准，再改这个接口，每步要有可核对证据。</p>
+            <button type="button" class="btn btn-secondary btn-sm" data-copy="#first-prompt">复制 Prompt</button>
+          </div>
+          <p class="start-tip" data-kit-copy-text="sections.start.try_line">
+            装好后，对助手说：「按 delivery-lite 规范优化这个接口」，看它是否按步骤交付。
+          </p>
+        </div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/download/">一键免费接入</a>
+          <a
+            class="btn btn-secondary"
+            href="https://github.com/parkwoo/wawoo-agent-skills/blob/master/docs/USAGE.zh-CN.md"
+            >使用说明（GitHub）</a
+          >
+        </div>
+      </section>
+
+      <section class="section section--divider" id="trust">
+        <header class="section-header">
+          <p class="section-eyebrow">
+            <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-plug"></use></svg>
+            接入方式
+          </p>
+          <h2 class="section-title-center" data-kit-copy-text="sections.mcp.title">还是你熟悉的 IDE，多一个后台「外脑」</h2>
+          <p class="section-lead-center" data-kit-copy-text="sections.mcp.lead">
+            一次配置 MCP，AI 在关键时刻自动拿到该遵守的规范；技术细节见<a href="/cn/docs/usage/">文档</a>。
+          </p>
+        </header>
+        <div class="mock">
+          <div class="mock-chrome">
+            <span>~/.cursor/mcp.json（示例）</span>
+          </div>
+          <div class="mock-main">
+            <p class="mock-line">{</p>
+            <p class="mock-line">  <span class="str">"mcpServers"</span>: {</p>
+            <p class="mock-line">    <span class="str">"wawoo-skills"</span>: {</p>
+            <p class="mock-line">      <span class="str">"command"</span>: <span class="str">"python3"</span>,</p>
+            <p class="mock-line">      <span class="str">"args"</span>: [<span class="str">"/path/to/wawoo-skills/mcp/server.py"</span>]</p>
+            <p class="mock-line">    }</p>
+            <p class="mock-line">  }</p>
+            <p class="mock-line">}</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--divider faq" id="faq" aria-labelledby="faq-heading">
+        <header class="section-header">
+          <p class="section-eyebrow">
+            <svg class="kit-icon kit-icon--sm" aria-hidden="true"><use href="/icons.svg#icon-book"></use></svg>
+            FAQ
+          </p>
+          <h2 id="faq-heading" class="section-title-center" data-kit-copy-text="sections.faq.title">
+            常见顾虑，一次说清
+          </h2>
+        </header>
+        <details open>
+          <summary>
+            <svg class="kit-icon kit-icon--sm kit-icon--muted" aria-hidden="true"><use href="/icons.svg#icon-spark"></use></svg>
+            这又是一个新的 AI 编程软件吗？
+          </summary>
+          <p>不是。你继续用习惯的 Cursor、Claude Code 或 Codex。wawoo-skills 像挂在后台的 MCP 服务，在关键时刻把正确的规范塞给 AI。</p>
+        </details>
+        <details>
+          <summary>
+            <svg class="kit-icon kit-icon--sm kit-icon--muted" aria-hidden="true"><use href="/icons.svg#icon-workflow"></use></svg>
+            规矩定这么死，复杂需求 AI 会不会变傻？
+          </summary>
+          <p>不会。我们只锁定必须验收的关键节点（例如上线前必须测试）。阶段内部仍可调整顺序、并行任务，你也可以随时打断指挥。</p>
+        </details>
+        <details>
+          <summary>
+            <svg class="kit-icon kit-icon--sm kit-icon--muted" aria-hidden="true"><use href="/icons.svg#icon-layers"></use></svg>
+            免费吗？能改成公司自己的规范吗？
+          </summary>
+          <p>100% 免费，MIT 开源。Fork 仓库，把团队业务规范写进技能目录，立刻变成你们专属的 AI 研发标准。</p>
+        </details>
+        <details>
+          <summary>
+            <svg class="kit-icon kit-icon--sm kit-icon--muted" aria-hidden="true"><use href="/icons.svg#icon-coins"></use></svg>
+            会多烧很多 Token 吗？
+          </summary>
+          <p>
+            通常更少。常驻上下文只保留技能目录（约数百 tokens），真正写代码或审计时才 skill_get 加载当步技能；避免一次性塞入上万字 Rules。
+          </p>
+        </details>
+        <details>
+          <summary>
+            <svg class="kit-icon kit-icon--sm kit-icon--muted" aria-hidden="true"><use href="/icons.svg#icon-shield"></use></svg>
+            会和官方 Agent Rules / Skills 冲突吗？
+          </summary>
+          <p>
+            不替换你的 IDE。MCP 在工具层补充流程与技能；可与现有 .cursorrules 并存，也可逐步把团队规范迁到可版本化的 SKILL.md 与工作流。
+          </p>
+        </details>
+      </section>
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "这又是一个新的 AI 编程软件吗？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "不是。你继续用习惯的 Cursor、Claude Code 或 Codex。wawoo-skills 通过 MCP 在关键时刻注入规范。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "会多烧很多 Token 吗？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "通常更少：目录常驻、按步骤 skill_get，避免整本 Rules 塞进对话。"
+              }
+            }
+          ]
+        }
+      </script>
+
+      <footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <p>产品</p>
+      <a href="/">首页</a>
+      <a href="/download/">免费下载</a>
+      <a href="https://github.com/parkwoo/wawoo-agent-skills/blob/master/README.zh-CN.md">README</a>
+    </div>
+    <div class="footer-col">
+      <p>资源</p>
+      <a href="/cn/docs/usage/">文档</a>
+      <a href="/cn/docs/skills-catalog/">Skill 收录</a>
+      <a href="/changelog/">更新日志</a>
+    </div>
+    <div class="footer-col">
+      <p>客户端</p>
+      <a href="/cn/docs/usage/#s2-3">Cursor</a>
+      <a href="/cn/docs/usage/#s2-1">Kilo</a>
+      <a href="/cn/docs/usage/#s2-2">OpenCode</a>
+    </div>
+    <div class="footer-col">
+      <p>社区</p>
+      <a
+        href="https://github.com/parkwoo/wawoo-agent-skills"
+        class="kit-footer-with-icon"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg class="kit-icon kit-icon--sm kit-icon--github" aria-hidden="true"><use href="/icons.svg#icon-github"></use></svg>
+        GitHub
+      </a>
+      <a href="https://github.com/parkwoo/wawoo-agent-skills/issues">Issues</a>
+      <a href="https://github.com/parkwoo/wawoo-agent-skills/blob/master/SECURITY.md">Security</a>
+    </div>
+  </div>
+  <p class="footer-meta">
+    wawoo-skills · MIT ·
+    <a href="https://github.com/parkwoo/wawoo-agent-skills/blob/master/README.zh-CN.md">README.zh-CN</a>
+    · <span data-kit-version>v0.8.0</span>
+  </p>
+</footer>
+    </div>
+    <script src="/main.js" defer></script>
+    <script src="/kit-ambience.js" defer></script>
+  </body>
+</html>

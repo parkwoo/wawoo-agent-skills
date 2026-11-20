@@ -1,0 +1,1057 @@
+/* MkDocs Material — 与 website/styles.css + kit-header 对齐 */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+
+/* Material 默认 .md-typeset≈0.8rem，首屏与正本一致 */
+html.kit-docs-root .md-typeset,
+body.kit-docs .md-typeset {
+  font-size: 1rem !important;
+  line-height: 1.65 !important;
+}
+
+html:has(body.kit-docs),
+html.kit-docs-root {
+  background-color: #101615;
+}
+
+:root {
+  --kit-docs-topbar-offset: 5rem;
+}
+
+body.kit-docs[data-md-color-scheme="slate"] {
+  --md-default-bg-color: #101615;
+  --md-code-bg-color: #1e2120;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: #101615;
+  --md-default-fg-color: #fafafa;
+  --md-default-fg-color--light: #a8adac;
+  --md-default-fg-color--lighter: #8d9391;
+  /* Material 主题色改为中性灰（去掉默认绿条/绿按钮） */
+  --md-primary-fg-color: #1e2120;
+  --md-primary-fg-color--light: #a8adac;
+  --md-primary-fg-color--dark: #101615;
+  --md-accent-fg-color: #a8adac;
+  --md-accent-fg-color--transparent: #a8adac1a;
+  --md-typeset-a-color: #7ccba0;
+  --md-typeset-color: #d8dcdb;
+  --md-code-bg-color: #1e2120;
+  --md-code-fg-color: #fafafa;
+  --md-footer-bg-color: transparent;
+  --md-footer-fg-color: #717574;
+  --md-typeset-table-color: #252b2a;
+}
+
+/* ── 文档页：canvas 在沟槽区可见，正文/侧栏保持不透明卡片 ── */
+body.kit-docs {
+  background: #070a09 !important;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 文档页顶栏：与首页 kit-header 同源，压住 Material 链接色 */
+body.kit-docs .kit-topbar,
+body.kit-docs .kit-topbar .nav a,
+body.kit-docs .kit-topbar .brand,
+body.kit-docs .kit-topbar .brand span {
+  color: #a8adac !important;
+}
+
+body.kit-docs .kit-topbar .nav a:hover,
+body.kit-docs .kit-topbar .nav a.is-active {
+  color: #fafafa !important;
+}
+
+body.kit-docs .md-search__form {
+  background: #1e2120;
+  border: 1px solid #252b2a;
+}
+
+body.kit-docs .md-search__input {
+  color: #fafafa;
+}
+
+body.kit-docs .md-search-result__meta {
+  color: #8d9391;
+}
+
+body.kit-docs .kit-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  border-bottom: 1px solid color-mix(in oklab, #252b2a 85%, transparent);
+}
+
+body.kit-docs[data-kit-ambience] .kit-topbar {
+  background: color-mix(in oklab, #101615 78%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+body.kit-docs:not([data-kit-ambience]) .kit-topbar {
+  background: #101615;
+  box-shadow: 0 1px 0 #252b2a;
+}
+
+body.kit-docs .md-container,
+body.kit-docs .md-main,
+body.kit-docs .md-main__inner {
+  background: transparent !important;
+}
+
+body.kit-docs .md-container {
+  position: relative;
+  z-index: 1;
+  min-height: 0 !important;
+}
+
+body.kit-docs .md-main {
+  isolation: isolate;
+  min-height: 0 !important;
+}
+
+body.kit-docs canvas.kit-ambience-canvas {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+body.kit-docs .kit-docs-footer {
+  background: transparent;
+  position: relative;
+  z-index: 2;
+}
+
+/* 保留 Material header 供 JS 绑定，仅视觉隐藏 */
+body.kit-docs .kit-docs-material-header {
+  position: fixed !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+  top: 0;
+  left: 0;
+  z-index: -1 !important;
+  pointer-events: none !important;
+}
+
+body.kit-docs .kit-docs-material-header .md-header {
+  display: block !important;
+  min-height: 0 !important;
+  box-shadow: none !important;
+}
+
+.md-container {
+  padding-top: 0;
+}
+
+/* ── 文档两栏：Flex 禁止折行（避免正文被挤到视口下方）── */
+.md-main__inner.md-grid {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem 3rem;
+  gap: 1.25rem 1.75rem;
+}
+
+@media (min-width: 76.1875em) {
+  .md-main__inner.md-grid {
+    padding-top: 2rem;
+  }
+}
+
+body.kit-docs.kit-doc-toc-left .md-sidebar--secondary {
+  display: none !important;
+}
+
+@media (min-width: 76.1875em) {
+  body.kit-docs.kit-doc-toc-left .md-main__inner.md-grid {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-start !important;
+    align-content: flex-start !important;
+    grid-template-columns: none !important;
+    grid-template-rows: none !important;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  body.kit-docs.kit-doc-toc-left .kit-sidebar-toc {
+    flex: 0 0 17.25rem;
+    width: 17.25rem;
+    max-width: 17.25rem;
+    min-width: 0;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    height: auto !important;
+    transform: none !important;
+    margin: 0 !important;
+  }
+
+  body.kit-docs.kit-doc-toc-left .md-content {
+    flex: 1 1 auto;
+    min-width: 0 !important;
+    max-width: none !important;
+    width: auto !important;
+    margin: 0 !important;
+  }
+}
+
+body.kit-docs .md-sidebar {
+  height: auto !important;
+}
+
+body.kit-docs .md-sidebar--primary {
+  position: relative !important;
+  transform: none !important;
+}
+
+@media (max-width: 76.1874px) {
+  body.kit-docs.kit-doc-toc-left .kit-sidebar-toc {
+    display: none;
+  }
+
+  body.kit-docs.kit-doc-toc-left .md-content {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+}
+
+body.kit-docs.kit-doc-toc-left .kit-sidebar-toc .md-sidebar__scrollwrap {
+  padding: 0.85rem 0.75rem;
+  background: #171d1c !important;
+  border: 1px solid #252b2a;
+  border-radius: 0.75rem;
+  position: sticky;
+  top: var(--kit-docs-topbar-offset, 5rem);
+  max-height: calc(100vh - var(--kit-docs-topbar-offset, 5rem) - 1rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── 侧栏卡片化 ── */
+.md-sidebar {
+  width: 13.5rem;
+}
+
+.md-sidebar__inner {
+  padding: 0;
+}
+
+.md-sidebar__scrollwrap {
+  border: none;
+}
+
+body.kit-docs .md-sidebar__scrollwrap {
+  background: #171d1c !important;
+}
+
+.md-sidebar--primary .md-sidebar__scrollwrap {
+  padding: 0.85rem 0.75rem;
+  background: #171d1c;
+  border: 1px solid #252b2a;
+  border-radius: 0.75rem;
+}
+
+.md-sidebar--secondary .md-sidebar__scrollwrap {
+  padding: 0.75rem 0.65rem;
+  background: #171d1c;
+  border: 1px solid #252b2a;
+  border-radius: 0.75rem;
+}
+
+.md-nav__title {
+  color: #8d9391;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding-bottom: 0.35rem;
+}
+
+.md-nav__link {
+  color: #a8adac;
+  font-size: 0.8125rem;
+  font-weight: 450;
+  border-radius: 0.375rem;
+  margin-top: 0.1rem;
+  padding: 0.35rem 0.5rem;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.md-nav__link:hover {
+  color: #fafafa;
+  background: #272a29;
+}
+
+.md-nav__link--active {
+  color: #fafafa !important;
+  background: #272a29;
+  font-weight: 500;
+}
+
+.md-nav__item--nested > .md-nav__link {
+  font-weight: 500;
+}
+
+/* ── 正文卡片（半透明，露出海底 canvas）── */
+.md-content {
+  position: relative;
+  z-index: 1;
+  background: #171d1c !important;
+  border: 1px solid #252b2a;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+}
+
+.md-content__inner {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 1.75rem 1.5rem 2.25rem;
+  background: #171d1c !important;
+}
+
+@media (min-width: 768px) {
+  .md-content__inner {
+    padding: 2rem 2.25rem 2.75rem;
+  }
+}
+
+.md-typeset {
+  font-size: var(--kit-doc-prose, 1rem);
+  line-height: var(--kit-doc-lh, 1.65);
+  font-family: var(--kit-doc-font, Inter, ui-sans-serif, system-ui, sans-serif);
+  color: #d8dcdb;
+}
+
+.md-typeset p,
+.md-typeset li {
+  color: #b4b9b8;
+}
+
+/* ── 文档首屏（USAGE hero）── */
+.md-typeset .kit-doc-hero {
+  text-align: center;
+  margin: 0 0 2rem;
+  padding: 1.75rem 1.25rem 1.5rem;
+  background: #1a211f;
+  border: 1px solid #252b2a;
+  border-radius: 0.75rem;
+}
+
+.kit-doc-hero p strong {
+  display: block;
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: #fafafa;
+  margin-bottom: 0.35rem;
+}
+
+.kit-doc-hero > p:not(:has(strong)) {
+  margin: 0 0 1rem;
+  color: #a8adac;
+  font-size: 1rem;
+}
+
+.kit-doc-langs,
+.kit-doc-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem 0.5rem;
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+}
+
+.kit-doc-langs a,
+.kit-doc-links a {
+  color: #7ccba0;
+}
+
+.kit-doc-langs span,
+.kit-doc-links span {
+  color: #717574;
+}
+
+.kit-doc-langs strong {
+  color: #fafafa;
+  font-weight: 500;
+}
+
+/* 隐藏 Material 重复注入的文档 title（Hero 里已有标题） */
+body.kit-docs .md-typeset > h1:first-of-type {
+  display: none !important;
+  margin: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.md-typeset h2 {
+  font-weight: 500;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  color: #fafafa;
+  margin-top: 2.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #252b2a;
+  scroll-margin-top: 5.5rem;
+}
+
+.md-typeset h3,
+.md-typeset h4 {
+  scroll-margin-top: 5.5rem;
+}
+
+.md-typeset h3 {
+  font-weight: 500;
+  font-size: 1.05rem;
+  color: #fafafa;
+  margin-top: 1.5rem;
+}
+
+.md-typeset a {
+  color: #7ccba0;
+  text-decoration: none;
+  font-weight: 450;
+}
+
+.md-typeset a:hover {
+  text-decoration: underline;
+  color: #9adab4;
+}
+
+.md-typeset blockquote {
+  border-left: 3px solid #3d4543;
+  background: #181b1a;
+  border-radius: 0 0.5rem 0.5rem 0;
+  padding: 0.75rem 1rem;
+  color: #b4b9b8;
+}
+
+.md-typeset code {
+  border-radius: 0.375rem;
+  border: 1px solid #252b2a;
+  background: #1e2120;
+  padding: 0.08em 0.4em;
+  font-size: 0.85em;
+  color: #fafafa;
+}
+
+.md-typeset pre {
+  border: 1px solid #252b2a;
+  border-radius: 0.5rem;
+  background-color: #141716 !important;
+  margin: 1.25rem 0;
+  max-width: 100%;
+  overflow-x: auto;
+  display: block;
+}
+
+.md-typeset pre > code {
+  border: none;
+  background: transparent;
+}
+
+.md-typeset table:not([class]) {
+  border: 1px solid #252b2a;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  font-size: 0.875rem;
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+body.kit-docs .md-typeset {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+body.kit-docs .md-typeset pre > code {
+  white-space: pre;
+  word-break: normal;
+}
+
+body.kit-docs .md-content__inner {
+  overflow-x: auto;
+  min-width: 0;
+}
+
+.md-typeset table:not([class]) th {
+  background: #1e2120;
+  font-weight: 500;
+  color: #fafafa;
+}
+
+.md-typeset table:not([class]) td {
+  border-top: 1px solid #252b2a;
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  border: 1px solid #252b2a;
+  border-radius: 0.5rem;
+  background: #181b1a;
+  box-shadow: none;
+}
+
+/* ── 搜索 / 抽屉 ── */
+.md-search__form {
+  background: #1e2120;
+  border: 1px solid #252b2a;
+  border-radius: 0.5rem;
+}
+
+.md-overlay {
+  background: rgba(7, 10, 9, 0.72);
+  backdrop-filter: blur(4px);
+}
+
+/* ── Material 默认页脚弱化， kit 页脚由 partial 提供 ── */
+.md-footer-meta {
+  display: none;
+}
+
+.md-footer {
+  display: none;
+}
+
+.kit-docs-footer {
+  border-top: 1px solid #252b2a;
+  margin-top: 0;
+  padding-top: 2.5rem;
+  padding-bottom: 3rem;
+  background: #101615 !important;
+}
+
+.kit-docs-footer .shell {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.kit-topbar .kit-drawer-toggle {
+  order: -1;
+  margin-right: 0.25rem;
+  color: #a8adac;
+}
+
+@media (min-width: 76.1875em) {
+  .kit-topbar .kit-drawer-toggle {
+    display: none !important;
+  }
+}
+
+/* ── 章节目录（左侧 kit-doc-toc）── */
+.kit-doc-toc .kit-toc-heading {
+  margin: 0 0 0.65rem;
+  padding: 0 0.35rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8d9391;
+}
+
+.kit-doc-toc .md-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.kit-toc-branch {
+  margin: 0 0 0.2rem;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.kit-toc-branch[open] {
+  border-color: color-mix(in oklab, #252b2a 90%, transparent);
+  background: color-mix(in oklab, #141716 65%, transparent);
+}
+
+.kit-toc-branch__summary {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.4rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.kit-toc-branch__summary::-webkit-details-marker {
+  display: none;
+}
+
+.kit-toc-branch__chevron {
+  flex-shrink: 0;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-right: 1.5px solid #717574;
+  border-bottom: 1.5px solid #717574;
+  transform: rotate(-45deg);
+  transition: transform 0.15s ease, border-color 0.15s ease;
+  margin-left: 0.15rem;
+}
+
+.kit-toc-branch[open] .kit-toc-branch__chevron {
+  transform: rotate(45deg);
+  border-color: #a8adac;
+}
+
+.kit-toc-branch__label {
+  flex: 1;
+  min-width: 0;
+  color: #d8dcdb;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-decoration: none;
+  line-height: 1.35;
+}
+
+.kit-toc-branch__label:hover {
+  color: #fafafa;
+}
+
+.kit-toc-children {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0.45rem 0.65rem;
+  border-left: 1px solid color-mix(in oklab, #252b2a 80%, transparent);
+  margin-left: 0.85rem;
+}
+
+.kit-toc-item--leaf .md-nav__link,
+.kit-toc-leaf {
+  display: block;
+  padding: 0.28rem 0.45rem;
+  font-size: 0.75rem;
+  color: #a8adac;
+  border-radius: 0.375rem;
+}
+
+.kit-toc-item--leaf .md-nav__link:hover,
+.kit-toc-leaf:hover {
+  color: #fafafa;
+  background: #272a29;
+}
+
+.md-sidebar--secondary .md-nav__link--passed {
+  color: #717574;
+}
+
+.md-sidebar--secondary .md-nav__link--active,
+.kit-doc-toc .md-nav__link--active,
+.kit-doc-toc a[aria-current="true"] {
+  color: #7ccba0 !important;
+  background: color-mix(in oklab, #7ccba0 14%, transparent);
+  font-weight: 500;
+}
+
+/* 顶栏语言菜单 */
+.kit-lang {
+  position: relative;
+}
+
+.kit-lang-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0.35rem 0.65rem;
+  font: inherit;
+  font-size: var(--kit-nav-link-size, 16px);
+  font-weight: var(--kit-nav-link-weight, 500);
+  line-height: var(--kit-nav-link-lh, 24px);
+  color: #a8adac;
+  background: color-mix(in oklab, #252b2a 45%, #141716);
+  border: 1px solid color-mix(in oklab, #252b2a 90%, transparent);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.kit-lang-trigger:hover,
+.kit-lang.is-open .kit-lang-trigger {
+  color: #fafafa;
+  border-color: color-mix(in oklab, #a8adac 40%, #252b2a);
+  background: #1e2120;
+}
+
+.kit-lang-chevron {
+  opacity: 0.75;
+  transition: transform 0.15s ease;
+}
+
+.kit-lang.is-open .kit-lang-chevron {
+  transform: rotate(180deg);
+}
+
+.kit-lang-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.35rem);
+  z-index: 12;
+  min-width: 11.5rem;
+  margin: 0;
+  padding: 0.35rem;
+  list-style: none;
+  background: color-mix(in oklab, #171d1c 96%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid #252b2a;
+  border-radius: 0.625rem;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+.kit-lang-menu a,
+.kit-lang-soon {
+  display: block;
+  padding: 0.45rem 0.65rem;
+  font-size: 0.875rem;
+  font-weight: 450;
+  color: #a8adac;
+  text-decoration: none;
+  border-radius: 0.4rem;
+}
+
+.kit-lang-menu a:hover {
+  color: #fafafa;
+  background: #272a29;
+}
+
+.kit-lang-menu a[aria-selected="true"] {
+  color: #fafafa;
+  background: #272a29;
+  font-weight: 500;
+}
+
+.kit-lang-soon {
+  color: #717574;
+  cursor: not-allowed;
+}
+
+/* 顶栏链接着色由 kit-header.css 负责 */
+.kit-topbar a:not(.nav-cta) {
+  text-decoration: none !important;
+}
+
+/* ── 页脚（与 website/styles.css 同步）── */
+.kit-docs-footer {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.kit-docs-footer .footer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  font-size: 0.875rem;
+}
+
+@media (min-width: 640px) {
+  .kit-docs-footer .footer-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.kit-docs-footer .footer-col > p {
+  margin: 0 0 0.75rem;
+  color: #8d9391;
+  font-size: 0.8125rem;
+}
+
+.kit-docs-footer .footer-col a {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #a8adac;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.kit-docs-footer .footer-col a:hover {
+  color: #fafafa;
+}
+
+.kit-docs-footer .footer-meta {
+  margin-top: 2rem;
+  font-size: 0.75rem;
+  color: #8d9391;
+}
+
+/* 使用说明：最短路径徽章与客户端导航 */
+.kit-doc-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 0.75rem 0 1.25rem;
+}
+
+.kit-doc-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #a8adac;
+  border: 1px solid #252b2a;
+  border-radius: 999px;
+  background: #1a211f;
+}
+
+.kit-doc-badge--hi {
+  color: #9adab4;
+  border-color: color-mix(in oklab, #7ccba0 35%, #252b2a);
+}
+
+.kit-client-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0 0 1.5rem;
+  padding: 0.65rem;
+  border: 1px solid #252b2a;
+  border-radius: 0.65rem;
+  background: #171d1c;
+}
+
+.kit-client-nav a {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #a8adac !important;
+  text-decoration: none !important;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.kit-client-nav a:hover,
+.kit-client-nav a.is-active {
+  color: #fafafa !important;
+  background: #272a29;
+  border-color: #252b2a;
+}
+
+.kit-client-callout {
+  margin: 0 0 1rem;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: #b4b9b8;
+  border-left: 3px solid color-mix(in oklab, #7ccba0 45%, #252b2a);
+  border-radius: 0 0.4rem 0.4rem 0;
+  background: color-mix(in oklab, #1a211f 90%, #7ccba0 5%);
+}
+
+.kit-client-callout strong {
+  color: #fafafa;
+  font-weight: 500;
+}
+
+.kit-mem-ro {
+  display: inline-block;
+  padding: 0.1em 0.45em;
+  font-size: 0.8em;
+  font-weight: 600;
+  border-radius: 0.35rem;
+}
+
+.kit-mem-ro--1 {
+  color: #9adab4;
+  background: color-mix(in oklab, #7ccba0 12%, #1e2120);
+}
+
+.kit-mem-ro--0 {
+  color: #f0c89a;
+  background: color-mix(in oklab, #f8b810 14%, #1e2120);
+}
+
+.kit-doc-next {
+  margin: 2.5rem 0 0;
+  padding: 1.25rem 1.35rem;
+  border: 1px solid #252b2a;
+  border-radius: 0.75rem;
+  background: #171d1c;
+  text-align: center;
+}
+
+.kit-doc-next h3 {
+  margin: 0 0 0.75rem !important;
+  font-size: 1.0625rem !important;
+}
+
+.kit-doc-site-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  justify-content: center;
+  margin: 0.75rem 0 0;
+  font-size: 0.875rem;
+}
+
+/* === kit-typography SSOT（正本: website/kit-typography.css）=== */
+/**
+ * 全站排版 SSOT（与 docs 首屏 kit-docs-first-paint 同値）
+ * 正本のみ編集 → scripts/merge_kit_typography.sh → styles.css / material-kit.css
+ */
+:root {
+  --kit-doc-font: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --kit-doc-size: 16px;
+  --kit-doc-lh: 1.65;
+  --kit-doc-prose: 1rem;
+  --kit-doc-ui: 0.9375rem;
+  --kit-doc-code: 0.875rem;
+  --kit-doc-nav: 16px;
+  --kit-doc-nav-lh: 24px;
+  --kit-doc-hero-lead: 17px;
+  --kit-doc-bg: #070a09;
+  --kit-doc-surface: #101615;
+}
+
+html {
+  font-size: var(--kit-doc-size) !important;
+  -webkit-text-size-adjust: 100%;
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--kit-doc-font);
+  font-size: var(--kit-doc-size);
+  line-height: var(--kit-doc-lh);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 文档：Material 默认 .md-typeset≈0.8rem */
+body.kit-docs .md-typeset,
+body.kit-docs .md-typeset p,
+body.kit-docs .md-typeset li,
+body.kit-docs .md-typeset ol,
+body.kit-docs .md-typeset ul,
+body.kit-docs .md-typeset dd,
+body.kit-docs .md-typeset td,
+body.kit-docs .md-typeset th {
+  font-family: var(--kit-doc-font) !important;
+  font-size: var(--kit-doc-prose) !important;
+  line-height: var(--kit-doc-lh) !important;
+}
+
+/* 营销 / 内页：正文与文档同尺度 */
+body:not(.kit-docs) p,
+body:not(.kit-docs) li,
+body:not(.kit-docs) dd,
+body:not(.kit-docs) .section-lead,
+body:not(.kit-docs) .section-lead-center,
+body:not(.kit-docs) .skills-section-lead,
+body:not(.kit-docs) .card p,
+body:not(.kit-docs) .feature-card p,
+body:not(.kit-docs) .feature-card-lg p,
+body:not(.kit-docs) .platform-card p,
+body:not(.kit-docs) .skill-chip span,
+body:not(.kit-docs) .skills-sources-grid span,
+body:not(.kit-docs) .skills-sources-grid strong,
+body:not(.kit-docs) .hero-lead,
+body:not(.kit-docs) .section-footnote,
+body:not(.kit-docs) .faq p,
+body:not(.kit-docs) .faq summary,
+body:not(.kit-docs) .changelog-body p,
+body:not(.kit-docs) .changelog-body li,
+body:not(.kit-docs) .skills-catalog-aside .steps-list,
+body:not(.kit-docs) .skills-catalog-aside .steps-list li,
+body:not(.kit-docs) .download-copy p,
+body:not(.kit-docs) .download-copy li,
+body:not(.kit-docs) .page-intro,
+body:not(.kit-docs) .inner-page .prose p,
+body:not(.kit-docs) .inner-page .prose li {
+  font-family: var(--kit-doc-font) !important;
+  font-size: var(--kit-doc-prose) !important;
+  line-height: var(--kit-doc-lh) !important;
+}
+
+body .md-typeset,
+body .md-typeset p,
+body .md-typeset li,
+body .card p,
+body .section-lead,
+body .section-lead-center,
+body .skills-section-lead,
+body .skill-chip span,
+body .skills-sources-grid span,
+body .skills-sources-grid strong,
+body .hero-lead,
+body .hero-kit-duo,
+body .section-footnote,
+body .faq p,
+body .faq summary,
+body .changelog-body p,
+body .changelog-body li,
+body .platform-card p,
+body .skills-catalog-aside .steps-list,
+body .skills-catalog-aside .steps-list li {
+  font-family: var(--kit-doc-font) !important;
+  font-size: var(--kit-doc-prose) !important;
+  line-height: var(--kit-doc-lh) !important;
+}
+
+body:not(.kit-docs) .hero-lead--secondary {
+  font-size: var(--kit-doc-hero-lead) !important;
+  line-height: var(--kit-doc-lh) !important;
+}
+
+body .md-typeset h2,
+body .section h2,
+body main h2 {
+  font-size: 1.25rem !important;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+body .md-typeset h3,
+body .section h3,
+body main h3,
+body .card h3 {
+  font-size: 1.0625rem !important;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.kit-topbar .nav > a,
+.kit-topbar .brand,
+.kit-topbar .brand span {
+  font-family: var(--kit-doc-font) !important;
+  font-size: var(--kit-doc-nav) !important;
+  line-height: var(--kit-doc-nav-lh) !important;
+}
+
+.hero-eyebrow,
+.hero-platform,
+.stats-subline,
+.pill,
+.footer-meta,
+.kit-doc-toc .kit-toc-heading {
+  font-size: var(--kit-doc-ui) !important;
+  line-height: 1.5;
+}
+
+:not(pre) > code {
+  font-size: var(--kit-doc-code) !important;
+}
+
+pre,
+pre code {
+  font-size: var(--kit-doc-code) !important;
+  line-height: 1.55;
+}

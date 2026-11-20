@@ -6,7 +6,7 @@ license: MIT
 
 # Accessibility Audit
 
-## Uplift pilot (optional static check)
+## Uplift pilot（静的・任意）
 
 [`expectations.md`](expectations.md) · `python3 scripts/skill_uplift_check.py accessibility-audit --path <ui-root>`
 

@@ -1,0 +1,17 @@
+# vault → 公開 clone rsync 除外（.kilo 配下・社内-only）
+# 正本チェック: gen_site_capabilities_json._FORBIDDEN_PUBLIC_NAMES
+.kilo/skills/paseo-orchestration/
+.kilo/skills/kiun-report-corpus/
+.kilo/skills/kiun-corpus-auditor/
+.kilo/skills/kiun-corpus-wave/
+.kilo/skills/nextwave-catalog-bridge/
+.kilo/skills/wawoo-tools-stg-dagu-test/
+.kilo/skills/git-identity/
+.kilo/agents/kiun-corpus-auditor.md
+.kilo/commands/kiun-corpus-wave.md
+.kilo/commands/platform-ops.md
+.kilo/commands/platform-design-audit.md
+.kilo/commands/skill-agent-design-pdca.md
+.kilo/commands/content-audit.md
+.kilo/commands/content-build.md
+.kilo/commands/content-delivery-lite.md

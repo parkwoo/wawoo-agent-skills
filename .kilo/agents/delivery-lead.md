@@ -25,3 +25,7 @@ Before any other tool, call the MCP tool `wawoo-skills_workflow_get` (when the w
 ## Skills to apply
 
 Use `figure-it-out` for large/ambiguous work, `swarm` for parallel fan-out, `show-me-your-work` for the decision/audit trail, `recall` when resuming.
+
+## OSS boundary
+
+Before adding/editing assets in `/home/git/wawoo-skills` (public OSS), follow `wawoo-oss-boundary`: only generic, product-independent, English assets; private/project-specific ones go to `/home/git/workspace/skills`.

@@ -1,0 +1,23 @@
+{
+  "output_dir": ".",
+  "defaults": {
+    "model": "google/gemini-2.5-flash-image"
+  },
+  "images": [
+    {
+      "id": "hero-bg",
+      "output": "hero-bg.png",
+      "prompt": "DEPRECATED for hero (style drift). Regenerate only after attaching reference logo image. Wide 16:9 banner #101615 empty center for headline. ONLY thin white single-stroke line art octopus identical to reference — no gray fills, no 3D, no emoji face. Four tiny poses along bottom edge only, 8% opacity equivalent lightness."
+    },
+    {
+      "id": "ocean-trench-panorama",
+      "output": "ocean-trench-panorama.png",
+      "prompt": "Ultra-wide panoramic underwater trench canyon, 3:1 horizontal strip. Endless abyssal rift with steep rock walls left and right, layered stone, deep valley floor. Sparse kelp, anemones, small fish schools, jellyfish, crabs on cliffs — photoreal detail. CRITICAL: uniformly underexposed, no light sources in the scene — no sun, no rays, no god rays, no flashlight, no bioluminescence glow, no bright hotspots. Average luminance near #060908. A separate UI will add the only light. Seamless feel for horizontal scroll. No text, no diver, no mascot, no watermark."
+    },
+    {
+      "id": "og-home",
+      "output": "og-home.png",
+      "prompt": "Open Graph social preview image 1200x630. Dark green-black background #101615. Three Q-style cute octopus mascots in WHITE LINE ART (same minimal mascot as wawoo-skills logo): left one waving, center one with MCP plug icon tentacle, right one celebrating with small sparkles. Clean composition with generous padding, space on right for title text overlay area kept empty. Professional open-source tech brand. No letters, no watermark, no photorealism."
+    }
+  ]
+}

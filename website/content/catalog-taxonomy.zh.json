@@ -1,0 +1,187 @@
+{
+  "_note": "Skill 收录分组 SSOT。与 docs/PRODUCT-OVERVIEW.zh-CN.md 地图一致；名单来自公开 wawoo-skills。",
+  "order": [
+    "engineering",
+    "quality",
+    "ui",
+    "research",
+    "security",
+    "ops",
+    "planning",
+    "memory",
+    "principles",
+    "kit"
+  ],
+  "sections": {
+    "engineering": {
+      "title": "工程实现",
+      "title_en": "Engineering",
+      "lead": "写功能、修缺陷、做规格与可验证交付（常配合 /delivery-lite、/feature-delivery）。"
+    },
+    "quality": {
+      "title": "质量评审",
+      "title_en": "Quality review",
+      "lead": "合并前与设计阶段的证据化评审（常配合 /self-review）。"
+    },
+    "ui": {
+      "title": "UI · 前端 · 设计",
+      "title_en": "UI & design",
+      "lead": "界面实现、设计审稿与可访问性（常配合 /ui-delivery、/design-review）。"
+    },
+    "research": {
+      "title": "调研 · 文案 · 市场",
+      "title_en": "Research & copy",
+      "lead": "调研决策、文章与市场叙事（常配合 /research、/market-plan、/writing）。"
+    },
+    "security": {
+      "title": "安全 · 隐私 · 合规",
+      "title_en": "Security & compliance",
+      "lead": "发布前与外发内容的门禁（常配合 /compliance-review、/release-review）。"
+    },
+    "ops": {
+      "title": "运维 · 发布 · 性能",
+      "title_en": "Ops & release",
+      "lead": "部署、依赖升级、性能与线上事故（常配合 /incident-response）。"
+    },
+    "planning": {
+      "title": "规划 · 架构 · 文档",
+      "title_en": "Planning & architecture",
+      "lead": "计划落盘、架构决策与需求澄清。"
+    },
+    "memory": {
+      "title": "记忆 · 上下文",
+      "title_en": "Memory & context",
+      "lead": "跨会话记忆与长上下文压缩（各 workflow 入口常用）。"
+    },
+    "principles": {
+      "title": "工程原则（principle-*）",
+      "title_en": "principle-*",
+      "lead": "短纪律 skill，按需每次只开 1～2 个，勿整族灌进上下文。"
+    },
+    "kit": {
+      "title": "套件基座",
+      "title_en": "Kit platform",
+      "lead": "路由、边界、桥接与维护本技能库的 meta skill。"
+    }
+  },
+  "assignments": {
+    "engineering": [
+      "api-contract-design",
+      "benchmark-checklist",
+      "blast-radius",
+      "changelog",
+      "codebase-design",
+      "create-verification-skill",
+      "diagnosing-bugs",
+      "engineering-quality",
+      "figure-it-out",
+      "how",
+      "implement",
+      "implement-spec",
+      "in-your-own-words",
+      "maintain-verification-skill",
+      "pr",
+      "recall",
+      "reflect",
+      "retro",
+      "sharpen",
+      "show-me-your-work",
+      "swarm",
+      "tdd",
+      "teach",
+      "why"
+    ],
+    "quality": [
+      "change-readiness",
+      "code-review",
+      "test-engineering"
+    ],
+    "ui": [
+      "accessibility-audit",
+      "design-brief",
+      "design-md",
+      "design-review",
+      "fal-gen",
+      "frontend-design",
+      "frontend-guides-hub",
+      "imagegen-frontend-mobile",
+      "prototype",
+      "reference-design-contract",
+      "web-design-guidelines",
+      "web-experience-design"
+    ],
+    "research": [
+      "product-discovery",
+      "research"
+    ],
+    "security": [
+      "compliance-legal",
+      "content-guardrail",
+      "data-egress-guard",
+      "privacy-review",
+      "release-readiness",
+      "security-review"
+    ],
+    "ops": [
+      "database-change-safety",
+      "dependency-upgrade",
+      "deployment",
+      "incident-debugging",
+      "performance-audit"
+    ],
+    "planning": [
+      "architecture-decision",
+      "domain-modeling",
+      "grill-with-docs",
+      "grilling",
+      "handoff",
+      "pdca-cycle",
+      "plan-md"
+    ],
+    "memory": [
+      "context-compression",
+      "memory"
+    ],
+    "principles": [
+      "principle-attack-the-premise",
+      "principle-boundary-discipline",
+      "principle-build-the-lever",
+      "principle-encode-lessons-in-structure",
+      "principle-exhaust-the-design-space",
+      "principle-experience-first",
+      "principle-explain-the-number",
+      "principle-fix-root-causes",
+      "principle-foundational-thinking",
+      "principle-guard-the-context-window",
+      "principle-laziness-protocol",
+      "principle-make-operations-idempotent",
+      "principle-migrate-callers-then-delete-legacy-apis",
+      "principle-minimize-reader-load",
+      "principle-model-the-domain",
+      "principle-never-block-on-the-human",
+      "principle-outcome-oriented-execution",
+      "principle-prove-it-works",
+      "principle-redesign-from-first-principles",
+      "principle-separate-before-serializing-shared-state",
+      "principle-sequence-verifiable-units",
+      "principle-subtract-before-you-add",
+      "principle-test-behavior-not-implementation",
+      "principle-type-system-discipline"
+    ],
+    "kit": [
+      "ask-matt",
+      "documentation-localization",
+      "language-policy",
+      "legacy-web-scan",
+      "modern-web-guidance-bridge",
+      "openrouter-gen",
+      "publication-boundary",
+      "setup-matt-pocock-skills",
+      "to-spec",
+      "to-tickets",
+      "triage",
+      "wayfinder",
+      "writing-for-agents"
+    ]
+  }
+}

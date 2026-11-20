@@ -1,43 +1,97 @@
 site_name: wawoo-skills
-site_url: https://parkwoo.github.io/wawoo-skills/
+site_url: https://skills.wawoo.jp/
 site_description: >-
-  Invocation by design — a reusable kit of skills / agents / workflows / MCP
-  servers for AI coding agents, so the same request takes the same steps.
+  按设计调用 — 面向 AI 编码 agent 的可复用 skill / agent / workflow / MCP 套件。
+repo_url: https://github.com/parkwoo/wawoo-agent-skills
+repo_name: parkwoo/wawoo-agent-skills
+edit_uri: edit/master/docs/
 docs_dir: docs
-site_dir: site
+site_dir: site/docs
 
 theme:
   name: material
-  language: en
+  language: zh
+  custom_dir: docs/overrides
+  logo: assets/wawoo-skills-logo.png
+  favicon: assets/wawoo-skills-logo.png
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - scheme: slate
+      primary: black
+      accent: grey
+      toggle:
+        icon: material/brightness-4
+        name: 配色
+  font:
+    text: Inter
+    code: Roboto Mono
   features:
-    - navigation.sections
-    - navigation.top
+    - navigation.footer
     - content.code.copy
     - search.suggest
     - search.highlight
+    - toc.follow
+
+extra_css:
+  - stylesheets/extra.css
+  - stylesheets/material-kit.css
+
+extra_javascript:
+  - javascripts/kit-lang-menu.js
+  - javascripts/kit-doc-layout.js
+  - javascripts/kit-doc-toc.js
+  - javascripts/kit-doc-client-nav.js
+
+extra:
+  homepage: /
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - toc:
+      permalink: true
+      toc_depth: 2-3
+      title: 目录
 
 plugins:
   - search
   - i18n:
-      docs_structure: suffix      # NAME.md (en) / NAME.ja.md (ja) -> language switcher + per-language nav
+      docs_structure: suffix
       fallback_to_default: true
       reconfigure_material: true
       languages:
-        - locale: en
+        - locale: zh
           default: true
+          name: 简体中文
+          build: true
+          nav_translations:
+            使用说明: 使用说明
+            Skill 收录: Skill 收录
+            更新日志: 更新日志
+        - locale: en
           name: English
+          nav_translations:
+            使用说明: Manual
+            Skill 收录: Skills catalog
+            更新日志: Changelog
         - locale: ja
           name: 日本語
           nav_translations:
-            Introduction: はじめに
-            Usage: 使い方
-            Intent routing: 意図ルーティング
-            Versioning: バージョン管理
-  - include-markdown          # Home includes the root README (single source, no duplication)
+            使用说明: 利用ガイド
+            Skill 收录: Skill 収録
+            更新日志: 変更履歴
+        - locale: ko
+          name: 한국어
+          nav_translations:
+            使用说明: 사용 설명
+            Skill 收录: Skill 수록
+            更新日志: 변경 기록
+  - include-markdown
 
-# The docs intentionally link to the other language as `NAME.ja.md` (so GitHub
-# navigation stays in the reader's language). Those sibling-language links are
-# not separate pages in the i18n build, so ignore only the link-target warning.
 validation:
   links:
     not_found: ignore
@@ -46,7 +100,25 @@ validation:
 exclude_docs: |
   memory/
   plans/
+  getting-started/
+  install/
+  mcp/
+  workflows/
+  faq/
+  evidence/
+  PRODUCT-OVERVIEW*
+  CLIENT-INTEGRATION-GUIDE*
+  COPY-MARKETING-GUIDE*
+  GUIDES*
+  INTENT-ROUTING*
+  MEMORY-CLIENT-GUIDE*
+  SEO-KEYWORDS*
+  SKILL-UPLIFT-PILOT*
+  VERSIONING*
 
 nav:
-  - Introduction: index.md
-  - Usage: USAGE.md
+  - 使用说明: usage.md
+  - 免费下载: download.md
+  - 攻略: guides.md
+  - Skill 收录: skills-catalog.md
+  - 更新日志: changelog.md

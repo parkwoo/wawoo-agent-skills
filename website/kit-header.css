@@ -1,0 +1,337 @@
+/* 官网 + 文档共享顶栏（正本: website/kit-header.css） */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+
+/* 与 website/styles.css 同步 — 文档页不启用 data-kit-ambience，无 canvas */
+.kit-ambience-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+
+body[data-kit-ambience] .kit-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+}
+
+body[data-kit-ambience] .md-container,
+body[data-kit-ambience] .kit-docs-footer {
+  position: relative;
+  z-index: 1;
+}
+
+:root {
+  --font-sans: Inter, "Geist Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --color-background: #101615;
+  --color-foreground: #fafafa;
+  --color-muted-foreground: #a8adac;
+  --color-border: #252b2a;
+  --kit-max-width: 80rem; /* ccswitch container ≈ 1280px */
+  /* ccswitch.io 主导航实测值 */
+  --kit-nav-link-size: 16px;
+  --kit-nav-link-lh: 24px;
+  --kit-nav-link-weight: 500;
+  --kit-nav-gap: 2rem; /* gap-8 */
+  --kit-nav-control-height: 2rem;
+  --kit-bar-min-height: 4rem; /* h-16 */
+  --kit-bar-min-height-md: 5rem; /* md:h-20 */
+}
+
+.kit-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  width: 100%;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-background);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Material 全局リンク色を上書き（文档页で緑になるのを防ぐ） */
+.kit-topbar a {
+  text-decoration: none !important;
+}
+
+.kit-topbar .brand,
+.kit-topbar .brand span {
+  color: var(--color-foreground) !important;
+  font-size: var(--kit-nav-link-size) !important;
+  line-height: var(--kit-nav-link-lh) !important;
+  font-weight: var(--kit-nav-link-weight) !important;
+  letter-spacing: 0.04em;
+}
+
+.kit-topbar .nav a {
+  color: var(--color-muted-foreground) !important;
+  font-size: var(--kit-nav-link-size) !important;
+  line-height: var(--kit-nav-link-lh) !important;
+  font-weight: var(--kit-nav-link-weight) !important;
+  letter-spacing: normal !important;
+}
+
+.kit-topbar .nav a:hover,
+.kit-topbar .nav a.is-active,
+.kit-topbar .nav a.kit-nav-docs.is-active {
+  color: var(--color-foreground) !important;
+  text-decoration: none !important;
+}
+
+.kit-topbar .github-link svg,
+.kit-topbar .nav a.kit-nav-with-icon .kit-icon {
+  display: block;
+  width: 18px !important;
+  height: 18px !important;
+  flex-shrink: 0;
+}
+
+.kit-topbar .nav a.kit-nav-with-icon,
+.kit-topbar .nav a.github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: var(--kit-nav-control-height, 2rem);
+}
+
+.footer-col a.kit-footer-with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.footer-col a.kit-footer-with-icon .kit-icon {
+  width: 1rem;
+  height: 1rem;
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+
+.kit-topbar .shell {
+  max-width: var(--kit-max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem; /* container px-6 */
+}
+
+.kit-topbar .site-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0;
+  min-height: var(--kit-bar-min-height);
+}
+
+@media (min-width: 768px) {
+  .kit-topbar .site-header {
+    flex-direction: row;
+    justify-content: space-between;
+    min-height: var(--kit-bar-min-height-md);
+  }
+}
+
+.site-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .site-header {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 5rem;
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: var(--kit-nav-link-size);
+  line-height: var(--kit-nav-link-lh);
+  font-weight: var(--kit-nav-link-weight);
+  letter-spacing: 0.04em;
+  color: var(--color-foreground);
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--kit-nav-gap);
+}
+
+.kit-topbar .nav > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: var(--kit-nav-control-height, 2rem);
+  box-sizing: border-box;
+}
+
+.nav .kit-lang-select {
+  align-self: center;
+  flex-shrink: 0;
+  height: var(--kit-nav-control-height, 2rem);
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.nav a {
+  font-size: var(--kit-nav-link-size);
+  line-height: var(--kit-nav-link-lh);
+  font-weight: var(--kit-nav-link-weight);
+  color: var(--color-muted-foreground);
+  transition: color 0.15s ease;
+}
+
+.nav a:hover {
+  color: var(--color-foreground);
+}
+
+.nav a.is-active {
+  color: var(--color-foreground);
+}
+
+.nav .github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+/* ドキュメント: モバイルで Material ドロワーを開く */
+.kit-drawer-toggle {
+  display: none;
+  cursor: pointer;
+  color: var(--color-muted-foreground);
+  padding: 0.25rem;
+}
+
+.kit-drawer-toggle:hover {
+  color: var(--color-foreground);
+}
+
+.kit-drawer-toggle svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: currentColor;
+}
+
+@media (max-width: 76.1875em) {
+  .kit-drawer-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ccswitch.io：「免费下载」与主导航同系文字链（非绿色按钮） */
+.kit-topbar .nav a.nav-cta {
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-muted-foreground) !important;
+  font-size: var(--kit-nav-link-size) !important;
+  line-height: var(--kit-nav-link-lh) !important;
+  font-weight: var(--kit-nav-link-weight) !important;
+}
+
+.kit-topbar .nav a.nav-cta:hover {
+  filter: none;
+  color: var(--color-foreground) !important;
+}
+
+/* 语言下拉（与主导航同字号，ccswitch 结构一致） */
+.kit-lang-select {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+  max-width: 11rem;
+  padding: 0.125rem 1.75rem 0.125rem 0.5rem;
+  font-family: inherit;
+  font-size: var(--kit-nav-link-size);
+  line-height: var(--kit-nav-link-lh);
+  font-weight: var(--kit-nav-link-weight);
+  color: var(--color-muted-foreground);
+  background-color: color-mix(in oklab, var(--color-border) 35%, #1a1f1e);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a8adac' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.55rem center;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.kit-lang-select:hover {
+  color: var(--color-foreground);
+  border-color: color-mix(in oklab, var(--color-border) 55%, white);
+}
+
+.kit-lang-select:focus-visible {
+  outline: 2px solid color-mix(in oklab, #a8adac 55%, transparent);
+  outline-offset: 2px;
+}
+
+.kit-lang-select option {
+  color: var(--color-foreground);
+  background: #101615;
+}
+
+.kit-lang-select option:disabled {
+  color: #717574;
+}
+
+@media (max-width: 960px) {
+  .kit-topbar .nav {
+    gap: 1rem;
+  }
+
+  .kit-lang-select {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+/* ── 顶栏导航排版 SSOT（首页 / 内页 / MkDocs 同一套，Material 无法压住）── */
+.kit-topbar {
+  font-family: Inter, var(--font-sans, ui-sans-serif), system-ui, -apple-system, sans-serif;
+  font-size: var(--kit-nav-link-size);
+  line-height: var(--kit-nav-link-lh);
+  -webkit-font-smoothing: antialiased;
+}
+
+.kit-topbar .brand,
+.kit-topbar .brand span,
+.kit-topbar .nav > a,
+.kit-topbar .nav a.nav-cta,
+.kit-topbar .nav a.github-link {
+  font-family: inherit !important;
+  font-size: var(--kit-nav-link-size) !important;
+  line-height: var(--kit-nav-link-lh) !important;
+  font-weight: var(--kit-nav-link-weight) !important;
+}
+
+.kit-topbar .brand,
+.kit-topbar .brand span {
+  letter-spacing: 0.04em !important;
+}
+
+.kit-topbar .kit-lang-select {
+  font-family: inherit !important;
+  font-size: var(--kit-nav-link-size) !important;
+  line-height: var(--kit-nav-link-lh) !important;
+  font-weight: var(--kit-nav-link-weight) !important;
+}
+
+.kit-topbar .kit-drawer-toggle {
+  font-size: var(--kit-nav-link-size);
+}

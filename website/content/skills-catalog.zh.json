@@ -1,0 +1,30 @@
+{
+  "_note": "Skill 收录页导语 SSOT。全量条目以 content/capabilities.catalog.json 为准。",
+  "page": {
+    "title": "Skill 收录 — 全量工程能力目录",
+    "lead": "列出全部 Skill、Agent 与 Workflow，描述与 CAPABILITIES.md 一致。",
+    "intro": "先选 Workflow，再按需 skill_get；本页由 gen_site_capabilities_json.py 从 GitHub parkwoo/wawoo-agent-skills 的 CAPABILITIES.md 生成（不含 workspace 内部 skill）。"
+  },
+  "sources": [
+    {
+      "label": "Skills for Real Engineers",
+      "note": "工程实践基底",
+      "value": "把零散最佳实践收成可 skill_get 的步骤，而不是一屏 Prompt。"
+    },
+    {
+      "label": "Kilo",
+      "note": "命令与编排参考",
+      "value": "工作流命令与 MCP 编排形态与本库对齐，少踩集成坑。"
+    },
+    {
+      "label": "OpenDesign",
+      "note": "设计类 skill",
+      "value": "UI/可访问性/设计评审技能，可直接接 /ui-delivery。"
+    },
+    {
+      "label": "wawoo 原创",
+      "note": "路由、门禁、记忆",
+      "value": "意图路由、证据闸门、memory 与 MCP 契约——把「建议」改成可校验流程。"
+    }
+  ]
+}

@@ -36,7 +36,7 @@ This repository is a **generic kit** of **reusable skills / agents / workflows /
   cli.json.example         … Cursor CLI example
 mcp/server.py              … capability MCP server (stdio)
 scripts/{gen_capabilities,validate_assets}.py
-docs/                      … USAGE, plans, memory（工程文書は internal/docs/）
+docs/                      … USAGE, INTENT-ROUTING, VERSIONING, plans, memory
 ```
 
 ---
@@ -48,14 +48,14 @@ docs/                      … USAGE, plans, memory（工程文書は internal/d
 | Purpose | SSOT | When to update |
 |------|------|----------------|
 | **L1 in-progress tasks (code, UI, research, etc.)** | `docs/plans/ACTIVE.md` | Read before starting. The agent updates only `todo`→`doing`→`done` and the evidence column |
-| **L1 long-form / books / reports** | `docs/plans/CONTENT.md` | `plan_content.py` (content state machine) |
+| **L1 long-form / books / reports** | `docs/plans/CONTENT.md` | `/content-delivery-lite`. Validated by `plan_content.py` |
 | **Detailed plan** | `docs/plans/<id>.md` (`plan-md`) | When the breakdown is large. Link from the ACTIVE id |
 | **L2 multiple tasks / sync** | issue tracker (if configured) or `docs/plans/BACKLOG*.md` | `to-tickets` / `plan_l2_backlog.py`. Do not double-manage with ACTIVE |
 | **L3 process improvement** | `docs/plans/RETRO*.md` etc. + `memory` | `/self-improve`. `plan_l3_record.py` |
 | **Cross-cutting decisions / constraints** | `docs/memory/` | Not for task completion — only recurring knowledge |
 | **Audit (kit assets)** | CI / `validate_assets.py` | Run it instead of saying "I audited" in words |
 
-**Ceremony levels (L0–L3)**: the table above (a different axis from the **route layers** `L0–L3` in `internal/docs/archive/INTENT-ROUTING.md`). When unsure, **L1 + `/delivery-lite`**. Production, legal, and large work go to `/feature-delivery` or L2.
+**Ceremony levels (L0–L3)**: the table above (a different axis from the **route layers** `L0–L3` in `docs/INTENT-ROUTING.md`). When unsure, **L1 + `/delivery-lite`**. Production, legal, and large work go to `/feature-delivery` or L2.
 
 **git commit**: only when the user asks (a task being `done` and a commit are separate).
 
@@ -67,7 +67,7 @@ Theory and design decisions: the required contract is in this file; extended des
 
 **Kilo practice (mandatory, rule 0)**: In an environment with the MCP `wawoo-skills` connected, for **non-trivial requests** (code change, research, design, document generation), **make the first tool call `wawoo-skills_workflow_get`** (or `wawoo-skills_interpret_intent` if undecidable). If you started work using the native `skill` tool (e.g. `plan-md`) or memory instead, treat it as a §4 violation and return to `workflow_get` even mid-task. Use native tools only when MCP is unavailable, and report that.
 
-1. **Entry = Workflow**: usually **`/delivery-lite`** (ceremony L1). For large, gate-heavy work, `/feature-delivery`. Kilo uses `/name`; Cursor uses `@.kilo/commands/<name>.md`. When the request is ambiguous, use MCP **`interpret_intent`** → `schedule.workflow` (`internal/docs/archive/INTENT-ROUTING.md`). If `interpret_intent` returns `needs_scoring`, re-call it with `scoring`.
+1. **Entry = Workflow**: usually **`/delivery-lite`** (ceremony L1). For large, gate-heavy work, `/feature-delivery`. Kilo uses `/name`; Cursor uses `@.kilo/commands/<name>.md`. When the request is ambiguous, use MCP **`interpret_intent`** → `schedule.workflow` (`docs/INTENT-ROUTING.md`). If `interpret_intent` returns `needs_scoring`, re-call it with `scoring`.
 2. **Candidate selection = catalog / MCP**: `.kilo/CAPABILITIES.md` or MCP `capabilities` / `skill_search`. **Do not read everything.** After `interpret_intent`, **do not call tools outside `mcp_tools_allow`** (`workflow_clear` at the end).
 3. **Steps = Skill**: open only the skills the workflow names, via `skill_get` / `@.kilo/skills/<name>/SKILL.md`. When phases exist, get goal/agent/skills/`exit_criteria` via `workflow_get {name, phase:<id>}`; for a workflow without `implement` (audit-type), do not proceed to implementation — **declare the switch**.
 4. **Output = schema**: follow the workflow's output shape. Do not skip gates (approval, evidence, observed failure).
@@ -101,8 +101,6 @@ These apply to **this kit itself** and to any project adopting the kit's convent
 
 ## 5. Context budget (how to hand things to the model)
 
-- **Budget exceptions**: `validate_assets.py`'s `SKILL_BUDGET_EXCEPTIONS` lists upstream/reference-heavy entry skills that exceed 4KB (their detail lives in `references/`). New or own skills must stay ≤4KB.
-
 - Contract ≤500tok / catalog ≤1k / Workflow ≤1.5k / **one skill ≤2–4KB** (exceptions exist) / memory top-5.
 - **Budget guide (§4.1)**: one step's tool output **< 4KB**; one session's payload **< 600KB**. If you would exceed it, split the target / `/compact` / switch to `grep -n`/`head`.
 - **Progressive disclosure**: do not hand everything at once. Read references only when needed.
@@ -132,8 +130,14 @@ These apply to **this kit itself** and to any project adopting the kit's convent
 ## 8. Adding and updating skills
 
 - When adding: require `name` / `description` in `.kilo/skills/<name>/SKILL.md`.
+- **Expansion gates** (token/cost): follow `docs/USAGE.md` §6.1 (six-item checklist). In short —
+  - Entry `SKILL.md` ≤4KB; split into `references/` before growing a workflow.
+  - One-line `description`, ~160 characters.
+  - Internal-only skills per `publication-boundary`.
+  - Workflows own gates; skills are phase procedures (e.g. `/writing`, `/research`).
+  - **Uplift pilot**: `docs/SKILL-UPLIFT-PILOT.md` · P0 `modern-web-guidance-bridge` · P1.5 `frontend-guides-hub`.
 - Regenerate the catalog: `python3 scripts/gen_capabilities.py` (**do not hand-edit**).
-- Validate: `python3 scripts/validate_assets.py` (name=dir, refs, dup, JSON).
+- Validate: `python3 scripts/validate_assets.py` (name=dir, refs, dup, JSON, 4KB WARN, description length WARN).
 - Do not break agent and command references (`agent:`).
 
 ---
@@ -150,12 +154,12 @@ These apply to **this kit itself** and to any project adopting the kit's convent
 ## 10. Versioning
 
 - **`VERSION`** (repo root) is the single SSOT. **SemVer** (`MAJOR.MINOR.PATCH`).
-- On change, update **`CHANGELOG.md`** and bump `VERSION`, then run `./scripts/release_preflight.sh` (or `python3 scripts/sync_readme_version.py`) so all `README*.md` version lines match.
+- On change, update **`CHANGELOG.md`** and bump `VERSION`, then run `./scripts/release_preflight.sh` (or `python3 scripts/sync_readme_version.py`) so README version lines match.
   - Deletions, renames, breaking MCP tool changes = **MAJOR**
   - Adding skills/agents/commands, backward-compatible additions = **MINOR**
   - Typos, wording, internal refactors = **PATCH**
 - Tag `v<version>` at release (e.g. `v0.1.0`).
-- Details: `internal/docs/archive/VERSIONING.md`.
+- Details: `docs/VERSIONING.md`.
 
 ---
 
@@ -165,7 +169,7 @@ These apply to **this kit itself** and to any project adopting the kit's convent
 |---|---|
 | 2026-10-25 | First version as a generic kit (extracted and generalized from an existing project) |
 | 2026-10-25 | §3 SSOT (ACTIVE, L0–L3), default entry `/delivery-lite` |
-| 2026-10-26 | §4 `interpret_intent`, tool gate, `internal/docs/archive/INTENT-ROUTING.md` |
+| 2026-10-26 | §4 `interpret_intent`, tool gate, `docs/INTENT-ROUTING.md` |
 | 2026-10-27 | §4 mandates MCP-first (`workflow_get` / `interpret_intent`). Fixed: Kilo `instructions` require absolute paths (a relative `ROUTER.md` is not injected) |
 | 2026-10-27 | Added `## Routing (MCP first)` to all agent definitions (21) |
 | 2026-10-27 | New default agent `wawoo-auto` (`default_agent`). `install_global.py` idempotently generates `ROUTER.md`, registers absolute `instructions`, and sets `default_agent` |

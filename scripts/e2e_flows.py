@@ -348,8 +348,8 @@ def test_local_lexical_router(r: Runner) -> None:
 
         got = intent_lexical.local_lexical_route("run a retrospective and improve our process")
         assert got is not None and got.workflow == "self-improve", got
-        got2 = intent_lexical.local_lexical_route("this screen's design needs a review")
-        assert got2 is not None and got2.workflow == "design-review", got2
+        got2 = intent_lexical.local_lexical_route("prepare a pitch deck for the client")
+        assert got2 is not None and got2.workflow == "deck", got2
         # abstain on short / vague input
         assert intent_lexical.local_lexical_route("hi") is None
         assert intent_lexical.local_lexical_route("do something") is None
@@ -619,9 +619,20 @@ def test_l1_simulated_flow(r: Runner) -> None:
     r.run("l1_simulated_flow", _)
 
 
+def test_content_delivery_lite_contract(r: Runner) -> None:
+    def _():
+        p = KILO / "commands" / "content-delivery-lite.md"
+        body = p.read_text(encoding="utf-8")
+        assert "CONTENT.md" in body and "plan_content" in body
+        res = mcp_call("workflow_get", {"name": "content-delivery-lite"})
+        assert "CONTENT" in res["result"]["content"][0]["text"]
+
+    r.run("content_delivery_lite_contract", _)
+
+
 def test_deliverable_workflows_active_hooks(r: Runner) -> None:
     def _():
-        for name in ("ui-delivery", "research"):
+        for name in ("ui-delivery", "research", "market-plan"):
             body = (KILO / "commands" / f"{name}.md").read_text(encoding="utf-8")
             assert "ACTIVE.md" in body, name
 
@@ -654,7 +665,7 @@ def test_agent_active_sandbox_dry(r: Runner) -> None:
         script = ROOT / "internal/scripts/e2e/agent-active-live.sh"
         if not script.is_file():
             return  # internal E2E tooling is non-public; skip when absent
-        for wf in ("delivery-lite",):
+        for wf in ("delivery-lite", "content-delivery-lite"):
             proc = subprocess.run(
                 ["bash", str(script), wf],
                 cwd=str(ROOT),
@@ -683,6 +694,23 @@ def test_cli_adapters_mock_subprocess(r: Runner) -> None:
 
 
 
+def test_kit_catalog_public_contract(r: Runner) -> None:
+    def _():
+        spec = importlib.util.spec_from_file_location(
+            "kit_catalog_public_contract", ROOT / "scripts" / "kit_catalog_public_contract.py"
+        )
+        assert spec and spec.loader
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        mod.verify_kit_repo_artifacts()
+        pub = mod.verify_public_capabilities_text(
+            (ROOT / "scripts" / "fixtures" / "public-CAPABILITIES.master.md").read_text(encoding="utf-8")
+        )
+        assert pub["skills"] == 98 and pub["agents"] == 21 and pub["workflows"] == 12
+
+    r.run("kit_catalog_public_contract", _)
+
+
 def test_opencode_stdio_contract(r: Runner) -> None:
     def _():
         # OpenCode launches a local MCP server over stdio with this config shape.
@@ -700,6 +728,7 @@ def test_opencode_stdio_contract(r: Runner) -> None:
             tl = rpc(proc, {"jsonrpc": "2.0", "id": 1, "method": "tools/list", "params": {}})
             names = {x["name"] for x in tl["result"]["tools"]}
             assert {"workflow_get", "skill_get", "interpret_intent", "steer_task", "delegate_subtask"} <= names
+            assert {"mwg_search", "mwg_retrieve", "mwg_legacy_scan"} <= names
         finally:
             try:
                 proc.stdin.close()
@@ -744,10 +773,12 @@ def main() -> int:
         test_l2_simulated_flow,
         test_l3_simulated_flow,
         test_ceremony_levels_matrix,
+        test_content_delivery_lite_contract,
         test_deliverable_workflows_active_hooks,
         test_content_simulated_flow,
         test_agent_active_sandbox_dry,
         test_cli_adapters_mock_subprocess,
+        test_kit_catalog_public_contract,
         test_opencode_stdio_contract,
     ]
     print("== e2e_flows ==")

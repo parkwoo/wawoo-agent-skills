@@ -18,7 +18,7 @@ replay: safe
 
 0. **Get this workflow via MCP**: call `wawoo-skills_workflow_get {name:"delivery-lite"}` and follow the returned steps (treat this file as authoritative only when MCP is unavailable).
 1. Read `AGENTS.md` §3 (SSOT) and `docs/plans/ACTIVE.md`. Check `git status` and do not break unrelated changes.
-0b. **Restate the goal + smallest change**: in one line, say the user's goal, the problem, and the smallest change (`in-your-own-words`). Open the final summary with it.
+0b. **Restate the goal + smallest change**: in one line (`in-your-own-words`).
 1b. **Context hygiene**: if the conversation or context is long or repetitive, clean it first — MCP `compress_context` or the `context-compression` skill (deterministic, offline).
 2. **Memory (entry, brief)**: only when the request touches existing constraints, use `memory_recall` or `docs/memory/INDEX.md`.
 3. **Plan**: break the request down and add rows to the ACTIVE table (`id`, `todo`, content, done criteria). If complex, create `docs/plans/<id>.md` with `plan-md` and link it from ACTIVE.

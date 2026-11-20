@@ -1,5 +1,7 @@
 ---
 name: reference-design-contract
+ja_name: "参考から設計規範へ"
+en_name: "Reference Design Contract"
 description: |
   Turn vague taste, screenshots, URLs, product notes, or "make it feel like this"
   references into a grounded DESIGN.md plus an implementation handoff. Use it
@@ -12,8 +14,8 @@ triggers:
   - "visual direction handoff"
   - "turn references into DESIGN.md"
   - "make it feel like this"
-  - "borrow the vibe without copying it"
-  - "turn reference images into a design standard"
+  - "同じ雰囲気だが丸写しはしない"
+  - "参考画像を設計規範に変換する"
 od:
   mode: design-system
   platform: desktop
@@ -45,6 +47,8 @@ od:
   capabilities_required:
     - file_write
   example_prompt: "Create a reference design contract for a developer-notes app. The direction should feel editorial, calm, tactile, and serious, but not copy any specific product. Produce DESIGN.md and an implementation handoff."
+  example_prompt_i18n:
+    ja: "開発者ノートアプリの参考デザイン契約を作成する。方向性は編集感・静けさ・触感・真面目さ。特定プロダクトを丸写ししない。DESIGN.md と実装ハンドオフを出力する。"
 ---
 
 # Reference Design Contract
