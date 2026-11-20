@@ -89,7 +89,7 @@ python3 scripts/check_public_boundary.py   # programming-only boundary
 
 - If `gen_capabilities.py` changes `.kilo/CAPABILITIES.md`, commit it with your change.
 - If you added a third-party asset, update `.kilo/skills/ATTRIBUTION.md` and `LICENSES/`; unverified-license assets are not accepted.
-- Bump `VERSION` and update `CHANGELOG.md` only when asked; then run `python3 scripts/sync_readme_version.py` before release (CI checks READMEs match `VERSION`).
+- Bump `VERSION` and update `CHANGELOG.md` only when asked; then run `./scripts/release_preflight.sh` before tagging (CI checks READMEs match `VERSION`).
 
 ## Security
 

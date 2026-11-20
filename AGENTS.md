@@ -150,7 +150,7 @@ These apply to **this kit itself** and to any project adopting the kit's convent
 ## 10. Versioning
 
 - **`VERSION`** (repo root) is the single SSOT. **SemVer** (`MAJOR.MINOR.PATCH`).
-- On change, update **`CHANGELOG.md`** and bump `VERSION`, then run `python3 scripts/sync_readme_version.py` so all `README*.md` version lines match.
+- On change, update **`CHANGELOG.md`** and bump `VERSION`, then run `./scripts/release_preflight.sh` (or `python3 scripts/sync_readme_version.py`) so all `README*.md` version lines match.
   - Deletions, renames, breaking MCP tool changes = **MAJOR**
   - Adding skills/agents/commands, backward-compatible additions = **MINOR**
   - Typos, wording, internal refactors = **PATCH**
