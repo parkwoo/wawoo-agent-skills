@@ -21,9 +21,9 @@
 
 1. Update `VERSION` (e.g. `0.1.0` → `0.2.0`).
 2. Prepend `## [0.2.0] - YYYY-MM-DD` to `CHANGELOG.md` (Added/Changed/Fixed/Removed).
-3. Verify:
+3. Sync and verify (or run the bundled script):
    ```bash
-   python3 scripts/validate_assets.py
+   ./scripts/release_preflight.sh
    python3 scripts/gen_capabilities.py
    python3 scripts/e2e_flows.py
    ```

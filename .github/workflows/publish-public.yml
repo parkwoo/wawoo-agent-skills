@@ -18,6 +18,13 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: README version matches VERSION (block drifted public release)
+        run: python3 scripts/sync_readme_version.py --check
+
       - name: Guard allowlist (never publish internal paths)
         run: |
           test -s .publish-allowlist

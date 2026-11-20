@@ -16,9 +16,9 @@
 ## リリース手順
 1. `VERSION` を更新（例 `0.1.0` → `0.2.0`）。
 2. `CHANGELOG.md` の先頭に `## [0.2.0] - YYYY-MM-DD` を追加（Added/Changed/Fixed/Removed）。
-3. 検証：
+3. 同期と検証（まとめて実行する場合は `./scripts/release_preflight.sh`）：
    ```bash
-   python3 scripts/validate_assets.py
+   ./scripts/release_preflight.sh
    python3 scripts/gen_capabilities.py
    python3 scripts/e2e_flows.py
    ```

@@ -144,7 +144,7 @@ docs/                      … 使い方・意図ルーティング・版管理�
 ## 10. バージョン管理
 
 - **`VERSION`**（リポジトリ直下）が唯一の正本。**SemVer**（`MAJOR.MINOR.PATCH`）。
-- 変更時は **`CHANGELOG.md`** を更新し、`VERSION` を上げたうえで `python3 scripts/sync_readme_version.py` を実行し、各 `README*.md` の版表示を揃える。
+- 変更時は **`CHANGELOG.md`** を更新し、`VERSION` を上げたうえで `./scripts/release_preflight.sh`（または `python3 scripts/sync_readme_version.py`）を実行し、各 `README*.md` の版表示を揃える。
   - 削除・改名・MCP ツールの破壊的変更 = **MAJOR**
   - skill/agent/command の追加・後方互換の追加 = **MINOR**
   - 誤字・文言・内部リファクタ = **PATCH**

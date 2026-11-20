@@ -44,6 +44,8 @@ scripts/skill_uplift_ab.py
 scripts/skill_uplift_check.py
 scripts/uplift_pilot.py
 scripts/validate_assets.py
+scripts/sync_readme_version.py
+scripts/release_preflight.sh
 scripts/wawoo-route.sh
 scripts/wawoo-zle.zsh
 docs/USAGE.md
