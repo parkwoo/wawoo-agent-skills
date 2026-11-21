@@ -16,6 +16,8 @@ venv/
 
 # node
 node_modules/
+eleventy/content/
+_site/
 
 # os
 .DS_Store

@@ -31,8 +31,8 @@ if [[ ! -f "$DOC_USAGE" ]]; then
   exit 1
 fi
 
-grep -q "kit-doc-layout.js" "$DOC_USAGE" || {
-  echo "エラー: cn/docs/usage に kit-doc-layout.js がありません。"
+grep -qE "kit-doc-layout\.js|kit-doc-body" "$DOC_USAGE" || {
+  echo "エラー: cn/docs/usage がドキュメント版式ではありません。"
   exit 1
 }
 

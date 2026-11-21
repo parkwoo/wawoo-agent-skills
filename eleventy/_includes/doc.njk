@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="{% if locale == 'cn' %}zh-Hans{% elif locale == 'ja' %}ja{% elif locale == 'ko' %}ko{% else %}en{% endif %}">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ title or "Wawoo Agent Skills" }}</title>
+  {% if description %}<meta name="description" content="{{ description }}" />{% endif %}
+  <link rel="stylesheet" href="/kit-header.css" />
+  <link rel="stylesheet" href="/kit-typography.css" />
+  <link rel="stylesheet" href="/{{ locale }}/docs/assets/kit-doc.css" />
+  <style id="kit-docs-first-paint">
+    :root {
+      --kit-doc-font: Inter, ui-sans-serif, system-ui, sans-serif;
+      --kit-doc-bg: #070a09;
+      --kit-doc-surface: #101615;
+    }
+    html { background: var(--kit-doc-surface); color-scheme: dark; }
+    body.kit-docs { font-family: var(--kit-doc-font); background: var(--kit-doc-bg); margin: 0; }
+  </style>
+</head>
+<body class="inner-page kit-docs kit-doc-toc-left" data-kit-ambience data-kit-nav="docs">
+  <div class="kit-topbar">
+    <div class="shell">
+      {% include "header.njk" %}
+    </div>
+  </div>
+  <main class="kit-doc-main shell" id="main">
+    <div class="kit-doc-grid">
+      <aside class="kit-doc-toc-host" aria-label="目录"></aside>
+      <article class="kit-doc-body md-typeset" data-kit-doc-body>
+        {{ content | safe }}
+      </article>
+    </div>
+  </main>
+  {% include "footer.njk" %}
+  <script src="/{{ locale }}/docs/javascripts/kit-lang-menu.js" defer></script>
+  <script src="/{{ locale }}/docs/javascripts/kit-doc-layout.js" defer></script>
+  <script src="/{{ locale }}/docs/javascripts/kit-doc-toc.js" defer></script>
+  <script src="/kit-ambience.js" defer></script>
+</body>
+</html>

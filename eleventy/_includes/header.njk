@@ -1,0 +1,17 @@
+<header class="site-header">
+  <a href="/" class="brand"><span>WAWOO SKILLS</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="/" data-nav="home">首页</a>
+    <a href="/cn/docs/usage/" data-nav="docs"{% if locale %} class="is-active"{% endif %}>文档</a>
+    <a href="/cn/docs/skills-catalog/" data-nav="guides">Skill 收录</a>
+    <a href="/changelog/" data-nav="changelog">更新日志</a>
+    <a href="/cn/download/" class="nav-cta" data-nav="download">免费下载</a>
+    <div class="kit-lang" data-kit-lang data-current="{% if locale == 'cn' %}zh{% else %}{{ locale }}{% endif %}">
+      <button type="button" class="kit-lang-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="选择语言">
+        <span class="kit-lang-current">{% if locale == 'cn' %}简体中文{% elif locale == 'ja' %}日本語{% elif locale == 'ko' %}한국어{% else %}English{% endif %}</span>
+      </button>
+      <ul class="kit-lang-menu" role="listbox" hidden></ul>
+    </div>
+    <a href="https://github.com/parkwoo/wawoo-agent-skills" class="github-link kit-nav-with-icon" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </nav>
+</header>

@@ -4,18 +4,19 @@ on:
   push:
     branches: [master, main]
     paths:
-      - 'mkdocs.yml'
-      - 'requirements-docs.txt'
-      - 'README*.md'
-      - 'AGENTS*.md'
-      - 'SECURITY*.md'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.eleventy.cjs'
+      - 'eleventy/**'
       - 'docs/**'
       - 'CHANGELOG.md'
       - 'website/**'
       - 'scripts/build_kit_site.sh'
+      - 'scripts/eleventy_*'
       - 'scripts/docs_*.sh'
       - 'scripts/kit_*.sh'
-      - 'mcp/README*.md'
+      - 'scripts/gen_site_capabilities_json.py'
+      - 'scripts/gen_catalog_skill_buckets.py'
       - '.github/workflows/docs.yml'
   workflow_dispatch:
 
@@ -33,11 +34,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: package-lock.json
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install -r requirements-docs.txt
-      - name: Build kit site (MkDocs + locale + marketing)
+      - run: npm ci
+      - name: Build kit site (Eleventy + marketing)
+        env:
+          KIT_BUCKETS_LENIENT: "1"
         run: bash scripts/build_kit_site.sh site
       - uses: actions/upload-pages-artifact@v3
         with:

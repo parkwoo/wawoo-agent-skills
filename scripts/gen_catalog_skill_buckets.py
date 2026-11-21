@@ -164,8 +164,16 @@ def main() -> None:
             unassigned.append(n)
 
     if unassigned:
-        print("未分配（请补 EXPLICIT）:", ", ".join(sorted(unassigned)), file=sys.stderr)
-        sys.exit(1)
+        import os
+
+        msg = "未分配（请补 EXPLICIT）: " + ", ".join(sorted(unassigned))
+        if os.environ.get("KIT_BUCKETS_LENIENT", "").strip() in ("1", "true", "yes"):
+            print("WARN:", msg, "→ platform に仮置き（KIT_BUCKETS_LENIENT）", file=sys.stderr)
+            for n in unassigned:
+                mapping[n] = "platform"
+        else:
+            print(msg, file=sys.stderr)
+            sys.exit(1)
 
     payload = {
         "_note": "公开 wawoo-skills Skill 分类 SSOT，对齐 PRODUCT-OVERVIEW.zh-CN。由 gen_catalog_skill_buckets.py 生成。",

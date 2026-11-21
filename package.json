@@ -1,0 +1,13 @@
+{
+  "name": "wawoo-agent-skills-site",
+  "private": true,
+  "description": "公式サイト docs（Eleventy）— 私有 vault の scripts/ からビルド",
+  "scripts": {
+    "build:eleventy": "eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "markdown-it": "^14.1.0",
+    "markdown-it-anchor": "^9.2.0"
+  }
+}
